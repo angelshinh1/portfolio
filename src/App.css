@@ -1,22 +1,33 @@
+/* Root Variables - Dark Theme */
 :root {
   --primary-color: #6c63ff;
   --primary-light: #837dff;
   --primary-dark: #5046e5;
   --secondary-color: #ff6584;
-  --dark-color: #111827;
-  --light-color: #f9fafb;
-  --text-color: #374151;
-  --text-light: #6b7280;
-  --bg-color: #ffffff;
-  --bg-dark: #1f2937;
-  --border-color: #e5e7eb;
+
+  /* Dark theme colors */
+  --dark-color: #f9fafb;
+  /* Light text color */
+  --light-color: #111827;
+  /* Dark background color */
+  --text-color: #e5e7eb;
+  /* Light text */
+  --text-light: #9ca3af;
+  /* Lighter secondary text */
+  --bg-color: #121212;
+  /* Main dark background */
+  --bg-dark: #0a0a0a;
+  /* Darker background */
+  --border-color: #2e2e2e;
+  /* Dark borders */
 
   --gradient-primary: linear-gradient(135deg, #6c63ff 0%, #5046e5 100%);
   --gradient-secondary: linear-gradient(135deg, #ff6584 0%, #e64980 100%);
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  /* Adjust shadows for dark mode */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
 
   --transition: all 0.3s ease;
 }
@@ -31,7 +42,6 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
-  /* Account for fixed navbar */
 }
 
 body {
@@ -49,7 +59,7 @@ a {
 }
 
 a:hover {
-  color: var(--primary-dark);
+  color: var(--primary-light);
 }
 
 ul {
@@ -57,7 +67,7 @@ ul {
 }
 
 strong {
-  color: var(--dark-color);
+  color: var(--text-color);
   font-weight: 600;
 }
 
@@ -104,7 +114,8 @@ strong {
 }
 
 .light-section {
-  background-color: #f8f9fa;
+  background-color: var(--light-color);
+  /* Updated for dark theme */
 }
 
 /* Navbar Styles */
@@ -120,7 +131,8 @@ strong {
 }
 
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(18, 18, 18, 0.95);
+  /* Dark background with opacity */
   backdrop-filter: blur(10px);
   padding: 15px 0;
   box-shadow: var(--shadow-md);
@@ -160,7 +172,7 @@ strong {
 
 .nav-menu a:hover,
 .nav-menu a.active {
-  color: var(--primary-color);
+  color: var(--primary-light);
 }
 
 .nav-menu a::after {
@@ -300,7 +312,8 @@ strong {
   height: 40px;
   border-radius: 50%;
   background: var(--bg-dark);
-  color: var(--light-color);
+  color: var(--dark-color);
+  /* Updated for dark theme */
   transition: var(--transition);
 }
 
@@ -428,7 +441,8 @@ strong {
 .highlight {
   flex: 1;
   min-width: 250px;
-  background: white;
+  background: #1e1e1e;
+  /* Dark card background */
   padding: 25px;
   border-radius: 10px;
   box-shadow: var(--shadow-md);
@@ -493,7 +507,8 @@ strong {
 }
 
 .timeline-content {
-  background: white;
+  background: #1e1e1e;
+  /* Dark card background */
   padding: 30px;
   border-radius: 10px;
   box-shadow: var(--shadow-md);
@@ -520,7 +535,8 @@ strong {
 .timeline-period {
   display: inline-block;
   padding: 5px 15px;
-  background-color: rgba(108, 99, 255, 0.1);
+  background-color: rgba(108, 99, 255, 0.2);
+  /* Slightly more opaque for dark theme */
   color: var(--primary-color);
   border-radius: 30px;
   font-size: 0.9rem;
@@ -553,7 +569,8 @@ strong {
 }
 
 .project-card {
-  background: white;
+  background: #1e1e1e;
+  /* Dark card background */
   border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--shadow-md);
@@ -606,7 +623,8 @@ strong {
 
 .tech-tag {
   padding: 5px 10px;
-  background-color: rgba(108, 99, 255, 0.1);
+  background-color: rgba(108, 99, 255, 0.2);
+  /* Slightly more opaque for dark theme */
   color: var(--primary-color);
   border-radius: 5px;
   font-size: 0.85rem;
@@ -616,7 +634,8 @@ strong {
   display: flex;
   gap: 10px;
   padding: 15px 30px;
-  background: rgba(249, 250, 251, 0.8);
+  background: rgba(18, 18, 18, 0.8);
+  /* Dark background with opacity */
   border-top: 1px solid var(--border-color);
 }
 
@@ -655,7 +674,8 @@ strong {
 }
 
 .skill-badge {
-  background: white;
+  background: #1e1e1e;
+  /* Dark card background */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -741,7 +761,8 @@ strong {
 }
 
 .contact-form {
-  background: white;
+  background: #1e1e1e;
+  /* Dark card background */
   padding: 30px;
   border-radius: 10px;
   box-shadow: var(--shadow-md);
@@ -767,13 +788,16 @@ strong {
   font-family: inherit;
   font-size: 1rem;
   transition: var(--transition);
+  background-color: #2d2d2d;
+  /* Darker input background */
+  color: var(--text-color);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
 }
 
 .form-group textarea {
@@ -806,7 +830,8 @@ strong {
 /* Footer Styles */
 .footer {
   background: var(--bg-dark);
-  color: var(--light-color);
+  color: var(--dark-color);
+  /* Updated for dark theme */
   padding: 30px 20px;
 }
 
@@ -826,7 +851,8 @@ strong {
 }
 
 .footer-links a {
-  color: var(--light-color);
+  color: var(--dark-color);
+  /* Updated for dark theme */
 }
 
 .footer-links a:hover {
@@ -863,7 +889,36 @@ strong {
   visibility: visible;
 }
 
-/* Responsive Styles */
+/* Mobile menu dark theme adjustments */
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background: #1a1a1a;
+    /* Dark mobile menu background */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    box-shadow: var(--shadow-lg);
+    padding: 50px 0;
+    gap: 20px;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .menu-toggle {
+    display: block;
+    z-index: 1001;
+  }
+}
+
+/* Rest of responsive styles remain the same */
 @media (max-width: 1024px) {
   .hero {
     flex-direction: column;
@@ -893,31 +948,6 @@ strong {
 }
 
 @media (max-width: 768px) {
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background: white;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: 0.5s;
-    box-shadow: var(--shadow-lg);
-    padding: 50px 0;
-    gap: 20px;
-  }
-
-  .nav-menu.active {
-    right: 0;
-  }
-
-  .menu-toggle {
-    display: block;
-    z-index: 1001;
-  }
-
   .section {
     padding: 70px 20px;
   }
@@ -976,4 +1006,3 @@ strong {
     transform: translateY(0);
   }
 }
-
