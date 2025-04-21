@@ -60,10 +60,10 @@ const Hero = () => {
         </div>
         
         <div className="hero-links">
-          <a href="YOUR_LINKEDIN_URL" target="_blank" rel="noopener noreferrer" className="social-link linkedin">
+          <a href="https://www.linkedin.com/in/angelshinh/" target="_blank" rel="noopener noreferrer" className="social-link linkedin">
             <i className="fab fa-linkedin-in"></i>
           </a>
-          <a href="YOUR_GITHUB_URL" target="_blank" rel="noopener noreferrer" className="social-link github">
+          <a href="https://github.com/angelshinh1/" target="_blank" rel="noopener noreferrer" className="social-link github">
             <i className="fab fa-github"></i>
           </a>
           <a href="#contact" className="cta-button">

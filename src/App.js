@@ -61,7 +61,7 @@ function App() {
         </div>
       </Section>
 
-      <Section id="experience" title="Work Experience" subtitle="My professional journey" light={true}>
+      <Section id="experience" title="Work Experience" subtitle="My professional journey" light={false}>
         <div className="timeline">
           <TimelineItem 
             title="Machine Learning Engineer & Data Science Intern"
@@ -123,7 +123,7 @@ function App() {
         </div>
       </Section>
 
-      <Section id="projects" title="Projects" subtitle="My recent work" light={true}>
+      <Section id="projects" title="Projects" subtitle="My recent work" light={false}>
         <div className="projects-grid">
           <ProjectCard 
             title="Facial Expression Recognition App"
@@ -134,8 +134,8 @@ function App() {
             ]}
             tech={["Python", "TensorFlow", "OpenCV", "Flask"]}
             links={{
-              backend: "GITHUB_BACKEND_URL",
-              frontend: "GITHUB_FRONTEND_URL"
+              backend: "https://github.com/angelshinh1/face-expression-detector-backend/",
+              frontend: "https://github.com/angelshinh1/face-expression-detector-frontend"
             }}
           />
           <ProjectCard 
@@ -143,11 +143,11 @@ function App() {
             description={[
               "Built model with 78.66% training accuracy and 77.27% test accuracy using SVM",
               "Implemented robust data preprocessing pipeline with feature scaling and normalization",
-              "Created interactive dashboard for medical professionals to interpret predictions"
+              "Performed exploratory data analysis to identify key trends and correlations in patient data"
             ]}
-            tech={["Python", "Scikit-learn", "Pandas", "Streamlit"]}
+            tech={["Python", "Scikit-learn", "Pandas", "NumPy", "Matplotlib"]}
             links={{
-              github: "GITHUB_URL"
+              github: "https://github.com/angelshinh1/ML/blob/main/diabetes_prediction_ML.ipynb"
             }}
           />
           <ProjectCard 
@@ -234,7 +234,7 @@ function App() {
         </div>
       </Section>
 
-      <Section id="contact" title="Get In Touch" subtitle="Let's connect" light={true}>
+      <Section id="contact" title="Get In Touch" subtitle="Let's connect" light={false}>
         <div className="contact-container">
           <div className="contact-info">
             <div className="contact-item">
