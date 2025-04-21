@@ -259,10 +259,10 @@ function App() {
               </div>
             </div>
             <div className="contact-socials">
-              <a href="YOUR_LINKEDIN_URL" target="_blank" rel="noopener noreferrer" className="social-icon">
+              <a href="https://www.linkedin.com/in/angelshinh/" target="_blank" rel="noopener noreferrer" className="social-icon">
                 <i className="fab fa-linkedin-in"></i>
               </a>
-              <a href="YOUR_GITHUB_URL" target="_blank" rel="noopener noreferrer" className="social-icon">
+              <a href="https://github.com/angelshinh1" target="_blank" rel="noopener noreferrer" className="social-icon">
                 <i className="fab fa-github"></i>
               </a>
               <a href="mailto:shinh.maverick@gmail.com" className="social-icon">
