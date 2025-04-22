@@ -5,8 +5,17 @@ import Section from './components/Section';
 import TimelineItem from './components/TimelineItem';
 import ProjectCard from './components/ProjectCard';
 import SkillBadge from './components/SkillBadge';
+import { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 function App() {
+  const [formStatus, setFormStatus] = useState({
+    submitting: false,
+    submitted: false,
+    error: null
+  });
+  const form = useRef();
+
   useEffect(() => {
     const handleScrollToSection = () => {
       // Handle hash links
@@ -22,6 +31,29 @@ function App() {
     window.addEventListener('load', handleScrollToSection);
     return () => window.removeEventListener('load', handleScrollToSection);
   }, []);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setFormStatus({ submitting: true, submitted: false, error: null });
+
+    emailjs.sendForm(
+      'service_i4bx25z',
+      'template_ybgms7p', 
+      form.current,
+      'd4LN-aanQaHxZ9iBx' 
+    )
+      .then((result) => {
+        console.log('Email sent successfully:', result.text);
+        setFormStatus({ submitting: false, submitted: true, error: null });
+        form.current.reset();
+        
+        // Reset form status after 5 seconds
+        setTimeout(() => setFormStatus({ submitting: false, submitted: false, error: null }), 5000);
+      }, (error) => {
+        console.error('Failed to send email:', error.text);
+        setFormStatus({ submitting: false, submitted: false, error: 'Failed to send message. Please try again.' });
+      });
+  };
 
   return (
     <div className="app">
@@ -272,14 +304,14 @@ function App() {
           </div>
           
           <div className="contact-form-container">
-            <form className="contact-form">
+            <form className="contact-form" ref={form} onSubmit={sendEmail}>
               <div className="form-group">
                 <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your Name" required />
+                <input type="text" id="name" name="user_name" placeholder="Your Name" required />
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Your Email" required />
+                <input type="email" id="email" name="user_email" placeholder="Your Email" required />
               </div>
               <div className="form-group">
                 <label htmlFor="subject">Subject</label>
@@ -289,10 +321,32 @@ function App() {
                 <label htmlFor="message">Message</label>
                 <textarea id="message" name="message" placeholder="Your Message" required></textarea>
               </div>
-              <button type="submit" className="submit-btn">
-                <span>Send Message</span>
-                <i className="fas fa-paper-plane"></i>
+              <button 
+                type="submit" 
+                className="submit-btn" 
+                disabled={formStatus.submitting}
+              >
+                {formStatus.submitting ? (
+                  <span>Sending...</span>
+                ) : (
+                  <>
+                    <span>Send Message</span>
+                    <i className="fas fa-paper-plane"></i>
+                  </>
+                )}
               </button>
+              
+              {formStatus.submitted && (
+                <div className="form-success-message">
+                  <i className="fas fa-check-circle"></i> Message sent successfully!
+                </div>
+              )}
+              
+              {formStatus.error && (
+                <div className="form-error-message">
+                  <i className="fas fa-exclamation-circle"></i> {formStatus.error}
+                </div>
+              )}
             </form>
           </div>
         </div>
