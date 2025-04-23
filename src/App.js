@@ -100,9 +100,9 @@ function App() {
             company="Meta Trading Club"
             period="Jan 2025 – Apr 2025"
             points={[
-              "Designed and deployed ML models to support financial trading strategies with 15% improved prediction accuracy",
-              "Built and refined data pipelines using Python and JavaScript handling 10GB+ of financial data daily",
-              "Collaborated with finance experts to integrate AI-driven solutions, accelerating decision-making by 30%"
+              "Developed predictive models to analyze market patterns, leading to a 10% increase in simulated returns.",
+              "Built data pipelines using Python and JavaScript to automate extraction and transformation of financial datasets.",
+              "Integrated NLP-powered prompt engineering for news-based sentiment analysis, improving short-term prediction reliability by 15%.",
             ]}
           />
           <TimelineItem 
@@ -110,9 +110,8 @@ function App() {
             company="Beaver Creek Kids Club"
             period="Sep 2024 – Present"
             points={[
-              "Guide 20+ students weekly through C++ and Python fundamentals with interactive learning methods",
-              "Developed custom debugging workshops and coding challenges that increased student engagement by 40%",
-              "Created personalized learning paths resulting in 85% of students mastering core programming concepts"
+              "Mentored 20+ students weekly in C++ and Python fundamentals, resulting in a 95% lab pass rate.",
+              "Created interactive debugging sessions and coding challenges to reinforce core OOP concepts."
             ]}
           />
           <TimelineItem 
@@ -120,9 +119,9 @@ function App() {
             company="Seneca College"
             period="Sep 2024 – Present"
             points={[
-              "Assist 60+ students per semester with C programming labs and debugging sessions",
-              "Improved class average by 10% through targeted one-on-one mentoring and custom learning resources",
-              "Collaborated with professors to refine lab materials based on common student challenges"
+              "Supported 60+ students per semester through hands-on help with assignments and lab activities.",
+              "Raised class average by 30% through one-on-one guidance and peer-learning strategies.",
+              "Maintained a safe and collaborative lab environment by enforcing lab guidelines."
             ]}
             isLast={true}
           />
@@ -136,9 +135,9 @@ function App() {
             company="Seneca College"
             period="Aug 2024 – Present"
             points={[
-              "Support 45+ international students, boosting first-term retention by 70% through weekly check-ins",
-              "Co-developed time-management workshops rated 'very helpful' by 80% of participants",
-              "Created comprehensive resource guides for new students to navigate college systems"
+              "Mentored 45+ international students, enhancing retention by 70% in the first term.",
+              "Co-led workshops on time management and academic strategies which 90% of mentees rated sessions 'Very Helpful.'",
+              "Enhancing cultural awareness by assisting international students with settling into life in Canada."
             ]}
           />
           <TimelineItem 
@@ -146,9 +145,9 @@ function App() {
             company="Seneca Software Developers Club"
             period="Aug 2024 – Present"
             points={[
-              "Manage club finances and budget approvals for tech events and hackathons",
-              "Prepare detailed semester-end reports on club growth, member engagement, and ROI",
-              "Secured 30% additional funding through strategic partnerships with local tech companies"
+              "Managed budgeting and event financing in alignment with Seneca Student Federation guidelines.",
+              "Delivered two financial reports showcasing 23% club membership growth and strong ROI on events.",
+              "Assisted in organizing hands-on coding workshops, events and speaker sessions."
             ]}
             isLast={true}
           />
@@ -160,9 +159,9 @@ function App() {
           <ProjectCard 
             title="Facial Expression Recognition App"
             description={[
-              "Achieved 75.3% accuracy on 10K+ images with TensorFlow and OpenCV",
-              "Implemented real-time emotion tracking at 30 FPS with inference under 200 ms",
-              "Optimized model for edge deployment on mobile devices"
+              "Achieved 75.3% accuracy on a 10K+ image dataset using TensorFlow and OpenCV, enabling real-time emotion recognition at 30 FPS. ",
+              "Implemented real-time emotion tracking at 30 FPS with inference under 200 ms.",
+              "Designed for scalability using modular components and clean architecture."
             ]}
             tech={["Python", "TensorFlow", "OpenCV", "Flask"]}
             links={{
@@ -173,9 +172,9 @@ function App() {
           <ProjectCard 
             title="Diabetes Prediction System"
             description={[
-              "Built model with 78.66% training accuracy and 77.27% test accuracy using SVM",
-              "Implemented robust data preprocessing pipeline with feature scaling and normalization",
-              "Performed exploratory data analysis to identify key trends and correlations in patient data"
+              "Implemented an SVM classifier on a clinical dataset of 768 patients achieving 78.7% training and 77.3% test accuracy.",
+              "Used StandardScaler and stratified splitting to ensure balanced performance.",
+              "Preprocessed features and applied grid search to fine-tune model parameters."
             ]}
             tech={["Python", "Scikit-learn", "Pandas", "NumPy", "Matplotlib"]}
             links={{
@@ -185,25 +184,13 @@ function App() {
           <ProjectCard 
             title="Movie Recommendation System"
             description={[
-              "Developed hybrid recommendation engine combining collaborative and content-based filtering",
-              "Implemented user preference tracking to refine recommendations over time",
-              "Processed dataset of 5000+ movies and 100,000+ ratings for accurate suggestions"
+              "Developed hybrid recommendation engine combining collaborative and content-based filtering.",
+              "Leveraged Scikit-learn, Pandas, and cosine similarity to personalize user recommendations.",
+              "Implemented user preference tracking to refine recommendations over time."
             ]}
             tech={["Python", "Pandas", "Scikit-learn", "Flask", "React"]}
             links={{
               github: "#"
-            }}
-          />
-          <ProjectCard 
-            title="Portfolio Website"
-            description={[
-              "Designed and developed responsive personal portfolio with React",
-              "Implemented smooth animations and transitions for enhanced user experience",
-              "Optimized performance with lazy loading and code splitting techniques"
-            ]}
-            tech={["React", "JavaScript", "CSS3", "Responsive Design"]}
-            links={{
-              demo: "#"
             }}
           />
         </div>
@@ -249,7 +236,7 @@ function App() {
             <div className="skills-grid">
               <SkillBadge name="MySQL" icon="fas fa-database" />
               <SkillBadge name="MongoDB" icon="fas fa-leaf" />
-              <SkillBadge name="PostgreSQL" icon="fas fa-elephant" />
+              <SkillBadge name="PostgreSQL" icon="fas fa-circle-nodes" />
             </div>
           </div>
           
