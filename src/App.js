@@ -98,7 +98,7 @@ function App() {
           <TimelineItem 
             title="Machine Learning Engineer & Data Science Intern"
             company="Meta Trading Club"
-            period="Jan 2025 – Apr 2025"
+            period="Jan 2025 - Apr 2025"
             points={[
               "Developed predictive models to analyze market patterns, leading to a 10% increase in simulated returns.",
               "Built data pipelines using Python and JavaScript to automate extraction and transformation of financial datasets.",
@@ -108,7 +108,7 @@ function App() {
           <TimelineItem 
             title="Coding Tutor"
             company="Beaver Creek Kids Club"
-            period="Sep 2024 – Present"
+            period="Sep 2024 - Present"
             points={[
               "Mentored 20+ students weekly in C++ and Python fundamentals, resulting in a 95% lab pass rate.",
               "Created interactive debugging sessions and coding challenges to reinforce core OOP concepts."
@@ -117,7 +117,7 @@ function App() {
           <TimelineItem 
             title="Lab Assistant, IPC144"
             company="Seneca College"
-            period="Sep 2024 – Present"
+            period="Sep 2024 - Present"
             points={[
               "Supported 60+ students per semester through hands-on help with assignments and lab activities.",
               "Raised class average by 30% through one-on-one guidance and peer-learning strategies.",
@@ -133,7 +133,7 @@ function App() {
           <TimelineItem 
             title="Peer Mentor"
             company="Seneca College"
-            period="Aug 2024 – Present"
+            period="Aug 2024 - Present"
             points={[
               "Mentored 45+ international students, enhancing retention by 70% in the first term.",
               "Co-led workshops on time management and academic strategies which 90% of mentees rated sessions 'Very Helpful.'",
@@ -143,7 +143,7 @@ function App() {
           <TimelineItem 
             title="Treasurer"
             company="Seneca Software Developers Club"
-            period="Aug 2024 – Present"
+            period="Aug 2024 - Present"
             points={[
               "Managed budgeting and event financing in alignment with Seneca Student Federation guidelines.",
               "Delivered two financial reports showcasing 23% club membership growth and strong ROI on events.",

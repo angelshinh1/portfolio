@@ -1,28 +1,35 @@
-/* Root Variables - Dark Theme */
-:root {
-  --primary-color: #6c63ff;
-  --primary-light: #837dff;
-  --primary-dark: #5046e5;
+/* Root Variables - Dark Theme with Multiple Color Options */
+:root {  
+  /* Coral Theme */
+  --primary-color-coral: #FF9A8B;
+  --primary-light-coral: #FFADA0;
+  --primary-dark-coral: #FF7F6A;
+
+  /* Common Secondary Color */
   --secondary-color: #ff6584;
 
-  /* Dark theme colors */
-  --dark-color: #f9fafb;
-  /* Light text color */
-  --light-color: #111827;
-  /* Dark background color */
-  --text-color: #e5e7eb;
-  /* Light text */
-  --text-light: #9ca3af;
-  /* Lighter secondary text */
-  --bg-color: #121212;
-  /* Main dark background */
-  --bg-dark: #0a0a0a;
-  /* Darker background */
-  --border-color: #2e2e2e;
-  /* Dark borders */
+  /* Dark theme base colors */
+  --dark-color: #f9fafb;       /* Light text color */
+  --light-color: #111827;      /* Dark background color */
+  --text-color: #e5e7eb;       /* Light text */
+  --text-light: #9ca3af;       /* Lighter secondary text */
+  --bg-color: #121212;         /* Main dark background */
+  --bg-dark: #0a0a0a;          /* Darker background */
+  --border-color: #2e2e2e;     /* Dark borders */
 
-  --gradient-primary: linear-gradient(135deg, #6c63ff 0%, #5046e5 100%);
+  /* Gradients for each theme */
+  --gradient-purple: linear-gradient(135deg, #6c63ff 0%, #5046e5 100%);
+  --gradient-mint: linear-gradient(135deg, #4ECCA3 0%, #3AAF89 100%);
+  --gradient-coral: linear-gradient(135deg, #FF9A8B 0%, #FF7F6A 100%);
+  --gradient-yellow: linear-gradient(135deg, #FFD166 0%, #FCBF49 100%);
+  --gradient-turquoise: linear-gradient(135deg, #64DFDF 0%, #56C9C9 100%);
+  --gradient-lavender: linear-gradient(135deg, #BDB2FF 0%, #A99BFF 100%);
   --gradient-secondary: linear-gradient(135deg, #ff6584 0%, #e64980 100%);
+
+  --primary-color: var(--primary-color-coral);
+  --primary-light: var(--primary-light-coral);
+  --primary-dark: var(--primary-dark-coral);
+  --gradient-primary: var(--gradient-coral);
 
   /* Adjust shadows for dark mode */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -555,7 +562,7 @@ img {
 .timeline-period {
   display: inline-block;
   padding: 5px 15px;
-  background-color: rgba(108, 99, 255, 0.2);
+  background-color: rgba(255, 127, 80, 0.2);
   color: var(--primary-color);
   border-radius: 30px;
   font-size: 0.9rem;
@@ -647,7 +654,7 @@ img {
 
 .tech-tag {
   padding: 5px 10px;
-  background-color: rgba(108, 99, 255, 0.2);
+  background-color: rgba(255, 127, 80, 0.2);
   color: var(--primary-color);
   border-radius: 5px;
   font-size: 0.85rem;
