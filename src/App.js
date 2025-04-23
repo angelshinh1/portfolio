@@ -184,9 +184,8 @@ function App() {
           <ProjectCard 
             title="Movie Recommendation System"
             description={[
-              "Developed hybrid recommendation engine combining collaborative and content-based filtering.",
-              "Leveraged Scikit-learn, Pandas, and cosine similarity to personalize user recommendations.",
-              "Implemented user preference tracking to refine recommendations over time."
+              "Developed a cool hybrid recommendation engine combining collaborative and content-based filtering.",
+              "Leveraged Sklearn, Pandas, and cosine similarity to personalize user recommendations.",
             ]}
             tech={["Python", "Pandas", "Scikit-learn", "Flask", "React"]}
             links={{
