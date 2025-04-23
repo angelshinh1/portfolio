@@ -1,55 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import * as THREE from 'three';
 
-const Hero = () => {
-  const [displayText, setDisplayText] = useState("");
-  const cursorRef = useRef(null);
-  const mountRef = useRef(null);
-  const sceneRef = useRef(null);
-  
+const HeroAnimation = ({ mountRef }) => {
   useEffect(() => {
-    // Text typing animation
-    const texts = ["Software Engineer", "ML Engineer", "Problem Solver"];
-    let count = 0;
-    let index = 0;
-    let currentText = "";
-    
-    const type = () => {
-      if (count === texts.length) {
-        count = 0;
-      }
-      currentText = texts[count];
-      
-      const letter = currentText.slice(0, ++index);
-      setDisplayText(letter);
-      
-      if (letter.length === currentText.length) {
-        count++;
-        index = 0;
-        setTimeout(type, 2000);
-      } else {
-        setTimeout(type, 100);
-      }
-    };
-    
-    // Start the typing animation
-    type();
-    
-    let cursorVisible = true;
-    const cursorBlink = setInterval(() => {
-      if (cursorRef.current) {
-        cursorRef.current.style.opacity = cursorVisible ? "1" : "0";
-        cursorVisible = !cursorVisible;
-      }
-    }, 500);
-    
-    // Three.js implementation
     if (!mountRef.current) return;
     
     // Scene setup
     const scene = new THREE.Scene();
-    
-    // Initial renderer setup
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setClearColor(0x000000, 0);
     
@@ -71,13 +28,9 @@ const Hero = () => {
     renderer.setSize(containerWidth, containerHeight);
     mountRef.current.appendChild(renderer.domElement);
     
-    // Store scene reference for cleanup
-    sceneRef.current = { scene, camera, renderer };
-    
     // Create particles
+    const particlesCount = window.innerWidth <= 768 ? 150 : 300; 
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 300;
-    
     const posArray = new Float32Array(particlesCount * 3);
     const colorArray = new Float32Array(particlesCount * 3);
     
@@ -131,9 +84,8 @@ const Hero = () => {
     
     // Function to update sizes when window resizes
     const updateSize = () => {
-      if (!mountRef.current || !sceneRef.current) return;
+      if (!mountRef.current) return;
       
-      const { camera, renderer } = sceneRef.current;
       const width = mountRef.current.clientWidth || 300;
       const height = mountRef.current.clientHeight || 300;
       
@@ -145,11 +97,8 @@ const Hero = () => {
       renderer.setSize(width, height);
     };
     
-    // Function to adjust Three.js for mobile
+    // adjust for mobile
     const adjustThreeJSForMobile = () => {
-      if (!sceneRef.current) return;
-      
-      const { camera } = sceneRef.current;
       const isMobile = window.innerWidth <= 768;
       
       if (isMobile) {
@@ -241,7 +190,6 @@ const Hero = () => {
     
     // Clean up
     return () => {
-      clearInterval(cursorBlink);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       
@@ -261,57 +209,140 @@ const Hero = () => {
       glowMaterial.dispose();
       renderer.dispose();
     };
+  }, [mountRef]);
+  
+  return null;
+};
+
+const Hero = () => {
+  const [displayText, setDisplayText] = useState("");
+  const [isAnimationLoaded, setIsAnimationLoaded] = useState(false);
+  const cursorRef = useRef(null);
+  const mountRef = useRef(null);
+  
+  useEffect(() => {
+    // Text typing animation
+    const texts = ["Software Engineer", "ML Engineer", "Problem Solver"];
+    let count = 0;
+    let index = 0;
+    let currentText = "";
+    
+    const type = () => {
+      if (count === texts.length) {
+        count = 0;
+      }
+      currentText = texts[count];
+      
+      const letter = currentText.slice(0, ++index);
+      setDisplayText(letter);
+      
+      if (letter.length === currentText.length) {
+        count++;
+        index = 0;
+        setTimeout(type, 2000);
+      } else {
+        setTimeout(type, 100);
+      }
+    };
+    
+    // Start the typing animation
+    type();
+    
+    let cursorVisible = true;
+    const cursorBlink = setInterval(() => {
+      if (cursorRef.current) {
+        cursorRef.current.style.opacity = cursorVisible ? "1" : "0";
+        cursorVisible = !cursorVisible;
+      }
+    }, 500);
+    
+    // Set animation as loaded after a short delay
+    const loadTimer = setTimeout(() => {
+      setIsAnimationLoaded(true);
+    }, 100);
+    
+    // Clean up
+    return () => {
+      clearInterval(cursorBlink);
+      clearTimeout(loadTimer);
+    };
   }, []);
+
+  // Handle smooth scrolling to contact section
+  const scrollToContact = (e) => {
+    e.preventDefault();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   
   return (
-    <div id="hero" className="hero">
+    <section id="hero" className="hero" aria-label="Introduction">
       <div className="hero-content">
         <h4 className="greeting">Hello, I'm</h4>
         <h1 className="name">Angel Shinh</h1>
-        <h2 className="dynamic-text">
+        <h2 className="dynamic-text" aria-live="polite">
           I'm a <span className="typed-text">{displayText}</span>
-          <span ref={cursorRef} className="cursor">|</span>
+          <span ref={cursorRef} className="cursor" aria-hidden="true">|</span>
         </h2>
         
         <p className="hero-description">
           Versatile engineer with a passion for building scalable systems and ML solutions
         </p>
         
-        <div className="hero-contact">
-          <div className="location">
-            <i className="fas fa-map-marker-alt"></i>
-            <span>Markham, ON</span>
-          </div>
-          <div className="phone">
-            <i className="fas fa-phone"></i>
-            <span>+1 437-430-6774</span>
-          </div>
-          <div className="email">
-            <i className="fas fa-envelope"></i>
-            <span>shinh.maverick@gmail.com</span>
-          </div>
-        </div>
-        
         <div className="hero-links">
-          <a href="https://www.linkedin.com/in/angelshinh/" target="_blank" rel="noopener noreferrer" className="social-link linkedin">
+          <a 
+            href="https://www.linkedin.com/in/angelshinh/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="social-link linkedin"
+            aria-label="LinkedIn Profile"
+          >
             <i className="fab fa-linkedin-in"></i>
           </a>
-          <a href="https://github.com/angelshinh1/" target="_blank" rel="noopener noreferrer" className="social-link github">
+          <a 
+            href="https://github.com/angelshinh1/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="social-link github"
+            aria-label="GitHub Profile"
+          >
             <i className="fab fa-github"></i>
           </a>
-          <a href="#contact" className="cta-button">
-            <span>Contact Me</span>
+          <a 
+            href="#contact" 
+            className="cta-button primary-cta"
+            onClick={scrollToContact}
+            aria-label="Contact Me"
+          >
+            <span>Get in Touch</span>
             <i className="fas fa-arrow-right"></i>
+          </a>
+          <a 
+            href="https://drive.google.com/file/d/1CxIkzI7DpocLjvecnH8v1InCErbrlTfB/view?usp=sharing" 
+            className="cta-button secondary-cta"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Download Resume"
+          >
+            <span>Resume</span>
+            <i className="fas fa-download"></i>
           </a>
         </div>
       </div>
       
       <div className="hero-image">
-        <div className="avatar-container" ref={mountRef}>
-          {/* Threejs Sphere */}
+        <div 
+          className={`avatar-container ${isAnimationLoaded ? 'loaded' : 'loading'}`} 
+          ref={mountRef}
+          aria-hidden="true"
+        >
+          {isAnimationLoaded && <HeroAnimation mountRef={mountRef} />}
+          {!isAnimationLoaded && <div className="loading-spinner"></div>}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -457,6 +457,7 @@ img {
 .about-text p {
   font-size: 1.1rem;
   margin-bottom: 20px;
+  text-align: justify;
 }
 
 .about-highlights {
