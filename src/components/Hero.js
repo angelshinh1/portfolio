@@ -292,44 +292,50 @@ const Hero = () => {
         </p>
         
         <div className="hero-links">
-          <a 
-            href="https://www.linkedin.com/in/angelshinh/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="social-link linkedin"
-            aria-label="LinkedIn Profile"
-          >
-            <i className="fab fa-linkedin-in"></i>
-          </a>
-          <a 
-            href="https://github.com/angelshinh1/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="social-link github"
-            aria-label="GitHub Profile"
-          >
-            <i className="fab fa-github"></i>
-          </a>
-          <a 
-            href="#contact" 
-            className="cta-button primary-cta"
-            onClick={scrollToContact}
-            aria-label="Contact Me"
-          >
-            <span>Get in Touch</span>
-            <i className="fas fa-arrow-right"></i>
-          </a>
-          <a 
-            href="https://drive.google.com/file/d/1CxIkzI7DpocLjvecnH8v1InCErbrlTfB/view?usp=sharing" 
-            className="cta-button secondary-cta"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Download Resume"
-          >
-            <span>Resume</span>
-            <i className="fas fa-download"></i>
-          </a>
-        </div>
+  <div className="social-links-container">
+    <a
+      href="https://www.linkedin.com/in/angelshinh/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="social-link linkedin"
+      aria-label="LinkedIn Profile"
+    >
+      <i className="fab fa-linkedin-in"></i>
+    </a>
+
+    <a
+      href="https://github.com/angelshinh1/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="social-link github"
+      aria-label="GitHub Profile"
+    >
+      <i className="fab fa-github"></i>
+    </a>
+  </div>
+
+  <a
+    href="#contact"
+    className="cta-button primary-cta"
+    onClick={scrollToContact}
+    aria-label="Contact Me"
+  >
+    <span>Get in Touch</span>
+    <i className="fas fa-arrow-right"></i>
+  </a>
+
+  <a
+    href="https://drive.google.com/file/d/1CxIkzI7DpocLjvecnH8v1InCErbrlTfB/view?usp=sharing"
+    className="cta-button secondary-cta"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Download Resume"
+  >
+    <span>Resume</span>
+    <i className="fas fa-download"></i>
+  </a>
+</div>
+
       </div>
       
       <div className="hero-image">

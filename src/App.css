@@ -501,6 +501,7 @@ img {
 .highlight p {
   color: var(--text-light);
   margin-bottom: 0;
+  text-align: center;
 }
 
 /* Timeline Styles */
@@ -1130,8 +1131,15 @@ img {
   }
 
   .hero-links {
+    display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 10px;
+  }
+
+  .social-links-container {
+    display: flex;
+    flex-direction: row;
     gap: 10px;
   }
 
