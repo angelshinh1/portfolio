@@ -245,8 +245,8 @@ function App() {
               <SkillBadge name="Git/GitHub" icon="fab fa-github" />
               <SkillBadge name="Jira" icon="fab fa-jira" />
               <SkillBadge name="VS Code" icon="fas fa-code" />
+              <SkillBadge name="Windows" icon="fab fa-windows" />
               <SkillBadge name="Linux" icon="fab fa-linux" />
-              <SkillBadge name="Docker" icon="fab fa-docker" />
             </div>
           </div>
         </div>
