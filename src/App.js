@@ -187,7 +187,7 @@ function App() {
               "Developed a cool hybrid recommendation engine combining collaborative and content-based filtering.",
               "Leveraged Sklearn, Pandas, and cosine similarity to personalize user recommendations.",
             ]}
-            tech={["Python", "Pandas", "Scikit-learn", "Flask", "React"]}
+            tech={["Python", "Pandas", "Scikit-learn", "Streamlit", "AST", "NLTK", "Pickle"]}
             links={{
               github: "https://github.com/angelshinh1/movie-recommender-system"
             }}
