@@ -155,7 +155,7 @@ function App() {
             company="Seneca Polytechnic"
             period="Sep 2023 - Present"
             points={[
-              "Led campus tours for over 100 prospective students and their families across various facilities.",
+              "Led campus tours for over 100 prospective students and their families across various facilities each semester.",
               "Communicated key information about academic programs, campus life, and student resources.",
               "Helped foster a welcoming first impression and encouraged student engagement through Q&A sessions."
             ]}
