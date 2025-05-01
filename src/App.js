@@ -116,7 +116,7 @@ function App() {
           />
           <TimelineItem 
             title="Lab Assistant, IPC144"
-            company="Seneca College"
+            company="Seneca Polytechnic"
             period="Sep 2024 - Present"
             points={[
               "Supported 60+ students per semester through hands-on help with assignments and lab activities.",
@@ -132,7 +132,7 @@ function App() {
         <div className="timeline">
           <TimelineItem 
             title="Peer Mentor"
-            company="Seneca College"
+            company="Seneca Polytechnic"
             period="Aug 2024 - Present"
             points={[
               "Mentored 45+ international students, enhancing retention by 70% in the first term.",
@@ -148,6 +148,16 @@ function App() {
               "Managed budgeting and event financing in alignment with Seneca Student Federation guidelines.",
               "Delivered two financial reports showcasing 23% club membership growth and strong ROI on events.",
               "Assisted in organizing hands-on coding workshops, events and speaker sessions."
+            ]}
+          />
+          <TimelineItem 
+            title="Campus Tour Guide"
+            company="Seneca Polytechnic"
+            period="Sep 2023 - Present"
+            points={[
+              "Led campus tours for over 100 prospective students and their families across various facilities.",
+              "Communicated key information about academic programs, campus life, and student resources.",
+              "Helped foster a welcoming first impression and encouraged student engagement through Q&A sessions."
             ]}
             isLast={true}
           />
