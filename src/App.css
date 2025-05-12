@@ -166,7 +166,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
+  padding: 0 120px;
   height: 70px;
   max-width: 1400px;
   margin: 0 auto;
@@ -175,13 +175,13 @@ img {
 .logo a {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--primary-light);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .logo a:hover {
-  color: #64ffda;
+  color: var(--gradient-primary);
 }
 
 .nav-menu {
@@ -1003,7 +1003,7 @@ img {
     top: 80px;
     right: 20px;
     width: 240px;
-    background: rgba(10, 12, 26, 0.95);
+    background: rgba(0, 0, 0, 0.90);
     backdrop-filter: blur(10px);
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
@@ -1030,6 +1030,10 @@ img {
     flex-direction: column;
     padding: 15px 0;
     gap: 0;
+  }
+
+  .navbar-container{
+    padding: 0 20px;
   }
   
   .nav-menu li {
