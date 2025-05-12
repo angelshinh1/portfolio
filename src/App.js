@@ -135,7 +135,7 @@ function App() {
             company="CUSEC: Canadian University Software Engineering Conference"
             period="May 2025 - Present"
             points={[
-              "Collaborated with cross-functional teams to design and develop a responsive website for CUSEC using React and Tailwind CSS.",
+              "Collaborated with cross-functional teams to design and develop a responsive website for CUSEC.",
               "Led the UI/UX revamp of the conference portal, improving user engagement by 40% through intuitive navigation and visual consistency.",
               "Implemented accessibility best practices (WCAG) to ensure inclusivity and compliance, increasing usability across diverse audiences.",
               "Designed promotional assets and branding elements to maintain visual consistency across digital platforms."
