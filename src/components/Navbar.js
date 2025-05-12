@@ -4,24 +4,42 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("hero");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll("section, .hero");
+      const currentScrollPos = window.scrollY;
       
       // Set navbar background when scrolled
-      if (window.scrollY > 50) {
+      if (currentScrollPos > 50) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
+      
+      // Hide/show navbar based on scroll direction
+      // Don't hide at the very top of the page & don't hide when menu is open
+      const isScrollingDown = currentScrollPos > prevScrollPos;
+      const isAtTop = currentScrollPos < 100;
+      
+      if (!menuOpen) {
+        if (isScrollingDown && !isAtTop && visible) {
+          setVisible(false);
+        } else if (!isScrollingDown && !visible) {
+          setVisible(true);
+        }
+      }
+      
+      setPrevScrollPos(currentScrollPos);
       
       // Determine which section is currently in view
       let current = "";
       sections.forEach((section) => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        if (window.scrollY >= sectionTop - 300) {
+        if (currentScrollPos >= sectionTop - 300) {
           current = section.getAttribute("id");
         }
       });
@@ -30,9 +48,13 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [prevScrollPos, visible, menuOpen]);
 
   const toggleMenu = () => {
+    // When opening menu, ensure navbar is visible
+    if (!menuOpen) {
+      setVisible(true);
+    }
     setMenuOpen(!menuOpen);
   };
 
@@ -41,14 +63,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${visible ? 'visible' : 'hidden'}`}>
       <div className="navbar-container">
         <div className="logo">
           <a href="#hero">AS</a>
         </div>
         
         <button 
-          className={`menu-toggle ${menuOpen ? 'active' : ''}`} 
+          className={`menu-toggle ${menuOpen ? 'active' : ''}`}
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
