@@ -34,6 +34,12 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+    // Prevent scrolling when menu is open
+    if (!menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
   };
 
   return (
@@ -48,13 +54,13 @@ const Navbar = () => {
         </div>
         
         <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
-          <li><a href="#hero" className={activeSection === "hero" ? "active" : ""} onClick={() => setMenuOpen(false)}>Home</a></li>
-          <li><a href="#about" className={activeSection === "about" ? "active" : ""} onClick={() => setMenuOpen(false)}>About</a></li>
-          <li><a href="#experience" className={activeSection === "experience" ? "active" : ""} onClick={() => setMenuOpen(false)}>Experience</a></li>
-          <li><a href="#leadership" className={activeSection === "leadership" ? "active" : ""} onClick={() => setMenuOpen(false)}>Leadership</a></li>
-          <li><a href="#projects" className={activeSection === "projects" ? "active" : ""} onClick={() => setMenuOpen(false)}>Projects</a></li>
-          <li><a href="#skills" className={activeSection === "skills" ? "active" : ""} onClick={() => setMenuOpen(false)}>Skills</a></li>
-          <li><a href="#contact" className={activeSection === "contact" ? "active" : ""} onClick={() => setMenuOpen(false)}>Contact</a></li>
+          <li><a href="#hero" className={activeSection === "hero" ? "active" : ""} onClick={() => {setMenuOpen(false); document.body.style.overflow = 'auto';}}>Home</a></li>
+          <li><a href="#about" className={activeSection === "about" ? "active" : ""} onClick={() => {setMenuOpen(false); document.body.style.overflow = 'auto';}}>About</a></li>
+          <li><a href="#experience" className={activeSection === "experience" ? "active" : ""} onClick={() => {setMenuOpen(false); document.body.style.overflow = 'auto';}}>Experience</a></li>
+          <li><a href="#leadership" className={activeSection === "leadership" ? "active" : ""} onClick={() => {setMenuOpen(false); document.body.style.overflow = 'auto';}}>Leadership</a></li>
+          <li><a href="#projects" className={activeSection === "projects" ? "active" : ""} onClick={() => {setMenuOpen(false); document.body.style.overflow = 'auto';}}>Projects</a></li>
+          <li><a href="#skills" className={activeSection === "skills" ? "active" : ""} onClick={() => {setMenuOpen(false); document.body.style.overflow = 'auto';}}>Skills</a></li>
+          <li><a href="#contact" className={activeSection === "contact" ? "active" : ""} onClick={() => {setMenuOpen(false); document.body.style.overflow = 'auto';}}>Contact</a></li>
         </ul>
       </div>
     </nav>

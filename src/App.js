@@ -35,12 +35,12 @@ function App() {
   const sendEmail = (e) => {
     e.preventDefault();
     setFormStatus({ submitting: true, submitted: false, error: null });
-
+  
     emailjs.sendForm(
-      'service_i4bx25z',
-      'template_ybgms7p', 
+      process.env.REACT_APP_EMAILJS_SERVICE_ID,
+      process.env.REACT_APP_EMAILJS_TEMPLATE_ID, 
       form.current,
-      'd4LN-aanQaHxZ9iBx' 
+      process.env.REACT_APP_EMAILJS_PUBLIC_KEY
     )
       .then((result) => {
         console.log('Email sent successfully:', result.text);
