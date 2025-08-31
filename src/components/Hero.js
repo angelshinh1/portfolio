@@ -222,7 +222,7 @@ const Hero = () => {
   
   useEffect(() => {
     // Text typing animation
-    const texts = ["Software Engineer", "ML Engineer", "Problem Solver"];
+    const texts = ["Technical Systems Analyst", "Computer Science Instructor", "ML Engineer", "Problem Solver"];
     let count = 0;
     let index = 0;
     let currentText = "";

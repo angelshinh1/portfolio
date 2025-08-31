@@ -96,13 +96,35 @@ function App() {
       <Section id="experience" title="Work Experience" subtitle="My professional journey" light={false}>
         <div className="timeline">
           <TimelineItem 
+            title="Technical Systems Analyst Intern"
+            company="RBC: Royal Bank of Canada"
+            period="Sept 2025 - Present"
+            points={[
+              "Develop and optimize automation processes to improve data accuracy and operational efficiency.",
+              "Collaborate with cross-functional teams to enable data-driven decision-making strategies.",
+              "Build and maintain dashboards for clear visualization of insights and recommendations.",
+              "Assist with database management, testing, and documentation of end-to-end data flows."
+            ]}
+          />
+          <TimelineItem 
+            title="Computer Science Instructor"
+            company="LogicFusion"
+            period="Jul 2025 - Present"
+            points={[
+              "Teach robotics using LEGO NXT and EV3 to introduce engineering and programming fundamentals.",
+              "Lead game development sessions with Roblox Studio (Lua) to build interactive 3D experiences.",
+              "Instruct Python and C++ programming, covering core concepts like loops, functions, and OOP.",
+              "Design hands-on projects that develop logical thinking, creativity, and problem-solving skills."
+            ]}
+          />
+          <TimelineItem 
             title="Machine Learning Engineer & Data Science Intern"
             company="Meta Trading Club"
             period="Jan 2025 - Apr 2025"
             points={[
               "Developed predictive models to analyze market patterns, leading to a 10% increase in simulated returns.",
               "Built data pipelines using Python and JavaScript to automate extraction and transformation of financial datasets.",
-              "Integrated NLP-powered prompt engineering for news-based sentiment analysis, improving short-term prediction reliability by 15%.",
+              "Integrated NLP-powered prompt engineering for news-based sentiment analysis, improving short-term prediction reliability by 15%."
             ]}
           />
           <TimelineItem 
@@ -110,8 +132,8 @@ function App() {
             company="Beaver Creek Kids Club"
             period="Sep 2024 - Present"
             points={[
-              "Mentored 20+ students weekly in C++ and Python fundamentals, resulting in a 95% lab pass rate.",
-              "Created interactive debugging sessions and coding challenges to reinforce core OOP concepts."
+              "Mentor 20+ students weekly in C++ and Python fundamentals, resulting in a 95% lab pass rate.",
+              "Create interactive debugging sessions and coding challenges to reinforce core OOP concepts."
             ]}
           />
           <TimelineItem 
@@ -119,9 +141,9 @@ function App() {
             company="Seneca Polytechnic"
             period="Sep 2024 - Present"
             points={[
-              "Supported 60+ students per semester through hands-on help with assignments and lab activities.",
-              "Raised class average by 30% through one-on-one guidance and peer-learning strategies.",
-              "Maintained a safe and collaborative lab environment by enforcing lab guidelines."
+              "Support 60+ students per semester through hands-on help with assignments and lab activities.",
+              "Raise class average by 30% through one-on-one guidance and peer-learning strategies.",
+              "Maintain a safe and collaborative lab environment by enforcing lab guidelines."
             ]}
             isLast={true}
           />
