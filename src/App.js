@@ -238,7 +238,7 @@ function App() {
         </div>
       </Section>
 
-      <Section id="skills" title="Skills & Technologies" subtitle="What I work with">
+      {/* <Section id="skills" title="Skills & Technologies" subtitle="What I work with">
         <div className="skills-container">
           <div className="skills-category">
             <h3><i className="fas fa-code"></i> Programming</h3>
@@ -288,12 +288,13 @@ function App() {
               <SkillBadge name="Git/GitHub" icon="fab fa-github" />
               <SkillBadge name="Jira" icon="fab fa-jira" />
               <SkillBadge name="VS Code" icon="fas fa-code" />
-              {/* <SkillBadge name="Windows" icon="fab fa-windows" /> */}
+              {/* <SkillBadge name="Windows" icon="fab fa-windows" />
               <SkillBadge name="Linux" icon="fab fa-linux" />
             </div>
           </div>
         </div>
-      </Section>
+      </Section> 
+      */}
 
       <Section id="contact" title="Get In Touch" subtitle="Let's connect" light={false}>
         <div className="contact-container">
