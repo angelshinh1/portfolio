@@ -1,6 +1,17 @@
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Hero() {
+    const [showTooltip, setShowTooltip] = useState(false);
+
+    const handleImageClick = () => {
+        setShowTooltip(!showTooltip);
+        // Auto-hide after 3 seconds on mobile
+        if (!showTooltip) {
+            setTimeout(() => setShowTooltip(false), 3000);
+        }
+    };
+
     return (
         <div id="about" className="max-w-[70vw] mx-auto flex flex-col lg:flex-row items-center justify-center py-12 gap-12 lg:gap-16 min-h-screen -mt-12">
             {/* Text Content */}
@@ -50,7 +61,7 @@ export default function Hero() {
                     {/* Animated gradient background */}
                     <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-4xl opacity-0 group-hover:opacity-30 blur-lg transition-all duration-500 group-hover:duration-200"></div>
                     
-                    <div className="relative">
+                    <div className="relative cursor-pointer" onClick={handleImageClick}>
                         <Image
                             src="/profile.jpg"
                             alt="Angel Shinh profile"
@@ -61,10 +72,17 @@ export default function Hero() {
                         
                         {/* Border overlay */}
                         <div className="absolute inset-0 rounded-4xl border-2 border-white/20 group-hover:border-white/40 transition-all duration-300 pointer-events-none z-20"></div>
+                        
+                        {/* Tap indicator */}
+                        <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white text-xs animate-pulse z-30">
+                            👆
+                        </div>
                     </div>
                     
-                    {/* Hover tooltip */}
-                    <div className="nova-oval-regular absolute left-1/2 -translate-x-1/2 top-full mt-3 px-5 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap shadow-xl">
+                    {/* Hover/Click tooltip */}
+                    <div className={`nova-oval-regular absolute left-1/2 -translate-x-1/2 top-full mt-3 px-5 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm transition-all duration-300 whitespace-nowrap shadow-xl z-40 ${
+                        showTooltip ? 'opacity-100' : 'opacity-0 lg:group-hover:opacity-100'
+                    }`}>
                         Ts guy got W rizz. Should ask him out <span className="inline-block">✌️🥀</span>
                         {/* Arrow pointing up */}
                         <div className="absolute left-1/2 -translate-x-1/2 -top-2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-transparent border-b-white/10"></div>
