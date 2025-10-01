@@ -7,7 +7,7 @@ export default function Hero() {
             <div className="medievalsharp-regular text-justify lg:text-left text-base lg:text-2xl flex-1 space-y-3 lg:space-y-6">
                 <div className="space-y-2 lg:space-y-4">
                     <p>
-                        Hi, I&apos;m <span className="text-white font-bold">Angel Shinh</span>, a passionate developer and designer who loves building stuff.
+                        Hi, I&apos;m <span className="text-white font-bold">Angel Shinh</span>, a who loves building stuff... somtimes.
                     </p>
                     
                     <p>
