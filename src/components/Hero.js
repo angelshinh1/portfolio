@@ -4,8 +4,8 @@ export default function Hero() {
     return (
         <div id="about" className="max-w-[70vw] mx-auto flex flex-col lg:flex-row items-center justify-center py-12 gap-12 lg:gap-16 min-h-screen -mt-12">
             {/* Text Content */}
-            <div className="medievalsharp-regular text-center lg:text-left text-base lg:text-2xl flex-1 space-y-6">
-                <div className="space-y-4">
+            <div className="medievalsharp-regular text-justify lg:text-left text-base lg:text-2xl flex-1 space-y-3 lg:space-y-6">
+                <div className="space-y-2 lg:space-y-4">
                     <p>
                         Hi, I&apos;m <span className="text-white font-bold">Angel Shinh</span>, a passionate developer and designer who loves building stuff.
                     </p>
@@ -28,16 +28,16 @@ export default function Hero() {
                 </div>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-4">
+                <div className="flex gap-3 lg:gap-4 justify-center lg:justify-start pt-4">
                     <a 
                         href="#contact" 
-                        className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 backdrop-blur-sm font-medium"
+                        className="flex-1 lg:flex-none px-4 lg:px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all duration-300 backdrop-blur-sm font-medium text-center"
                     >
                         Get in Touch
                     </a>
                     <a 
                         href="#projects" 
-                        className="px-6 py-3 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 rounded-xl transition-all duration-300 backdrop-blur-sm font-medium"
+                        className="flex-1 lg:flex-none px-4 lg:px-6 py-3 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 rounded-xl transition-all duration-300 backdrop-blur-sm font-medium text-center"
                     >
                         View Projects
                     </a>
