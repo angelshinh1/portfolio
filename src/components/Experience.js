@@ -154,32 +154,34 @@ export default function Experience() {
                     </ul>
 
                     {/* Navigation Buttons */}
-                    <div className="flex gap-4 mt-8">
+                    <div className="flex gap-3 lg:gap-4 mt-6 lg:mt-8">
                         {currentIndex > 0 && (
                             <button
                                 onClick={handlePrev}
-                                className={`jost group px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm text-white font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-white/10 active:scale-[0.98] ${
+                                className={`jost group px-4 py-2 lg:px-8 lg:py-3 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 rounded-lg lg:rounded-xl backdrop-blur-sm text-white text-sm lg:text-base font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-white/10 active:scale-[0.98] ${
                                     currentIndex === companyKeys.length - 1 ? 'w-full' : 'flex-1'
                                 }`}
                             >
-                                <span className="flex items-center justify-center gap-2">
-                                    <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <span className="flex items-center justify-center gap-1 lg:gap-2">
+                                    <svg className="w-3 h-3 lg:w-4 lg:h-4 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
                                     </svg>
-                                    Previous
+                                    <span className="hidden sm:inline">Previous</span>
+                                    <span className="sm:hidden">Prev</span>
                                 </span>
                             </button>
                         )}
                         {currentIndex < companyKeys.length - 1 && (
                             <button
                                 onClick={handleNext}
-                                className={`jost group px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm text-white font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-white/10 active:scale-[0.98] ${
+                                className={`jost group px-4 py-2 lg:px-8 lg:py-3 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 rounded-lg lg:rounded-xl backdrop-blur-sm text-white text-sm lg:text-base font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-white/10 active:scale-[0.98] ${
                                     currentIndex === 0 ? 'w-full' : 'flex-1'
                                 }`}
                             >
-                                <span className="flex items-center justify-center gap-2">
-                                    Next
-                                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <span className="flex items-center justify-center gap-1 lg:gap-2">
+                                    <span className="hidden sm:inline">Next</span>
+                                    <span className="sm:hidden">Next</span>
+                                    <svg className="w-3 h-3 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                                     </svg>
                                 </span>
