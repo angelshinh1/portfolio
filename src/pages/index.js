@@ -23,7 +23,7 @@ export default function Home(){
 
         <FunStuff />
         <br />
-        
+          
         <Contact />
       </div>
     </>
