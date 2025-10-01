@@ -16,7 +16,6 @@ export default function Home(){
         <br />
 
         <Experience />
-        <br />
 
         <Projects />
         <br />
