@@ -5,7 +5,7 @@ export default function Footer(){
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
                     {/* Left side - Name and tagline */}
                     <div className="text-center lg:text-left">
-                        <h3 className="jost text-xl lg:text-2xl font-bold text-white mb-2">
+                        <h3 className="ubuntu-mono-regular text-xl lg:text-2xl font-bold text-white mb-2">
                             Angel Shinh
                         </h3>
                         <p className="nova-oval-regular text-sm lg:text-base text-white/70">

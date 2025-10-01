@@ -15,8 +15,8 @@ export default function Hero() {
     return (
         <div id="about" className="max-w-[70vw] mx-auto flex flex-col lg:flex-row items-center justify-center py-12 gap-12 lg:gap-16 min-h-screen -mt-12">
             {/* Text Content */}
-            <div className="jost text-justify lg:text-left text-base lg:text-xl flex-1 space-y-3 lg:space-y-6">
-                <div className="space-y-2 lg:space-y-4">
+            <div className="ubuntu-mono-regular text-justify lg:text-left text-base lg:text-xl flex-1 space-y-3 lg:space-y-6">
+                <div className="space-y-1 lg:space-y-2">
                     <p>
                         Hi, I&apos;m <span className="text-white font-bold">Angel Shinh</span>, a passionate developer who loves building innovative solutions and bringing creative ideas to life.
                     </p>

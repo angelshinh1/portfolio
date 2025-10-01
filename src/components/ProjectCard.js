@@ -116,7 +116,7 @@ export default function ProjectCard({ project }) {
 
           <div className="h-full flex flex-col">
             <div className="mb-4 md:mb-6">
-              <h3 className="jost text-xl md:text-3xl font-bold text-white mb-2 md:mb-3">{project.title}</h3>
+              <h3 className="ubuntu-mono-regular text-xl md:text-3xl font-bold text-white mb-2 md:mb-3">{project.title}</h3>
               <p className="nova-oval-regular text-sm md:text-base text-white/70 font-medium">{project.category}</p>
             </div>
             
@@ -126,7 +126,7 @@ export default function ProjectCard({ project }) {
               </p>
 
               <div className="mb-4 md:mb-6">
-                <h4 className="jost text-base md:text-lg font-semibold text-white mb-3 md:mb-4">Technologies</h4>
+                <h4 className="ubuntu-mono-regular text-base md:text-lg font-semibold text-white mb-3 md:mb-4">Technologies</h4>
                 <div className="flex flex-wrap gap-2 md:gap-3">
                   {project.technologies.map((tech, index) => (
                     <span

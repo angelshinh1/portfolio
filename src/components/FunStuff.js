@@ -35,7 +35,7 @@ export default function FunStuff() {
     return (
         <section id="fun-stuff" className="max-w-[90vw] lg:max-w-[70vw] mx-auto py-16">
             {/* Header */}
-            <div className="jost mb-12 text-center">
+            <div className="ubuntu-mono-regular mb-12 text-center">
                 <h2 className="text-2xl lg:text-5xl font-bold mb-3">Fun Stuff</h2>
                 <p className="text-base lg:text-xl text-gray-400">The whimsical side of ts developer</p>
             </div>
@@ -63,7 +63,7 @@ export default function FunStuff() {
                             </div>
                         </div>
                         <div className="lg:w-1/2 space-y-4">
-                            <h3 className="jost text-xl lg:text-3xl font-bold flex items-center gap-3">
+                            <h3 className="ubuntu-mono-regular text-xl lg:text-3xl font-bold flex items-center gap-3">
                                 🎸 Music & Guitar
                             </h3>
                             <p className="nova-oval-regular text-sm lg:text-base text-gray-300">
@@ -72,7 +72,7 @@ export default function FunStuff() {
                             <div className="flex flex-wrap gap-2">
                                 <span className="ubuntu-mono-regular px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Classic</span>
                                 <span className="ubuntu-mono-regular px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Jazz</span>
-                                <span className="ubuntu-mono-regular px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Alt Rock</span>
+                                <span className="ubuntu-mono-regular px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Spanish</span>
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@ export default function FunStuff() {
 
                 {/* Hobbies Grid */}
                 <div>
-                    <h3 className="jost text-xl lg:text-2xl font-bold mb-6 text-center">Hobbies & Interests</h3>
+                    <h3 className="ubuntu-mono-regular text-xl lg:text-2xl font-bold mb-6 text-center">Hobbies & Interests</h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {hobbies.map((hobby, index) => (
                             <div 
@@ -90,7 +90,7 @@ export default function FunStuff() {
                                 <div className="text-3xl lg:text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">
                                     {hobby.icon}
                                 </div>
-                                <h4 className="jost font-semibold text-sm lg:text-base mb-1">{hobby.title}</h4>
+                                <h4 className="ubuntu-mono-regular font-semibold text-sm lg:text-base mb-1">{hobby.title}</h4>
                                 <p className="nova-oval-regular text-xs lg:text-sm text-gray-400">{hobby.desc}</p>
                             </div>
                         ))}
@@ -99,7 +99,7 @@ export default function FunStuff() {
 
                 {/* Random Facts */}
                 <div>
-                    <h3 className="jost text-xl lg:text-2xl font-bold mb-6 text-center">
+                    <h3 className="ubuntu-mono-regular text-xl lg:text-2xl font-bold mb-6 text-center">
                         Random Facts You Didn&apos;t Ask For 🤷‍♂️
                     </h3>
                     <div className="grid gap-4 md:grid-cols-2">
@@ -118,7 +118,7 @@ export default function FunStuff() {
 
                 {/* Photos/Moments Section */}
                 <div>
-                    <h3 className="jost text-xl lg:text-2xl font-bold mb-6 text-center">
+                    <h3 className="ubuntu-mono-regular text-xl lg:text-2xl font-bold mb-6 text-center">
                         Life in Snapshots 📸
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
