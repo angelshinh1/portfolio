@@ -24,7 +24,7 @@ export default function FunStuff() {
         "My guitar has more commits than some of my repos",
         "i LOVEE MATCHAA and listen to Clario all the time (totally not being performative)",
         "I can solve a Rubik's cube",
-        "I lowkey get confused at some mathematics which my high-school self would've solved in seconds",
+        "I lowkey get confused at some math problems which my high-school self would've solved in seconds",
         "Oh, did I mentioned I'm 6' 3\" btw",
     ];
 
