@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function Experience() {
     const [selectedExp, setSelectedExp] = useState("RBC");
+    const detailsRef = useRef(null);
 
     const experiences = {
         RBC: {
@@ -76,10 +77,39 @@ export default function Experience() {
         }
     };
 
+    const companyKeys = Object.keys(experiences);
+    const currentIndex = companyKeys.indexOf(selectedExp);
+
+    const handleExpChange = (company) => {
+        setSelectedExp(company);
+        
+        // Auto-scroll to details on mobile
+        if (detailsRef.current && window.innerWidth < 1024) {
+            setTimeout(() => {
+                detailsRef.current.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 50);
+        }
+    };
+
+    const handleNext = () => {
+        if (currentIndex < companyKeys.length - 1) {
+            handleExpChange(companyKeys[currentIndex + 1]);
+        }
+    };
+
+    const handlePrev = () => {
+        if (currentIndex > 0) {
+            handleExpChange(companyKeys[currentIndex - 1]);
+        }
+    };
+
     return (
-    <section id="experience" className="max-w-[70vw] mx-auto py-16">
+        <section id="experience" className="max-w-[70vw] mx-auto py-16">
             {/* Header */}
-            <div className="medievalsharp-regular mb-4 text-left lg:text-center">
+            <div className="jost mb-4 text-left lg:text-center">
                 <h2 className="text-2xl lg:text-5xl font-bold mb-3 text-left lg:text-center">My Experience</h2>
                 <p className="text-base lg:text-xl text-gray-400 text-left lg:text-center">What I&apos;ve been working on</p>
             </div>
@@ -87,11 +117,11 @@ export default function Experience() {
             {/* Experience Layout */}
             <div className="flex flex-col lg:flex-row gap-8">
                 {/* Left Sidebar - Company List */}
-                <div className="medievalsharp-regular text-sm lg:text-xl lg:w-64 flex flex-col gap-0.5 lg:gap-3">
+                <div className="jost text-sm lg:text-xl lg:w-64 flex flex-col gap-0.5 lg:gap-3">
                     {Object.keys(experiences).map((company) => (
                         <button
                             key={company}
-                            onClick={() => setSelectedExp(company)}
+                            onClick={() => handleExpChange(company)}
                             className={`text-left px-6 py-4 transition-all duration-300 font-medium border-b ${
                                 selectedExp === company
                                     ? "border-white text-white"
@@ -104,10 +134,10 @@ export default function Experience() {
                 </div>
 
                 {/* Right Side - Experience Details */}
-                <div className="flex-1 p-8">
-                    <h3 className="medievalsharp-regular text-base lg:text-2xl font-bold mb-1">
+                <div ref={detailsRef} className="flex-1 p-8">
+                    <h3 className="jost text-base lg:text-2xl font-bold mb-1">
                         {experiences[selectedExp].title}{" "}
-                        <span className="medievalsharp-regular text-purple-400">@ {experiences[selectedExp].company}</span>
+                        <span className="jost text-purple-400">@ {experiences[selectedExp].company}</span>
                     </h3>
                     <p className="nova-oval-regular text-sm lg:text-base text-gray-500 mb-2">
                         {experiences[selectedExp].type}
@@ -122,6 +152,40 @@ export default function Experience() {
                             </li>
                         ))}
                     </ul>
+
+                    {/* Navigation Buttons */}
+                    <div className="flex gap-4 mt-8">
+                        {currentIndex > 0 && (
+                            <button
+                                onClick={handlePrev}
+                                className={`jost group px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm text-white font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-white/10 active:scale-[0.98] ${
+                                    currentIndex === companyKeys.length - 1 ? 'w-full' : 'flex-1'
+                                }`}
+                            >
+                                <span className="flex items-center justify-center gap-2">
+                                    <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                    Previous
+                                </span>
+                            </button>
+                        )}
+                        {currentIndex < companyKeys.length - 1 && (
+                            <button
+                                onClick={handleNext}
+                                className={`jost group px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm text-white font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-white/10 active:scale-[0.98] ${
+                                    currentIndex === 0 ? 'w-full' : 'flex-1'
+                                }`}
+                            >
+                                <span className="flex items-center justify-center gap-2">
+                                    Next
+                                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </button>
+                        )}
+                    </div>
                 </div>
             </div>
         </section>

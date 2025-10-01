@@ -58,8 +58,9 @@ a, button, [role="button"], .cursor-pointer {
   font-style: normal;
 }
 
-.medievalsharp-regular {
-  font-family: "MedievalSharp", cursive;
+.jost{
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }

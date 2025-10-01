@@ -31,7 +31,7 @@ export default function Contact() {
   return (
     <section id="contact" className="max-w-[90vw] lg:max-w-[70vw] mx-auto py-16">
       {/* Header */}
-      <div className="medievalsharp-regular mb-10 text-center">
+      <div className="jost mb-10 text-center">
         <h2 className="text-2xl lg:text-5xl font-bold mb-3">Get In Touch</h2>
         <p className="text-base lg:text-xl text-gray-400">Let&apos;s connect</p>
       </div>
@@ -47,7 +47,7 @@ export default function Contact() {
               </svg>
             </div>
             <div>
-              <h4 className="medievalsharp-regular text-lg font-semibold text-white mb-2">Location</h4>
+              <h4 className="jost text-lg font-semibold text-white mb-2">Location</h4>
               <p className="nova-oval-regular text-gray-300">Markham, Ontario, Canada</p>
             </div>
           </div>
@@ -59,7 +59,7 @@ export default function Contact() {
               </svg>
             </div>
             <div>
-              <h4 className="medievalsharp-regular text-lg font-semibold text-white mb-2">Email</h4>
+              <h4 className="jost text-lg font-semibold text-white mb-2">Email</h4>
               <p className="nova-oval-regular text-gray-300">shinh.maverick@gmail.com</p>
             </div>
           </div>
@@ -71,7 +71,7 @@ export default function Contact() {
               </svg>
             </div>
             <div>
-              <h4 className="medievalsharp-regular text-lg font-semibold text-white mb-2">Phone</h4>
+              <h4 className="jost text-lg font-semibold text-white mb-2">Phone</h4>
               <p className="nova-oval-regular text-gray-300">+1 437-430-6774</p>
             </div>
           </div>
@@ -113,7 +113,7 @@ export default function Contact() {
         <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 lg:p-8">
           <form ref={form} onSubmit={sendEmail} className="space-y-6">
             <div>
-              <label htmlFor="name" className="block medievalsharp-regular text-white font-medium mb-2">Name</label>
+              <label htmlFor="name" className="block jost text-white font-medium mb-2">Name</label>
               <input 
                 type="text" 
                 id="name" 
@@ -125,7 +125,7 @@ export default function Contact() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block medievalsharp-regular text-white font-medium mb-2">Email</label>
+              <label htmlFor="email" className="block jost text-white font-medium mb-2">Email</label>
               <input 
                 type="email" 
                 id="email" 
@@ -137,7 +137,7 @@ export default function Contact() {
             </div>
 
             <div>
-              <label htmlFor="subject" className="block medievalsharp-regular text-white font-medium mb-2">Subject</label>
+              <label htmlFor="subject" className="block jost text-white font-medium mb-2">Subject</label>
               <input 
                 type="text" 
                 id="subject" 
@@ -149,7 +149,7 @@ export default function Contact() {
             </div>
 
             <div>
-              <label htmlFor="message" className="block medievalsharp-regular text-white font-medium mb-2">Message</label>
+              <label htmlFor="message" className="block jost text-white font-medium mb-2">Message</label>
               <textarea 
                 id="message" 
                 name="message" 
@@ -163,7 +163,7 @@ export default function Contact() {
             <button 
               type="submit" 
               disabled={formStatus.submitting}
-              className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-white/10 hover:bg-white/20 disabled:bg-white/5 border border-white/20 hover:border-white/40 disabled:border-white/10 rounded-lg text-white disabled:text-gray-400 font-medium transition-all duration-300 medievalsharp-regular"
+              className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-white/10 hover:bg-white/20 disabled:bg-white/5 border border-white/20 hover:border-white/40 disabled:border-white/10 rounded-lg text-white disabled:text-gray-400 font-medium transition-all duration-300 jost"
             >
               {formStatus.submitting ? (
                 <span>Sending...</span>

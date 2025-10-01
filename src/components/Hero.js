@@ -15,14 +15,14 @@ export default function Hero() {
     return (
         <div id="about" className="max-w-[70vw] mx-auto flex flex-col lg:flex-row items-center justify-center py-12 gap-12 lg:gap-16 min-h-screen -mt-12">
             {/* Text Content */}
-            <div className="medievalsharp-regular text-justify lg:text-left text-base lg:text-xl flex-1 space-y-3 lg:space-y-6">
+            <div className="jost text-justify lg:text-left text-base lg:text-xl flex-1 space-y-3 lg:space-y-6">
                 <div className="space-y-2 lg:space-y-4">
                     <p>
-                        Hi, I&apos;m <span className="text-white font-bold">Angel Shinh</span>, a developer who loves building stuff... ykwim
+                        Hi, I&apos;m <span className="text-white font-bold">Angel Shinh</span>, a passionate developer who loves building innovative solutions and bringing creative ideas to life.
                     </p>
                     
                     <p>
-                        I am a lot into brainrot memes <span className="text-red-500 font-semibold">*6 7*</span> and I&apos;ve got W rizz, I think... Also, I absolutely love photography and playing guitar. I&apos;m very whimsical too...
+                        I&apos;m really into exploring new technologies and staying up-to-date with the latest trends in software development. When I&apos;m not coding, I absolutely love photography and playing guitar. I&apos;m pretty creative and always looking for ways to blend tech with art.
                     </p>
                     
                     <p>
@@ -34,7 +34,7 @@ export default function Hero() {
                     </p>
                     
                     <p className="pt-2">
-                        Anyways, feel free to contact me as I am always down to make new friends.
+                        Feel free to contact me as I am always down to make new friends.
                     </p>
                 </div>
 

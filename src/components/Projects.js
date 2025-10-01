@@ -37,7 +37,7 @@ export default function Projects() {
     return (
         <section id="projects" className="max-w-[90vw] lg:max-w-[60vw] mx-auto py-16">
             {/* Header */}
-            <div className="medievalsharp-regular mb-10 text-center">
+            <div className="jost mb-10 text-center">
                 <h2 className="text-2xl lg:text-5xl font-bold mb-3">My Projects</h2>
                 <p className="text-base lg:text-xl text-gray-400">What I&apos;ve built so far</p>
             </div>
