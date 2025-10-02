@@ -13,15 +13,12 @@ export default function Home(){
       </Head>
       <div className="pt-20">
         <Hero />
-        <br />
 
         <Experience />
 
         <Projects />
-        <br />
 
         <FunStuff />
-        <br />
           
         <Contact />
       </div>

@@ -47,10 +47,12 @@ export default function Hero() {
                         Get in Touch
                     </a>
                     <a 
-                        href="#projects" 
+                        href="./Angel_Resume.pdf" 
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="flex-1 lg:flex-none px-4 lg:px-6 py-3 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 rounded-xl transition-all duration-300 backdrop-blur-sm font-medium text-center"
                     >
-                        View Projects
+                        View Resume
                     </a>
                 </div>
             </div>

@@ -25,7 +25,7 @@ export default function FunStuff() {
         "i LOVEE MATCHAA and listen to Clario all the time (totally not being performative)",
         "I can solve a Rubik's cube",
         "I lowkey get confused at some math problems which my high-school self would've solved in seconds",
-        "Oh, did I mentioned I'm 6' 3\" btw",
+        "Oh, did I mentioned I'm 6' 2\" btw",
     ];
 
     const nextMeme = () => {
@@ -122,18 +122,61 @@ export default function FunStuff() {
                         Life in Snapshots 📸
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {[1, 2, 3, 4].map((index) => (
+                        {[1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
                             <div key={index} className="relative group">
                                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg opacity-0 group-hover:opacity-30 transition-all duration-300 blur-sm"></div>
-                                <div className="relative bg-white/10 rounded-lg aspect-square flex items-center justify-center hover:bg-white/15 transition-all duration-300">
-                                    <div className="text-4xl">📷</div>
+                                <div className="relative bg-white/10 rounded-lg aspect-square flex items-center justify-center hover:bg-white/15 transition-all duration-300 overflow-hidden">
+                                    <Image
+                                        src={`/gallery-${index}.jpg`}
+                                        alt={`Gallery photo ${index}`}
+                                        fill
+                                        className="object-cover rounded-lg"
+                                        sizes="(max-width: 768px) 50vw, 25vw"
+                                    />
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <p className="nova-oval-regular text-center text-sm text-gray-400 mt-4">
-                        Photos coming soon... still figuring out which ones don&apos;t make me look like a potato
-                    </p>
+                </div>
+
+                {/* Interesting stuff */}
+                <div>
+                    <h3 className="ubuntu-mono-regular text-xl lg:text-2xl font-bold mb-6 text-center">
+                        Interesting Stuff
+                    </h3>
+                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                        {/* Fart Button */}
+                        <button
+                            onClick={() => {
+                                const audio = new Audio('/dry-fart.m4a');
+                                audio.play().catch(() => console.log('Audio play failed'));
+                                // Add shake animation
+                                const btn = document.getElementById('fart-btn');
+                                btn.classList.add('animate-pulse');
+                                setTimeout(() => btn.classList.remove('animate-pulse'), 500);
+                            }}
+                            id="fart-btn"
+                            className="glass-border-effect ubuntu-mono-regular px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm text-white font-medium transition-all duration-300 hover:scale-105 active:scale-95 group relative overflow-hidden"
+                        >
+                            <span className="relative z-10 flex items-center gap-2">
+                                Click Me !!
+                            </span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </button>
+
+                        {/* Link Button */}
+                        <a
+                            href="https://www.youtube.com/watch?v=xvFZjo5PgG0"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="glass-border-effect ubuntu-mono-regular px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm text-white font-medium transition-all duration-300 hover:scale-105 active:scale-95 group relative overflow-hidden"
+                        >
+                            <span className="relative z-10 flex items-center gap-2">
+                                Click Me!!
+                            </span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
