@@ -2,6 +2,25 @@ import ProjectCard from "./ProjectCard";
 
 const projects = [
   {
+    "title": "Somnio - Dream Journal & Network Platform",
+    "category": "Full-Stack Web Application & Graph Database",
+    "description": "A dream journaling platform with AI-powered similarity matching and 3D network visualization. Features tag-based similarity algorithm achieving 70%+ connection accuracy, Neo4j graph database for relationship mapping, and immersive Three.js 3D dream network with real-time navigation. Implements JWT authentication, RESTful API with 20+ endpoints, and responsive Next.js frontend with emotion-based visualizations.",
+    "technologies": [
+      "Next.js",
+      "React",
+      "Node.js",
+      "Express",
+      "Neo4j",
+      "Three.js",
+      "React Three Fiber",
+      "JWT",
+      "Tailwind CSS"
+    ],
+    "image": "/somnio-network.jpg",
+    "githubUrl": "https://github.com/angelshinh1/somnio",
+    "liveUrl": "https://somnio-r9ro.vercel.app/"
+  },
+  {
     title: "Facial Expression Recognition App",
     category: "Machine Learning & Computer Vision",
     description:
