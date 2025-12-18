@@ -26,11 +26,7 @@ export default function Hero() {
                     </p>
                     
                     <p>
-                        Currently, I&apos;m working at RBC as a <span className="text-purple-500 font-semibold">TS</span> Analyst, I mean Technical Systems Analyst.
-                    </p>
-                    
-                    <p className="text-white/70 text-lg lg:text-xl italic">
-                        You see how I put <span className="text-purple-500 not-italic font-semibold">TS</span> over there?
+                        Currently, I&apos;m working at RBC as a <span className="text-purple-500 font-semibold">SWE</span> Intern.
                     </p>
                     
                     <p className="pt-2">

@@ -3,6 +3,7 @@ import Image from "next/image";
 
 export default function FunStuff() {
     const [currentMeme, setCurrentMeme] = useState(0);
+    const [showVolumeModal, setShowVolumeModal] = useState(false);
     
     const memes = [
         { title: "When your code works on the first try", image: "/memes/meme1.jpg" },
@@ -30,6 +31,48 @@ export default function FunStuff() {
 
     const nextMeme = () => {
         setCurrentMeme((prev) => (prev + 1) % memes.length);
+    };
+
+    const handleFartButtonClick = () => {
+        // Create a test audio to check volume
+        const audio = new Audio('/dry-fart.m4a');
+        
+        // Check if volume is too low (using a simple heuristic)
+        // We'll try to play a brief test and detect if system volume might be low
+        const testAudio = () => {
+            audio.volume = 1.0; // Set to max
+            
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        // Audio is playing, add animation
+                        const btn = document.getElementById('fart-btn');
+                        if (btn) {
+                            btn.classList.add('animate-pulse');
+                            setTimeout(() => btn.classList.remove('animate-pulse'), 500);
+                        }
+                    })
+                    .catch((error) => {
+                        console.log('Audio play failed:', error);
+                        // If autoplay is blocked, show volume warning
+                        setShowVolumeModal(true);
+                    });
+            }
+        };
+
+        // Simple volume check: if user hasn't interacted yet, show modal
+        // Or we can just show it first time as a courtesy
+        const hasShownVolumeWarning = sessionStorage.getItem('volumeWarningShown');
+        
+        if (!hasShownVolumeWarning) {
+            setShowVolumeModal(true);
+            sessionStorage.setItem('volumeWarningShown', 'true');
+            // Play after they acknowledge
+        } else {
+            testAudio();
+        }
     };
 
     return (
@@ -147,14 +190,7 @@ export default function FunStuff() {
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                         {/* Fart Button */}
                         <button
-                            onClick={() => {
-                                const audio = new Audio('/dry-fart.m4a');
-                                audio.play().catch(() => console.log('Audio play failed'));
-                                // Add shake animation
-                                const btn = document.getElementById('fart-btn');
-                                btn.classList.add('animate-pulse');
-                                setTimeout(() => btn.classList.remove('animate-pulse'), 500);
-                            }}
+                            onClick={handleFartButtonClick}
                             id="fart-btn"
                             className="glass-border-effect ubuntu-mono-regular px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm text-white font-medium transition-all duration-300 hover:scale-105 active:scale-95 group relative overflow-hidden"
                         >
@@ -179,6 +215,40 @@ export default function FunStuff() {
                     </div>
                 </div>
             </div>
+
+            {/* Volume Warning Modal */}
+            {showVolumeModal && (
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 lg:p-8 max-w-md w-full shadow-2xl">
+                        <div className="text-center">
+                            <div className="text-5xl mb-4">🔊</div>
+                            <h3 className="ubuntu-mono-regular text-xl lg:text-2xl font-bold text-white mb-3">
+                                Volume Check
+                            </h3>
+                            <p className="nova-oval-regular text-sm lg:text-base text-gray-300 mb-6">
+                                Please make sure your volume is turned up to enjoy the full experience! 
+                            </p>
+                            <button
+                                onClick={() => {
+                                    setShowVolumeModal(false);
+                                    // Play the sound after they acknowledge
+                                    const audio = new Audio('/dry-fart.m4a');
+                                    audio.volume = 1.0;
+                                    audio.play().catch(() => console.log('Audio play failed'));
+                                    const btn = document.getElementById('fart-btn');
+                                    if (btn) {
+                                        btn.classList.add('animate-pulse');
+                                        setTimeout(() => btn.classList.remove('animate-pulse'), 500);
+                                    }
+                                }}
+                                className="ubuntu-mono-regular w-full px-6 py-3 bg-purple-500/30 hover:bg-purple-500/40 border border-purple-500/50 rounded-xl text-white font-medium transition-all duration-300 hover:scale-105"
+                            >
+                                Got it! Play Sound
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 }
