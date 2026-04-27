@@ -16,8 +16,8 @@ const Navbar = () => {
         <nav
             className={`bitcount-single-ink-navbar w-full lg:px-4 2xl:px-8 pt-4 fixed top-0 z-30 xl:rounded-3xl transition-all duration-300 ease-in-out ${
                 isMenuOpen 
-                    ? "h-screen bg-black/90 backdrop-blur-md xl:h-min" 
-                    : "h-auto bg-black/80 backdrop-blur-sm xl:h-min"
+                    ? "h-screen bg-[#FAF9F6]/95 backdrop-blur-md border-b border-black/10 xl:h-min" 
+                    : "h-auto bg-[#FAF9F6]/80 backdrop-blur-md border-b border-transparent xl:border-black/5 xl:h-min"
             }`}
         >
             <div className="flex items-center justify-between px-4 xl:px-8 pb-2 mx-4">
@@ -42,7 +42,7 @@ const Navbar = () => {
                         <Link
                             key={item}
                             href={url}
-                            className="glass-border-effect text-lg 2xl:text-xl font-medium px-2 2xl:px-4 py-2 rounded-xl transition-all duration-300 ease-out"
+                            className="text-[#1E1E1E] hover:bg-black/5 text-lg 2xl:text-xl font-medium px-2 2xl:px-4 py-2 rounded-xl transition-all duration-300 ease-out"
                         >
                             {item}
                         </Link>
@@ -56,17 +56,17 @@ const Navbar = () => {
                     aria-label="Toggle menu"
                 >
                     <div
-                        className={`w-6 h-0.5 bg-white transition-all duration-300 ${
+                        className={`w-6 h-0.5 bg-black transition-all duration-300 ${
                             isMenuOpen ? "rotate-45 translate-y-2" : ""
                         }`}
                     />
                     <div
-                        className={`w-6 h-0.5 bg-white transition-all duration-300 ${
+                        className={`w-6 h-0.5 bg-black transition-all duration-300 ${
                             isMenuOpen ? "opacity-0" : ""
                         }`}
                     />
                     <div
-                        className={`w-6 h-0.5 bg-white transition-all duration-300 ${
+                        className={`w-6 h-0.5 bg-black transition-all duration-300 ${
                             isMenuOpen ? "-rotate-45 -translate-y-2" : ""
                         }`}
                     />
@@ -80,7 +80,7 @@ const Navbar = () => {
                         <Link
                             key={item}
                             href={url}
-                            className="glass-border-effect block w-full text-left text-lg font-medium px-4 py-3 rounded-xl transition-all duration-300 ease-out"
+                            className="block w-full text-left text-lg font-medium text-[#1E1E1E] px-4 py-3 rounded-xl hover:bg-black/5 transition-all duration-300 ease-out"
                             onClick={() => setIsMenuOpen(false)}
                         >
                             {item}

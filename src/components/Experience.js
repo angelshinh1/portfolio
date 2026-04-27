@@ -183,7 +183,7 @@ export default function Experience() {
         <section id="experience" className="max-w-[80vw] lg:max-w-[70vw] mx-auto py-16">
             {/* Header */}
             <div className="font-sans mb-10 text-left">
-                <h2 className="font-heading text-2xl lg:text-4xl font-bold mb-3">Work Experience</h2>
+                <h2 className="font-heading text-2xl lg:text-4xl font-bold mb-3 text-[#1E1E1E]">Work Experience</h2>
             </div>
 
             {/* Experience List */}
@@ -194,7 +194,7 @@ export default function Experience() {
                         <div key={index} className="flex flex-col md:flex-row gap-6">
                             {/* Left Side: Logo */}
                             <div className="flex-shrink-0">
-                                <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/10 text-black font-bold text-xl relative">
+                                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center overflow-hidden border border-black/10 text-[#1E1E1E] font-bold text-xl relative">
                                     {/* If logo exists, it will load, otherwise fallback text */}
                                     <span className="absolute z-0">{exp.fallback}</span>
                                     <img 
@@ -217,18 +217,18 @@ export default function Experience() {
                                     className="flex flex-col md:flex-row md:items-start justify-between mb-2 cursor-pointer group"
                                 >
                                     <div>
-                                        <h3 className="font-heading font-bold text-lg md:text-xl text-white transition-colors">
+                                        <h3 className="font-heading font-bold text-lg md:text-xl text-[#1E1E1E] transition-colors group-hover:text-black">
                                             {exp.title}
                                         </h3>
                                         <div className="flex items-center gap-2">
-                                            <p className="font-sans text-sm md:text-base text-gray-300 mt-0.5">
+                                            <p className="font-sans text-sm md:text-base text-gray-700 mt-0.5 font-medium">
                                                 {exp.company}
                                             </p>
-                                            <span className="text-gray-500 text-xs mt-0.5">• {exp.type}</span>
+                                            <span className="text-gray-500 text-xs mt-0.5 font-medium">• {exp.type}</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3 mt-1 md:mt-0">
-                                        <p className="font-sans text-sm md:text-base text-gray-400 whitespace-nowrap">
+                                        <p className="font-sans text-xs md:text-sm text-gray-600 whitespace-nowrap font-medium">
                                             {exp.period}
                                         </p>
                                         <svg 
@@ -251,13 +251,13 @@ export default function Experience() {
                                 >
                                     <div className="overflow-hidden">
                                         {exp.description && (
-                                            <p className="font-sans text-sm md:text-base text-gray-300 mt-4 leading-relaxed whitespace-pre-line">
+                                            <p className="font-sans text-sm text-gray-700 mt-3 leading-relaxed whitespace-pre-line">
                                                 {exp.description}
                                             </p>
                                         )}
-                                        <ul className={`list-disc list-outside ml-4 ${exp.description ? 'mt-3' : 'mt-4'} space-y-1.5`}>
+                                        <ul className={`list-disc list-outside ml-4 ${exp.description ? 'mt-2' : 'mt-3'} space-y-1.5`}>
                                             {exp.details.map((detail, dIdx) => (
-                                                <li key={dIdx} className="font-sans text-sm md:text-base text-gray-400 leading-relaxed pl-1 marker:text-gray-500">
+                                                <li key={dIdx} className="font-sans text-sm text-gray-600 leading-relaxed pl-1 marker:text-gray-400">
                                                     {detail}
                                                 </li>
                                             ))}

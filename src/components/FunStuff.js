@@ -79,26 +79,26 @@ export default function FunStuff() {
         <section id="fun-stuff" className="max-w-[90vw] lg:max-w-[70vw] mx-auto py-16">
             {/* Header */}
             <div className="font-sans mb-12 text-center">
-                <h2 className="font-heading text-2xl lg:text-5xl font-bold mb-3">Fun Stuff</h2>
-                <p className="text-base lg:text-xl text-gray-400">The whimsical side of ts developer</p>
+                <h2 className="font-heading text-2xl lg:text-5xl font-bold mb-3 text-[#1E1E1E]">Fun Stuff</h2>
+                <p className="text-sm lg:text-base text-gray-600">The whimsical side of ts developer</p>
             </div>
 
             <div className="space-y-12">
                 {/* Guitar/Music Section */}
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 lg:p-8">
+                <div className="bg-black/5 backdrop-blur-sm border border-black/10 rounded-2xl p-6 lg:p-8 shadow-sm">
                     <div className="flex flex-col lg:flex-row gap-8 items-start">
                         <div className="lg:w-1/2">
                             <div className="relative group">
-                                <div className="absolute -inset-1 bg-gradient-to-r from-gray-500 via-gray-400 to-white rounded-2xl opacity-30 group-hover:opacity-50 blur-sm transition-all duration-300"></div>
-                                <div className="relative">
+                                <div className="absolute -inset-1 bg-gradient-to-r from-gray-300 via-gray-200 to-white rounded-2xl opacity-50 group-hover:opacity-70 blur-sm transition-all duration-300"></div>
+                                <div className="relative border border-black/10 rounded-xl overflow-hidden">
                                     <video
                                         src="/guitar-video.mp4"
                                         controls
                                         loop
                                         playsInline
                                         preload="metadata"
-                                        className="rounded-xl object-cover w-full aspect-square"
-                                        poster="/profile.jpg"
+                                        className="object-cover w-full aspect-square"
+                                        poster="/poster.jpg"
                                     >
                                         Your browser does not support the video tag.
                                     </video>
@@ -106,16 +106,16 @@ export default function FunStuff() {
                             </div>
                         </div>
                         <div className="lg:w-1/2 space-y-4">
-                            <h3 className="font-heading text-xl lg:text-3xl font-bold flex items-center gap-3">
+                            <h3 className="font-heading text-xl lg:text-3xl font-bold flex items-center gap-3 text-[#1E1E1E]">
                                 🎸 Music & Guitar
                             </h3>
-                            <p className="font-sans text-sm lg:text-base text-gray-300">
-                                Been playing guitar for 2 years and it&apos;s my go-to stress reliever. The song I&apos;m playing in this video is <a className="underline" href="https://www.youtube.com/watch?v=Hth8kTDTh3g">Gratitude by Amin Toofani</a> Currently trying to learn <a className="underline" href="https://www.youtube.com/watch?v=7gphiFVVtUI">The song of the golden dragon</a>.
+                            <p className="font-sans text-sm text-gray-700 leading-relaxed">
+                                Been playing guitar for 2 years and it&apos;s my go-to stress reliever. The song I&apos;m playing in this video is <a className="underline hover:text-black font-medium" href="https://www.youtube.com/watch?v=Hth8kTDTh3g">Gratitude by Amin Toofani</a> Currently trying to learn <a className="underline hover:text-black font-medium" href="https://www.youtube.com/watch?v=7gphiFVVtUI">The song of the golden dragon</a>.
                             </p>
-                            <div className="flex flex-wrap gap-2">
-                                <span className="font-sans px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Classic</span>
-                                <span className="font-sans px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Jazz</span>
-                                <span className="font-sans px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Spanish</span>
+                            <div className="flex flex-wrap gap-2 pt-2">
+                                <span className="font-sans px-3 py-1 bg-black/5 border border-black/10 rounded-full text-xs font-medium text-[#1E1E1E]">Classic</span>
+                                <span className="font-sans px-3 py-1 bg-black/5 border border-black/10 rounded-full text-xs font-medium text-[#1E1E1E]">Jazz</span>
+                                <span className="font-sans px-3 py-1 bg-black/5 border border-black/10 rounded-full text-xs font-medium text-[#1E1E1E]">Spanish</span>
                             </div>
                         </div>
                     </div>
@@ -123,18 +123,18 @@ export default function FunStuff() {
 
                 {/* Hobbies Grid */}
                 <div>
-                    <h3 className="font-heading text-xl lg:text-2xl font-bold mb-6 text-center">Hobbies & Interests</h3>
+                    <h3 className="font-heading text-xl lg:text-2xl font-bold mb-6 text-center text-[#1E1E1E]">Hobbies & Interests</h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {hobbies.map((hobby, index) => (
                             <div 
                                 key={index}
-                                className="bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 hover:border-white/20 rounded-xl p-4 lg:p-6 text-center transition-all duration-300 hover:scale-105 group"
+                                className="bg-black/5 hover:bg-black/10 backdrop-blur-sm border border-black/10 hover:border-black/20 rounded-xl p-4 lg:p-6 text-center transition-all duration-300 hover:scale-105 group"
                             >
-                                <div className="text-3xl lg:text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                                <div className="text-3xl lg:text-4xl mb-2 group-hover:scale-110 transition-transform duration-300 text-black">
                                     {hobby.icon}
                                 </div>
-                                <h4 className="font-heading font-semibold text-sm lg:text-base mb-1">{hobby.title}</h4>
-                                <p className="font-sans text-xs lg:text-sm text-gray-400">{hobby.desc}</p>
+                                <h4 className="font-heading font-semibold text-sm lg:text-base mb-1 text-[#1E1E1E]">{hobby.title}</h4>
+                                <p className="font-sans text-xs text-gray-600">{hobby.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -142,16 +142,16 @@ export default function FunStuff() {
 
                 {/* Random Facts */}
                 <div>
-                    <h3 className="font-heading text-xl lg:text-2xl font-bold mb-6 text-center">
+                    <h3 className="font-heading text-xl lg:text-2xl font-bold mb-6 text-center text-[#1E1E1E]">
                         Random Facts You Didn&apos;t Ask For 🤷‍♂️
                     </h3>
                     <div className="grid gap-4 md:grid-cols-2">
                         {randomFacts.map((fact, index) => (
                             <div 
                                 key={index}
-                                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 lg:p-5 hover:bg-white/10 transition-all duration-300"
+                                className="bg-black/5 backdrop-blur-sm border border-black/10 rounded-xl p-4 lg:p-5 hover:bg-black/10 transition-all duration-300"
                             >
-                                <p className="font-sans text-sm lg:text-base text-gray-300">
+                                <p className="font-sans text-xs lg:text-sm text-gray-700 leading-relaxed">
                                     {fact}
                                 </p>
                             </div>
@@ -161,19 +161,19 @@ export default function FunStuff() {
 
                 {/* Photos/Moments Section */}
                 <div>
-                    <h3 className="font-heading text-xl lg:text-2xl font-bold mb-6 text-center">
+                    <h3 className="font-heading text-xl lg:text-2xl font-bold mb-6 text-center text-[#1E1E1E]">
                         Life in Snapshots 📸
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {[1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
-                            <div key={index} className="relative group">
-                                <div className="absolute -inset-1 bg-gradient-to-r from-gray-600 to-gray-400 rounded-lg opacity-0 group-hover:opacity-30 transition-all duration-300 blur-sm"></div>
-                                <div className="relative bg-white/10 rounded-lg aspect-square flex items-center justify-center hover:bg-white/15 transition-all duration-300 overflow-hidden">
+                            <div key={index} className="relative group border border-black/10 rounded-lg p-1 bg-white">
+                                <div className="absolute -inset-1 bg-gradient-to-r from-gray-300 to-gray-200 rounded-lg opacity-0 group-hover:opacity-50 transition-all duration-300 blur-sm"></div>
+                                <div className="relative bg-black/5 rounded-md aspect-square flex items-center justify-center transition-all duration-300 overflow-hidden">
                                     <Image
                                         src={`/gallery-${index}.jpg`}
                                         alt={`Gallery photo ${index}`}
                                         fill
-                                        className="object-cover rounded-lg"
+                                        className="object-cover"
                                         sizes="(max-width: 768px) 50vw, 25vw"
                                     />
                                 </div>
