@@ -16,7 +16,7 @@ export default function Hero() {
         <div id="about" className="max-w-[80vw] lg:max-w-[60vw] mx-auto pt-8 pb-24 md:pt-12 md:pb-32 flex flex-col gap-10 lg:gap-14 min-h-[85vh] justify-center">
             
             {/* Header Section: Avatar (Left) + Title (Right) */}
-            <div className="flex flex-col md:flex-row items-center md:items-center gap-8 lg:gap-12">
+            <div className="flex flex-col md:flex-row items-start md:items-start gap-8 lg:gap-12">
                 
                 {/* Circular Avatar */}
                 <div className="relative group flex-shrink-0">
@@ -45,7 +45,7 @@ export default function Hero() {
                 </div>
 
                 {/* Greeting & Subtitle */}
-                <div className="space-y-3 lg:space-y-4 text-center md:text-left">
+                <div className="space-y-3 lg:space-y-4 text-left">
                     <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-[#1E1E1E]">
                         Hi, I&apos;m Angel
                     </h1>
