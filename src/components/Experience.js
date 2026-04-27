@@ -1,19 +1,41 @@
-import { useState, useRef } from "react";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function Experience() {
-    const [selectedExp, setSelectedExp] = useState("RBC");
-    const detailsRef = useRef(null);
-    const tabsRef = useRef(null);
+    const [expandedIndex, setExpandedIndex] = useState(null);
 
-    const experiences = {
+    const experiencesData = {
         RBC: {
             company: "RBC",
+            logo: "/rbc-logo.png",
+            fallback: "RBC",
             roles: [
                 {
                     title: "Software Developer",
                     type: "Internship",
-                    period: "JAN 2026 - PRESENT",
-                    details: ["Incoming in winter"]
+                    period: "JAN 2026 - APR 2026",
+                    description: "Developed and optimized backend services for RBC’s Data Sharing API platform, enabling secure data exchange for initiatives such as Open Banking and Interac Pay-By-Bank.",
+                    details: [
+                        "Designed and implemented a Cryptography service following JOSE (JSON Object Signing and Encryption) standards, ensuring secure, compliant transmission of sensitive client data across distributed systems",
+                        "Architected the service for scalability and modularity, leveraging stateless design, clear service boundaries, and extensible components to support high-throughput API workloads",
+                        "Improved application startup performance by 80% by introducing multithreading and parallel initialization of critical components",
+                        "Built and enhanced Java Spring Boot APIs deployed on OpenShift, contributing to production-grade backend systems used by internal and external consumers",
+                        "Translated business and security requirements into technical designs, including API specifications, data mappings, and system workflows",
+                        "Conducted performance tuning, debugging, and root cause analysis to improve reliability and efficiency of services",
+                        "Contributed to CI/CD and DevOps workflows, supporting deployment, monitoring, and production stability",
+                        "Participated in design reviews, technical discussions, and presented solutions to stakeholders and team members"
+                    ]
+                },
+                {
+                    title: "Lead Developer – DDP Hunt (RBC Digital & WMT)",
+                    type: "Project Lead",
+                    period: "JAN 2026 - APR 2026",
+                    description: "Toronto, Ontario, Canada\n\nLed the development of DDP Hunt, an interactive scavenger hunt platform inspired by the @ CUSEC 2026 Scavenger Hunt, along with my internship and adapted for internal use at RBC.\n\nRefactored and rebuilt the codebase alongside to create a scalable and engaging system that allowed participants to claim hunt items via QR codes and unique codes, accumulate points, and redeem prizes in real time.\n\nHosted and executed a live event involving 30+ co-op students across RBC Digital and Wealth Management Technologies, driving engagement through gamification and seamless user experience.\n\nKey contributions:",
+                    details: [
+                        "Led architecture and development using Next.js and MongoDB",
+                        "Designed real-time point tracking and reward redemption system",
+                        "Pitched the idea to the VP of my branch to further discuss how this technology can be used in real scenarios to improve customer experience"
+                    ]
                 },
                 {
                     title: "Technical Systems Analyst",
@@ -29,13 +51,57 @@ export default function Experience() {
                 }
             ]
         },
+        CUSEC: {
+            company: "CUSEC",
+            logo: "/cusec-logo.png",
+            fallback: "CUSEC",
+            roles: [
+                {
+                    title: "Director of Technology",
+                    type: "Volunteer",
+                    period: "FEB 2025 - PRESENT",
+                    details: [
+                        "Collaborated with cross-functional teams to design and develop a responsive website for CUSEC.",
+                        "Led the UI/UX revamp of the conference portal, improving user engagement through intuitive navigation and visual consistency.",
+                        "Implemented accessibility best practices to ensure inclusivity and compliance, increasing usability across diverse audiences.",
+                        "Designed promotional assets and branding elements to maintain visual consistency across digital platforms."
+                    ]
+                },
+                {
+                    title: "Director of UI/UX",
+                    type: "Volunteer",
+                    period: "MAY 2025 - JAN 2026",
+                    details: [
+                        "Worked on UI and UX Design for CUSEC 2026.",
+                        "Final result: https://2026.cusec.net"
+                    ]
+                }                
+            ]
+        },
+        "GOOGLE DEVELOPER GROUPS": {
+            company: "Google Developer Groups Seneca Polytechnic",
+            logo: "/gdg-logo.png",
+            fallback: "GDG-SP",
+            roles: [
+                {
+                    title: "Vice President of Technology",
+                    type: "Volunteer",
+                    period: "Jan 2026 - PRESENT",
+                    details: [
+                        "Spearhead 4+ technical workshops and study sessions per term, driving 150+ student attendees and fostering a hands-on developer learning community."
+                    ]
+                }
+            ]
+        },
         LOGICFUSION: {
             company: "LogicFusion",
+            logo: "/logicfusion-logo.png",
+            fallback: "LF",
             roles: [
                 {
                     title: "Computer Science Instructor",
-                    type: "Permanent Part-time",
-                    period: "JUL 2025 - PRESENT",
+                    type: "Part-time",
+                    period: "JUL 2025 - SEP 2025",
                     details: [
                         "Teach robotics using LEGO NXT and EV3 to introduce engineering and programming fundamentals.",
                         "Lead game development sessions with Roblox Studio (Lua) to build interactive 3D experiences.",
@@ -46,28 +112,14 @@ export default function Experience() {
                 }
             ]
         },
-        CUSEC: {
-            company: "CUSEC",
-            roles: [
-                {
-                    title: "Developer and UI/UX Designer",
-                    type: "Volunteer",
-                    period: "MAY 2025 - PRESENT",
-                    details: [
-                        "Collaborated with cross-functional teams to design and develop a responsive website for CUSEC.",
-                        "Led the UI/UX revamp of the conference portal, improving user engagement through intuitive navigation and visual consistency.",
-                        "Implemented accessibility best practices to ensure inclusivity and compliance, increasing usability across diverse audiences.",
-                        "Designed promotional assets and branding elements to maintain visual consistency across digital platforms."
-                    ]
-                }
-            ]
-        },
         "SENECA POLYTECHNIC": {
             company: "Seneca Polytechnic",
+            logo: "/seneca-logo.png",
+            fallback: "SP",
             roles: [
                 {
                     title: "Lab Assistant",
-                    type: "Contract Part-time",
+                    type: "Part-time",
                     period: "AUG 2024 - PRESENT",
                     details: [
                         "Supported 60+ students per semester through hands-on help with assignments and lab activities.",
@@ -79,10 +131,12 @@ export default function Experience() {
         },
         "BEAVER CREEK": {
             company: "Beaver Creek Kids Club",
+            logo: "/beavercreek-logo.png",
+            fallback: "BC",
             roles: [
                 {
                     title: "Coding Tutor",
-                    type: "Permanent Part-time",
+                    type: "Part-time",
                     period: "AUG 2024 - JUN 2025",
                     details: [
                         "Mentored 20+ students weekly in C++ and Python fundamentals, resulting in a 95% lab pass rate.",
@@ -93,6 +147,8 @@ export default function Experience() {
         },
         "META TRADING CLUB": {
             company: "Meta Trading Club",
+            logo: "/metatrading-logo.png",
+            fallback: "MTC",
             roles: [
                 {
                     title: "Machine Learning Engineer and Data Science Intern",
@@ -108,142 +164,112 @@ export default function Experience() {
         }
     };
 
-    const companyKeys = Object.keys(experiences);
-    const currentIndex = companyKeys.indexOf(selectedExp);
+    // Flatten the experiences data into a single array
+    const flatExperiences = [];
+    Object.values(experiencesData).forEach(companyData => {
+        companyData.roles.forEach(role => {
+            flatExperiences.push({
+                company: companyData.company,
+                logo: companyData.logo,
+                fallback: companyData.fallback,
+                ...role
+            });
+        });
+    });
 
-    const handleExpChange = (company) => {
-        setSelectedExp(company);
-        
-        // Auto-scroll to the selected tab on mobile
-        if (tabsRef.current && window.innerWidth < 1024) {
-            const activeButton = tabsRef.current.querySelector(`[data-company="${company}"]`);
-            if (activeButton) {
-                activeButton.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'nearest',
-                    inline: 'center'
-                });
-            }
-        }
-        
-        // Auto-scroll to details on mobile
-        if (detailsRef.current && window.innerWidth < 1024) {
-            setTimeout(() => {
-                detailsRef.current.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
-                });
-            }, 50);
-        }
-    };
-
-    const handleNext = () => {
-        if (currentIndex < companyKeys.length - 1) {
-            handleExpChange(companyKeys[currentIndex + 1]);
-        }
-    };
-
-    const handlePrev = () => {
-        if (currentIndex > 0) {
-            handleExpChange(companyKeys[currentIndex - 1]);
-        }
+    const toggleExpand = (index) => {
+        setExpandedIndex(expandedIndex === index ? null : index);
     };
 
     return (
-        <section id="experience" className="max-w-[70vw] mx-auto py-16">
+        <section id="experience" className="max-w-[80vw] lg:max-w-[70vw] mx-auto py-16">
             {/* Header */}
-            <div className="ubuntu-mono-regular mb-4 text-left lg:text-center">
-                <h2 className="text-2xl lg:text-5xl font-bold mb-3 text-left lg:text-center">My Experience</h2>
-                <p className="text-base lg:text-xl text-gray-400 text-left lg:text-center">What I&apos;ve been working on</p>
+            <div className="font-sans mb-10 text-left">
+                <h2 className="font-heading text-2xl lg:text-4xl font-bold mb-3">Work Experience</h2>
             </div>
 
-            {/* Experience Layout */}
-            <div className="flex flex-col lg:flex-row gap-8">
-                {/* Left Sidebar - Company List (Horizontal scroll on mobile, vertical on desktop) */}
-                <div 
-                    ref={tabsRef}
-                    className="ubuntu-mono-regular text-sm lg:text-xl flex flex-row lg:flex-col gap-2 lg:gap-3 lg:w-64 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 scrollbar-hide"
-                    style={{
-                        scrollbarWidth: 'none',
-                        msOverflowStyle: 'none',
-                    }}
-                >
-                    {Object.keys(experiences).map((company) => (
-                        <button
-                            key={company}
-                            data-company={company}
-                            onClick={() => handleExpChange(company)}
-                            className={`text-left px-6 py-4 transition-all duration-300 font-medium border-b lg:border-b whitespace-nowrap lg:whitespace-normal flex-shrink-0 lg:flex-shrink ${
-                                selectedExp === company
-                                    ? "border-white text-white"
-                                    : "border-transparent text-gray-400 hover:text-white"
-                            }`}
-                        >
-                            {company}
-                        </button>
-                    ))}
-                </div>
+            {/* Experience List */}
+            <div className="flex flex-col gap-12">
+                {flatExperiences.map((exp, index) => {
+                    const isExpanded = expandedIndex === index;
+                    return (
+                        <div key={index} className="flex flex-col md:flex-row gap-6">
+                            {/* Left Side: Logo */}
+                            <div className="flex-shrink-0">
+                                <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center overflow-hidden border border-white/10 text-black font-bold text-xl relative">
+                                    {/* If logo exists, it will load, otherwise fallback text */}
+                                    <span className="absolute z-0">{exp.fallback}</span>
+                                    <img 
+                                        src={exp.logo} 
+                                        alt={`${exp.company} logo`}
+                                        className="w-full h-full object-contain relative z-10 bg-white"
+                                        onError={(e) => {
+                                            // Hide image on error to show fallback text
+                                            e.target.style.display = 'none';
+                                        }}
+                                    />
+                                </div>
+                            </div>
 
-                {/* Right Side - Experience Details */}
-                <div ref={detailsRef} className="flex-1 p-8">
-                    {experiences[selectedExp].roles.map((role, roleIndex) => (
-                        <div key={roleIndex} className={roleIndex > 0 ? "mt-8 pt-8 border-t border-white/10" : ""}>
-                            <h3 className="ubuntu-mono-regular text-base lg:text-2xl font-bold mb-1">
-                                {role.title}{" "}
-                                <span className="ubuntu-mono-regular text-purple-400">@ {experiences[selectedExp].company}</span>
-                            </h3>
-                            <p className="nova-oval-regular text-sm lg:text-base text-gray-500 mb-2">
-                                {role.type}
-                            </p>
-                            <p className="nova-oval-regular text-sm lg:text-base text-gray-400 mb-6 uppercase tracking-wide">
-                                {role.period}
-                            </p>
-                            <ul className="list-disc list-inside space-y-2 pl-2">
-                                {role.details.map((detail, index) => (
-                                    <li key={index} className="nova-oval-regular text-sm lg:text-base text-white leading-relaxed">
-                                        {detail}
-                                    </li>
-                                ))}
-                            </ul>
+                            {/* Right Side: Content */}
+                            <div className="flex-1">
+                                {/* Header Row (Clickable) */}
+                                <div 
+                                    onClick={() => toggleExpand(index)}
+                                    className="flex flex-col md:flex-row md:items-start justify-between mb-2 cursor-pointer group"
+                                >
+                                    <div>
+                                        <h3 className="font-heading font-bold text-lg md:text-xl text-white transition-colors">
+                                            {exp.title}
+                                        </h3>
+                                        <div className="flex items-center gap-2">
+                                            <p className="font-sans text-sm md:text-base text-gray-300 mt-0.5">
+                                                {exp.company}
+                                            </p>
+                                            <span className="text-gray-500 text-xs mt-0.5">• {exp.type}</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-3 mt-1 md:mt-0">
+                                        <p className="font-sans text-sm md:text-base text-gray-400 whitespace-nowrap">
+                                            {exp.period}
+                                        </p>
+                                        <svg 
+                                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                                            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                            className={`text-gray-500 transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}
+                                        >
+                                            <path d="M6 9l6 6 6-6"/>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                {/* Expandable Details */}
+                                <div 
+                                    className="grid transition-all duration-300 ease-in-out"
+                                    style={{ 
+                                        gridTemplateRows: isExpanded ? '1fr' : '0fr',
+                                        opacity: isExpanded ? 1 : 0
+                                    }}
+                                >
+                                    <div className="overflow-hidden">
+                                        {exp.description && (
+                                            <p className="font-sans text-sm md:text-base text-gray-300 mt-4 leading-relaxed whitespace-pre-line">
+                                                {exp.description}
+                                            </p>
+                                        )}
+                                        <ul className={`list-disc list-outside ml-4 ${exp.description ? 'mt-3' : 'mt-4'} space-y-1.5`}>
+                                            {exp.details.map((detail, dIdx) => (
+                                                <li key={dIdx} className="font-sans text-sm md:text-base text-gray-400 leading-relaxed pl-1 marker:text-gray-500">
+                                                    {detail}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    ))}
-
-                    {/* Navigation Buttons */}
-                    <div className="flex gap-3 lg:gap-4 mt-6 lg:mt-8">
-                        {currentIndex > 0 && (
-                            <button
-                                onClick={handlePrev}
-                                className={`ubuntu-mono-regular group px-4 py-2 lg:px-8 lg:py-3 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 rounded-lg lg:rounded-xl backdrop-blur-sm text-white text-sm lg:text-base font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-white/10 active:scale-[0.98] ${
-                                    currentIndex === companyKeys.length - 1 ? 'w-full' : 'flex-1'
-                                }`}
-                            >
-                                <span className="flex items-center justify-center gap-1 lg:gap-2">
-                                    <svg className="w-3 h-3 lg:w-4 lg:h-4 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                                    </svg>
-                                    <span className="hidden sm:inline">Previous</span>
-                                    <span className="sm:hidden">Prev</span>
-                                </span>
-                            </button>
-                        )}
-                        {currentIndex < companyKeys.length - 1 && (
-                            <button
-                                onClick={handleNext}
-                                className={`ubuntu-mono-regular group px-4 py-2 lg:px-8 lg:py-3 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 rounded-lg lg:rounded-xl backdrop-blur-sm text-white text-sm lg:text-base font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-white/10 active:scale-[0.98] ${
-                                    currentIndex === 0 ? 'w-full' : 'flex-1'
-                                }`}
-                            >
-                                <span className="flex items-center justify-center gap-1 lg:gap-2">
-                                    <span className="hidden sm:inline">Next</span>
-                                    <span className="sm:hidden">Next</span>
-                                    <svg className="w-3 h-3 lg:w-4 lg:h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </span>
-                            </button>
-                        )}
-                    </div>
-                </div>
+                    );
+                })}
             </div>
         </section>
     );

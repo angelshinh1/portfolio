@@ -5,16 +5,16 @@ export default function Footer(){
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
                     {/* Left side - Name and tagline */}
                     <div className="text-center lg:text-left">
-                        <h3 className="ubuntu-mono-regular text-xl lg:text-2xl font-bold text-white mb-2">
+                        <h3 className="font-sans text-xl lg:text-2xl font-bold text-white mb-2">
                             Angel Shinh
                         </h3>
-                        <p className="nova-oval-regular text-sm lg:text-base text-white/70">
+                        <p className="font-sans text-sm lg:text-base text-white/70">
                             Please check out the Fun stuff section to see me being WHIMSICAL
                         </p>
                     </div>
 
                     {/* Center - Quick links */}
-                    <div className="nova-oval-regular flex flex-wrap gap-4 lg:gap-6 justify-center text-sm lg:text-base">
+                    <div className="font-sans flex flex-wrap gap-4 lg:gap-6 justify-center text-sm lg:text-base">
                         <a 
                             href="#about" 
                             className="text-white/70 hover:text-white transition-colors duration-200"
@@ -74,7 +74,7 @@ export default function Footer(){
 
                 {/* Bottom separator and copyright */}
                 <div className="mt-8 pt-6 border-t border-white/10">
-                    <p className="nova-oval-regular text-center text-sm text-white/50">
+                    <p className="font-sans text-center text-sm text-white/50">
                         © 2025 Angel Shinh. Built with Next.js and lots of ☕
                     </p>
                 </div>

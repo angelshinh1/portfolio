@@ -45,41 +45,20 @@ a, button, [role="button"], .cursor-pointer {
     "YPN2" 0;
 }
 
-.nova-oval-regular {
-  font-family: "Nova Oval", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
 
-.jost{
+
+.font-sans {
   font-family: "Jost", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
 
-.ubuntu-mono-regular {
-  font-family: "Ubuntu Mono", monospace;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.ubuntu-mono-bold {
-  font-family: "Ubuntu Mono", monospace;
+.font-heading {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
-}
-
-.ubuntu-mono-regular-italic {
-  font-family: "Ubuntu Mono", monospace;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.ubuntu-mono-bold-italic {
-  font-family: "Ubuntu Mono", monospace;
-  font-weight: 700;
-  font-style: italic;
 }
 
 /* Apple-style glass border effect */
@@ -129,5 +108,4 @@ a, button, [role="button"], .cursor-pointer {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }

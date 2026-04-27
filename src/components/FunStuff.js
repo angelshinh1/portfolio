@@ -78,8 +78,8 @@ export default function FunStuff() {
     return (
         <section id="fun-stuff" className="max-w-[90vw] lg:max-w-[70vw] mx-auto py-16">
             {/* Header */}
-            <div className="ubuntu-mono-regular mb-12 text-center">
-                <h2 className="text-2xl lg:text-5xl font-bold mb-3">Fun Stuff</h2>
+            <div className="font-sans mb-12 text-center">
+                <h2 className="font-heading text-2xl lg:text-5xl font-bold mb-3">Fun Stuff</h2>
                 <p className="text-base lg:text-xl text-gray-400">The whimsical side of ts developer</p>
             </div>
 
@@ -89,7 +89,7 @@ export default function FunStuff() {
                     <div className="flex flex-col lg:flex-row gap-8 items-start">
                         <div className="lg:w-1/2">
                             <div className="relative group">
-                                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-2xl opacity-30 group-hover:opacity-50 blur-sm transition-all duration-300"></div>
+                                <div className="absolute -inset-1 bg-gradient-to-r from-gray-500 via-gray-400 to-white rounded-2xl opacity-30 group-hover:opacity-50 blur-sm transition-all duration-300"></div>
                                 <div className="relative">
                                     <video
                                         src="/guitar-video.mp4"
@@ -106,16 +106,16 @@ export default function FunStuff() {
                             </div>
                         </div>
                         <div className="lg:w-1/2 space-y-4">
-                            <h3 className="ubuntu-mono-regular text-xl lg:text-3xl font-bold flex items-center gap-3">
+                            <h3 className="font-heading text-xl lg:text-3xl font-bold flex items-center gap-3">
                                 🎸 Music & Guitar
                             </h3>
-                            <p className="nova-oval-regular text-sm lg:text-base text-gray-300">
+                            <p className="font-sans text-sm lg:text-base text-gray-300">
                                 Been playing guitar for 2 years and it&apos;s my go-to stress reliever. The song I&apos;m playing in this video is <a className="underline" href="https://www.youtube.com/watch?v=Hth8kTDTh3g">Gratitude by Amin Toofani</a> Currently trying to learn <a className="underline" href="https://www.youtube.com/watch?v=7gphiFVVtUI">The song of the golden dragon</a>.
                             </p>
                             <div className="flex flex-wrap gap-2">
-                                <span className="ubuntu-mono-regular px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Classic</span>
-                                <span className="ubuntu-mono-regular px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Jazz</span>
-                                <span className="ubuntu-mono-regular px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Spanish</span>
+                                <span className="font-sans px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Classic</span>
+                                <span className="font-sans px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Jazz</span>
+                                <span className="font-sans px-3 py-1 bg-white/10 rounded-full text-xs lg:text-sm">Spanish</span>
                             </div>
                         </div>
                     </div>
@@ -123,7 +123,7 @@ export default function FunStuff() {
 
                 {/* Hobbies Grid */}
                 <div>
-                    <h3 className="ubuntu-mono-regular text-xl lg:text-2xl font-bold mb-6 text-center">Hobbies & Interests</h3>
+                    <h3 className="font-heading text-xl lg:text-2xl font-bold mb-6 text-center">Hobbies & Interests</h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {hobbies.map((hobby, index) => (
                             <div 
@@ -133,8 +133,8 @@ export default function FunStuff() {
                                 <div className="text-3xl lg:text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">
                                     {hobby.icon}
                                 </div>
-                                <h4 className="ubuntu-mono-regular font-semibold text-sm lg:text-base mb-1">{hobby.title}</h4>
-                                <p className="nova-oval-regular text-xs lg:text-sm text-gray-400">{hobby.desc}</p>
+                                <h4 className="font-heading font-semibold text-sm lg:text-base mb-1">{hobby.title}</h4>
+                                <p className="font-sans text-xs lg:text-sm text-gray-400">{hobby.desc}</p>
                             </div>
                         ))}
                     </div>
@@ -142,7 +142,7 @@ export default function FunStuff() {
 
                 {/* Random Facts */}
                 <div>
-                    <h3 className="ubuntu-mono-regular text-xl lg:text-2xl font-bold mb-6 text-center">
+                    <h3 className="font-heading text-xl lg:text-2xl font-bold mb-6 text-center">
                         Random Facts You Didn&apos;t Ask For 🤷‍♂️
                     </h3>
                     <div className="grid gap-4 md:grid-cols-2">
@@ -151,7 +151,7 @@ export default function FunStuff() {
                                 key={index}
                                 className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 lg:p-5 hover:bg-white/10 transition-all duration-300"
                             >
-                                <p className="nova-oval-regular text-sm lg:text-base text-gray-300">
+                                <p className="font-sans text-sm lg:text-base text-gray-300">
                                     {fact}
                                 </p>
                             </div>
@@ -161,13 +161,13 @@ export default function FunStuff() {
 
                 {/* Photos/Moments Section */}
                 <div>
-                    <h3 className="ubuntu-mono-regular text-xl lg:text-2xl font-bold mb-6 text-center">
+                    <h3 className="font-heading text-xl lg:text-2xl font-bold mb-6 text-center">
                         Life in Snapshots 📸
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {[1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
                             <div key={index} className="relative group">
-                                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg opacity-0 group-hover:opacity-30 transition-all duration-300 blur-sm"></div>
+                                <div className="absolute -inset-1 bg-gradient-to-r from-gray-600 to-gray-400 rounded-lg opacity-0 group-hover:opacity-30 transition-all duration-300 blur-sm"></div>
                                 <div className="relative bg-white/10 rounded-lg aspect-square flex items-center justify-center hover:bg-white/15 transition-all duration-300 overflow-hidden">
                                     <Image
                                         src={`/gallery-${index}.jpg`}
@@ -183,16 +183,15 @@ export default function FunStuff() {
                 </div>
 
                 {/* Interesting stuff */}
-                <div>
-                    <h3 className="ubuntu-mono-regular text-xl lg:text-2xl font-bold mb-6 text-center">
+                {/* <div>
+                    <h3 className="font-heading text-xl lg:text-2xl font-bold mb-6 text-center">
                         Interesting Stuff
                     </h3>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                        {/* Fart Button */}
                         <button
                             onClick={handleFartButtonClick}
                             id="fart-btn"
-                            className="glass-border-effect ubuntu-mono-regular px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm text-white font-medium transition-all duration-300 hover:scale-105 active:scale-95 group relative overflow-hidden"
+                            className="glass-border-effect font-sans px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm text-white font-medium transition-all duration-300 hover:scale-105 active:scale-95 group relative overflow-hidden"
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 Click Me !!
@@ -200,20 +199,19 @@ export default function FunStuff() {
                             <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </button>
 
-                        {/* Link Button */}
                         <a
                             href="https://www.youtube.com/watch?v=xvFZjo5PgG0"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="glass-border-effect ubuntu-mono-regular px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm text-white font-medium transition-all duration-300 hover:scale-105 active:scale-95 group relative overflow-hidden"
+                            className="glass-border-effect font-sans px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/40 rounded-xl backdrop-blur-sm text-white font-medium transition-all duration-300 hover:scale-105 active:scale-95 group relative overflow-hidden"
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 Click Me!!
                             </span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-gray-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </a>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             {/* Volume Warning Modal */}
@@ -222,10 +220,10 @@ export default function FunStuff() {
                     <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 lg:p-8 max-w-md w-full shadow-2xl">
                         <div className="text-center">
                             <div className="text-5xl mb-4">🔊</div>
-                            <h3 className="ubuntu-mono-regular text-xl lg:text-2xl font-bold text-white mb-3">
+                            <h3 className="font-heading text-xl lg:text-2xl font-bold text-white mb-3">
                                 Volume Check
                             </h3>
-                            <p className="nova-oval-regular text-sm lg:text-base text-gray-300 mb-6">
+                            <p className="font-sans text-sm lg:text-base text-gray-300 mb-6">
                                 Please make sure your volume is turned up to enjoy the full experience! 
                             </p>
                             <button
@@ -241,7 +239,7 @@ export default function FunStuff() {
                                         setTimeout(() => btn.classList.remove('animate-pulse'), 500);
                                     }
                                 }}
-                                className="ubuntu-mono-regular w-full px-6 py-3 bg-purple-500/30 hover:bg-purple-500/40 border border-purple-500/50 rounded-xl text-white font-medium transition-all duration-300 hover:scale-105"
+                                className="font-sans w-full px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/30 rounded-xl text-white font-medium transition-all duration-300 hover:scale-105"
                             >
                                 Got it! Play Sound
                             </button>
