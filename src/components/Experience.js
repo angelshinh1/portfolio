@@ -61,10 +61,8 @@ export default function Experience() {
                     type: "Volunteer",
                     period: "FEB 2025 - PRESENT",
                     details: [
-                        "Collaborated with cross-functional teams to design and develop a responsive website for CUSEC.",
-                        "Led the UI/UX revamp of the conference portal, improving user engagement through intuitive navigation and visual consistency.",
-                        "Implemented accessibility best practices to ensure inclusivity and compliance, increasing usability across diverse audiences.",
-                        "Designed promotional assets and branding elements to maintain visual consistency across digital platforms."
+                        "Currently developing a conference website for CUSEC 2027.",
+                        "Leading two teams: Tech General & Tech Growth to coordinate and develop technology at CUSEC."
                     ]
                 },
                 {
