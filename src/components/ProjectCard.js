@@ -4,7 +4,7 @@ export default function ProjectCard({ project, hoverBgClass }) {
       className={`group relative w-full h-full bg-[#0a0a0a] rounded-xl transition-all duration-300 ease-out border border-white/5 hover:shadow-[6px_6px_0px_rgba(255,255,255,0.15)] hover:-translate-x-[2px] hover:-translate-y-[2px] hover:border-transparent flex flex-col ${hoverBgClass || 'hover:bg-[#f4f4f5]'}`}
     >
       {/* Header section */}
-      <div className="p-6 pb-2 text-center relative flex flex-col items-center">
+      <div className="p-6 pb-2 text-left relative flex flex-col items-start">
         <h3 className="font-heading text-xl md:text-2xl font-bold text-white mb-2 transition-colors duration-300 group-hover:text-black">
           {project.title}
         </h3>
@@ -19,11 +19,11 @@ export default function ProjectCard({ project, hoverBgClass }) {
           {project.description}
         </p>
 
-        <div className="mb-6">
+        <div className="mb-6 text-left">
           <h4 className="font-heading text-sm font-bold text-white mb-3 tracking-wider transition-colors duration-300 group-hover:text-black">
             TECHNOLOGIES
           </h4>
-          <div className="flex flex-wrap gap-2 justify-center">
+          <div className="flex flex-wrap gap-2 justify-start">
             {project.technologies.map((tech, index) => (
               <span
                 key={index}

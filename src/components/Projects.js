@@ -52,7 +52,7 @@ export default function Projects() {
     return (
         <section id="projects" className="max-w-[80vw] lg:max-w-[70vw] mx-auto py-16">
             {/* Header */}
-            <div className="font-sans mb-10 text-center">
+            <div className="font-sans mb-10 text-left">
                 <h2 className="font-heading text-2xl lg:text-5xl font-bold mb-3">My Projects</h2>
                 <p className="text-base lg:text-xl text-gray-400">What I&apos;ve built so far</p>
             </div>
