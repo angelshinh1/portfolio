@@ -21,7 +21,7 @@ export default function Hero() {
                 {/* Circular Avatar */}
                 <div className="relative group flex-shrink-0">
                     <div 
-                        className="relative w-40 h-40 md:w-48 md:h-48 rounded-full shadow-lg overflow-hidden cursor-pointer bg-white border border-black/5" 
+                        className="relative w-30 h-30 md:w-36 md:h-36 rounded-full shadow-lg overflow-hidden cursor-pointer bg-white border border-black/5" 
                         onClick={handleImageClick}
                     >
                         <Image
