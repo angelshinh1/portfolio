@@ -30,7 +30,7 @@ export default function Experience() {
                     title: "Lead Developer – DDP Hunt (RBC Digital & WMT)",
                     type: "Project Lead",
                     period: "JAN 2026 - APR 2026",
-                    description: "Toronto, Ontario, Canada\n\nLed the development of DDP Hunt, an interactive scavenger hunt platform inspired by the @ CUSEC 2026 Scavenger Hunt, along with my internship and adapted for internal use at RBC.\n\nRefactored and rebuilt the codebase alongside to create a scalable and engaging system that allowed participants to claim hunt items via QR codes and unique codes, accumulate points, and redeem prizes in real time.\n\nHosted and executed a live event involving 30+ co-op students across RBC Digital and Wealth Management Technologies, driving engagement through gamification and seamless user experience.\n\nKey contributions:",
+                    description: "Led the development of DDP Hunt, an interactive scavenger hunt platform inspired by the @ CUSEC 2026 Scavenger Hunt, along with my internship and adapted for internal use at RBC.\n\nRefactored and rebuilt the codebase alongside to create a scalable and engaging system that allowed participants to claim hunt items via QR codes and unique codes, accumulate points, and redeem prizes in real time.\n\nHosted and executed a live event involving 30+ co-op students across RBC Digital and Wealth Management Technologies, driving engagement through gamification and seamless user experience.\n\nKey contributions:",
                     details: [
                         "Led architecture and development using Next.js and MongoDB",
                         "Designed real-time point tracking and reward redemption system",
