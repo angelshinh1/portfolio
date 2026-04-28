@@ -1,7 +1,7 @@
 export default function ProjectCard({ project, hoverBgClass }) {
   return (
     <div 
-      className={`group relative w-full h-full bg-white rounded-xl transition-all duration-300 ease-out border border-black/10 hover:shadow-[6px_6px_0px_rgba(0,0,0,0.1)] hover:-translate-x-[2px] hover:-translate-y-[2px] hover:border-black/30 flex flex-col ${hoverBgClass || 'hover:bg-[#f4f4f5]'}`}
+      className={`group relative w-full bg-white rounded-xl transition-all duration-300 ease-out border border-black/10 hover:shadow-[6px_6px_0px_rgba(0,0,0,0.1)] hover:-translate-x-[2px] hover:-translate-y-[2px] hover:border-black/30 flex flex-col ${hoverBgClass || 'hover:bg-[#f4f4f5]'}`}
     >
       {/* Header section */}
       <div className="p-6 pb-2 text-left relative flex flex-col items-start">
@@ -63,4 +63,4 @@ export default function ProjectCard({ project, hoverBgClass }) {
       </div>
     </div>
   );
-}
+}

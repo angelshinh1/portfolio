@@ -79,8 +79,8 @@ export default function FunStuff() {
         <section id="fun-stuff" className="max-w-[90vw] lg:max-w-[70vw] mx-auto py-16">
             {/* Header */}
             <div className="font-sans mb-12 text-center">
-                <h2 className="font-heading text-2xl lg:text-5xl font-bold mb-3 text-[#1E1E1E]">Fun Stuff</h2>
-                <p className="text-sm lg:text-base text-gray-600">The whimsical side of ts developer</p>
+                <h2 className="font-heading text-2xl lg:text-4xl font-bold mb-3 text-[#1E1E1E]">Fun Stuff</h2>
+                <p className="text-sm lg:text-base text-gray-600">The whimsical side of this developer</p>
             </div>
 
             <div className="space-y-12">

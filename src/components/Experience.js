@@ -14,7 +14,7 @@ export default function Experience() {
                     title: "Software Developer",
                     type: "Internship",
                     period: "JAN 2026 - APR 2026",
-                    description: "Developed and optimized backend services for RBC’s Data Sharing API platform, enabling secure data exchange for initiatives such as Open Banking and Interac Pay-By-Bank.",
+                    description: "Developed and optimized backend services for RBC's Data Sharing API platform, enabling secure data exchange for initiatives such as Open Banking and Interac Pay-By-Bank.",
                     details: [
                         "Designed and implemented a Cryptography service following JOSE (JSON Object Signing and Encryption) standards, ensuring secure, compliant transmission of sensitive client data across distributed systems",
                         "Architected the service for scalability and modularity, leveraging stateless design, clear service boundaries, and extensible components to support high-throughput API workloads",
@@ -77,7 +77,7 @@ export default function Experience() {
             ]
         },
         "GOOGLE DEVELOPER GROUPS": {
-            company: "Google Developer Groups Seneca Polytechnic",
+            company: "Google Developer Groups",
             logo: "/gdg-logo.png",
             fallback: "GDG-SP",
             roles: [
@@ -86,7 +86,7 @@ export default function Experience() {
                     type: "Volunteer",
                     period: "Jan 2026 - PRESENT",
                     details: [
-                        "Spearhead 4+ technical workshops and study sessions per term, driving 150+ student attendees and fostering a hands-on developer learning community."
+                        "Spearhead 4+ technical workshops and study sessions per term for GDG @ Seneca Polytechnic, driving 150+ student attendees and fostering a hands-on developer learning community."
                     ]
                 }
             ]
@@ -162,6 +162,18 @@ export default function Experience() {
         }
     };
 
+    const typeBadgeStyles = {
+        "Internship":    "bg-blue-50 text-blue-700 border border-blue-200",
+        "Co-op":         "bg-violet-50 text-violet-700 border border-violet-200",
+        "Part-time":     "bg-amber-50 text-amber-700 border border-amber-200",
+        "Full-time":     "bg-green-50 text-green-700 border border-green-200",
+        "Volunteer":     "bg-rose-50 text-rose-700 border border-rose-200",
+        "Project Lead":  "bg-teal-50 text-teal-700 border border-teal-200",
+    };
+
+    const getTypeBadgeClass = (type) =>
+        typeBadgeStyles[type] || "bg-gray-100 text-gray-600 border border-gray-200";
+
     // Flatten the experiences data into a single array
     const flatExperiences = [];
     Object.values(experiencesData).forEach(companyData => {
@@ -180,7 +192,7 @@ export default function Experience() {
     };
 
     return (
-        <section id="experience" className="max-w-[80vw] lg:max-w-[70vw] mx-auto py-16">
+        <section id="experience" className="max-w-[80vw] lg:max-w-[65vw] mx-auto py-16">
             {/* Header */}
             <div className="font-sans mb-10 text-left">
                 <h2 className="font-heading text-2xl lg:text-4xl font-bold mb-3 text-[#1E1E1E]">Work Experience</h2>
@@ -195,14 +207,12 @@ export default function Experience() {
                             {/* Left Side: Logo */}
                             <div className="flex-shrink-0">
                                 <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center overflow-hidden border border-black/10 text-[#1E1E1E] font-bold text-xl relative">
-                                    {/* If logo exists, it will load, otherwise fallback text */}
                                     <span className="absolute z-0">{exp.fallback}</span>
                                     <img 
                                         src={exp.logo} 
                                         alt={`${exp.company} logo`}
                                         className="w-full h-full object-contain relative z-10 bg-white"
                                         onError={(e) => {
-                                            // Hide image on error to show fallback text
                                             e.target.style.display = 'none';
                                         }}
                                     />
@@ -217,17 +227,19 @@ export default function Experience() {
                                     className="flex flex-col md:flex-row md:items-start justify-between mb-2 cursor-pointer group"
                                 >
                                     <div>
-                                        <h3 className="font-heading font-bold text-lg md:text-xl text-[#1E1E1E] transition-colors group-hover:text-black">
+                                        <h3 className="font-heading font-bold text-base md:text-lg text-[#1E1E1E] transition-colors group-hover:text-black">
                                             {exp.title}
                                         </h3>
-                                        <div className="flex items-center gap-2">
-                                            <p className="font-sans text-sm md:text-base text-gray-700 mt-0.5 font-medium">
-                                                {exp.company}
-                                            </p>
-                                            <span className="text-gray-500 text-xs mt-0.5 font-medium">• {exp.type}</span>
+                                        <p className="font-sans text-sm md:text-base text-gray-700 mt-0.5 font-medium">
+                                            {exp.company} <span className={`inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full ${getTypeBadgeClass(exp.type)}`}>
+                                                {exp.type}
+                                            </span>
+                                        </p>
+                                        <div className="mt-1.5">
+                                            
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-3 mt-1 md:mt-0">
+                                    <div className="flex items-center gap-3 mt-2 md:mt-0">
                                         <p className="font-sans text-xs md:text-sm text-gray-600 whitespace-nowrap font-medium">
                                             {exp.period}
                                         </p>
