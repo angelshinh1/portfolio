@@ -195,7 +195,7 @@ export default function Experience() {
         <section id="experience" className="max-w-[80vw] lg:max-w-[65vw] mx-auto py-16">
             {/* Header */}
             <div className="font-sans mb-10 text-left">
-                <h2 className="font-heading text-2xl lg:text-4xl font-bold mb-3 text-[#1E1E1E]">Work Experience</h2>
+                <h2 className="font-heading text-3xl lg:text-4xl font-bold mb-3 text-[#1E1E1E]">Work Experience</h2>
             </div>
 
             {/* Experience List */}
