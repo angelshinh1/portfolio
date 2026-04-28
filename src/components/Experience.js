@@ -101,11 +101,11 @@ export default function Experience() {
                     type: "Part-time",
                     period: "JUL 2025 - SEP 2025",
                     details: [
-                        "Teach robotics using LEGO NXT and EV3 to introduce engineering and programming fundamentals.",
+                        "Tought robotics using LEGO NXT and EV3 to introduce engineering and programming fundamentals.",
                         "Lead game development sessions with Roblox Studio (Lua) to build interactive 3D experiences.",
-                        "Instruct Python and C++ programming, covering core concepts like loops, functions, and OOP.",
-                        "Design hands-on projects that develop logical thinking, creativity, and problem-solving skills.",
-                        "Adapt teaching methods for different age groups and skill levels in a fun, engaging environment."
+                        "Instructed Python and C++ programming, covering core concepts like loops, functions, and OOP.",
+                        "Designed hands-on projects that develop logical thinking, creativity, and problem-solving skills.",
+                        "Adapted teaching methods for different age groups and skill levels in a fun, engaging environment."
                     ]
                 }
             ]

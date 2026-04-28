@@ -7,7 +7,7 @@
   background-position: right;
 }
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Bitcount+Single+Ink:ital,opsz,wght@0,6..72,100..900;1,6..72,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 :root {
   --background: #FAF9F6;
@@ -27,25 +27,11 @@ a, button, [role="button"], .cursor-pointer {
   cursor: url('/cursor-pointer.png'), pointer;
 }
 
-.bitcount-single-ink-navbar {
-  font-family: "Bitcount Single Ink", system-ui !important;
-  font-optical-sizing: auto;
-  font-weight: 400;
+.vt323-regular {
+  font-family: "VT323", monospace;
+  font-weight: 600;
   font-style: normal;
-  font-variation-settings:
-    "slnt" 0,
-    "CRSV" 0.5,
-    "ELSH" 0,
-    "ELXP" 0,
-    "SZP1" 0,
-    "SZP2" 0,
-    "XPN1" 0,
-    "XPN2" 0,
-    "YPN1" 0,
-    "YPN2" 0;
 }
-
-
 
 .font-sans {
   font-family: Consolas, ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;

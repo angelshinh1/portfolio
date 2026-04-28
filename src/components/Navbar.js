@@ -14,7 +14,7 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`bitcount-single-ink-navbar w-full lg:px-4 2xl:px-8 pt-4 fixed top-0 z-30 xl:rounded-3xl transition-all duration-300 ease-in-out ${
+            className={`vt323-regular w-full lg:px-4 2xl:px-8 pt-4 fixed top-0 z-30 xl:rounded-3xl transition-all duration-300 ease-in-out ${
                 isMenuOpen 
                     ? "h-screen bg-[#FAF9F6]/95 backdrop-blur-md border-b border-black/10 xl:h-min" 
                     : "h-auto bg-[#FAF9F6]/80 backdrop-blur-md border-b border-transparent xl:border-black/5 xl:h-min"
