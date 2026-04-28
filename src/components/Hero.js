@@ -85,7 +85,7 @@ export default function Hero() {
                         href="./Angel_Resume.pdf" 
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-2.5 bg-black/5 hover:bg-black/10 border border-black/10 text-[#1E1E1E] rounded-xl transition-all duration-300 font-medium text-center text-sm"
+                        className="px-6 py-2.5 bg-[#FFE7A5] hover:bg-[#FFE7A5]/10 border border-black/10 text-[#1E1E1E] rounded-xl transition-all duration-300 font-medium text-center text-sm"
                     >
                         View Resume
                     </a>
