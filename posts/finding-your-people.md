@@ -1,5 +1,5 @@
 ---
-title: "Finding Your People at Seneca"
+title: "Finding Your People"
 date: "2025-05-01"
 description: "Community doesn't just happen - you have to reach for it. Here's how I found mine at Seneca, and how you can too."
 tags: ["community", "seneca", "campus-life", "clubs", "student-life"]

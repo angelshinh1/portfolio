@@ -51,6 +51,21 @@ export default function Experience() {
                 }
             ]
         },
+        "GOOGLE DEVELOPER GROUPS": {
+            company: "Google Developer Groups",
+            logo: "/gdg-logo.png",
+            fallback: "GDG-SP",
+            roles: [
+                {
+                    title: "Vice President of Technology",
+                    type: "Volunteer",
+                    period: "Jan 2026 - PRESENT",
+                    details: [
+                        "Spearhead 4+ technical workshops and study sessions per term for GDG @ Seneca Polytechnic, driving 150+ student attendees and fostering a hands-on developer learning community."
+                    ]
+                }
+            ]
+        },
         CUSEC: {
             company: "CUSEC",
             logo: "/cusec-logo.png",
@@ -74,21 +89,6 @@ export default function Experience() {
                         "Final result: https://2026.cusec.net"
                     ]
                 }                
-            ]
-        },
-        "GOOGLE DEVELOPER GROUPS": {
-            company: "Google Developer Groups",
-            logo: "/gdg-logo.png",
-            fallback: "GDG-SP",
-            roles: [
-                {
-                    title: "Vice President of Technology",
-                    type: "Volunteer",
-                    period: "Jan 2026 - PRESENT",
-                    details: [
-                        "Spearhead 4+ technical workshops and study sessions per term for GDG @ Seneca Polytechnic, driving 150+ student attendees and fostering a hands-on developer learning community."
-                    ]
-                }
             ]
         },
         LOGICFUSION: {
