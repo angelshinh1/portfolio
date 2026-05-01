@@ -203,7 +203,7 @@ export default function Experience() {
                     const isExpanded = expandedIndex === index;
                     return (
                         <div key={index} className="flex flex-row gap-4 md:gap-6">
-                            {/* Left Side: Logo — always visible on same line as title */}
+                            {/* Left Side: Logo - always visible on same line as title */}
                             <div className="flex-shrink-0 mt-0.5">
                                 <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center overflow-hidden border border-black/10 text-[#1E1E1E] font-bold text-sm md:text-xl relative">
                                     <span className="absolute z-0">{exp.fallback}</span>

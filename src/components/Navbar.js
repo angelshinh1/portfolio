@@ -8,6 +8,7 @@ const Navbar = () => {
         "About me": "/#about",
         Experience: "/#experience",
         Projects: "/#projects",
+        Blog: "/blog",
         "Fun Stuff": "/#fun-stuff",
         Contact: "/#contact",
     };
