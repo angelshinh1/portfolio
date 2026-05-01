@@ -174,7 +174,6 @@ export default function Experience() {
     const getTypeBadgeClass = (type) =>
         typeBadgeStyles[type] || "bg-gray-100 text-gray-600 border border-gray-200";
 
-    // Flatten the experiences data into a single array
     const flatExperiences = [];
     Object.values(experiencesData).forEach(companyData => {
         companyData.roles.forEach(role => {
@@ -203,10 +202,10 @@ export default function Experience() {
                 {flatExperiences.map((exp, index) => {
                     const isExpanded = expandedIndex === index;
                     return (
-                        <div key={index} className="flex flex-col md:flex-row gap-6">
-                            {/* Left Side: Logo */}
-                            <div className="flex-shrink-0">
-                                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center overflow-hidden border border-black/10 text-[#1E1E1E] font-bold text-xl relative">
+                        <div key={index} className="flex flex-row gap-4 md:gap-6">
+                            {/* Left Side: Logo — always visible on same line as title */}
+                            <div className="flex-shrink-0 mt-0.5">
+                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center overflow-hidden border border-black/10 text-[#1E1E1E] font-bold text-sm md:text-xl relative">
                                     <span className="absolute z-0">{exp.fallback}</span>
                                     <img 
                                         src={exp.logo} 
@@ -220,33 +219,31 @@ export default function Experience() {
                             </div>
 
                             {/* Right Side: Content */}
-                            <div className="flex-1">
+                            <div className="flex-1 min-w-0">
                                 {/* Header Row (Clickable) */}
                                 <div 
                                     onClick={() => toggleExpand(index)}
                                     className="flex flex-col md:flex-row md:items-start justify-between mb-2 cursor-pointer group"
                                 >
-                                    <div>
-                                        <h3 className="font-heading font-bold text-base md:text-lg text-[#1E1E1E] transition-colors group-hover:text-black">
+                                    <div className="min-w-0">
+                                        <h3 className="font-heading font-bold text-base md:text-lg text-[#1E1E1E] transition-colors group-hover:text-black leading-snug">
                                             {exp.title}
                                         </h3>
                                         <p className="font-sans text-sm md:text-base text-gray-700 mt-0.5 font-medium">
-                                            {exp.company} <span className={`inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full ${getTypeBadgeClass(exp.type)}`}>
+                                            {exp.company}{" "}
+                                            <span className={`inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full ${getTypeBadgeClass(exp.type)}`}>
                                                 {exp.type}
                                             </span>
                                         </p>
-                                        <div className="mt-1.5">
-                                            
-                                        </div>
                                     </div>
-                                    <div className="flex items-center gap-3 mt-2 md:mt-0">
+                                    <div className="flex items-center gap-2 mt-1.5 md:mt-0 md:ml-4 flex-shrink-0">
                                         <p className="font-sans text-xs md:text-sm text-gray-600 whitespace-nowrap font-medium">
                                             {exp.period}
                                         </p>
                                         <svg 
                                             width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
                                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                                            className={`text-gray-500 transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}
+                                            className={`text-gray-500 transform transition-transform duration-300 flex-shrink-0 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}
                                         >
                                             <path d="M6 9l6 6 6-6"/>
                                         </svg>
