@@ -75,7 +75,7 @@ export default function Footer(){
                 {/* Bottom separator and copyright */}
                 <div className="mt-8 pt-6 border-t border-black/10">
                     <p className="font-sans text-center text-sm text-gray-500 font-medium">
-                        © 2025 Angel Shinh. Built with Next.js and lots of ☕
+                        © 2026 Angel Shinh. Built with Next.js and lots of ☕
                     </p>
                 </div>
             </div>

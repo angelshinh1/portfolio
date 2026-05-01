@@ -1,6 +1,6 @@
 ---
 title: "Balance Your Life: Studies, Work & Friends"
-date: "2025-05-01"
+date: "2026-05-01"
 description: "How I keep my sanity as a CS student - tips on scheduling, priorities, and making time for the people who matter."
 tags: ["productivity", "student-life", "cs", "time-management"]
 category: "Student Life"

@@ -1,6 +1,6 @@
 ---
 title: "Crush Your Midterms: Tips & Seneca Resources"
-date: "2025-05-01"
+date: "2026-05-01"
 description: "From study habits to Seneca-specific support services - everything you need to walk into midterms feeling ready."
 tags: ["midterms", "seneca", "academics", "study-tips"]
 category: "Academics"

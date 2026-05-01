@@ -1,6 +1,6 @@
 ---
 title: "Finals Season: How to Actually Prepare"
-date: "2025-05-01"
+date: "2026-05-01"
 description: "Finals are different from midterms - here's how to level up your preparation, apply what you learned mid-semester, and finish strong."
 tags: ["finals", "study-tips", "academics", "cs"]
 category: "Academics"

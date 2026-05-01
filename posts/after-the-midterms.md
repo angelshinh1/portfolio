@@ -1,6 +1,6 @@
 ---
 title: "After the Midterm: Reflect, Grow, Adjust"
-date: "2025-05-01"
+date: "2026-05-01"
 description: "Getting your midterm back isn't the end - it's the beginning. Here's how to turn your results into a real action plan for the rest of the semester."
 tags: ["midterms", "growth", "reflection", "academics"]
 category: "Academics"
