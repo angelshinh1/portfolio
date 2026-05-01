@@ -59,7 +59,7 @@ export default function Experience() {
                 {
                     title: "Director of Technology",
                     type: "Volunteer",
-                    period: "FEB 2025 - PRESENT",
+                    period: "FEB 2026 - PRESENT",
                     details: [
                         "Currently developing a conference website for CUSEC 2027.",
                         "Leading two teams: Tech General & Tech Growth to coordinate and develop technology at CUSEC."
