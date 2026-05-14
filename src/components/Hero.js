@@ -16,12 +16,12 @@ export default function Hero() {
         <div id="about" className="max-w-[80vw] lg:max-w-[60vw] mx-auto pt-0 pb-24 md:pt-0 md:pb-32 flex flex-col gap-10 lg:gap-14 min-h-[85vh] justify-center">
             
             {/* Header Section: Avatar (Left) + Title (Right) */}
-            <div className="flex flex-col md:flex-row items-start md:items-start gap-8 lg:gap-12">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 lg:gap-12 w-full">
                 
                 {/* Circular Avatar */}
                 <div className="relative group flex-shrink-0">
                     <div 
-                        className="relative w-30 h-30 md:w-36 md:h-36 rounded-full shadow-lg overflow-hidden cursor-pointer bg-white border border-black/5" 
+                        className="relative w-32 h-32 md:w-40 md:h-40 rounded-full shadow-lg overflow-hidden cursor-pointer bg-white border border-black/5" 
                         onClick={handleImageClick}
                     >
                         <Image
@@ -45,7 +45,7 @@ export default function Hero() {
                 </div>
 
                 {/* Greeting & Subtitle */}
-                <div className="space-y-3 lg:space-y-4 text-left">
+                <div className="space-y-3 lg:space-y-4 text-left flex-1">
                     <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-[#1E1E1E]">
                         Hi, I&apos;m Angel
                     </h1>
@@ -53,7 +53,7 @@ export default function Hero() {
                         <p className="font-sans text-base md:text-lg lg:text-xl text-gray-700 font-medium">
                             Software Developer Intern @ RBC
                         </p>
-                        <p className="font-sans text-sm md:text-base text-gray-500">
+                        <p className="font-sans text-sm md:text-base text-gray-500 max-w-xl">
                             Passionate about building innovative solutions & blending tech with art
                         </p>
                     </div>

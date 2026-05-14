@@ -14,14 +14,14 @@ const navItems = [
 const Navbar = () => {
   return (
     <nav
-      className="vt323-regular w-max mx-auto left-1/2 -translate-x-1/2 fixed bottom-6 z-30 transition-all duration-300 ease-in-out h-auto bg-[#FAF9F6]/60 backdrop-blur-xl border rounded-full border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
+      className="vt323-regular w-max mx-auto left-1/2 -translate-x-1/2 fixed bottom-6 z-30 transition-all duration-500 ease-out h-auto bg-white/70 backdrop-blur-2xl border rounded-full border-black/10 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.25)]"
     >
       <div className="flex items-center gap-1 md:gap-2 px-2 md:px-3 py-2">
         {/* Home Button */}
         <Link
           href="/"
           title="Home"
-          className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-black/5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-bottom cursor-pointer shrink-0"
+          className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-black/5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-bottom cursor-pointer shrink-0 hover:scale-110 active:scale-95"
         >
           <i className="ti ti-home text-xl md:text-2xl text-[#1E1E1E]/70 group-hover:text-[#1E1E1E] transition-all duration-300" aria-hidden="true" />
           {/* Tooltip */}
@@ -41,7 +41,7 @@ const Navbar = () => {
               key={label}
               href={href}
               title={label}
-              className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-black/5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] shrink-0"
+              className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-black/5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] shrink-0 hover:scale-110 active:scale-95"
             >
               <i className={`ti ${icon} text-xl md:text-2xl text-[#1E1E1E]/70 group-hover:text-[#1E1E1E] transition-all duration-300`} aria-hidden="true" />
               {/* Tooltip */}

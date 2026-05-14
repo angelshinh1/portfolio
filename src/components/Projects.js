@@ -62,7 +62,7 @@ export default function Projects() {
         <section id="projects" className="max-w-[80vw] lg:max-w-[70vw] mx-auto py-16">
             {/* Header */}
             <div className="font-sans mb-10 text-left">
-                <h2 className="font-heading text-2xl lg:text-4xl font-bold mb-3 text-[#1E1E1E]">My Projects</h2>
+                <h2 className="font-heading text-2xl lg:text-3xl font-bold mb-3 text-[#1E1E1E]">My Projects</h2>
                 <p className="text-sm lg:text-base text-gray-600">What I&apos;ve built so far</p>
             </div>
 
