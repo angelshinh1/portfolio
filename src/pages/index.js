@@ -11,7 +11,7 @@ export default function Home(){
       <Head>
         <title>Angel Shinh | Portfolio</title>
       </Head>
-      <div className="pt-2 md:pt-4">
+      <div className="pt-18 md:pt-16">
         <Hero />
 
         <Experience />

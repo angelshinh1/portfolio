@@ -21,11 +21,11 @@ const Navbar = () => {
         <Link
           href="/"
           title="Home"
-          className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-black/5 hover:-translate-y-3 hover:scale-[1.4] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-bottom cursor-pointer shrink-0"
+          className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-black/5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-bottom cursor-pointer shrink-0"
         >
           <i className="ti ti-home text-xl md:text-2xl text-[#1E1E1E]/70 group-hover:text-[#1E1E1E] transition-all duration-300" aria-hidden="true" />
           {/* Tooltip */}
-          <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#1E1E1E] text-white text-[10px] sm:text-xs font-medium rounded-lg md:rounded-xl opacity-0 scale-90 pointer-events-none group-hover:opacity-100 group-hover:scale-100 sm:group-hover:scale-[0.8] transition-all duration-300 ease-out whitespace-nowrap shadow-xl">
+          <span className="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-[#1E1E1E] text-white text-sm sm:text-base font-medium rounded-lg md:rounded-xl opacity-0 scale-90 pointer-events-none group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out whitespace-nowrap shadow-xl">
             Home
             <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#1E1E1E] rotate-45" />
           </span>
@@ -41,11 +41,11 @@ const Navbar = () => {
               key={label}
               href={href}
               title={label}
-              className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-black/5 hover:-translate-y-3 hover:scale-[1.4] md:hover:mx-2 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-bottom shrink-0"
+              className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-black/5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] shrink-0"
             >
               <i className={`ti ${icon} text-xl md:text-2xl text-[#1E1E1E]/70 group-hover:text-[#1E1E1E] transition-all duration-300`} aria-hidden="true" />
               {/* Tooltip */}
-              <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#1E1E1E] text-white text-[10px] sm:text-xs font-medium rounded-lg md:rounded-xl opacity-0 scale-90 pointer-events-none group-hover:opacity-100 group-hover:scale-100 sm:group-hover:scale-[0.8] transition-all duration-300 ease-out whitespace-nowrap shadow-xl">
+              <span className="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-[#1E1E1E] text-white text-sm sm:text-base font-medium rounded-lg md:rounded-xl opacity-0 scale-90 pointer-events-none group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out whitespace-nowrap shadow-xl">
                 {label}
                 <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#1E1E1E] rotate-45" />
               </span>
