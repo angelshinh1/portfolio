@@ -12,6 +12,28 @@ export async function getStaticProps() {
 }
 
 export default function Blog({ allPostsData }) {
+  // Temporarily disable the blog page by rendering a simple message
+  return (
+    <>
+      <Head>
+        <title>Blog | Angel Shinh</title>
+        <meta name="description" content="Thoughts, notes, and digital garden of Angel Shinh" />
+      </Head>
+      
+      <div className="pt-10 pb-20 min-h-screen">
+        <main className="max-w-[750px] mx-auto px-6">
+          <header className="mb-16">
+            <h1 className="font-heading text-4xl lg:text-5xl font-bold mb-4 text-[#1E1E1E]">Blog</h1>
+            <p className="font-sans text-gray-600 text-lg">A digital garden of notes, essays, and learnings. They are currenty on the way so stay tuned!</p>
+          </header>
+          <Link href="/" className="inline-block mt-8 underline hover:text-[#D9A000]">
+            Return to Home
+          </Link>
+        </main>
+      </div>
+    </>
+  );
+
   // Group posts by category
   const groupedPosts = allPostsData.reduce((acc, post) => {
     const category = post.category || 'General';
@@ -32,7 +54,7 @@ export default function Blog({ allPostsData }) {
         <meta name="description" content="Thoughts, notes, and digital garden of Angel Shinh" />
       </Head>
       
-      <div className="pt-32 pb-20 min-h-screen">
+      <div className="pt-10 pb-20 min-h-screen">
         <main className="max-w-[750px] mx-auto px-6">
           <header className="mb-16">
             <h1 className="font-heading text-4xl lg:text-5xl font-bold mb-4 text-[#1E1E1E]">Blog</h1>

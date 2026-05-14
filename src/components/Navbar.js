@@ -1,96 +1,60 @@
 import Link from "next/link";
 import React, { useState } from "react";
 
+const navItems = [
+  { label: "About me",   href: "/#about",      icon: "ti-user-circle" },
+  { label: "Experience", href: "/#experience",  icon: "ti-briefcase"   },
+  { label: "Projects",   href: "/#projects",    icon: "ti-layout-grid" },
+  // { label: "Blog",       href: "/blog",         icon: "ti-pencil"      }, // Temporarily disabled
+  { label: "Resume",     href: "/Angel_Resume_swe.pdf", icon: "ti-file-text" },
+  { label: "Fun Stuff",  href: "/#fun-stuff",   icon: "ti-confetti"    },
+  { label: "Contact",    href: "/#contact",     icon: "ti-mail"        },
+];
+
 const Navbar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const navItems = {
-        "About me": "/#about",
-        Experience: "/#experience",
-        Projects: "/#projects",
-        Blog: "/blog",
-        "Fun Stuff": "/#fun-stuff",
-        Contact: "/#contact",
-    };
-
-    return (
-        <nav
-            className={`vt323-regular w-full lg:px-4 2xl:px-8 pt-4 fixed top-0 z-30 xl:rounded-3xl transition-all duration-300 ease-in-out ${
-                isMenuOpen 
-                    ? "h-screen bg-[#FAF9F6]/95 backdrop-blur-md border-b border-black/10 xl:h-min" 
-                    : "h-auto bg-[#FAF9F6]/80 backdrop-blur-md border-b border-transparent xl:border-black/5 xl:h-min"
-            }`}
+  return (
+    <nav
+      className="vt323-regular w-max mx-auto left-1/2 -translate-x-1/2 fixed bottom-6 z-30 transition-all duration-300 ease-in-out h-auto bg-[#FAF9F6]/60 backdrop-blur-xl border rounded-full border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
+    >
+      <div className="flex items-center gap-1 md:gap-2 px-2 md:px-3 py-2">
+        {/* Home Button */}
+        <Link
+          href="/"
+          title="Home"
+          className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-black/5 hover:-translate-y-3 hover:scale-[1.4] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-bottom cursor-pointer shrink-0"
         >
-            <div className="flex items-center justify-between px-4 xl:px-8 pb-2 mx-4">
-                <Link
-                    href="/"
-                    className="glass-border-effect flex items-center gap-3 p-2 px-4 rounded-lg cursor-pointer transition-all duration-300 ease-out"
-                    onClick={() => setIsMenuOpen(false)}
-                >
-                    {/* Name for mobile */}
-                    <div className="block xl:hidden text-center leading-none">
-                        <h3 className="text-2xl font-bold">Angel Shinh</h3>
-                    </div>
-                    {/* Name for desktop */}
-                    <div className="hidden xl:block text-center leading-none">
-                        <h3 className="text-3xl font-bold">Angel Shinh</h3>
-                    </div>
-                </Link>
+          <i className="ti ti-home text-xl md:text-2xl text-[#1E1E1E]/70 group-hover:text-[#1E1E1E] transition-all duration-300" aria-hidden="true" />
+          {/* Tooltip */}
+          <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#1E1E1E] text-white text-[10px] sm:text-xs font-medium rounded-lg md:rounded-xl opacity-0 scale-90 pointer-events-none group-hover:opacity-100 group-hover:scale-100 sm:group-hover:scale-[0.8] transition-all duration-300 ease-out whitespace-nowrap shadow-xl">
+            Home
+            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#1E1E1E] rotate-45" />
+          </span>
+        </Link>
 
-                {/* Desktop Navigation */}
-                <div className="hidden xl:flex items-center gap-6">
-                    {Object.entries(navItems).map(([item, url]) => (
-                        <Link
-                            key={item}
-                            href={url}
-                            className="text-[#1E1E1E] hover:bg-black/5 text-lg 2xl:text-xl font-medium px-2 2xl:px-4 py-2 rounded-xl transition-all duration-300 ease-out"
-                        >
-                            {item}
-                        </Link>
-                    ))}
-                </div>
+        {/* Separator */}
+        <div className="w-[1px] h-6 md:h-8 bg-black/10 mx-0.5 md:mx-1 rounded-full shrink-0" />
 
-                {/* Mobile Burger Menu Button */}
-                <button
-                    className="xl:hidden flex flex-col items-center justify-center w-8 h-8 space-y-1.5"
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    aria-label="Toggle menu"
-                >
-                    <div
-                        className={`w-6 h-0.5 bg-black transition-all duration-300 ${
-                            isMenuOpen ? "rotate-45 translate-y-2" : ""
-                        }`}
-                    />
-                    <div
-                        className={`w-6 h-0.5 bg-black transition-all duration-300 ${
-                            isMenuOpen ? "opacity-0" : ""
-                        }`}
-                    />
-                    <div
-                        className={`w-6 h-0.5 bg-black transition-all duration-300 ${
-                            isMenuOpen ? "-rotate-45 -translate-y-2" : ""
-                        }`}
-                    />
-                </button>
-            </div>
-
-            {/* Mobile Navigation Menu */}
-            {isMenuOpen && (
-                <div className="xl:hidden mt-12 px-8 pb-4 space-y-3">
-                    {Object.entries(navItems).map(([item, url]) => (
-                        <Link
-                            key={item}
-                            href={url}
-                            className="block w-full text-left text-lg font-medium text-[#1E1E1E] px-4 py-3 rounded-xl hover:bg-black/5 transition-all duration-300 ease-out"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            {item}
-                        </Link>
-                    ))}
-                </div>
-            )}
-        </nav>
-    );
+        {/* Navigation */}
+        <div className="flex items-center gap-0.5 md:gap-1">
+          {navItems.map(({ label, href, icon }) => (
+            <Link
+              key={label}
+              href={href}
+              title={label}
+              className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-black/5 hover:-translate-y-3 hover:scale-[1.4] md:hover:mx-2 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-bottom shrink-0"
+            >
+              <i className={`ti ${icon} text-xl md:text-2xl text-[#1E1E1E]/70 group-hover:text-[#1E1E1E] transition-all duration-300`} aria-hidden="true" />
+              {/* Tooltip */}
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#1E1E1E] text-white text-[10px] sm:text-xs font-medium rounded-lg md:rounded-xl opacity-0 scale-90 pointer-events-none group-hover:opacity-100 group-hover:scale-100 sm:group-hover:scale-[0.8] transition-all duration-300 ease-out whitespace-nowrap shadow-xl">
+                {label}
+                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#1E1E1E] rotate-45" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </nav>
+  );
 };
 
 export default Navbar;
