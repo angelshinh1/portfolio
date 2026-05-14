@@ -21,7 +21,7 @@ const Navbar = () => {
         <Link
           href="/"
           title="Home"
-          className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-black/5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-bottom cursor-pointer shrink-0 hover:scale-110 active:scale-95"
+          className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-black/5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] shrink-0 hover:scale-110 active:scale-95"
         >
           <i className="ti ti-home text-xl md:text-2xl text-[#1E1E1E]/70 group-hover:text-[#1E1E1E] transition-all duration-300" aria-hidden="true" />
           {/* Tooltip */}
