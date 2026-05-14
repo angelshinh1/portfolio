@@ -39,7 +39,7 @@ export default function Post({ postData }) {
         {postData.description && <meta name="description" content={postData.description} />}
       </Head>
 
-      <div className="pt-32 pb-24 min-h-screen">
+      <div className="pt-6 md:pt-10 pb-24 min-h-screen">
         <article className="max-w-[750px] mx-auto px-6">
           <header className="mb-12">
             <Link 

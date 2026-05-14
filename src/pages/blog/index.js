@@ -20,7 +20,7 @@ export default function Blog({ allPostsData }) {
         <meta name="description" content="Thoughts, notes, and digital garden of Angel Shinh" />
       </Head>
       
-      <div className="pt-10 pb-20 min-h-screen">
+      <div className="pt-6 md:pt-6 pb-20 min-h-screen">
         <main className="max-w-[750px] mx-auto px-6">
           <header className="mb-16">
             <h1 className="font-heading text-4xl lg:text-5xl font-bold mb-4 text-[#1E1E1E]">Blog</h1>
@@ -54,7 +54,7 @@ export default function Blog({ allPostsData }) {
         <meta name="description" content="Thoughts, notes, and digital garden of Angel Shinh" />
       </Head>
       
-      <div className="pt-10 pb-20 min-h-screen">
+      <div className="pt-6 md:pt-10 pb-20 min-h-screen">
         <main className="max-w-[750px] mx-auto px-6">
           <header className="mb-16">
             <h1 className="font-heading text-4xl lg:text-5xl font-bold mb-4 text-[#1E1E1E]">Blog</h1>

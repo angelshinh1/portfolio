@@ -13,7 +13,7 @@ export default function Hero() {
     };
 
     return (
-        <div id="about" className="max-w-[80vw] lg:max-w-[60vw] mx-auto pt-8 pb-24 md:pt-2 md:pb-32 flex flex-col gap-10 lg:gap-14 min-h-[85vh] justify-center">
+        <div id="about" className="max-w-[80vw] lg:max-w-[60vw] mx-auto pt-0 pb-24 md:pt-0 md:pb-32 flex flex-col gap-10 lg:gap-14 min-h-[85vh] justify-center">
             
             {/* Header Section: Avatar (Left) + Title (Right) */}
             <div className="flex flex-col md:flex-row items-start md:items-start gap-8 lg:gap-12">
