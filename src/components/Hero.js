@@ -51,7 +51,7 @@ export default function Hero() {
                     </h1>
                     <div className="flex flex-col space-y-1">
                         <p className="font-sans text-base md:text-lg lg:text-xl text-gray-700 font-medium">
-                            Software Developer Intern @ RBC
+                            Software Developer | Prev @ RBC
                         </p>
                         <p className="font-sans text-sm md:text-base text-gray-500 max-w-xl">
                             Passionate about building innovative solutions & blending tech with art
@@ -69,7 +69,7 @@ export default function Hero() {
                         I&apos;m really into exploring new technologies and staying up-to-date with the latest trends in software development. When I&apos;m not coding, I absolutely love photography and playing guitar.
                     </p>
                     <p>
-                        Currently, I&apos;m working at RBC as a SWE Intern, diving deep into secure data exchange and backend systems. Feel free to contact me as I am always down to make new friends and collaborate on cool projects!
+                        Currently, I&apos;m exploring new opportunities in software engineering, having previously worked at RBC as a SWE Intern where I dove deep into secure data exchange and backend systems. Feel free to contact me as I am always down to make new friends and collaborate on cool projects!
                     </p>
                 </div>
                 

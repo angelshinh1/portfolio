@@ -14,27 +14,21 @@ export default function Experience() {
                     title: "Software Developer",
                     type: "Internship",
                     period: "JAN 2026 - APR 2026",
-                    description: "Developed and optimized backend services for RBC's Data Sharing API platform, enabling secure data exchange for initiatives such as Open Banking and Interac Pay-By-Bank.",
+                    description: "Developed and optimized backend services for RBC's Data Sharing API platform, enabling secure data exchange for Open Banking.",
                     details: [
-                        "Designed and implemented a Cryptography service following JOSE (JSON Object Signing and Encryption) standards, ensuring secure, compliant transmission of sensitive client data across distributed systems",
-                        "Architected the service for scalability and modularity, leveraging stateless design, clear service boundaries, and extensible components to support high-throughput API workloads",
-                        "Improved application startup performance by 80% by introducing multithreading and parallel initialization of critical components",
-                        "Built and enhanced Java Spring Boot APIs deployed on OpenShift, contributing to production-grade backend systems used by internal and external consumers",
-                        "Translated business and security requirements into technical designs, including API specifications, data mappings, and system workflows",
-                        "Conducted performance tuning, debugging, and root cause analysis to improve reliability and efficiency of services",
-                        "Contributed to CI/CD and DevOps workflows, supporting deployment, monitoring, and production stability",
-                        "Participated in design reviews, technical discussions, and presented solutions to stakeholders and team members"
+                        "Designed and implemented a Cryptography service following JOSE standards for secure data transmission.",
+                        "Improved application startup performance by 80% through multithreading and parallel initialization.",
+                        "Built and deployed Java Spring Boot APIs on OpenShift for scalable and modular service architecture."
                     ]
                 },
                 {
                     title: "Lead Developer – DDP Hunt (RBC Digital & WMT)",
                     type: "Project Lead",
                     period: "JAN 2026 - APR 2026",
-                    description: "Led the development of DDP Hunt, an interactive scavenger hunt platform inspired by the @ CUSEC 2026 Scavenger Hunt, along with my internship and adapted for internal use at RBC.\n\nRefactored and rebuilt the codebase alongside to create a scalable and engaging system that allowed participants to claim hunt items via QR codes and unique codes, accumulate points, and redeem prizes in real time.\n\nHosted and executed a live event involving 30+ co-op students across RBC Digital and Wealth Management Technologies, driving engagement through gamification and seamless user experience.\n\nKey contributions:",
+                    description: "Led the development of DDP Hunt, an interactive scavenger hunt platform for internal events.",
                     details: [
-                        "Led architecture and development using Next.js and MongoDB",
-                        "Designed real-time point tracking and reward redemption system",
-                        "Pitched the idea to the VP of my branch to further discuss how this technology can be used in real scenarios to improve customer experience"
+                        "Built a scalable real-time points system using Next.js and MongoDB.",
+                        "Hosted a live event with 30+ participants, driving engagement through gamification."
                     ]
                 },
                 {
@@ -42,11 +36,8 @@ export default function Experience() {
                     type: "Co-op",
                     period: "SEP 2025 - DEC 2025",
                     details: [
-                        "Developing and optimizing automation processes to improve data accuracy and operational efficiency within the Identity & Access Management (IAM) Analytics & Governance team.",
-                        "Collaborating with cross-functional teams to enable data-driven decision-making strategies for Global Cyber Security.",
-                        "Building and maintaining dashboards for clear visualization of insights and recommendations.",
-                        "Assisting with database management, testing, and documentation of end-to-end data flows.",
-                        "Working in an agile environment to deliver secure and scalable solutions aligned with business needs."
+                        "Optimized automation processes within Identity & Access Management (IAM).",
+                        "Built dashboards for data-driven decision-making in Global Cyber Security."
                     ]
                 }
             ]
@@ -61,7 +52,8 @@ export default function Experience() {
                     type: "Volunteer",
                     period: "Jan 2026 - PRESENT",
                     details: [
-                        "Spearhead 4+ technical workshops and study sessions per term for GDG @ Seneca Polytechnic, driving 150+ student attendees and fostering a hands-on developer learning community."
+                        "Spearhead 4+ technical workshops per term, driving 150+ attendees.",
+                        "Foster a hands-on developer learning community at Seneca Polytechnic."
                     ]
                 }
             ]
@@ -76,8 +68,8 @@ export default function Experience() {
                     type: "Volunteer",
                     period: "FEB 2026 - PRESENT",
                     details: [
-                        "Currently developing a conference website for CUSEC 2027.",
-                        "Leading two teams: Tech General & Tech Growth to coordinate and develop technology at CUSEC."
+                        "Developing the conference website for CUSEC 2027.",
+                        "Leading Tech General & Tech Growth teams to coordinate technology at CUSEC."
                     ]
                 },
                 {
@@ -85,8 +77,7 @@ export default function Experience() {
                     type: "Volunteer",
                     period: "MAY 2025 - JAN 2026",
                     details: [
-                        "Worked on UI and UX Design for CUSEC 2026.",
-                        "Final result: https://2026.cusec.net"
+                        "Designed the UI and UX for CUSEC 2026 (https://2026.cusec.net)."
                     ]
                 }                
             ]
@@ -101,11 +92,8 @@ export default function Experience() {
                     type: "Part-time",
                     period: "JUL 2025 - SEP 2025",
                     details: [
-                        "Tought robotics using LEGO NXT and EV3 to introduce engineering and programming fundamentals.",
-                        "Lead game development sessions with Roblox Studio (Lua) to build interactive 3D experiences.",
-                        "Instructed Python and C++ programming, covering core concepts like loops, functions, and OOP.",
-                        "Designed hands-on projects that develop logical thinking, creativity, and problem-solving skills.",
-                        "Adapted teaching methods for different age groups and skill levels in a fun, engaging environment."
+                        "Taught robotics and game development using LEGO EV3 and Roblox Studio.",
+                        "Instructed Python and C++ programming fundamentals to various age groups."
                     ]
                 }
             ]
@@ -120,9 +108,8 @@ export default function Experience() {
                     type: "Part-time",
                     period: "AUG 2024 - PRESENT",
                     details: [
-                        "Supported 60+ students per semester through hands-on help with assignments and lab activities.",
-                        "Raised class average by 30% through one-on-one guidance and peer-learning strategies.",
-                        "Maintained a safe and collaborative lab environment by enforcing lab guidelines."
+                        "Supported 60+ students per semester with assignments and lab activities.",
+                        "Helped raise the class average by 30% through one-on-one guidance."
                     ]
                 }
             ]
@@ -137,8 +124,8 @@ export default function Experience() {
                     type: "Part-time",
                     period: "AUG 2024 - JUN 2025",
                     details: [
-                        "Mentored 20+ students weekly in C++ and Python fundamentals, resulting in a 95% lab pass rate.",
-                        "Created interactive debugging sessions and coding challenges to reinforce core OOP concepts."
+                        "Mentored 20+ students weekly in C++ and Python fundamentals.",
+                        "Created interactive debugging sessions and coding challenges."
                     ]
                 }
             ]
@@ -153,9 +140,8 @@ export default function Experience() {
                     type: "Co-op",
                     period: "JAN 2025 - APR 2025",
                     details: [
-                        "Developed predictive models to analyze market patterns, leading to a 10% increase in simulated returns.",
-                        "Built data pipelines using Python and JavaScript to automate extraction and transformation of financial datasets.",
-                        "Integrated NLP-powered prompt engineering for news-based sentiment analysis, improving short-term prediction reliability by 15%."
+                        "Developed predictive models leading to a 10% increase in simulated returns.",
+                        "Built data pipelines in Python and JavaScript to automate extraction."
                     ]
                 }
             ]
