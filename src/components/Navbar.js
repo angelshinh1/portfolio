@@ -2,7 +2,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 const navItems = [
-  { label: "About me",   href: "/#about",      icon: "ti-user-circle" },
   { label: "Experience", href: "/#experience",  icon: "ti-briefcase"   },
   { label: "Projects",   href: "/#projects",    icon: "ti-layout-grid" },
   // { label: "Blog",       href: "/blog",         icon: "ti-pencil"      }, // Temporarily disabled
