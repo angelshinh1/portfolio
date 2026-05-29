@@ -32,7 +32,7 @@ This check-in alone puts you ahead of most people who just start reviewing hapha
 
 This is the whole point of reflecting after your midterms - so that finals go better. Whatever adjustments you decided to make, now's when you actually implement them.
 
-If you found out you struggle with time management under test conditions → do timed practice runs. If conceptual gaps were your issue → schedule dedicated "re-learn from scratch" sessions on those topics, not just re-reads. If you cramming didn't work → start your review two to three weeks out and spread it.
+If you found out you struggle with time management under test conditions -> do timed practice runs. If conceptual gaps were your issue -> schedule dedicated "re-learn from scratch" sessions on those topics, not just re-reads. If you cramming didn't work -> start your review two to three weeks out and spread it.
 
 Don't repeat the same approach and expect different results.
 

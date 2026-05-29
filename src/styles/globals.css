@@ -1,23 +1,40 @@
-/* Animated gradient border for Hero profile image */
-.animate-gradient-border {
-  background-size: 200% 200%;
-  transition: background-position 0.5s cubic-bezier(.4,0,.2,1);
-}
-.group:hover .animate-gradient-border {
-  background-position: right;
-}
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* ───────────────────────── Type ─────────────────────────
+   Editorial tension: a distinctive display serif against a
+   clean humanist sans, with monospace as the functional voice
+   for labels, metadata and code-flavoured detail.            */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=VT323&display=swap');
 
 :root {
-  --background: #FAF9F6;
-  --foreground: #1E1E1E;
+  /* Warm neutral foundation - aged paper, not sterile white */
+  --bg:          #F4F1EB;
+  --bg-2:        #EBE6DC;
+  --surface:     #FFFFFF;
+  --ink:         #20201E;
+  --ink-2:       #2B2A27;
+  --ink-3:       #8A867C;
+  --line:        rgba(32, 32, 30, 0.10);
+  --line-strong: rgba(32, 32, 30, 0.22);
+
+  /* One accent, used sparingly - warm terracotta */
+  --accent:      #B0542E;
+  --accent-2:    #C8693F;
+  --accent-soft: #EFE3D8;
+  --highlight:   rgba(240, 200, 120, 0.40);
+
+  /* Strong custom easing - the built-in curves lack punch */
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  --background: var(--bg);
+  --foreground: var(--ink);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px; /* Accounts for fixed navbar height */
+  scroll-padding-top: 90px;
 }
 
 html, body {
@@ -28,70 +45,87 @@ a, button, [role="button"], .cursor-pointer {
   cursor: url('/cursor-pointer.png'), pointer;
 }
 
-.vt323-regular {
-  font-family: "VT323", monospace;
-  font-weight: 600;
-  font-style: normal;
+body {
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Type families ──
+   .font-heading -> display serif   (load-bearing headings)
+   .font-sans    -> humanist sans   (body copy)
+   .font-mono    -> monospace       (eyebrows, labels, metadata)   */
+.font-heading {
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  letter-spacing: -0.015em;
 }
 
 .font-sans {
-  font-family: Consolas, ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  font-family: "Source Sans 3", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+.font-mono {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 500;
+}
+
+.vt323-regular {
+  font-family: "VT323", monospace;
   font-weight: 400;
   font-style: normal;
 }
 
-.font-heading {
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
+/* ── Editorial helpers ── */
+
+/* Eyebrow label - small, tracked, monospace */
+.eyebrow {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
-/* Apple-style glass border effect */
-.glass-border-effect {
-  position: relative;
-  background: transparent;
+/* CUSEC-style soft highlight on key phrases */
+mark, .mark {
+  background: linear-gradient(180deg, transparent 58%, var(--highlight) 58%);
+  color: inherit;
+  padding: 0 0.05em;
+  border-radius: 1px;
 }
 
-.glass-border-effect::before {
+/* Subtle paper-grain texture over the whole page */
+.grain::after {
   content: '';
-  position: absolute;
+  position: fixed;
   inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  pointer-events: none;
+  opacity: 0.03;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
 }
 
-
-.glass-border-effect:hover::before {
-  background: linear-gradient(135deg,
-    rgba(99, 102, 241, 0.5) 0%, /* blue-500 */
-    rgba(168, 85, 247, 0.5) 100% /* purple-500 */
-  );
-  opacity: 1;
+/* Decorative drop-cap initial for editorial intros */
+.dropcap::first-letter {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 500;
+  font-size: 3.4em;
+  line-height: 0.78;
+  float: left;
+  padding: 0.06em 0.12em 0 0;
+  color: var(--ink);
 }
 
-.glass-border-effect:hover {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
-  transform: translateY(-1px) scale(1.01);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+/* Responsive reading rhythm */
+@media (max-width: 768px) {
+  body { font-size: 1.0625rem; }
 }
 
-.glass-border-effect:active {
-  transform: scale(0.98);
-}
-
-body {
-  background: #FAF9F6;
-  color: #1E1E1E;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

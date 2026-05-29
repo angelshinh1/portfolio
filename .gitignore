@@ -42,3 +42,5 @@ next-env.d.ts
 
 .github/
 .github/chatmodes/
+
+/.claude/
