@@ -1,5 +1,6 @@
-import Image from "next/image";
 import { useState } from "react";
+import Reveal from "./Reveal";
+import SectionHeader from "./SectionHeader";
 
 export default function Experience() {
     const [expandedIndex, setExpandedIndex] = useState(null);
@@ -50,7 +51,7 @@ export default function Experience() {
                 {
                     title: "Vice President of Technology",
                     type: "Volunteer",
-                    period: "Jan 2026 - PRESENT",
+                    period: "JAN 2026 - PRESENT",
                     details: [
                         "Spearhead 4+ technical workshops per term, driving 150+ attendees.",
                         "Foster a hands-on developer learning community at Seneca Polytechnic."
@@ -79,7 +80,7 @@ export default function Experience() {
                     details: [
                         "Designed the UI and UX for CUSEC 2026 (https://2026.cusec.net)."
                     ]
-                }                
+                }
             ]
         },
         LOGICFUSION: {
@@ -148,21 +149,9 @@ export default function Experience() {
         }
     };
 
-    const typeBadgeStyles = {
-        "Internship":    "bg-blue-50 text-blue-700 border border-blue-200",
-        "Co-op":         "bg-violet-50 text-violet-700 border border-violet-200",
-        "Part-time":     "bg-amber-50 text-amber-700 border border-amber-200",
-        "Full-time":     "bg-green-50 text-green-700 border border-green-200",
-        "Volunteer":     "bg-rose-50 text-rose-700 border border-rose-200",
-        "Project Lead":  "bg-teal-50 text-teal-700 border border-teal-200",
-    };
-
-    const getTypeBadgeClass = (type) =>
-        typeBadgeStyles[type] || "bg-gray-100 text-gray-600 border border-gray-200";
-
     const flatExperiences = [];
-    Object.values(experiencesData).forEach(companyData => {
-        companyData.roles.forEach(role => {
+    Object.values(experiencesData).forEach((companyData) => {
+        companyData.roles.forEach((role) => {
             flatExperiences.push({
                 company: companyData.company,
                 logo: companyData.logo,
@@ -177,90 +166,101 @@ export default function Experience() {
     };
 
     return (
-        <section id="experience" className="max-w-[80vw] lg:max-w-[65vw] mx-auto py-16">
-            {/* Header */}
-            <div className="font-sans mb-10 text-left">
-                <h2 className="font-heading text-2xl lg:text-3xl font-bold mb-3 text-[#1E1E1E]">Work Experience</h2>
-            </div>
+        <section
+            id="experience"
+            className="relative max-w-[88vw] lg:max-w-[64rem] mx-auto px-1 py-24 lg:py-28"
+        >
+            <SectionHeader title="Experience" className="mb-14 lg:mb-16" />
 
-            {/* Experience List */}
-            <div className="flex flex-col gap-12">
+            <div className="flex flex-col">
                 {flatExperiences.map((exp, index) => {
                     const isExpanded = expandedIndex === index;
                     return (
-                        <div key={index} className="flex flex-row gap-4 md:gap-6">
-                            {/* Left Side: Logo - always visible on same line as title */}
-                            <div className="flex-shrink-0 mt-0.5">
-                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center overflow-hidden border border-black/10 text-[#1E1E1E] font-bold text-sm md:text-xl relative">
-                                    <span className="absolute z-0">{exp.fallback}</span>
-                                    <img 
-                                        src={exp.logo} 
-                                        alt={`${exp.company} logo`}
-                                        className="w-full h-full object-contain relative z-10 bg-white"
-                                        onError={(e) => {
-                                            e.target.style.display = 'none';
-                                        }}
-                                    />
+                        <Reveal
+                            key={index}
+                            delay={Math.min(index * 0.04, 0.2)}
+                            className="group/row border-t border-[var(--line)] first:border-t-0"
+                        >
+                            <div className="flex flex-row gap-4 md:gap-6 py-7">
+                                {/* Logo */}
+                                <div className="flex-shrink-0 mt-0.5">
+                                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--surface)] flex items-center justify-center overflow-hidden border border-[var(--line)] text-[var(--ink)] font-mono font-semibold text-[10px] md:text-xs relative">
+                                        <span className="absolute z-0">{exp.fallback}</span>
+                                        <img
+                                            src={exp.logo}
+                                            alt={`${exp.company} logo`}
+                                            className="w-full h-full object-cover relative z-10 bg-[var(--surface)]"
+                                            onError={(e) => {
+                                                e.target.style.display = "none";
+                                            }}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
 
-                            {/* Right Side: Content */}
-                            <div className="flex-1 min-w-0">
-                                {/* Header Row (Clickable) */}
-                                <div 
-                                    onClick={() => toggleExpand(index)}
-                                    className="flex flex-col md:flex-row md:items-start justify-between mb-2 cursor-pointer group"
-                                >
-                                    <div className="min-w-0">
-                                        <h3 className="font-heading font-bold text-base md:text-lg text-[#1E1E1E] transition-colors group-hover:text-black leading-snug">
-                                            {exp.title}
-                                        </h3>
-                                        <p className="font-sans text-sm md:text-base text-gray-700 mt-0.5 font-medium">
-                                            {exp.company}{" "}
-                                            <span className={`inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full ${getTypeBadgeClass(exp.type)}`}>
-                                                {exp.type}
+                                {/* Content */}
+                                <div className="flex-1 min-w-0">
+                                    <button
+                                        onClick={() => toggleExpand(index)}
+                                        className="w-full text-left flex flex-col md:flex-row md:items-start justify-between gap-1.5 cursor-pointer"
+                                        aria-expanded={isExpanded}
+                                    >
+                                        <div className="min-w-0">
+                                            <h3 className="font-heading font-medium text-lg md:text-xl text-[var(--ink)] leading-snug transition-colors duration-200 group-hover/row:text-[var(--accent)]">
+                                                {exp.title}
+                                            </h3>
+                                            <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mt-1.5">
+                                                <span className="font-sans text-sm md:text-base text-[var(--ink-2)] font-medium">
+                                                    {exp.company}
+                                                </span>
+                                                <span className="font-mono text-[0.65rem] tracking-[0.12em] uppercase px-2 py-0.5 rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
+                                                    {exp.type}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-3 md:mt-1 flex-shrink-0">
+                                            <span className="font-mono text-[0.7rem] md:text-xs text-[var(--ink-3)] whitespace-nowrap tracking-tight">
+                                                {exp.period}
                                             </span>
-                                        </p>
-                                    </div>
-                                    <div className="flex items-center gap-2 mt-1.5 md:mt-0 md:ml-4 flex-shrink-0">
-                                        <p className="font-sans text-xs md:text-sm text-gray-600 whitespace-nowrap font-medium">
-                                            {exp.period}
-                                        </p>
-                                        <svg 
-                                            width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                                            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                                            className={`text-gray-500 transform transition-transform duration-300 flex-shrink-0 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}
-                                        >
-                                            <path d="M6 9l6 6 6-6"/>
-                                        </svg>
-                                    </div>
-                                </div>
+                                            <svg
+                                                width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                                className={`text-[var(--ink-3)] transition-transform duration-300 ease-[var(--ease-out)] flex-shrink-0 ${isExpanded ? "rotate-180" : ""}`}
+                                            >
+                                                <path d="M6 9l6 6 6-6" />
+                                            </svg>
+                                        </div>
+                                    </button>
 
-                                {/* Expandable Details */}
-                                <div 
-                                    className="grid transition-all duration-300 ease-in-out"
-                                    style={{ 
-                                        gridTemplateRows: isExpanded ? '1fr' : '0fr',
-                                        opacity: isExpanded ? 1 : 0
-                                    }}
-                                >
-                                    <div className="overflow-hidden">
-                                        {exp.description && (
-                                            <p className="font-sans text-sm text-gray-700 mt-3 leading-relaxed whitespace-pre-line">
-                                                {exp.description}
-                                            </p>
-                                        )}
-                                        <ul className={`list-disc list-outside ml-4 ${exp.description ? 'mt-2' : 'mt-3'} space-y-1.5`}>
-                                            {exp.details.map((detail, dIdx) => (
-                                                <li key={dIdx} className="font-sans text-sm text-gray-600 leading-relaxed pl-1 marker:text-gray-400">
-                                                    {detail}
-                                                </li>
-                                            ))}
-                                        </ul>
+                                    {/* Expandable details */}
+                                    <div
+                                        className="grid transition-all duration-300 ease-[var(--ease-out)]"
+                                        style={{
+                                            gridTemplateRows: isExpanded ? "1fr" : "0fr",
+                                            opacity: isExpanded ? 1 : 0
+                                        }}
+                                    >
+                                        <div className="overflow-hidden">
+                                            {exp.description && (
+                                                <p className="font-sans text-sm md:text-base text-[var(--ink-2)] mt-4 leading-relaxed">
+                                                    {exp.description}
+                                                </p>
+                                            )}
+                                            <ul className={`${exp.description ? "mt-3" : "mt-4"} space-y-2`}>
+                                                {exp.details.map((detail, dIdx) => (
+                                                    <li
+                                                        key={dIdx}
+                                                        className="font-sans text-sm md:text-[0.95rem] text-[var(--ink-2)] leading-relaxed flex gap-3"
+                                                    >
+                                                        <span className="text-[var(--accent)] mt-[0.4em] flex-shrink-0 h-px w-3 bg-[var(--accent)]" aria-hidden="true" />
+                                                        <span>{detail}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </Reveal>
                     );
                 })}
             </div>
