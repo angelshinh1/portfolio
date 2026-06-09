@@ -41,16 +41,6 @@ export default function Contact() {
           .
         </p>
       </Reveal>
-
-      <Reveal delay={0.15}>
-        <a
-          href="mailto:shinh.maverick@gmail.com"
-          className="group inline-flex items-center gap-2 mt-12 px-7 py-3.5 bg-[var(--ink)] text-[var(--bg)] rounded-lg font-sans font-medium text-sm tracking-tight transition-[transform,opacity] duration-200 ease-[var(--ease-out)] hover:opacity-90 active:scale-[0.97]"
-        >
-          Contact
-          <span className="transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-x-0.5">&gt;</span>
-        </a>
-      </Reveal>
     </section>
   );
 }

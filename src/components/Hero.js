@@ -56,8 +56,8 @@ export default function Hero() {
                     </h1>
                     <p className="font-mono mt-4 text-sm md:text-base text-[var(--ink-2)] tracking-tight">
                         Software Developer
-                        <span className="mx-2 text-[var(--ink-3)]">/</span>
-                        Prev @ RBC
+                        {/* <span className="mx-2 text-[var(--ink-3)]">/</span>
+                        Prev @ RBC */}
                     </p>
                     <p className="font-sans mt-2 text-base md:text-lg leading-relaxed text-[var(--ink-2)] max-w-[44ch]">
                         Passionate about building innovative solutions &amp; blending
@@ -93,9 +93,6 @@ export default function Hero() {
                             className="group inline-flex items-center gap-2 px-6 py-3 bg-[var(--ink)] text-[var(--bg)] rounded-lg font-sans font-medium text-sm tracking-tight transition-[transform,opacity] duration-200 ease-[var(--ease-out)] hover:opacity-90 active:scale-[0.97]"
                         >
                             Get in touch
-                            <span className="transition-transform duration-200 ease-[var(--ease-out)] group-hover:translate-x-0.5">
-                                &gt;
-                            </span>
                         </a>
                         <a
                             href="./Angel_Resume_swe.pdf"
