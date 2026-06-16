@@ -184,12 +184,12 @@ export default function Experience() {
                             <div className="flex flex-row gap-4 md:gap-6 py-7">
                                 {/* Logo */}
                                 <div className="flex-shrink-0 mt-0.5">
-                                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--surface)] flex items-center justify-center overflow-hidden border border-[var(--line)] text-[var(--ink)] font-mono font-semibold text-[10px] md:text-xs relative">
+                                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--bg-surface)] flex items-center justify-center overflow-hidden border border-[var(--line)] text-[var(--text-primary)] font-mono font-semibold text-[10px] md:text-xs relative">
                                         <span className="absolute z-0">{exp.fallback}</span>
                                         <img
                                             src={exp.logo}
                                             alt={`${exp.company} logo`}
-                                            className="w-full h-full object-cover relative z-10 bg-[var(--surface)]"
+                                            className="w-full h-full object-cover relative z-10 bg-[var(--bg-surface)]"
                                             onError={(e) => {
                                                 e.target.style.display = "none";
                                             }}
@@ -205,26 +205,26 @@ export default function Experience() {
                                         aria-expanded={isExpanded}
                                     >
                                         <div className="min-w-0">
-                                            <h3 className="font-heading font-medium text-lg md:text-xl text-[var(--ink)] leading-snug transition-colors duration-200 group-hover/row:text-[var(--accent)]">
+                                            <h3 className="font-heading text-lg md:text-xl text-[var(--text-primary)] leading-snug transition-colors duration-200 group-hover/row:text-[var(--green-deep)]">
                                                 {exp.title}
                                             </h3>
                                             <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mt-1.5">
-                                                <span className="font-sans text-sm md:text-base text-[var(--ink-2)] font-medium">
+                                                <span className="font-body text-sm md:text-base text-[var(--text-secondary)] font-medium">
                                                     {exp.company}
                                                 </span>
-                                                <span className="font-mono text-[0.65rem] tracking-[0.12em] uppercase px-2 py-0.5 rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
+                                                <span className="font-mono text-[0.65rem] tracking-[0.12em] uppercase px-2 py-0.5 bg-[var(--bg-green)] text-[var(--green-deep)]" style={{ borderRadius: '2px' }}>
                                                     {exp.type}
                                                 </span>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-3 md:mt-1 flex-shrink-0">
-                                            <span className="font-mono text-[0.7rem] md:text-xs text-[var(--ink-3)] whitespace-nowrap tracking-tight">
+                                            <span className="font-mono text-[0.7rem] md:text-xs text-[var(--text-muted)] whitespace-nowrap tracking-tight">
                                                 {exp.period}
                                             </span>
                                             <svg
                                                 width="16" height="16" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                                                className={`text-[var(--ink-3)] transition-transform duration-300 ease-[var(--ease-out)] flex-shrink-0 ${isExpanded ? "rotate-180" : ""}`}
+                                                className={`text-[var(--text-muted)] transition-transform duration-300 ease-[var(--ease-out)] flex-shrink-0 ${isExpanded ? "rotate-180" : ""}`}
                                             >
                                                 <path d="M6 9l6 6 6-6" />
                                             </svg>
@@ -241,7 +241,7 @@ export default function Experience() {
                                     >
                                         <div className="overflow-hidden">
                                             {exp.description && (
-                                                <p className="font-sans text-sm md:text-base text-[var(--ink-2)] mt-4 leading-relaxed">
+                                                <p className="font-body text-sm md:text-base text-[var(--text-secondary)] mt-4 leading-relaxed">
                                                     {exp.description}
                                                 </p>
                                             )}
@@ -249,9 +249,9 @@ export default function Experience() {
                                                 {exp.details.map((detail, dIdx) => (
                                                     <li
                                                         key={dIdx}
-                                                        className="font-sans text-sm md:text-[0.95rem] text-[var(--ink-2)] leading-relaxed flex gap-3"
+                                                        className="font-body text-sm md:text-[0.95rem] text-[var(--text-secondary)] leading-relaxed flex gap-3"
                                                     >
-                                                        <span className="text-[var(--accent)] mt-[0.4em] flex-shrink-0 h-px w-3 bg-[var(--accent)]" aria-hidden="true" />
+                                                        <span className="flex-shrink-0 text-[var(--green-deep)] font-bold">*</span>
                                                         <span>{detail}</span>
                                                     </li>
                                                 ))}

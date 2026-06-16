@@ -1,59 +1,101 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const navItems = [
-  { label: "Experience", href: "/#experience",  icon: "ti-briefcase"   },
-  { label: "Projects",   href: "/#projects",    icon: "ti-layout-grid" },
-  // { label: "Blog",       href: "/blog",         icon: "ti-pencil"      }, // Temporarily disabled
-  { label: "Resume",     href: "/Angel_Resume_swe.pdf", icon: "ti-file-text" },
-  { label: "Fun Stuff",  href: "/#fun-stuff",   icon: "ti-confetti"    },
-  { label: "Contact",    href: "/#contact",     icon: "ti-mail"        },
+  { label: "Experience", href: "/#experience" },
+  { label: "Projects",   href: "/#projects"   },
+  { label: "Resume",     href: "/Angel_Resume_swe.pdf" },
+  { label: "Fun Stuff",  href: "/#fun-stuff"  },
+  { label: "Contact",    href: "/#contact"    },
 ];
 
-const Navbar = () => {
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <nav
-      className="vt323-regular w-max mx-auto left-1/2 -translate-x-1/2 fixed bottom-6 z-30 transition-shadow duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] h-auto bg-[#F4F1EB]/75 backdrop-blur-2xl border rounded-full border-[var(--line)] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.25)]"
-    >
-      <div className="flex items-center gap-1 md:gap-2 px-2 md:px-3 py-2">
-        {/* Home Button */}
-        <Link
-          href="/"
-          title="Home"
-          className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-[var(--accent-soft)] transition-[transform,background] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] shrink-0 hover:scale-110 active:scale-95"
-        >
-          <i className="ti ti-home text-xl md:text-2xl text-[var(--ink-2)] group-hover:text-[var(--accent)] transition-colors duration-300" aria-hidden="true" />
-          {/* Tooltip */}
-          <span className="vt323-regular absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-[var(--ink)] text-[var(--bg)] text-base sm:text-lg rounded-lg md:rounded-xl opacity-0 scale-90 pointer-events-none group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] whitespace-nowrap shadow-xl">
-            Home
-            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[var(--ink)] rotate-45" />
-          </span>
-        </Link>
+    <header className="fixed top-0 left-0 right-0 z-30">
+      {/* Main bar */}
+      <div
+        className="border-b border-[var(--line)]"
+        style={{ background: "rgba(232, 238, 226, 0.88)", backdropFilter: "blur(12px)" }}
+      >
+        <div className="max-w-[92vw] lg:max-w-[80rem] mx-auto flex items-center justify-between py-4 md:py-5">
 
-        {/* Separator */}
-        <div className="w-[1px] h-6 md:h-8 bg-[var(--line)] mx-0.5 md:mx-1 rounded-full shrink-0" />
+          {/* Wordmark — IM Fell English italic */}
+          <Link
+            href="/"
+            className="text-[var(--text-primary)] hover:text-[var(--green-deep)] transition-colors duration-200"
+            style={{ fontFamily: "'IM Fell English', Georgia, serif", fontStyle: "italic", fontSize: "1.25rem" }}
+          >
+            Angel Shinh
+          </Link>
 
-        {/* Navigation */}
-        <div className="flex items-center gap-0.5 md:gap-1">
-          {navItems.map(({ label, href, icon }) => (
+          {/* Desktop links */}
+          <nav className="hidden md:flex items-center" aria-label="Primary navigation">
+            {navItems.map(({ label, href }, i) => (
+              <span key={label} className="flex items-center">
+                {i > 0 && (
+                  <span
+                    className="mx-3 select-none"
+                    style={{ fontFamily: "'IM Fell English', Georgia, serif", fontStyle: "italic", color: "var(--green-deep)", opacity: 0.5, fontSize: "1rem" }}
+                    aria-hidden="true"
+                  >
+                    /
+                  </span>
+                )}
+                <Link
+                  href={href}
+                  className="relative group transition-colors duration-200 hover:text-[var(--green-deep)]"
+                  style={{ fontFamily: "'IM Fell English', Georgia, serif", fontStyle: "italic", fontSize: "0.95rem", color: "var(--text-secondary)" }}
+                >
+                  {label}
+                  <span
+                    className="absolute -bottom-[2px] left-0 w-0 h-[1.5px] transition-all duration-300 ease-[var(--ease-out)] group-hover:w-full"
+                    style={{ background: "var(--green-deep)" }}
+                  />
+                </Link>
+              </span>
+            ))}
+          </nav>
+
+          {/* Mobile toggle */}
+          <button
+            className="md:hidden hover:text-[var(--green-deep)] transition-colors duration-200"
+            style={{ fontFamily: "'IM Fell English', Georgia, serif", fontStyle: "italic", fontSize: "0.9rem", color: "var(--text-secondary)" }}
+            onClick={() => setOpen(!open)}
+            aria-expanded={open}
+            aria-label="Toggle navigation"
+          >
+            {open ? "✕" : "menu"}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile dropdown panel */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-[var(--ease-out)] border-b border-[var(--line)]`}
+        style={{
+          background: "rgba(232, 238, 226, 0.97)",
+          backdropFilter: "blur(12px)",
+          maxHeight: open ? "320px" : "0px",
+          opacity: open ? 1 : 0,
+        }}
+      >
+        <nav className="max-w-[92vw] mx-auto py-6 flex flex-col gap-5" aria-label="Mobile navigation">
+          {navItems.map(({ label, href }, i) => (
             <Link
               key={label}
               href={href}
-              title={label}
-              className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full hover:bg-[var(--accent-soft)] transition-[transform,background] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] shrink-0 hover:scale-110 active:scale-95"
+              onClick={() => setOpen(false)}
+              className="hover:text-[var(--green-deep)] transition-colors duration-200"
+              style={{ fontFamily: "'IM Fell English', Georgia, serif", fontStyle: "italic", fontSize: "1.1rem", color: "var(--text-secondary)" }}
             >
-              <i className={`ti ${icon} text-xl md:text-2xl text-[var(--ink-2)] group-hover:text-[var(--accent)] transition-colors duration-300`} aria-hidden="true" />
-              {/* Tooltip */}
-              <span className="vt323-regular absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-[var(--ink)] text-[var(--bg)] text-base sm:text-lg rounded-lg md:rounded-xl opacity-0 scale-90 pointer-events-none group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] whitespace-nowrap shadow-xl">
-                {label}
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[var(--ink)] rotate-45" />
-              </span>
+              <span style={{ color: "var(--green-deep)", opacity: 0.5, marginRight: "0.5rem" }}>/</span>
+              {label}
             </Link>
           ))}
-        </div>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
-};
-
-export default Navbar;
+}

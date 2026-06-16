@@ -1,40 +1,53 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* ───────────────────────── Type ─────────────────────────
-   Editorial tension: a distinctive display serif against a
-   clean humanist sans, with monospace as the functional voice
-   for labels, metadata and code-flavoured detail.            */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=VT323&display=swap');
+/* ── Cormorant Garamond (curly, calligraphic) + IM Fell English (ornate initials) + Space Mono ── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=IM+Fell+English:ital@0;1&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
-  /* Warm neutral foundation - aged paper, not sterile white */
-  --bg:          #F4F1EB;
-  --bg-2:        #EBE6DC;
-  --surface:     #FFFFFF;
-  --ink:         #20201E;
-  --ink-2:       #2B2A27;
-  --ink-3:       #8A867C;
-  --line:        rgba(32, 32, 30, 0.10);
-  --line-strong: rgba(32, 32, 30, 0.22);
+  /* ── Green-tinted paper foundations ── */
+  --bg-base:        #E8EEE2;   /* sage-green paper */
+  --bg-grain:       #DFE8D8;   /* slightly deeper sage */
+  --bg-green:       #C8E4B0;   /* vivid mint section */
+  --bg-surface:     #F4F8F1;   /* near-white with green breath */
+  --bg-dark:        #1A1A18;
 
-  /* One accent, used sparingly - warm terracotta */
-  --accent:      #B0542E;
-  --accent-2:    #C8693F;
-  --accent-soft: #EFE3D8;
-  --highlight:   rgba(240, 200, 120, 0.40);
+  --text-primary:   #0F0F0D;
+  --text-secondary: #252520;
+  --text-muted:     #5A5A54;
 
-  /* Strong custom easing - the built-in curves lack punch */
+  --green-vivid:    #A2E666;
+  --green-soft:     #C8E4B0;
+  --green-deep:     #5C8A2A;
+  --green-muted:    #BDD99A;
+
+  --accent-link:    #5C8A2A;
+  --accent-mark:    rgba(162, 230, 102, 0.40);
+
+  /* ── Legacy aliases so existing var() references keep working ── */
+  --bg:          #E8EEE2;
+  --bg-2:        #DFE8D8;
+  --surface:     #F4F8F1;
+  --ink:         #0F0F0D;
+  --ink-2:       #252520;
+  --ink-3:       #5A5A54;
+  --line:        rgba(26, 26, 24, 0.10);
+  --line-strong: rgba(26, 26, 24, 0.20);
+  --accent:      #5C8A2A;
+  --accent-2:    #A2E666;
+  --accent-soft: #C8E4B0;
+  --highlight:   rgba(162, 230, 102, 0.40);
+
   --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
-  --background: var(--bg);
-  --foreground: var(--ink);
+  --background: var(--bg-base);
+  --foreground: var(--text-primary);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
+  scroll-padding-top: 80px;
 }
 
 html, body {
@@ -46,86 +59,148 @@ a, button, [role="button"], .cursor-pointer {
 }
 
 body {
-  background: var(--bg);
-  color: var(--ink);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* ── Type families ──
-   .font-heading -> display serif   (load-bearing headings)
-   .font-sans    -> humanist sans   (body copy)
-   .font-mono    -> monospace       (eyebrows, labels, metadata)   */
+/* ── Type families ── */
+.font-display {
+  font-family: 'IM Fell English', Georgia, serif;
+  font-style: italic;
+}
+
+/* IM Fell English for all headings — the curly ornate display face */
 .font-heading {
-  font-family: "Fraunces", Georgia, "Times New Roman", serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  letter-spacing: -0.015em;
+  font-family: 'IM Fell English', Georgia, serif;
+  font-weight: 400;
 }
 
+/* Cormorant Garamond for body text — calligraphic, elegant */
+.font-body,
 .font-sans {
-  font-family: "Source Sans 3", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 400;
-}
-
-.font-mono {
-  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-weight: 500;
 }
 
+/* Space Mono for all utility text */
+.font-mono,
 .vt323-regular {
-  font-family: "VT323", monospace;
-  font-weight: 400;
-  font-style: normal;
+  font-family: 'Space Mono', monospace;
 }
 
-/* ── Editorial helpers ── */
+/* ── Ornate initial cap — the signature visual gesture ── */
+.initial {
+  font-family: 'IM Fell English', Georgia, serif;
+  font-style: italic;
+  font-size: 1.45em;
+  line-height: 0.8;
+  display: inline-block;
+  vertical-align: -0.18em;
+  color: var(--text-primary);
+}
 
-/* Eyebrow label - small, tracked, monospace */
+/* ── Section backgrounds ── */
+.section-base  { background: var(--bg-base); }
+.section-grain { background: var(--bg-grain); }
+.section-green { background: var(--bg-green); }
+.section-dark  { background: var(--bg-dark); color: #ECECEC; }
+
+/* ── Eyebrow label ── */
 .eyebrow {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: 'Space Mono', monospace;
   font-size: 0.72rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
-/* CUSEC-style soft highlight on key phrases */
+/* ── Green highlight mark ── */
 mark, .mark {
-  background: linear-gradient(180deg, transparent 58%, var(--highlight) 58%);
+  background: var(--accent-mark);
   color: inherit;
-  padding: 0 0.05em;
-  border-radius: 1px;
+  padding: 0 0.2em;
+  border-radius: 2px;
 }
 
-/* Subtle paper-grain texture over the whole page */
-.grain::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.03;
-  z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
+/* ── Ornament divider ── */
+.ornament-divider {
+  text-align: center;
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 2.25rem;
+  color: var(--green-deep);
+  opacity: 0.6;
+  line-height: 1;
+  user-select: none;
+  padding: 2rem 0;
+  background: var(--bg-base);
 }
 
-/* Decorative drop-cap initial for editorial intros */
-.dropcap::first-letter {
-  font-family: "Fraunces", Georgia, serif;
-  font-weight: 500;
-  font-size: 3.4em;
-  line-height: 0.78;
-  float: left;
-  padding: 0.06em 0.12em 0 0;
-  color: var(--ink);
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 500ms cubic-bezier(0.23, 1, 0.32, 1),
+              transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Responsive reading rhythm */
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── CTA button ── */
+.btn {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  background: transparent;
+  border: 1.5px solid var(--text-primary);
+  padding: 0.6rem 1.35rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 160ms ease-out, transform 120ms ease-out;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: rgba(162, 230, 102, 0.22);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-solid {
+  background: var(--text-primary);
+  color: var(--bg-base);
+}
+
+.btn-solid:hover {
+  background: var(--text-primary);
+  opacity: 0.85;
+  color: var(--bg-base);
+}
+
+/* ── Responsive ── */
 @media (max-width: 768px) {
   body { font-size: 1.0625rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

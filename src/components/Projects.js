@@ -60,16 +60,16 @@ export default function Projects() {
       className="relative max-w-[88vw] lg:max-w-[72rem] mx-auto px-1 py-24 lg:py-28"
     >
       <SectionHeader
-        title="Projects"
+        title="Projects!"
         className="mb-14 lg:mb-16"
       />
 
-      <div className="columns-1 md:columns-2 lg:columns-3 gap-6 [column-fill:_balance]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.map((project, idx) => (
           <Reveal
             key={idx}
-            delay={Math.min(idx * 0.05, 0.25)}
-            className="break-inside-avoid mb-6"
+            delay={Math.min(idx * 0.06, 0.24)}
+            className="flex"
           >
             <ProjectCard project={project} />
           </Reveal>
