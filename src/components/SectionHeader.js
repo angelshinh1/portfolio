@@ -4,7 +4,7 @@ export default function SectionHeader({ title, intro, align = "left", className 
   const isCenter = align === "center";
   return (
     <Reveal className={`${className} ${isCenter ? "text-center" : "text-left"}`}>
-      <h2 className="font-body text-[2.5rem] leading-[1.05] sm:text-5xl lg:text-[3.5rem] text-[var(--text-primary)] font-semibold">
+      <h2 className="font-heading text-[2.5rem] leading-[1.05] sm:text-5xl lg:text-[3.5rem] text-[var(--text-primary)]">
         <span className="initial">{title[0]}</span>{title.slice(1)}
       </h2>
 

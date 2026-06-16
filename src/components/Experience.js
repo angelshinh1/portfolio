@@ -2,152 +2,142 @@ import { useState } from "react";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
 
+const experiencesData = {
+    RBC: {
+        company: "RBC",
+        logo: "/rbc-logo.png",
+        fallback: "RBC",
+        roles: [
+            {
+                title: "Software Developer",
+                period: "Jan – Apr 2026",
+                description: "Developed and optimized backend services for RBC's Data Sharing API platform, enabling secure data exchange for Open Banking.",
+                details: [
+                    "Designed and implemented a Cryptography service following JOSE standards for secure data transmission.",
+                    "Improved application startup performance by 80% through multithreading and parallel initialization.",
+                    "Built and deployed Java Spring Boot APIs on OpenShift for scalable and modular service architecture."
+                ]
+            },
+            {
+                title: "Lead Developer — DDP Hunt",
+                period: "Jan – Apr 2026",
+                description: "Led the development of DDP Hunt, an interactive scavenger hunt platform for internal events.",
+                details: [
+                    "Built a scalable real-time points system using Next.js and MongoDB.",
+                    "Hosted a live event with 30+ participants, driving engagement through gamification."
+                ]
+            },
+            {
+                title: "Technical Systems Analyst",
+                period: "Sep – Dec 2025",
+                details: [
+                    "Optimized automation processes within Identity & Access Management (IAM).",
+                    "Built dashboards for data-driven decision-making in Global Cyber Security."
+                ]
+            }
+        ]
+    },
+    "GOOGLE DEVELOPER GROUPS": {
+        company: "Google Developer Groups",
+        logo: "/gdg-logo.png",
+        fallback: "GDG",
+        roles: [
+            {
+                title: "Vice President of Technology",
+                period: "Jan 2026 – Present",
+                details: [
+                    "Spearhead 4+ technical workshops per term, driving 150+ attendees.",
+                    "Foster a hands-on developer learning community at Seneca Polytechnic."
+                ]
+            }
+        ]
+    },
+    CUSEC: {
+        company: "CUSEC",
+        logo: "/cusec-logo.png",
+        fallback: "CSC",
+        roles: [
+            {
+                title: "Director of Technology",
+                period: "Feb 2026 – Present",
+                details: [
+                    "Developing the conference website for CUSEC 2027.",
+                    "Leading Tech General & Tech Growth teams to coordinate technology at CUSEC."
+                ]
+            },
+            {
+                title: "Director of UI/UX",
+                period: "May 2025 – Jan 2026",
+                details: [
+                    "Designed the UI and UX for CUSEC 2026 (https://2026.cusec.net)."
+                ]
+            }
+        ]
+    },
+    LOGICFUSION: {
+        company: "LogicFusion",
+        logo: "/logicfusion-logo.png",
+        fallback: "LF",
+        roles: [
+            {
+                title: "Computer Science Instructor",
+                period: "Jul – Sep 2025",
+                details: [
+                    "Taught robotics and game development using LEGO EV3 and Roblox Studio.",
+                    "Instructed Python and C++ programming fundamentals to various age groups."
+                ]
+            }
+        ]
+    },
+    "SENECA POLYTECHNIC": {
+        company: "Seneca Polytechnic",
+        logo: "/seneca-logo.png",
+        fallback: "SEN",
+        roles: [
+            {
+                title: "Lab Assistant",
+                period: "Aug 2024 – Present",
+                details: [
+                    "Supported 60+ students per semester with assignments and lab activities.",
+                    "Helped raise the class average by 30% through one-on-one guidance."
+                ]
+            }
+        ]
+    },
+    "BEAVER CREEK": {
+        company: "Beaver Creek Kids Club",
+        logo: "/beavercreek-logo.png",
+        fallback: "BC",
+        roles: [
+            {
+                title: "Coding Tutor",
+                period: "Aug 2024 – Jun 2025",
+                details: [
+                    "Mentored 20+ students weekly in C++ and Python fundamentals.",
+                    "Created interactive debugging sessions and coding challenges."
+                ]
+            }
+        ]
+    },
+    "META TRADING CLUB": {
+        company: "Meta Trading Club",
+        logo: "/metatrading-logo.png",
+        fallback: "MTC",
+        roles: [
+            {
+                title: "ML Engineer & Data Science Intern",
+                period: "Jan – Apr 2025",
+                details: [
+                    "Developed predictive models leading to a 10% increase in simulated returns.",
+                    "Built data pipelines in Python and JavaScript to automate extraction."
+                ]
+            }
+        ]
+    }
+};
+
 export default function Experience() {
     const [expandedIndex, setExpandedIndex] = useState(null);
-
-    const experiencesData = {
-        RBC: {
-            company: "RBC",
-            logo: "/rbc-logo.png",
-            fallback: "RBC",
-            roles: [
-                {
-                    title: "Software Developer",
-                    type: "Internship",
-                    period: "JAN 2026 - APR 2026",
-                    description: "Developed and optimized backend services for RBC's Data Sharing API platform, enabling secure data exchange for Open Banking.",
-                    details: [
-                        "Designed and implemented a Cryptography service following JOSE standards for secure data transmission.",
-                        "Improved application startup performance by 80% through multithreading and parallel initialization.",
-                        "Built and deployed Java Spring Boot APIs on OpenShift for scalable and modular service architecture."
-                    ]
-                },
-                {
-                    title: "Lead Developer – DDP Hunt (RBC Digital & WMT)",
-                    type: "Project Lead",
-                    period: "JAN 2026 - APR 2026",
-                    description: "Led the development of DDP Hunt, an interactive scavenger hunt platform for internal events.",
-                    details: [
-                        "Built a scalable real-time points system using Next.js and MongoDB.",
-                        "Hosted a live event with 30+ participants, driving engagement through gamification."
-                    ]
-                },
-                {
-                    title: "Technical Systems Analyst",
-                    type: "Co-op",
-                    period: "SEP 2025 - DEC 2025",
-                    details: [
-                        "Optimized automation processes within Identity & Access Management (IAM).",
-                        "Built dashboards for data-driven decision-making in Global Cyber Security."
-                    ]
-                }
-            ]
-        },
-        "GOOGLE DEVELOPER GROUPS": {
-            company: "Google Developer Groups",
-            logo: "/gdg-logo.png",
-            fallback: "GDG-SP",
-            roles: [
-                {
-                    title: "Vice President of Technology",
-                    type: "Volunteer",
-                    period: "JAN 2026 - PRESENT",
-                    details: [
-                        "Spearhead 4+ technical workshops per term, driving 150+ attendees.",
-                        "Foster a hands-on developer learning community at Seneca Polytechnic."
-                    ]
-                }
-            ]
-        },
-        CUSEC: {
-            company: "CUSEC",
-            logo: "/cusec-logo.png",
-            fallback: "CUSEC",
-            roles: [
-                {
-                    title: "Director of Technology",
-                    type: "Volunteer",
-                    period: "FEB 2026 - PRESENT",
-                    details: [
-                        "Developing the conference website for CUSEC 2027.",
-                        "Leading Tech General & Tech Growth teams to coordinate technology at CUSEC."
-                    ]
-                },
-                {
-                    title: "Director of UI/UX",
-                    type: "Volunteer",
-                    period: "MAY 2025 - JAN 2026",
-                    details: [
-                        "Designed the UI and UX for CUSEC 2026 (https://2026.cusec.net)."
-                    ]
-                }
-            ]
-        },
-        LOGICFUSION: {
-            company: "LogicFusion",
-            logo: "/logicfusion-logo.png",
-            fallback: "LF",
-            roles: [
-                {
-                    title: "Computer Science Instructor",
-                    type: "Part-time",
-                    period: "JUL 2025 - SEP 2025",
-                    details: [
-                        "Taught robotics and game development using LEGO EV3 and Roblox Studio.",
-                        "Instructed Python and C++ programming fundamentals to various age groups."
-                    ]
-                }
-            ]
-        },
-        "SENECA POLYTECHNIC": {
-            company: "Seneca Polytechnic",
-            logo: "/seneca-logo.png",
-            fallback: "SP",
-            roles: [
-                {
-                    title: "Lab Assistant",
-                    type: "Part-time",
-                    period: "AUG 2024 - PRESENT",
-                    details: [
-                        "Supported 60+ students per semester with assignments and lab activities.",
-                        "Helped raise the class average by 30% through one-on-one guidance."
-                    ]
-                }
-            ]
-        },
-        "BEAVER CREEK": {
-            company: "Beaver Creek Kids Club",
-            logo: "/beavercreek-logo.png",
-            fallback: "BC",
-            roles: [
-                {
-                    title: "Coding Tutor",
-                    type: "Part-time",
-                    period: "AUG 2024 - JUN 2025",
-                    details: [
-                        "Mentored 20+ students weekly in C++ and Python fundamentals.",
-                        "Created interactive debugging sessions and coding challenges."
-                    ]
-                }
-            ]
-        },
-        "META TRADING CLUB": {
-            company: "Meta Trading Club",
-            logo: "/metatrading-logo.png",
-            fallback: "MTC",
-            roles: [
-                {
-                    title: "Machine Learning Engineer and Data Science Intern",
-                    type: "Co-op",
-                    period: "JAN 2025 - APR 2025",
-                    details: [
-                        "Developed predictive models leading to a 10% increase in simulated returns.",
-                        "Built data pipelines in Python and JavaScript to automate extraction."
-                    ]
-                }
-            ]
-        }
-    };
 
     const flatExperiences = [];
     Object.values(experiencesData).forEach((companyData) => {
@@ -156,7 +146,7 @@ export default function Experience() {
                 company: companyData.company,
                 logo: companyData.logo,
                 fallback: companyData.fallback,
-                ...role
+                ...role,
             });
         });
     });
@@ -170,88 +160,120 @@ export default function Experience() {
             id="experience"
             className="relative max-w-[88vw] lg:max-w-[64rem] mx-auto px-1 py-24 lg:py-28"
         >
-            <SectionHeader title="Experience" className="mb-14 lg:mb-16" />
+            <SectionHeader title="Experience" className="mb-10 lg:mb-12" />
 
             <div className="flex flex-col">
                 {flatExperiences.map((exp, index) => {
                     const isExpanded = expandedIndex === index;
+                    const num = String(index + 1).padStart(2, "0");
+
                     return (
                         <Reveal
                             key={index}
                             delay={Math.min(index * 0.04, 0.2)}
-                            className="group/row border-t border-[var(--line)] first:border-t-0"
                         >
-                            <div className="flex flex-row gap-4 md:gap-6 py-7">
-                                {/* Logo */}
-                                <div className="flex-shrink-0 mt-0.5">
-                                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--bg-surface)] flex items-center justify-center overflow-hidden border border-[var(--line)] text-[var(--text-primary)] font-mono font-semibold text-[10px] md:text-xs relative">
-                                        <span className="absolute z-0">{exp.fallback}</span>
-                                        <img
-                                            src={exp.logo}
-                                            alt={`${exp.company} logo`}
-                                            className="w-full h-full object-cover relative z-10 bg-[var(--bg-surface)]"
-                                            onError={(e) => {
-                                                e.target.style.display = "none";
-                                            }}
-                                        />
-                                    </div>
-                                </div>
+                            <div
+                                className="border-t border-[var(--line)] transition-colors duration-300"
+                                style={{ background: isExpanded ? "rgba(200, 228, 176, 0.18)" : "transparent" }}
+                            >
+                                {/* Clickable row */}
+                                <button
+                                    onClick={() => toggleExpand(index)}
+                                    className="w-full text-left cursor-pointer group/row py-7 md:py-9 px-2 md:px-4"
+                                    aria-expanded={isExpanded}
+                                >
+                                    <div className="flex items-start justify-between gap-4 md:gap-8">
 
-                                {/* Content */}
-                                <div className="flex-1 min-w-0">
-                                    <button
-                                        onClick={() => toggleExpand(index)}
-                                        className="w-full text-left flex flex-col md:flex-row md:items-start justify-between gap-1.5 cursor-pointer"
-                                        aria-expanded={isExpanded}
-                                    >
-                                        <div className="min-w-0">
-                                            <h3 className="font-heading text-lg md:text-xl text-[var(--text-primary)] leading-snug transition-colors duration-200 group-hover/row:text-[var(--green-deep)]">
-                                                {exp.title}
-                                            </h3>
-                                            <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mt-1.5">
-                                                <span className="font-body text-sm md:text-base text-[var(--text-secondary)] font-medium">
+                                        {/* Left: logo + number + title + company */}
+                                        <div className="flex items-start gap-4 md:gap-5 min-w-0">
+                                            {/* Company logo */}
+                                            <div className="flex-shrink-0 mt-0.5">
+                                                <div className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[var(--bg-surface)] flex items-center justify-center overflow-hidden border border-[var(--line)] font-mono text-[9px] text-[var(--text-muted)] relative">
+                                                    <span className="absolute z-0">{exp.fallback}</span>
+                                                    <img
+                                                        src={exp.logo}
+                                                        alt={`${exp.company} logo`}
+                                                        className="w-full h-full object-cover relative z-10 bg-[var(--bg-surface)]"
+                                                        onError={(e) => { e.target.style.display = "none"; }}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="min-w-0">
+                                                <h3 className="font-heading text-xl md:text-2xl leading-snug text-[var(--text-primary)] transition-colors duration-200 group-hover/row:text-[var(--green-deep)]">
+                                                    {exp.title}
+                                                </h3>
+                                                <p
+                                                    className="mt-1"
+                                                    style={{
+                                                        fontFamily: "'IM Fell English', Georgia, serif",
+                                                        fontStyle: "italic",
+                                                        fontSize: "1rem",
+                                                        color: "var(--green-deep)",
+                                                        opacity: 0.8,
+                                                    }}
+                                                >
                                                     {exp.company}
-                                                </span>
-                                                <span className="font-mono text-[0.65rem] tracking-[0.12em] uppercase px-2 py-0.5 bg-[var(--bg-green)] text-[var(--green-deep)]" style={{ borderRadius: '2px' }}>
-                                                    {exp.type}
-                                                </span>
+                                                </p>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-3 md:mt-1 flex-shrink-0">
-                                            <span className="font-mono text-[0.7rem] md:text-xs text-[var(--text-muted)] whitespace-nowrap tracking-tight">
+
+                                        {/* Right: period + toggle */}
+                                        <div className="flex-shrink-0 flex items-center gap-3 md:gap-4 mt-0.5">
+                                            <span className="font-mono text-[0.74rem] md:text-[0.82rem] text-[var(--text-secondary)] whitespace-nowrap tracking-tight hidden sm:block">
                                                 {exp.period}
                                             </span>
-                                            <svg
-                                                width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                                                className={`text-[var(--text-muted)] transition-transform duration-300 ease-[var(--ease-out)] flex-shrink-0 ${isExpanded ? "rotate-180" : ""}`}
+                                            <span
+                                                className="font-heading text-2xl leading-none select-none transition-all duration-300"
+                                                style={{
+                                                    color: "var(--green-deep)",
+                                                    opacity: isExpanded ? 1 : 0.45,
+                                                    transform: isExpanded ? "rotate(45deg)" : "rotate(0deg)",
+                                                    display: "inline-block",
+                                                }}
                                             >
-                                                <path d="M6 9l6 6 6-6" />
-                                            </svg>
+                                                +
+                                            </span>
                                         </div>
-                                    </button>
+                                    </div>
 
-                                    {/* Expandable details */}
-                                    <div
-                                        className="grid transition-all duration-300 ease-[var(--ease-out)]"
-                                        style={{
-                                            gridTemplateRows: isExpanded ? "1fr" : "0fr",
-                                            opacity: isExpanded ? 1 : 0
-                                        }}
-                                    >
-                                        <div className="overflow-hidden">
+                                    {/* Period on mobile */}
+                                    <p className="sm:hidden font-mono text-[0.74rem] text-[var(--text-secondary)] mt-1.5 ml-10 tracking-tight">
+                                        {exp.period}
+                                    </p>
+                                </button>
+
+                                {/* Expandable details */}
+                                <div
+                                    className="grid transition-all duration-400 ease-[var(--ease-out)]"
+                                    style={{
+                                        gridTemplateRows: isExpanded ? "1fr" : "0fr",
+                                        opacity: isExpanded ? 1 : 0,
+                                        transition: "grid-template-rows 350ms cubic-bezier(0.23,1,0.32,1), opacity 300ms ease",
+                                    }}
+                                >
+                                    <div className="overflow-hidden">
+                                        <div className="px-2 md:px-4 pb-8 md:pb-10 ml-10 md:ml-14">
+                                            {/* Thin green rule */}
+                                            <div className="mb-5 h-px w-10" style={{ background: "var(--green-vivid)" }} />
+
                                             {exp.description && (
-                                                <p className="font-body text-sm md:text-base text-[var(--text-secondary)] mt-4 leading-relaxed">
+                                                <p className="font-body text-base text-[var(--text-secondary)] mb-4 leading-relaxed max-w-[56ch]">
                                                     {exp.description}
                                                 </p>
                                             )}
-                                            <ul className={`${exp.description ? "mt-3" : "mt-4"} space-y-2`}>
+                                            <ul className="space-y-3">
                                                 {exp.details.map((detail, dIdx) => (
                                                     <li
                                                         key={dIdx}
-                                                        className="font-body text-sm md:text-[0.95rem] text-[var(--text-secondary)] leading-relaxed flex gap-3"
+                                                        className="font-body text-base text-[var(--text-secondary)] leading-relaxed flex gap-3"
                                                     >
-                                                        <span className="flex-shrink-0 text-[var(--green-deep)] font-bold">*</span>
+                                                        <span
+                                                            className="flex-shrink-0 font-bold mt-[0.05em]"
+                                                            style={{ color: "var(--green-deep)" }}
+                                                        >
+                                                            *
+                                                        </span>
                                                         <span>{detail}</span>
                                                     </li>
                                                 ))}
@@ -263,6 +285,9 @@ export default function Experience() {
                         </Reveal>
                     );
                 })}
+
+                {/* Closing rule */}
+                <div className="border-t border-[var(--line)]" />
             </div>
         </section>
     );
