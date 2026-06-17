@@ -43,6 +43,29 @@ const AMBIENT_NOTES = [
     { symbol: '♬', left:  '2%',  top: '74%', size: '1.2rem', opacity: 0.11 },
 ];
 
+// One guitar-string color per hobby card (low E → high e)
+const HOBBY_ACCENTS = [
+    'var(--string-E)',
+    'var(--string-D)',
+    'var(--string-B)',
+    'var(--string-G)',
+    'var(--string-A)',
+    'var(--string-e)',
+];
+
+// Subtle static tilts — "pinned to a corkboard" feel
+const HOBBY_TILTS = [-1.8, 1.2, -0.7, 1.6, -1.3, 0.9];
+
+// Per-fact decoration: optional prefix glyph + callout treatment
+const FACT_META = [
+    { prefix: null, callout: false },
+    { prefix: '♩',  callout: true  },  // guitar commits
+    { prefix: null, callout: false },
+    { prefix: null, callout: false },
+    { prefix: null, callout: false },
+    { prefix: '↑',  callout: false },  // 6' 2"
+];
+
 export default function FunStuff() {
     return (
         <section
@@ -136,7 +159,7 @@ export default function FunStuff() {
                             {["Classic", "Jazz", "Spanish"].map((g) => (
                                 <span
                                     key={g}
-                                    className="font-mono text-[0.7rem] px-2.5 py-1 bg-[var(--bg-green)] text-[var(--green-deep)] tracking-tight"
+                                    className="font-mono text-[0.7rem] px-2.5 py-1 bg-[var(--green-soft)] text-[var(--green-deep)] tracking-tight"
                                     style={{ borderRadius: '2px' }}
                                 >
                                     {g}
@@ -156,27 +179,26 @@ export default function FunStuff() {
                             <span className="initial">H</span>obbies &amp; interests
                         </h3>
                     </Reveal>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-4">
                         {hobbies.map((hobby, index) => (
                             <Reveal
                                 key={index}
                                 delay={Math.min(index * 0.04, 0.2)}
-                                className={`group flex items-center gap-3 border bg-[var(--bg-surface)] px-4 py-3.5 transition-[transform,box-shadow] duration-300 ease-[var(--ease-out)] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] ${
-                                    hobby.highlight
-                                        ? 'border-[var(--green-muted)]'
-                                        : 'border-[var(--line)]'
-                                }`}
+                                className="group flex flex-col items-center text-center gap-2.5 border border-[var(--line)] bg-[var(--bg-surface)] px-4 py-5 transition-[box-shadow] duration-300 hover:shadow-[0_6px_20px_rgba(0,0,0,0.09)]"
                                 style={{ borderRadius: '4px' }}
                             >
-                                <i className={`ti ${hobby.icon} text-2xl text-[var(--text-secondary)] transition-[transform,color] duration-300 ease-[var(--ease-out)] group-hover:scale-110 group-hover:text-[var(--green-deep)]`} aria-hidden="true" />
-                                <div className="min-w-0">
+                                <i
+                                    className={`ti ${hobby.icon} text-[1.75rem] text-[var(--green-deep)]`}
+                                    aria-hidden="true"
+                                />
+                                <div>
                                     <h4 className="font-body font-semibold text-sm text-[var(--text-primary)] leading-tight">
                                         {hobby.title}
                                         {hobby.highlight && (
-                                            <span className="ml-1.5 font-body font-normal text-[var(--green-deep)] text-xs" aria-hidden>♪</span>
+                                            <span className="ml-1 font-body font-normal text-[var(--green-deep)] text-xs" aria-hidden> ♪</span>
                                         )}
                                     </h4>
-                                    <p className="font-mono text-xs text-[var(--text-muted)] mt-0.5 truncate">
+                                    <p className="font-mono text-[0.62rem] text-[var(--text-muted)] mt-1 leading-tight">
                                         {hobby.desc}
                                     </p>
                                 </div>
@@ -192,7 +214,7 @@ export default function FunStuff() {
                             <span className="initial">R</span>andom facts you didn&apos;t ask for
                         </h3>
                     </Reveal>
-                    <ul className="space-y-1">
+                    <ul className="space-y-0">
                         {randomFacts.map((fact, index) => (
                             <Reveal
                                 key={index}
@@ -201,10 +223,6 @@ export default function FunStuff() {
                                 className="py-3.5 border-t border-[var(--line)]"
                             >
                                 <p className="font-body text-sm lg:text-[0.95rem] leading-relaxed text-[var(--text-secondary)]">
-                                    {/* Guitar fact gets a note prefix */}
-                                    {index === 1 && (
-                                        <span className="mr-1.5 text-[var(--green-deep)] opacity-60" aria-hidden>♩</span>
-                                    )}
                                     {fact}
                                 </p>
                             </Reveal>

@@ -25,7 +25,7 @@ export default function Hero() {
             <div
                 className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block"
                 aria-hidden="true"
-                style={{ opacity: 0.37 }}
+                style={{ opacity: 0.32 }}
             >
                 <GuitarIllustration />
             </div>

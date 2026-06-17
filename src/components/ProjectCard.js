@@ -1,6 +1,6 @@
 export default function ProjectCard({ project }) {
   return (
-    <div className="group relative h-full w-full flex flex-col bg-[var(--bg-surface)] border border-[var(--line)] p-7 transition-[transform,box-shadow] duration-300 ease-[var(--ease-out)] shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0_4px_16px_rgba(0,0,0,0.10)]" style={{ borderRadius: '4px' }}>
+    <div className="group relative h-full w-full flex flex-col bg-[var(--bg-surface)] border border-[var(--line)] p-7 transition-[box-shadow] duration-300 ease-[var(--ease-out)] shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.10)]" style={{ borderRadius: '4px' }}>
       {/* Title + category */}
       <h3 className="font-heading text-2xl leading-tight text-[var(--text-primary)] transition-colors duration-300 group-hover:text-[var(--green-deep)]">
         {project.title}

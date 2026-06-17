@@ -77,7 +77,7 @@ function ProjectCard({ project, index }) {
   const num = String(index + 1).padStart(2, "0");
 
   return (
-    <div className="group relative string-border h-full w-full flex flex-col bg-[var(--bg-surface)] border border-[var(--line)] overflow-hidden transition-[transform,box-shadow] duration-300 ease-[var(--ease-out)] hover:-translate-y-1 hover:shadow-[0_8px_28px_rgba(0,0,0,0.10)]" style={{ borderRadius: "6px" }}>
+    <div className="group relative string-border h-full w-full flex flex-col bg-[var(--bg-surface)] border border-[var(--line)] overflow-hidden transition-[box-shadow] duration-300 ease-[var(--ease-out)] hover:shadow-[0_8px_28px_rgba(0,0,0,0.10)]" style={{ borderRadius: "6px" }}>
       {/* Fretboard dot markers */}
       <div className="absolute top-3 left-3 flex gap-1.5 z-10" aria-hidden="true">
         {[0, 1, 2].map(i => (
@@ -124,7 +124,7 @@ function ProjectCard({ project, index }) {
               key={i}
               className="font-mono text-[0.63rem] px-2.5 py-[0.3rem] text-[var(--text-secondary)] tracking-tight transition-colors duration-200"
               style={{
-                background: "var(--bg-green)",
+                background: "var(--green-soft)",
                 borderRadius: "3px",
               }}
             >
