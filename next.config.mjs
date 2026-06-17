@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   devIndicators: false,
+  transpilePackages: ['animejs'],
 };
 
 export default nextConfig;

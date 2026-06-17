@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Reveal from "./Reveal";
+import GuitarIllustration from "./GuitarIllustration";
+
+const GuitarStrings = dynamic(() => import("./GuitarStrings"), { ssr: false });
 
 export default function Hero() {
     const [showTooltip, setShowTooltip] = useState(false);
@@ -17,6 +21,30 @@ export default function Hero() {
             id="about"
             className="relative max-w-[88vw] lg:max-w-[64rem] mx-auto px-1 pt-24 pb-24 lg:pt-28 lg:pb-32 min-h-[88vh] flex flex-col justify-center gap-12 lg:gap-16"
         >
+            {/* Guitar illustration watermark — desktop only */}
+            <div
+                className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block"
+                aria-hidden="true"
+                style={{ opacity: 0.37 }}
+            >
+                <GuitarIllustration />
+            </div>
+
+            {/* Background drone strings — barely visible, gently oscillating */}
+            <div
+                className="absolute inset-0 flex items-center pointer-events-none overflow-hidden"
+                aria-hidden="true"
+            >
+                <GuitarStrings
+                    width={900}
+                    height={120}
+                    opacity={0.13}
+                    interactive={false}
+                    droneOnMount
+                    className="w-full"
+                />
+            </div>
+
             {/* Top row — TV-frame avatar (left) + name & subtitle (right) */}
             <div className="flex flex-col md:flex-row items-start md:items-center gap-10 lg:gap-14">
                 <Reveal className="flex-shrink-0">
