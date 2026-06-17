@@ -77,7 +77,18 @@ function ProjectCard({ project, index }) {
   const num = String(index + 1).padStart(2, "0");
 
   return (
-    <div className="group relative h-full w-full flex flex-col bg-[var(--bg-surface)] border border-[var(--line)] overflow-hidden transition-[transform,box-shadow] duration-300 ease-[var(--ease-out)] hover:shadow-[0_8px_28px_rgba(0,0,0,0.10)]" style={{ borderRadius: "6px" }}>
+    <div className="group relative string-border h-full w-full flex flex-col bg-[var(--bg-surface)] border border-[var(--line)] overflow-hidden transition-[transform,box-shadow] duration-300 ease-[var(--ease-out)] hover:-translate-y-1 hover:shadow-[0_8px_28px_rgba(0,0,0,0.10)]" style={{ borderRadius: "6px" }}>
+      {/* Fretboard dot markers */}
+      <div className="absolute top-3 left-3 flex gap-1.5 z-10" aria-hidden="true">
+        {[0, 1, 2].map(i => (
+          <svg key={i} width="7" height="7" viewBox="0 0 7 7">
+            <circle cx="3.5" cy="3.5" r="3"
+              fill={i === 1 ? 'var(--green-muted)' : 'transparent'}
+              stroke="var(--green-muted)" strokeWidth="1" opacity={0.55} />
+          </svg>
+        ))}
+      </div>
+
       <div className="flex flex-col flex-1 p-7">
         {/* Title */}
         <h3 className="font-heading text-[1.6rem] leading-[1.1] text-[var(--text-primary)] transition-colors duration-300 group-hover:text-[var(--green-deep)]">

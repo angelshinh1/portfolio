@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
+
+const GuitarStrings = dynamic(() => import("./GuitarStrings"), { ssr: false });
 
 const experiencesData = {
     RBC: {
@@ -138,6 +141,18 @@ const experiencesData = {
 
 export default function Experience() {
     const [expandedIndex, setExpandedIndex] = useState(null);
+    const sectionRef = useRef(null);
+    const pluckApi = useRef(null);
+    const [sectionHeight, setSectionHeight] = useState(0);
+
+    useEffect(() => {
+        const el = sectionRef.current;
+        if (!el) return;
+        const ro = new ResizeObserver(() => setSectionHeight(el.offsetHeight));
+        ro.observe(el);
+        setSectionHeight(el.offsetHeight);
+        return () => ro.disconnect();
+    }, []);
 
     const flatExperiences = [];
     Object.values(experiencesData).forEach((companyData) => {
@@ -152,14 +167,38 @@ export default function Experience() {
     });
 
     const toggleExpand = (index) => {
-        setExpandedIndex(expandedIndex === index ? null : index);
+        const newIndex = expandedIndex === index ? null : index;
+        setExpandedIndex(newIndex);
+        if (newIndex !== null) {
+            pluckApi.current?.pluckString(newIndex % 3, 16);
+        }
     };
 
     return (
         <section
+            ref={sectionRef}
             id="experience"
             className="relative max-w-[88vw] lg:max-w-[64rem] mx-auto px-1 py-24 lg:py-28"
         >
+            {/* Left-margin vertical accent strings — desktop only */}
+            {sectionHeight > 0 && (
+                <div
+                    className="absolute left-[-1.25rem] top-24 pointer-events-none hidden lg:block"
+                    aria-hidden="true"
+                    style={{ width: 24, height: sectionHeight - 96 }}
+                >
+                    <GuitarStrings
+                        onReady={api => { pluckApi.current = api; }}
+                        width={24}
+                        height={sectionHeight - 96}
+                        count={3}
+                        orientation="vertical"
+                        opacity={0.3}
+                        interactive={false}
+                    />
+                </div>
+            )}
+
             <SectionHeader title="Experience" className="mb-10 lg:mb-12" />
 
             <div className="flex flex-col">

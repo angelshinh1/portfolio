@@ -1,12 +1,4 @@
 export default function Footer() {
-    const links = [
-        { label: "About", href: "#about" },
-        { label: "Experience", href: "#experience" },
-        { label: "Projects", href: "#projects" },
-        { label: "Fun stuff", href: "#fun-stuff" },
-        { label: "Contact", href: "#contact" },
-    ];
-
     return (
         <footer className="section-dark border-t border-[rgba(255,255,255,0.08)]">
             <div className="max-w-[88vw] lg:max-w-[64rem] mx-auto pt-14 lg:pt-16 pb-14 lg:pb-16">
@@ -16,7 +8,7 @@ export default function Footer() {
                         <h3 className="font-heading text-3xl lg:text-4xl text-[#ECECEC]">
                             Angel Shinh
                         </h3>
-                        <p className="font-body text-sm lg:text-base text-[rgba(236,236,236,0.6)] mt-2 max-w-[36ch]">
+                        <p className="font-body text-sm lg:text-base text-[rgba(236,236,236,0.6)] mt-2 max-w-[36ch] mx-auto lg:mx-0">
                             Peek at the{" "}
                             <a href="#fun-stuff" className="text-[var(--green-muted)] underline decoration-[var(--green-deep)] underline-offset-4 hover:decoration-[var(--green-vivid)] transition-colors">
                                 Fun stuff
@@ -24,19 +16,6 @@ export default function Footer() {
                             to see me being whimsical.
                         </p>
                     </div>
-
-                    {/* Quick links */}
-                    <nav className="flex flex-wrap gap-x-6 gap-y-2 justify-center font-mono text-xs tracking-tight">
-                        {links.map((l) => (
-                            <a
-                                key={l.label}
-                                href={l.href}
-                                className="text-[rgba(236,236,236,0.5)] hover:text-[var(--green-muted)] transition-colors duration-200"
-                            >
-                                {l.label}
-                            </a>
-                        ))}
-                    </nav>
 
                     {/* Socials */}
                     <div className="flex gap-3 justify-center">

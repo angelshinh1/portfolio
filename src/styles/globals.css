@@ -24,6 +24,14 @@
   --accent-link:    #5C8A2A;
   --accent-mark:    rgba(162, 230, 102, 0.40);
 
+  /* ── Guitar string colors (bass → treble, dark → light green) ── */
+  --string-E:       #4A6B20;
+  --string-A:       #5C7A28;
+  --string-D:       #6E8E32;
+  --string-G:       #86A845;
+  --string-B:       #A2C46A;
+  --string-e:       #BDD99A;
+
   /* ── Legacy aliases so existing var() references keep working ── */
   --bg:          #E8EEE2;
   --bg-2:        #DFE8D8;
@@ -203,4 +211,28 @@ mark, .mark {
     transform: none;
     transition: none;
   }
+}
+
+/* ── Guitar string border ripple (project cards) ── */
+.string-border { position: relative; }
+
+.string-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  border: 1.5px solid transparent;
+  pointer-events: none;
+  transition: border-color 300ms ease-out;
+}
+
+.string-border:hover::after {
+  border-color: var(--green-muted);
+  animation: string-ripple-border 600ms ease-out forwards;
+}
+
+@keyframes string-ripple-border {
+  0%   { box-shadow: 0 0 0 0 rgba(162, 230, 102, 0); }
+  40%  { box-shadow: 0 0 0 5px rgba(162, 230, 102, 0.18); }
+  100% { box-shadow: 0 0 0 0 rgba(162, 230, 102, 0); }
 }
