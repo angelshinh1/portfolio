@@ -58,13 +58,6 @@ html {
   scroll-padding-top: 80px;
 }
 
-html, body {
-  cursor: url('/cursor.png'), auto;
-}
-
-a, button, [role="button"], .cursor-pointer {
-  cursor: url('/cursor-pointer.png'), pointer;
-}
 
 body {
   background: var(--bg-base);
