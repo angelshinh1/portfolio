@@ -120,14 +120,6 @@ const projects = [
       {
         type: "gallery",
       },
-      {
-        type: "heading",
-        text: "What I'd do differently",
-      },
-      {
-        type: "paragraph",
-        text: "The leaderboard refreshes on a polling interval, which was fine at this scale but would start to feel stale at a bigger event — a WebSocket or SSE push is the obvious next step. Abuse prevention (the claim-attempts log, rate limiting on scans) was also mostly retrofitted once we saw how people actually used the app on-site rather than designed in from day one; next time that's part of the first pass, not the second.",
-      },
     ],
   },
   {
@@ -194,14 +186,6 @@ const projects = [
           { value: "20%", label: "minimum threshold to connect two dreams" },
         ],
       },
-      {
-        type: "heading",
-        text: "What I'd do differently",
-      },
-      {
-        type: "paragraph",
-        text: "The tag-based approach is fast and cheap but brittle against synonyms — \"flying\" and \"floating\" don't currently connect unless both dreams happen to share a tag. A lightweight synonym map is the next logical improvement before reaching for anything embeddings-based.",
-      },
     ],
   },
   {
@@ -257,14 +241,6 @@ const projects = [
           { value: "30 FPS", label: "real-time throughput" },
         ],
       },
-      {
-        type: "heading",
-        text: "What I'd do differently",
-      },
-      {
-        type: "paragraph",
-        text: "Starting from a pretrained face-recognition backbone and fine-tuning instead of training from scratch would likely close a good chunk of the accuracy gap, and the class balance across expressions could use more attention — some expressions are just rarer in the dataset than others, and the model quietly learned that too well.",
-      },
     ],
   },
   {
@@ -315,14 +291,6 @@ const projects = [
         type: "paragraph",
         text: "78.7% training accuracy against 77.3% on the held-out test set — a narrow gap, which is the signal that matters more than either number alone. A model that scores much higher on training data than on test data is memorizing, not learning; this one wasn't.",
       },
-      {
-        type: "heading",
-        text: "What I'd do differently",
-      },
-      {
-        type: "paragraph",
-        text: "Raw accuracy is a blunt metric for a clinical use case — a false negative (missing a diabetic patient) and a false positive carry very different real-world costs. Next time this needs precision/recall and ROC-AUC reported alongside accuracy, and probably an ensemble model to see whether it's leaving performance on the table.",
-      },
     ],
   },
   {
@@ -369,14 +337,6 @@ const projects = [
         type: "paragraph",
         text: "The whole thing is wrapped in a Streamlit app — pick a movie you like, get back a ranked list of recommendations, no separate frontend build needed. For a project centered on the recommendation logic itself, that let the interface stay out of the way.",
       },
-      {
-        type: "heading",
-        text: "What I'd do differently",
-      },
-      {
-        type: "paragraph",
-        text: "Matrix factorization (or an implicit-feedback model) would likely outperform the current cosine-similarity collaborative approach as the rating matrix grows, and the cold-start case for genuinely new users — zero ratings, zero history — still isn't handled particularly gracefully.",
-      },
     ],
   },
   {
@@ -422,14 +382,6 @@ const projects = [
       {
         type: "paragraph",
         text: "Because intersection, shading, and scene management are cleanly separated, adding a new primitive or a new material later doesn't mean touching the render loop itself — it slots into the existing interfaces. That structure mattered more here than raw performance did; the goal was a codebase I could keep extending, not just one working image.",
-      },
-      {
-        type: "heading",
-        text: "What I'd do differently",
-      },
-      {
-        type: "paragraph",
-        text: "The renderer currently tests every ray against every object, which is fine for a small scene and falls over fast as object count grows. A bounding volume hierarchy would be the first real upgrade, followed by multithreading the per-pixel render loop — it's embarrassingly parallel and currently isn't taking advantage of that at all.",
       },
     ],
   },
