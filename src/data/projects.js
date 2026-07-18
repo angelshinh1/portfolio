@@ -28,7 +28,7 @@ const projects = [
     githubUrl: null,
     liveUrl: null,
     privateNote: "Internal RBC tool — the codebase is private.",
-    coverImage: "/projects/ddp-hunt/ddp-3.jpg",
+    coverImage: "/projects/ddp-hunt/ddp-2.jpg",
     images: [
       {
         src: "/projects/ddp-hunt/ddp-1.jpg",

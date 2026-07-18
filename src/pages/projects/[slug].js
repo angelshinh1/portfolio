@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import projects, { getProjectBySlug, getAllProjectSlugs } from "@/data/projects";
+import { getProjectBySlug, getAllProjectSlugs } from "@/data/projects";
 import CaseStudyContent from "@/components/case-study/CaseStudyContent";
 import CaseReveal from "@/components/case-study/CaseReveal";
 
@@ -16,13 +16,10 @@ export async function getStaticProps({ params }) {
   const project = getProjectBySlug(params.slug);
   if (!project) return { notFound: true };
 
-  const idx = projects.findIndex((p) => p.slug === params.slug);
-  const next = projects[(idx + 1) % projects.length];
-
-  return { props: { project, nextProject: { slug: next.slug, title: next.title, subtitle: next.subtitle } } };
+  return { props: { project } };
 }
 
-export default function ProjectCaseStudy({ project, nextProject }) {
+export default function ProjectCaseStudy({ project }) {
   const wordCount = project.content
     .map((b) => b.text || b.desc || (b.items ? b.items.join(" ") : ""))
     .join(" ")
@@ -162,40 +159,6 @@ export default function ProjectCaseStudy({ project, nextProject }) {
           <CaseStudyContent project={project} />
         </div>
       </article>
-
-      {/* Next project */}
-      <div className="section-grain py-16 lg:py-20">
-        <div className="max-w-[760px] mx-auto px-6">
-          <CaseReveal>
-            <Link
-              href={`/projects/${nextProject.slug}`}
-              className="group block rounded-xl border border-[var(--line)] bg-[var(--bg-surface)] p-8 lg:p-10 transition-[box-shadow,transform] duration-300 ease-[var(--ease-out)] hover:shadow-[0_8px_28px_rgba(0,0,0,0.10)] hover:-translate-y-0.5"
-            >
-              <p className="font-mono text-xs text-[var(--text-muted)] uppercase tracking-[0.15em]">Next project</p>
-              <div className="flex items-center justify-between gap-6 mt-3">
-                <div>
-                  <h3 className="font-heading text-2xl lg:text-3xl text-[var(--text-primary)] transition-colors duration-300 group-hover:text-[var(--green-deep)]">
-                    {nextProject.title}
-                  </h3>
-                  <p
-                    className="mt-1"
-                    style={{ fontFamily: "'IM Fell English', Georgia, serif", fontStyle: "italic", color: "var(--green-deep)", opacity: 0.75 }}
-                  >
-                    {nextProject.subtitle}
-                  </p>
-                </div>
-                <svg
-                  width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                  strokeLinecap="round" strokeLinejoin="round"
-                  className="text-[var(--green-deep)] flex-shrink-0 transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-1"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </div>
-            </Link>
-          </CaseReveal>
-        </div>
-      </div>
     </>
   );
 }

@@ -54,7 +54,9 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis owns smooth-scroll easing now (see Layout.js); native smooth-scroll
+     would double-ease against it and cause jank. */
+  scroll-behavior: auto;
   scroll-padding-top: 80px;
 }
 

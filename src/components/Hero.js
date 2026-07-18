@@ -1,13 +1,53 @@
+'use client';
+
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import dynamic from "next/dynamic";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+import { useGSAP } from "@gsap/react";
 import Reveal from "./Reveal";
 import GuitarIllustration from "./GuitarIllustration";
 
 const GuitarStrings = dynamic(() => import("./GuitarStrings"), { ssr: false });
 
+gsap.registerPlugin(SplitText, DrawSVGPlugin, useGSAP);
+
 export default function Hero() {
     const [showTooltip, setShowTooltip] = useState(false);
+    const introRef = useRef(null);
+    const avatarRef = useRef(null);
+    const headingRef = useRef(null);
+    const underlineRef = useRef(null);
+    const watermarkRef = useRef(null);
+
+    // Kinetic first-impression intro — avatar scale-in, name splits and stacks
+    // into place, accent line inks itself, guitar watermark fades up last.
+    // Plays once per session (sessionStorage) and is a no-op under
+    // prefers-reduced-motion, same gate the drone background strings use.
+    useGSAP(() => {
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const alreadyPlayed = sessionStorage.getItem("heroIntroPlayed");
+
+        if (reduced || alreadyPlayed) return;
+
+        const split = SplitText.create(headingRef.current, { type: "lines", mask: "lines" });
+
+        const tl = gsap.timeline({
+            defaults: { ease: "power3.out" },
+            onComplete: () => {
+                try { sessionStorage.setItem("heroIntroPlayed", "1"); } catch { /* storage unavailable */ }
+            },
+        });
+
+        tl.from(avatarRef.current, { scale: 0.85, opacity: 0, duration: 0.6, ease: "power2.out" })
+          .from(split.lines, { yPercent: 110, rotate: 1.5, duration: 0.9, stagger: 0.06 }, "-=0.25")
+          .from(underlineRef.current, { drawSVG: "0%", duration: 0.7, ease: "power2.inOut" }, "-=0.35")
+          .from(watermarkRef.current, { opacity: 0, y: 24, duration: 0.8, ease: "power2.out" }, "-=0.3");
+
+        return () => split.revert();
+    }, { scope: introRef });
 
     const handleImageClick = () => {
         setShowTooltip(!showTooltip);
@@ -19,10 +59,12 @@ export default function Hero() {
     return (
         <header
             id="about"
+            ref={introRef}
             className="relative max-w-[88vw] lg:max-w-[64rem] mx-auto px-1 pt-24 pb-24 lg:pt-28 lg:pb-32 min-h-[88vh] flex flex-col justify-center gap-12 lg:gap-16"
         >
             {/* Guitar illustration watermark — desktop only */}
             <div
+                ref={watermarkRef}
                 className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block"
                 aria-hidden="true"
                 style={{ opacity: 0.32 }}
@@ -50,6 +92,7 @@ export default function Hero() {
                 <Reveal className="flex-shrink-0">
                     <div className="relative group">
                         <div
+                            ref={avatarRef}
                             className="relative w-36 h-36 md:w-44 md:h-44 cursor-pointer overflow-hidden rounded-full transition-transform duration-500 ease-[var(--ease-out)] group-hover:-translate-y-1"
                             style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.20)" }}
                             onClick={handleImageClick}
@@ -78,12 +121,20 @@ export default function Hero() {
                 </Reveal>
 
                 <Reveal delay={0.05} className="flex-1">
-                    <h1 className="font-heading text-[clamp(2.75rem,8vw,5rem)] leading-[0.98] text-[var(--text-primary)]">
+                    <h1 ref={headingRef} className="font-heading text-[clamp(2.75rem,8vw,5rem)] leading-[0.98] text-[var(--text-primary)]">
                         <span className="initial">H</span>i, I&apos;m{" "}
                         <em style={{ color: "var(--green-deep)" }}>Angel</em>.
                     </h1>
-                    {/* Vivid green accent underline */}
-                    <div className="mt-3 h-[3px] w-16 rounded-full" style={{ background: "var(--green-vivid)" }} />
+                    {/* Vivid green accent underline — SVG line so it can ink itself in via DrawSVG */}
+                    <svg width="64" height="3" viewBox="0 0 64 3" className="mt-3 overflow-visible" aria-hidden="true">
+                        <line
+                            ref={underlineRef}
+                            x1="1.5" y1="1.5" x2="62.5" y2="1.5"
+                            stroke="var(--green-vivid)"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                        />
+                    </svg>
                     <p className="font-mono mt-4 text-xs md:text-sm text-[var(--text-muted)] tracking-widest uppercase">
                         Software Developer
                     </p>

@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   devIndicators: false,
-  transpilePackages: ['animejs'],
+  transpilePackages: ['animejs', 'lenis'],
 };
 
 export default nextConfig;
