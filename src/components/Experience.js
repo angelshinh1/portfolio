@@ -245,11 +245,10 @@ export default function Experience() {
                                                 <p
                                                     className="mt-1"
                                                     style={{
-                                                        fontFamily: "'IM Fell English', Georgia, serif",
-                                                        fontStyle: "italic",
+                                                        fontFamily: "'Manrope', sans-serif",
+                                                        fontWeight: 400,
                                                         fontSize: "1rem",
                                                         color: "var(--green-deep)",
-                                                        opacity: 0.8,
                                                     }}
                                                 >
                                                     {exp.company}

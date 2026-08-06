@@ -2,15 +2,12 @@
 
 import Image from "next/image";
 import { useState, useRef } from "react";
-import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { useGSAP } from "@gsap/react";
 import Reveal from "./Reveal";
 import GuitarIllustration from "./GuitarIllustration";
-
-const GuitarStrings = dynamic(() => import("./GuitarStrings"), { ssr: false });
 
 gsap.registerPlugin(SplitText, DrawSVGPlugin, useGSAP);
 
@@ -25,7 +22,7 @@ export default function Hero() {
     // Kinetic first-impression intro — avatar scale-in, name splits and stacks
     // into place, accent line inks itself, guitar watermark fades up last.
     // Plays once per session (sessionStorage) and is a no-op under
-    // prefers-reduced-motion, same gate the drone background strings use.
+    // prefers-reduced-motion.
     useGSAP(() => {
         const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const alreadyPlayed = sessionStorage.getItem("heroIntroPlayed");
@@ -60,37 +57,22 @@ export default function Hero() {
         <header
             id="about"
             ref={introRef}
-            className="relative max-w-[88vw] lg:max-w-[64rem] mx-auto px-1 pt-24 pb-24 lg:pt-28 lg:pb-32 min-h-[88vh] flex flex-col justify-center gap-12 lg:gap-16"
+            className="relative max-w-[88vw] lg:max-w-[64rem] mx-auto px-1 pt-32 pb-20 lg:pt-36 lg:pb-24"
         >
-            {/* Guitar illustration watermark — desktop only */}
+            {/* Guitar illustration — fully visible accent, desktop only */}
             <div
                 ref={watermarkRef}
                 className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block"
                 aria-hidden="true"
-                style={{ opacity: 0.32 }}
+                style={{ opacity: 0.70 }}
             >
-                <GuitarIllustration />
+                <GuitarIllustration style={{ width: 300, height: 500 }} />
             </div>
 
-            {/* Background drone strings — barely visible, gently oscillating */}
-            <div
-                className="absolute inset-0 flex items-center pointer-events-none overflow-hidden"
-                aria-hidden="true"
-            >
-                <GuitarStrings
-                    width={900}
-                    height={120}
-                    opacity={0.13}
-                    interactive={false}
-                    droneOnMount
-                    className="w-full"
-                />
-            </div>
-
-            {/* Top row — TV-frame avatar (left) + name & subtitle (right) */}
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-10 lg:gap-14">
+            {/* Identity row — avatar (left) + name & subtitle (right) */}
+            <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6 lg:gap-8 items-center">
                 <Reveal className="flex-shrink-0">
-                    <div className="relative group">
+                    <div className="relative group w-fit mx-auto lg:mx-0">
                         <div
                             ref={avatarRef}
                             className="relative w-36 h-36 md:w-44 md:h-44 cursor-pointer overflow-hidden rounded-full transition-transform duration-500 ease-[var(--ease-out)] group-hover:-translate-y-1"
@@ -120,13 +102,13 @@ export default function Hero() {
                     </div>
                 </Reveal>
 
-                <Reveal delay={0.05} className="flex-1">
+                <Reveal delay={0.05} className="flex-1 text-center lg:text-left">
                     <h1 ref={headingRef} className="font-heading text-[clamp(2.75rem,8vw,5rem)] leading-[0.98] text-[var(--text-primary)]">
-                        <span className="initial">H</span>i, I&apos;m{" "}
-                        <em style={{ color: "var(--green-deep)" }}>Angel</em>.
+                        Hi, I&apos;m{" "}
+                        <em style={{ color: "var(--green-deep)", fontStyle: "normal" }}>Angel</em>.
                     </h1>
                     {/* Vivid green accent underline — SVG line so it can ink itself in via DrawSVG */}
-                    <svg width="64" height="3" viewBox="0 0 64 3" className="mt-3 overflow-visible" aria-hidden="true">
+                    <svg width="64" height="3" viewBox="0 0 64 3" className="mt-3 mx-auto lg:mx-0 overflow-visible" aria-hidden="true">
                         <line
                             ref={underlineRef}
                             x1="1.5" y1="1.5" x2="62.5" y2="1.5"
@@ -138,7 +120,7 @@ export default function Hero() {
                     <p className="font-mono mt-4 text-xs md:text-sm text-[var(--text-muted)] tracking-widest uppercase">
                         Software Developer
                     </p>
-                    <p className="font-body mt-3 text-lg md:text-xl leading-relaxed text-[var(--text-secondary)] max-w-[44ch]">
+                    <p className="font-body mt-3 text-lg md:text-xl leading-relaxed text-[var(--text-secondary)] max-w-[44ch] mx-auto lg:mx-0">
                         Passionate about building innovative solutions &amp; blending
                         tech with art.
                     </p>
@@ -146,11 +128,11 @@ export default function Hero() {
             </div>
 
             {/* About */}
-            <Reveal delay={0.1}>
+            <Reveal delay={0.1} className="mt-16 lg:mt-20">
                 <h2 className="font-heading text-3xl lg:text-4xl text-[var(--text-primary)]">
-                    <span className="initial">A</span>bout
+                    About
                 </h2>
-                <div className="font-body mt-5 text-base lg:text-lg text-[var(--text-secondary)] leading-[1.7] space-y-5">
+                <div className="font-body mt-5 text-base lg:text-lg text-[var(--text-secondary)] leading-[1.7] space-y-5 max-w-[62ch]">
                     <p>
                         I&apos;m really into exploring new technologies and staying
                         up-to-date with the latest trends in software development.

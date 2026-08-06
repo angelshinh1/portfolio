@@ -6,7 +6,7 @@ import GuitarIllustration from "./GuitarIllustration";
 
 const navItems = [
   { label: "Experience", href: "/#experience" },
-  { label: "Projects",   href: "/#projects"   },
+  { label: "Projects",   href: "/projects"    },
   { label: "Resume",     href: "/Angel_Resume_swe.pdf" },
   { label: "Fun Stuff",  href: "/#fun-stuff"  },
   { label: "Contact",    href: "/#contact"    },
@@ -41,11 +41,11 @@ export default function Navbar() {
       >
         <div className="max-w-[92vw] lg:max-w-[80rem] mx-auto flex items-center justify-between py-4 md:py-5">
 
-          {/* Wordmark — IM Fell English italic */}
+          {/* Wordmark — Playfair Display (the one serif touch outside headings, as a logotype) */}
           <Link
             href="/"
             className="text-[var(--text-primary)] hover:text-[var(--green-deep)] transition-colors duration-200"
-            style={{ fontFamily: "'IM Fell English', Georgia, serif", fontStyle: "italic", fontSize: "1.25rem" }}
+            style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 600, fontSize: "1.3rem" }}
           >
             Angel Shinh
           </Link>
@@ -57,7 +57,7 @@ export default function Navbar() {
                 {i > 0 && (
                   <span
                     className="mx-3 select-none"
-                    style={{ fontFamily: "'IM Fell English', Georgia, serif", fontStyle: "italic", color: "var(--green-deep)", opacity: 0.5, fontSize: "1rem" }}
+                    style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 500, color: "var(--green-deep)", opacity: 0.5, fontSize: "0.9rem" }}
                     aria-hidden="true"
                   >
                     /
@@ -66,7 +66,7 @@ export default function Navbar() {
                 <Link
                   href={href}
                   className="relative group transition-colors duration-200 hover:text-[var(--green-deep)]"
-                  style={{ fontFamily: "'IM Fell English', Georgia, serif", fontStyle: "italic", fontSize: "0.95rem", color: "var(--text-secondary)" }}
+                  style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 400, fontSize: "0.95rem", color: "var(--text-secondary)" }}
                   onMouseEnter={() => wiggleLink(wigglePaths.current[i])}
                 >
                   {label}
@@ -139,7 +139,7 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               onMouseEnter={() => wiggleLink(mobilePaths.current[i])}
               className="relative group inline-block hover:text-[var(--green-deep)] transition-colors duration-200"
-              style={{ fontFamily: "'IM Fell English', Georgia, serif", fontStyle: "italic", fontSize: "1.6rem", color: "var(--text-secondary)" }}
+              style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 500, fontSize: "1.5rem", color: "var(--text-secondary)" }}
             >
               <span style={{ color: "var(--green-deep)", opacity: 0.45, marginRight: "0.6rem", fontSize: "1.1rem" }}>/</span>
               {label}

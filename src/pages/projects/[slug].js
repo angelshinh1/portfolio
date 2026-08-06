@@ -1,9 +1,9 @@
 import Head from "next/head";
-import Link from "next/link";
 import Image from "next/image";
 import { getProjectBySlug, getAllProjectSlugs } from "@/data/projects";
 import CaseStudyContent from "@/components/case-study/CaseStudyContent";
 import CaseReveal from "@/components/case-study/CaseReveal";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 export async function getStaticPaths() {
   return {
@@ -35,18 +35,17 @@ export default function ProjectCaseStudy({ project }) {
       </Head>
 
       {/* Hero */}
-      <header className="section-green pt-28 pb-16 lg:pt-32 lg:pb-20">
+      <header className="section-base pt-28 pb-16 lg:pt-32 lg:pb-20">
         <div className="max-w-[760px] mx-auto px-6">
           <CaseReveal>
-            <Link
-              href="/#projects"
-              className="inline-flex items-center gap-2 font-mono text-xs text-[var(--text-secondary)] hover:text-[var(--green-deep)] transition-colors duration-200 mb-10"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-              </svg>
-              All projects
-            </Link>
+            <Breadcrumbs
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Projects", href: "/projects" },
+                { label: project.title },
+              ]}
+              className="mb-10"
+            />
           </CaseReveal>
 
           <CaseReveal delay={40}>
@@ -55,18 +54,16 @@ export default function ProjectCaseStudy({ project }) {
             </p>
 
             <h1 className="font-heading text-[clamp(2.5rem,7vw,4rem)] leading-[1.02] text-[var(--text-primary)] mt-4">
-              <span className="initial">{project.title[0]}</span>
-              {project.title.slice(1)}
+              {project.title}
             </h1>
 
             <p
               className="mt-3"
               style={{
-                fontFamily: "'IM Fell English', Georgia, serif",
-                fontStyle: "italic",
-                fontSize: "1.15rem",
-                color: "var(--green-deep)",
-                opacity: 0.85,
+                fontFamily: "'Manrope', sans-serif",
+                fontWeight: 400,
+                fontSize: "1.4rem",
+                color: "var(--text-secondary)",
               }}
             >
               {project.subtitle}
@@ -154,7 +151,7 @@ export default function ProjectCaseStudy({ project }) {
       </header>
 
       {/* Article body */}
-      <article className="section-base pt-16 pb-20 lg:pt-20 lg:pb-28">
+      <article className="section-grain pt-16 pb-20 lg:pt-20 lg:pb-28">
         <div className="max-w-[760px] mx-auto px-6">
           <CaseStudyContent project={project} />
         </div>

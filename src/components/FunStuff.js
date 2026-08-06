@@ -176,7 +176,7 @@ export default function FunStuff() {
                 <div>
                     <Reveal>
                         <h3 className="font-heading text-2xl lg:text-3xl text-[var(--text-primary)] mb-8">
-                            <span className="initial">H</span>obbies &amp; interests
+                            Hobbies &amp; interests
                         </h3>
                     </Reveal>
                     <div className="grid grid-cols-2 gap-4">
@@ -211,7 +211,7 @@ export default function FunStuff() {
                 <div>
                     <Reveal>
                         <h3 className="font-heading text-2xl lg:text-3xl text-[var(--text-primary)] mb-8">
-                            <span className="initial">R</span>andom facts you didn&apos;t ask for
+                            Random facts you didn&apos;t ask for
                         </h3>
                     </Reveal>
                     <ul className="space-y-0">
@@ -235,7 +235,7 @@ export default function FunStuff() {
             {/* <div>
                 <Reveal>
                     <h3 className="font-heading text-2xl lg:text-3xl text-[var(--text-primary)] mb-10">
-                        <span className="initial">H</span>anging on the strings{" "}
+                        Hanging on the strings{" "}
                         <span style={{ color: "var(--green-deep)", opacity: 0.55 }} aria-hidden>♪</span>
                     </h3>
                 </Reveal>

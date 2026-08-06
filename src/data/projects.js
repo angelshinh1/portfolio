@@ -78,10 +78,6 @@ const projects = [
         ],
       },
       {
-        type: "diagram",
-        variant: "ddp-flow",
-      },
-      {
         type: "heading",
         text: "Designing the points economy",
       },
@@ -104,10 +100,6 @@ const projects = [
       {
         type: "paragraph",
         text: "Every admin mutation — editing a hunt item, adjusting a user's points, redeeming a prize — writes to an audit log with the before/after state, who made the change, and when. For a tool running live across a multi-day event with several admins on shift at once, that trail mattered more than almost anything else in the app.",
-      },
-      {
-        type: "diagram",
-        variant: "ddp-architecture",
       },
       {
         type: "heading",
@@ -149,10 +141,6 @@ const projects = [
       {
         type: "paragraph",
         text: "Real semantic similarity between two dream descriptions is an NLP-embeddings problem, and that gets expensive fast at any real scale. Instead, the matching engine weighs three cheaper, tag-driven signals: tag overlap (50%), extracted-keyword overlap (35%), and emotional-state similarity (15%). Two dreams connect once they cross a 20% similarity score, with anything past 70% flagged as a strong match.",
-      },
-      {
-        type: "diagram",
-        variant: "similarity-breakdown",
       },
       {
         type: "heading",
@@ -280,8 +268,11 @@ const projects = [
         text: "With a dataset this size, a support vector classifier was a better fit than anything deep-learning-shaped — enough structure to find a real margin, not enough data to justify the variance a bigger model would add. Stratified train/test splits kept the class balance honest, and grid search swept the kernel, C, and gamma hyperparameters to find the combination that generalized best rather than the one that just fit training data hardest.",
       },
       {
-        type: "diagram",
-        variant: "diabetes-accuracy",
+        type: "stats",
+        items: [
+          { value: "78.7%", label: "training accuracy" },
+          { value: "77.3%", label: "test accuracy" },
+        ],
       },
       {
         type: "heading",
@@ -289,7 +280,7 @@ const projects = [
       },
       {
         type: "paragraph",
-        text: "78.7% training accuracy against 77.3% on the held-out test set — a narrow gap, which is the signal that matters more than either number alone. A model that scores much higher on training data than on test data is memorizing, not learning; this one wasn't.",
+        text: "The gap between the two is narrow, and that gap is the signal that matters more than either number alone. A model that scores much higher on training data than on test data is memorizing, not learning; this one wasn't.",
       },
     ],
   },

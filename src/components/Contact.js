@@ -21,8 +21,7 @@ export default function Contact() {
 
       <Reveal delay={0.05}>
         <h2 className="font-heading text-[clamp(2.75rem,9vw,6rem)] leading-[0.98] text-[var(--text-primary)]">
-          <span className="initial">G</span>et{" "}
-          <em>in touch</em>.
+          Get <em>in touch</em>.
         </h2>
       </Reveal>
 

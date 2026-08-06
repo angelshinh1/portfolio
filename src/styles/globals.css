@@ -1,14 +1,14 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* ── Cormorant Garamond (curly, calligraphic) + IM Fell English (ornate initials) + Space Mono ── */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=IM+Fell+English:ital@0;1&family=Space+Mono:wght@400;700&display=swap');
+/* ── Playfair Display (expressive display serif, headings only) + Manrope (sans, everything else) ── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Manrope:wght@300;400;500;600;700;800&display=swap');
 
 :root {
   /* ── Green-tinted paper foundations ── */
   --bg-base:        #E8EEE2;   /* sage-green paper */
   --bg-grain:       #DFE8D8;   /* slightly deeper sage */
-  --bg-green:       #afd781;   /* vivid sage-lime section */
+  --bg-green:       #e3f0cb;   /* light sage-lime section — calmer & more legible than the old vivid tone */
   --bg-surface:     #F4F8F1;   /* near-white with green breath */
   --bg-dark:        #1A1A18;
 
@@ -64,48 +64,39 @@ html {
 body {
   background: var(--bg-base);
   color: var(--text-primary);
-  font-family: 'Cormorant Garamond', 'Georgia', serif;
-  font-size: 1.125rem;
-  font-weight: 500;
+  font-family: 'Manrope', -apple-system, 'Segoe UI', sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 /* ── Type families ── */
+/* Two fonts, one job each: Playfair Display (expressive display serif)
+   carries headings and the ornate initial-cap gesture; Manrope (sans, kept
+   light) carries everything else — body copy, nav, labels, subtitles. */
 .font-display {
-  font-family: 'IM Fell English', Georgia, serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-style: italic;
 }
 
-/* IM Fell English for all headings — the curly ornate display face */
 .font-heading {
-  font-family: 'IM Fell English', Georgia, serif;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+}
+
+.font-body,
+.font-sans {
+  font-family: 'Manrope', -apple-system, 'Segoe UI', sans-serif;
   font-weight: 400;
 }
 
-/* Cormorant Garamond for body text — calligraphic, elegant */
-.font-body,
-.font-sans {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-weight: 500;
-}
-
-/* Space Mono for all utility text */
 .font-mono,
 .vt323-regular {
-  font-family: 'Space Mono', monospace;
-}
-
-/* ── Ornate initial cap — the signature visual gesture ── */
-.initial {
-  font-family: 'IM Fell English', Georgia, serif;
-  font-style: italic;
-  font-size: 1.45em;
-  line-height: 0.8;
-  display: inline-block;
-  vertical-align: -0.18em;
-  color: var(--text-primary);
+  font-family: 'Manrope', -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 /* ── Section backgrounds ── */
@@ -116,9 +107,9 @@ body {
 
 /* ── Eyebrow label ── */
 .eyebrow {
-  font-family: 'Space Mono', monospace;
+  font-family: 'Manrope', sans-serif;
   font-size: 0.72rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
@@ -134,7 +125,8 @@ mark, .mark {
 /* ── Ornament divider ── */
 .ornament-divider {
   text-align: center;
-  font-family: 'IM Fell English', Georgia, serif;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
   font-size: 2.25rem;
   color: var(--green-deep);
   opacity: 0.6;
@@ -160,7 +152,8 @@ mark, .mark {
 /* ── CTA button ── */
 .btn {
   display: inline-block;
-  font-family: 'Space Mono', monospace;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
   font-size: 0.72rem;
   letter-spacing: 0.05em;
   color: var(--text-primary);
@@ -220,6 +213,20 @@ mark, .mark {
 
 @media (prefers-reduced-motion: reduce) {
   .case-reveal { animation: none; }
+}
+
+/* ── Preview fade — crossfade when the /projects hover preview swaps ── */
+@keyframes preview-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.preview-fade {
+  animation: preview-fade-in 420ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview-fade { animation: none; }
 }
 
 /* ── Guitar string border ripple (project cards) ── */

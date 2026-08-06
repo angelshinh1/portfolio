@@ -1,17 +1,4 @@
 import Image from "next/image";
-import {
-  DdpFlowDiagram,
-  DdpArchitectureDiagram,
-  SimilarityBreakdown,
-  DiabetesAccuracyBars,
-} from "./Diagrams";
-
-const diagramComponents = {
-  "ddp-flow": DdpFlowDiagram,
-  "ddp-architecture": DdpArchitectureDiagram,
-  "similarity-breakdown": SimilarityBreakdown,
-  "diabetes-accuracy": DiabetesAccuracyBars,
-};
 
 export default function CaseStudyContent({ project }) {
   return (
@@ -35,8 +22,7 @@ function Block({ block, project }) {
     case "heading":
       return (
         <h2 className="font-heading text-[1.85rem] lg:text-[2.25rem] leading-[1.15] text-[var(--text-primary)] pt-2">
-          <span className="initial">{block.text[0]}</span>
-          {block.text.slice(1)}
+          {block.text}
         </h2>
       );
 
@@ -88,16 +74,6 @@ function Block({ block, project }) {
           ))}
         </div>
       );
-
-    case "diagram": {
-      const DiagramComponent = diagramComponents[block.variant];
-      if (!DiagramComponent) return null;
-      return (
-        <div className="py-2">
-          <DiagramComponent />
-        </div>
-      );
-    }
 
     case "gallery": {
       if (!project.images?.length) return null;
