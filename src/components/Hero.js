@@ -4,25 +4,22 @@ import Image from "next/image";
 import { useState, useRef } from "react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
-import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { useGSAP } from "@gsap/react";
 import Reveal from "./Reveal";
 import GuitarIllustration from "./GuitarIllustration";
 
-gsap.registerPlugin(SplitText, DrawSVGPlugin, useGSAP);
+gsap.registerPlugin(SplitText, useGSAP);
 
 export default function Hero() {
     const [showTooltip, setShowTooltip] = useState(false);
     const introRef = useRef(null);
     const avatarRef = useRef(null);
     const headingRef = useRef(null);
-    const underlineRef = useRef(null);
     const watermarkRef = useRef(null);
 
     // Kinetic first-impression intro — avatar scale-in, name splits and stacks
-    // into place, accent line inks itself, guitar watermark fades up last.
-    // Plays once per session (sessionStorage) and is a no-op under
-    // prefers-reduced-motion.
+    // into place, guitar watermark fades up last. Plays once per session
+    // (sessionStorage) and is a no-op under prefers-reduced-motion.
     useGSAP(() => {
         const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const alreadyPlayed = sessionStorage.getItem("heroIntroPlayed");
@@ -40,7 +37,6 @@ export default function Hero() {
 
         tl.from(avatarRef.current, { scale: 0.85, opacity: 0, duration: 0.6, ease: "power2.out" })
           .from(split.lines, { yPercent: 110, rotate: 1.5, duration: 0.9, stagger: 0.06 }, "-=0.25")
-          .from(underlineRef.current, { drawSVG: "0%", duration: 0.7, ease: "power2.inOut" }, "-=0.35")
           .from(watermarkRef.current, { opacity: 0, y: 24, duration: 0.8, ease: "power2.out" }, "-=0.3");
 
         return () => split.revert();
@@ -107,16 +103,6 @@ export default function Hero() {
                         Hi, I&apos;m{" "}
                         <em style={{ color: "var(--green-deep)", fontStyle: "normal" }}>Angel</em>.
                     </h1>
-                    {/* Vivid green accent underline — SVG line so it can ink itself in via DrawSVG */}
-                    <svg width="64" height="3" viewBox="0 0 64 3" className="mt-3 mx-auto lg:mx-0 overflow-visible" aria-hidden="true">
-                        <line
-                            ref={underlineRef}
-                            x1="1.5" y1="1.5" x2="62.5" y2="1.5"
-                            stroke="var(--green-vivid)"
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                        />
-                    </svg>
                     <p className="font-mono mt-4 text-xs md:text-sm text-[var(--text-muted)] tracking-widest uppercase">
                         Software Developer
                     </p>

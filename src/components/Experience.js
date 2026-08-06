@@ -275,8 +275,8 @@ export default function Experience() {
                                         </div>
                                     </div>
 
-                                    {/* Period on mobile */}
-                                    <p className="sm:hidden font-mono text-[0.74rem] text-[var(--text-secondary)] mt-1.5 ml-10 tracking-tight">
+                                    {/* Period on mobile — offset matches the logo (w-11 = 44px) + gap-4 (16px) so it lines up under the company name, not the logo */}
+                                    <p className="sm:hidden font-mono text-[0.74rem] text-[var(--text-secondary)] mt-1.5 ml-[3.75rem] tracking-tight">
                                         {exp.period}
                                     </p>
                                 </button>
