@@ -75,7 +75,7 @@ function ExpandedDetails({ project, chipBg }) {
 
 // Shared accordion unit for a project — used on the homepage teaser grid
 // (variant="card") and the full /projects listing (variant="list").
-export default function ProjectRow({ project, isExpanded, onToggle, onHoverStart, chipBg = "var(--bg-surface)", variant = "list" }) {
+export default function ProjectRow({ project, isExpanded, onToggle, onHoverStart, chipBg = "var(--bg-surface)", variant = "list", topBorder = true }) {
   if (variant === "card") {
     return (
       <div
@@ -142,7 +142,7 @@ export default function ProjectRow({ project, isExpanded, onToggle, onHoverStart
 
   return (
     <div
-      className="border-t border-[var(--line)]"
+      className={topBorder ? "border-t border-[var(--line)]" : ""}
       onMouseEnter={onHoverStart}
     >
       <button

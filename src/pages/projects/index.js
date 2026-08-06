@@ -53,6 +53,7 @@ export default function ProjectsIndex() {
                     onToggle={() => toggleExpand(index)}
                     onHoverStart={() => setHoveredIndex(index)}
                     chipBg="var(--bg-base)"
+                    topBorder={index !== 0}
                   />
                 </Reveal>
               ))}
