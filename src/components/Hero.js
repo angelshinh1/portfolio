@@ -115,7 +115,7 @@ export default function Hero() {
                 </Reveal>
 
                 <Reveal delay={0.05} className="flex-1 text-center lg:text-left">
-                    <h1 ref={headingRef} className="font-heading text-[clamp(2.75rem,8vw,5rem)] leading-[0.98] text-[var(--text-primary)] pb-1.5 lg:pb-0">
+                    <h1 ref={headingRef} className="font-heading text-[clamp(2.75rem,8vw,5rem)] leading-[1.15] text-[var(--text-primary)]">
                         Hi, I&apos;m{" "}
                         <em style={{ color: "var(--green-deep)", fontStyle: "normal" }}>Angel</em>.
                     </h1>

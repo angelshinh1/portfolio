@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-export const SITE_URL = "https://ashinh.lol";
+export const SITE_URL = "https://www.ashinh.lol";
 const SITE_NAME = "Angel Shinh";
 const DEFAULT_IMAGE = `${SITE_URL}/profile.jpg`;
 
