@@ -20,13 +20,6 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ProjectCaseStudy({ project }) {
-  const wordCount = project.content
-    .map((b) => b.text || b.desc || (b.items ? b.items.join(" ") : ""))
-    .join(" ")
-    .trim()
-    .split(/\s+/).length;
-  const readingTime = Math.max(1, Math.ceil(wordCount / 200));
-
   return (
     <>
       <Head>
@@ -49,11 +42,7 @@ export default function ProjectCaseStudy({ project }) {
           </CaseReveal>
 
           <CaseReveal delay={40}>
-            <p className="font-mono text-xs text-[var(--text-secondary)] uppercase tracking-[0.15em] opacity-80">
-              {project.category} · {project.year}
-            </p>
-
-            <h1 className="font-heading text-[clamp(2.5rem,7vw,4rem)] leading-[1.02] text-[var(--text-primary)] mt-4">
+            <h1 className="font-heading text-[clamp(2.5rem,7vw,4rem)] leading-[1.02] text-[var(--text-primary)]">
               {project.title}
             </h1>
 
@@ -75,15 +64,7 @@ export default function ProjectCaseStudy({ project }) {
           </CaseReveal>
 
           <CaseReveal delay={80}>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-7 font-mono text-xs text-[var(--text-secondary)]">
-              <span>{project.role}</span>
-              <span className="opacity-40">·</span>
-              <span>{project.team}</span>
-              <span className="opacity-40">·</span>
-              <span>{readingTime} min read</span>
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-1.5">
+            <div className="mt-7 flex flex-wrap gap-1.5">
               {project.technologies.map((tech) => (
                 <span
                   key={tech}

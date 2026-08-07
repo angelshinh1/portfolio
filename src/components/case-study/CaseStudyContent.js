@@ -93,9 +93,6 @@ function Block({ block, project }) {
                   sizes="(max-width: 640px) 100vw, 50vw"
                 />
               </div>
-              <figcaption className="font-mono text-[0.7rem] text-[var(--text-muted)] mt-2.5 leading-snug">
-                {img.caption}
-              </figcaption>
             </figure>
           ))}
         </div>

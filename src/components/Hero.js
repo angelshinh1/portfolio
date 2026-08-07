@@ -32,6 +32,7 @@ export default function Hero() {
             defaults: { ease: "power3.out" },
             onComplete: () => {
                 try { sessionStorage.setItem("heroIntroPlayed", "1"); } catch { /* storage unavailable */ }
+                split.revert();
             },
         });
 
