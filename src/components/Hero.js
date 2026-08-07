@@ -19,28 +19,43 @@ export default function Hero() {
 
     // Kinetic first-impression intro — avatar scale-in, name splits and stacks
     // into place, guitar watermark fades up last. Plays once per session
-    // (sessionStorage) and is a no-op under prefers-reduced-motion.
+    // (sessionStorage), is a no-op under prefers-reduced-motion, and waits for
+    // the loading-screen curtain to finish so it's actually seen, not burned
+    // through underneath the overlay.
     useGSAP(() => {
         const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const alreadyPlayed = sessionStorage.getItem("heroIntroPlayed");
 
         if (reduced || alreadyPlayed) return;
 
-        const split = SplitText.create(headingRef.current, { type: "lines", mask: "lines" });
+        let split;
 
-        const tl = gsap.timeline({
-            defaults: { ease: "power3.out" },
-            onComplete: () => {
-                try { sessionStorage.setItem("heroIntroPlayed", "1"); } catch { /* storage unavailable */ }
-                split.revert();
-            },
-        });
+        const play = () => {
+            split = SplitText.create(headingRef.current, { type: "lines", mask: "lines" });
 
-        tl.from(avatarRef.current, { scale: 0.85, opacity: 0, duration: 0.6, ease: "power2.out" })
-          .from(split.lines, { yPercent: 110, rotate: 1.5, duration: 0.9, stagger: 0.06 }, "-=0.25")
-          .from(watermarkRef.current, { opacity: 0, y: 24, duration: 0.8, ease: "power2.out" }, "-=0.3");
+            const tl = gsap.timeline({
+                defaults: { ease: "power3.out" },
+                onComplete: () => {
+                    try { sessionStorage.setItem("heroIntroPlayed", "1"); } catch { /* storage unavailable */ }
+                    split.revert();
+                },
+            });
 
-        return () => split.revert();
+            tl.from(avatarRef.current, { scale: 0.85, opacity: 0, duration: 0.6, ease: "power2.out" })
+              .from(split.lines, { yPercent: 110, rotate: 1.5, duration: 0.9, stagger: 0.06 }, "-=0.25")
+              .from(watermarkRef.current, { opacity: 0, y: 24, duration: 0.8, ease: "power2.out" }, "-=0.3");
+        };
+
+        if (window.__appReady) {
+            play();
+        } else {
+            window.addEventListener("app:ready", play, { once: true });
+        }
+
+        return () => {
+            window.removeEventListener("app:ready", play);
+            split?.revert();
+        };
     }, { scope: introRef });
 
     const handleImageClick = () => {
@@ -56,14 +71,14 @@ export default function Hero() {
             ref={introRef}
             className="relative max-w-[88vw] lg:max-w-[64rem] mx-auto px-1 pt-32 pb-20 lg:pt-36 lg:pb-24"
         >
-            {/* Guitar illustration — fully visible accent, desktop only */}
+            {/* Guitar illustration — tilted accent, desktop only */}
             <div
                 ref={watermarkRef}
                 className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block"
                 aria-hidden="true"
                 style={{ opacity: 0.70 }}
             >
-                <GuitarIllustration style={{ width: 300, height: 500 }} />
+                <GuitarIllustration style={{ width: 300, height: 500, transform: "rotate(8deg)" }} />
             </div>
 
             {/* Identity row — avatar (left) + name & subtitle (right) */}

@@ -1,8 +1,8 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import { getAllPostSlugs, getPostData } from '@/lib/posts';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import Seo from '@/components/Seo';
 
 export async function getStaticPaths() {
   const paths = getAllPostSlugs();
@@ -34,10 +34,11 @@ export default function Post({ postData }) {
 
   return (
     <>
-      <Head>
-        <title>{postData.title} | Angel Shinh</title>
-        {postData.description && <meta name="description" content={postData.description} />}
-      </Head>
+      <Seo
+        title={`${postData.title} | Angel Shinh`}
+        description={postData.description}
+        path={`/blog/${postData.slug}`}
+      />
 
       <div className="pt-6 md:pt-10 pb-24 min-h-screen">
         <article className="max-w-[750px] mx-auto px-6">

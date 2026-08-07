@@ -9,13 +9,16 @@ const LoadingScreen = dynamic(() => import("@/components/LoadingScreen"), { ssr:
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
 
+  const handleLoadingDone = () => {
+    setLoading(false);
+    window.__appReady = true;
+    window.dispatchEvent(new Event("app:ready"));
+  };
+
   return (
     <>
-      {loading ? (
-        <LoadingScreen onDone={() => setLoading(false)} />
-      ) : (
-        <Layout><Component {...pageProps} /></Layout>
-      )}
+      <Layout><Component {...pageProps} /></Layout>
+      {loading && <LoadingScreen onDone={handleLoadingDone} />}
     </>
   );
 }

@@ -1,9 +1,9 @@
-import Head from "next/head";
 import Image from "next/image";
 import { getProjectBySlug, getAllProjectSlugs } from "@/data/projects";
 import CaseStudyContent from "@/components/case-study/CaseStudyContent";
 import CaseReveal from "@/components/case-study/CaseReveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import Seo, { SITE_URL } from "@/components/Seo";
 
 export async function getStaticPaths() {
   return {
@@ -22,10 +22,12 @@ export async function getStaticProps({ params }) {
 export default function ProjectCaseStudy({ project }) {
   return (
     <>
-      <Head>
-        <title>{project.title} | Angel Shinh</title>
-        <meta name="description" content={project.description} />
-      </Head>
+      <Seo
+        title={`${project.title} | Angel Shinh`}
+        description={project.description}
+        path={`/projects/${project.slug}`}
+        image={project.coverImage ? `${SITE_URL}${project.coverImage}` : undefined}
+      />
 
       {/* Hero */}
       <header className="section-base pt-28 pb-16 lg:pt-32 lg:pb-20">

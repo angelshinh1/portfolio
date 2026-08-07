@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Head from "next/head";
 import Reveal from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ProjectRow from "@/components/ProjectRow";
 import ProjectPreview from "@/components/ProjectPreview";
+import Seo from "@/components/Seo";
 import projects from "@/data/projects";
 
 export default function ProjectsIndex() {
@@ -18,10 +18,11 @@ export default function ProjectsIndex() {
 
   return (
     <>
-      <Head>
-        <title>Projects | Angel Shinh</title>
-        <meta name="description" content="Everything I've built — from an event scavenger hunt to a from-scratch ray tracer." />
-      </Head>
+      <Seo
+        title="Projects | Angel Shinh"
+        description="Everything I've built — from an event scavenger hunt to a from-scratch ray tracer."
+        path="/projects"
+      />
 
       <header className="section-base pt-32 pb-14 lg:pt-36 lg:pb-16">
         <div className="max-w-[88vw] lg:max-w-[64rem] mx-auto px-1">

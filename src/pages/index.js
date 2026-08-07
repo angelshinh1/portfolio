@@ -1,19 +1,21 @@
-import Head from "next/head";
 import dynamic from "next/dynamic";
 import Contact from "@/components/Contact";
 import Experience from "@/components/Experience";
 import FunStuff from "@/components/FunStuff";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
+import Seo from "@/components/Seo";
 
 const GuitarDivider = dynamic(() => import("@/components/GuitarDivider"), { ssr: false });
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Angel Shinh | Portfolio</title>
-      </Head>
+      <Seo
+        title="Angel Shinh | Portfolio"
+        description="Portfolio of Angel Shinh - software developer blending tech with art. Python, C++, JavaScript, and a guitar."
+        path="/"
+      />
 
       {/* Hero — warm paper background */}
       <div className="section-base">
