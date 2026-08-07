@@ -3,12 +3,11 @@
 import Image from "next/image";
 import { useState, useRef } from "react";
 import gsap from "gsap";
-import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 import Reveal from "./Reveal";
 import GuitarIllustration from "./GuitarIllustration";
 
-gsap.registerPlugin(SplitText, useGSAP);
+gsap.registerPlugin(useGSAP);
 
 export default function Hero() {
     const [showTooltip, setShowTooltip] = useState(false);
@@ -17,33 +16,18 @@ export default function Hero() {
     const headingRef = useRef(null);
     const watermarkRef = useRef(null);
 
-    // Kinetic first-impression intro — avatar scale-in, name splits and stacks
-    // into place, guitar watermark fades up last. Plays once per session
-    // (sessionStorage), is a no-op under prefers-reduced-motion, and waits for
-    // the loading-screen curtain to finish so it's actually seen, not burned
-    // through underneath the overlay.
+    // Intro — avatar scales in, name rises into place, guitar fades up last.
+    // Animates whole elements only (no text splitting), so nothing clips
+    // descenders or reflows the layout when it finishes. Waits for the
+    // loading-screen curtain to lift so it isn't burned through underneath.
     useGSAP(() => {
-        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        const alreadyPlayed = sessionStorage.getItem("heroIntroPlayed");
-
-        if (reduced || alreadyPlayed) return;
-
-        let split;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
         const play = () => {
-            split = SplitText.create(headingRef.current, { type: "lines", mask: "lines" });
-
-            const tl = gsap.timeline({
-                defaults: { ease: "power3.out" },
-                onComplete: () => {
-                    try { sessionStorage.setItem("heroIntroPlayed", "1"); } catch { /* storage unavailable */ }
-                    split.revert();
-                },
-            });
-
-            tl.from(avatarRef.current, { scale: 0.85, opacity: 0, duration: 0.6, ease: "power2.out" })
-              .from(split.lines, { yPercent: 110, rotate: 1.5, duration: 0.9, stagger: 0.06 }, "-=0.25")
-              .from(watermarkRef.current, { opacity: 0, y: 24, duration: 0.8, ease: "power2.out" }, "-=0.3");
+            gsap.timeline({ defaults: { ease: "power3.out" } })
+                .from(avatarRef.current, { scale: 0.85, opacity: 0, duration: 0.6, ease: "power2.out" })
+                .from(headingRef.current, { y: 32, opacity: 0, duration: 0.8 }, "-=0.25")
+                .from(watermarkRef.current, { opacity: 0, y: 24, duration: 0.8, ease: "power2.out" }, "-=0.4");
         };
 
         if (window.__appReady) {
@@ -52,10 +36,7 @@ export default function Hero() {
             window.addEventListener("app:ready", play, { once: true });
         }
 
-        return () => {
-            window.removeEventListener("app:ready", play);
-            split?.revert();
-        };
+        return () => window.removeEventListener("app:ready", play);
     }, { scope: introRef });
 
     const handleImageClick = () => {
@@ -115,7 +96,7 @@ export default function Hero() {
                 </Reveal>
 
                 <Reveal delay={0.05} className="flex-1 text-center lg:text-left">
-                    <h1 ref={headingRef} className="font-heading text-[clamp(2.75rem,8vw,5rem)] leading-[1.15] text-[var(--text-primary)]">
+                    <h1 ref={headingRef} className="font-heading text-[clamp(2.75rem,8vw,5rem)] leading-[1.3] text-[var(--text-primary)]">
                         Hi, I&apos;m{" "}
                         <em style={{ color: "var(--green-deep)", fontStyle: "normal" }}>Angel</em>.
                     </h1>
