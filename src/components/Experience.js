@@ -297,9 +297,6 @@ export default function Experience() {
                                 >
                                     <div className="overflow-hidden">
                                         <div className="px-2 md:px-4 pb-8 md:pb-10 ml-10 md:ml-14">
-                                            {/* Thin green rule */}
-                                            <div className="mb-5 h-px w-10" style={{ background: "var(--green-vivid)" }} />
-
                                             {exp.description && (
                                                 <p className="font-body text-base text-[var(--text-secondary)] mb-4 leading-relaxed max-w-[56ch]">
                                                     {exp.description}

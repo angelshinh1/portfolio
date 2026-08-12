@@ -70,9 +70,6 @@
   --mat-regular:  rgba(244, 248, 241, 0.66);
   --mat-thin:     rgba(244, 248, 241, 0.44);
   --mat-dark:     rgba(26, 26, 24, 0.62);
-  --mat-blur-lg:  saturate(180%) blur(24px);
-  --mat-blur-md:  saturate(170%) blur(14px);
-  --mat-blur-sm:  saturate(150%) blur(8px);
   --mat-edge:     rgba(255, 255, 255, 0.55);   /* light catching the top edge */
 
   /* Elevation — bigger surfaces read thicker, so they cast further */
@@ -207,25 +204,41 @@ body::after {
 /* ══ MATERIALS ═════════════════════════════════════════════════════════ */
 .material {
   background: var(--mat-regular);
-  backdrop-filter: var(--mat-blur-md);
-  -webkit-backdrop-filter: var(--mat-blur-md);
   border: 1px solid var(--mat-edge);
   box-shadow: var(--lift-2);
 }
 
 .material-chrome {  /* structural: nav bars — heavier, blurs more */
   background: var(--mat-thick);
-  backdrop-filter: var(--mat-blur-lg);
-  -webkit-backdrop-filter: var(--mat-blur-lg);
 }
 
-/* A sheet that takes over the screen is a blocking layer, so it reads as a
-   near-solid surface — translucent enough to stay connected to the page,
-   never so thin that the content behind it competes with the nav. */
-.material-sheet {
-  background: rgba(232, 238, 226, 0.95);
-  backdrop-filter: saturate(180%) blur(32px);
-  -webkit-backdrop-filter: saturate(180%) blur(32px);
+/* The blur lives behind an @supports guard on purpose. The production CSS
+   minifier resolves the build's browser targets and silently DELETES bare
+   backdrop-filter declarations for them — the property survives in dev and
+   vanishes in the built stylesheet. Inside @supports the condition is a
+   runtime question, so the declarations are left alone. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .material {
+    -webkit-backdrop-filter: saturate(170%) blur(14px);
+    backdrop-filter: saturate(170%) blur(14px);
+  }
+
+  .material-chrome {
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    backdrop-filter: saturate(180%) blur(24px);
+  }
+
+  .btn {
+    -webkit-backdrop-filter: saturate(150%) blur(8px);
+    backdrop-filter: saturate(150%) blur(8px);
+  }
+
+  @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+    .material, .material-chrome, .btn {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
 }
 
 /* Vibrancy: text over a translucent surface needs weight + a tracking bump,
@@ -295,8 +308,6 @@ mark, .mark {
   letter-spacing: 0.045em;
   color: var(--text-primary);
   background: var(--mat-thin);
-  backdrop-filter: var(--mat-blur-sm);
-  -webkit-backdrop-filter: var(--mat-blur-sm);
   border: 1.5px solid var(--text-primary);
   padding: 0.72rem 1.5rem;
   border-radius: 999px;
@@ -323,7 +334,6 @@ mark, .mark {
 .btn-solid {
   background: var(--text-primary);
   color: var(--bg-base);
-  backdrop-filter: none;
 }
 
 .btn-solid:hover {
@@ -355,10 +365,8 @@ mark, .mark {
 
 /* Frostier, not see-through, when transparency is turned down */
 @media (prefers-reduced-transparency: reduce) {
-  .material, .material-chrome, .material-sheet, .btn {
+  .material, .material-chrome, .btn {
     background: var(--bg-surface);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
   }
   body::after { opacity: 0.06; }
 }
@@ -370,10 +378,8 @@ mark, .mark {
     --text-secondary: #16160F;
     --text-muted: #3A3A34;
   }
-  .material, .material-chrome, .material-sheet {
+  .material, .material-chrome {
     background: var(--bg-surface);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
     border-color: var(--line-strong);
   }
   body::after { opacity: 0; }

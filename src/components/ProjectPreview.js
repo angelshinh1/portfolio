@@ -37,9 +37,7 @@ export default function ProjectPreview({ project }) {
         {project.subtitle}
       </p>
 
-      <div className="h-px w-8 my-5" style={{ background: "var(--green-vivid)" }} />
-
-      <p className="font-body text-[1.05rem] leading-relaxed text-[var(--text-secondary)]">
+      <p className="font-body text-[1.05rem] leading-relaxed text-[var(--text-secondary)] mt-5">
         {project.description}
       </p>
 

@@ -45,8 +45,6 @@ function ToggleGlyph({ isExpanded }) {
 function ExpandedDetails({ project, chipBg }) {
   return (
     <>
-      <div className="mb-5 h-px w-10" style={{ background: "var(--green-vivid)" }} />
-
       <p className="font-body text-base text-[var(--text-secondary)] leading-relaxed max-w-[56ch]">
         {project.description}
       </p>

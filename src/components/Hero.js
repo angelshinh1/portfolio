@@ -133,8 +133,7 @@ export default function Hero() {
                 <h2 className="type-heading text-[var(--text-primary)]">
                     About
                 </h2>
-                <div className="mb-6 mt-4 h-px w-10" style={{ background: "var(--green-vivid)" }} aria-hidden />
-                <div className="font-body type-body text-base lg:text-lg text-[var(--text-secondary)] space-y-5 max-w-[62ch]">
+                <div className="font-body type-body mt-5 text-base lg:text-lg text-[var(--text-secondary)] space-y-5 max-w-[62ch]">
                     <p>
                         I&apos;m really into exploring new technologies and staying
                         up-to-date with the latest trends in software development.

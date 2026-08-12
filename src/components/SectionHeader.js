@@ -6,14 +6,6 @@ export default function SectionHeader({ title, intro, align = "left", className 
     <Reveal className={`${className} ${isCenter ? "text-center" : "text-left"}`}>
       <h2 className="type-title text-[var(--text-primary)]">{title}</h2>
 
-      {/* Thin green rule — the same mark that opens every expanded row, so the
-          page reads as one system rather than a stack of unrelated sections. */}
-      <div
-        className={`mt-5 h-px w-10 ${isCenter ? "mx-auto" : ""}`}
-        style={{ background: "var(--green-vivid)" }}
-        aria-hidden
-      />
-
       {intro && (
         <p
           className={`font-body type-lead mt-5 text-[var(--text-secondary)] max-w-[42ch] ${
