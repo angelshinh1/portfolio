@@ -159,7 +159,7 @@ export default function Hero() {
                             </svg>
                         </a>
                         <a
-                            href="./Angel_Resume_swe.pdf"
+                            href="/Angel_Resume_swe.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn"

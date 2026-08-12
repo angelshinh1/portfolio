@@ -5,13 +5,27 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import GuitarIllustration from "./GuitarIllustration";
 import { createSpring, project, rubberband, createVelocityTracker } from "@/lib/spring";
 
+// `external` items are real files in /public, not routes — next/link would try
+// to client-side route to them and land on a 404, so they get a plain anchor.
 const navItems = [
   { label: "Experience", href: "/#experience" },
   { label: "Projects",   href: "/projects"    },
-  { label: "Resume",     href: "/Angel_Resume_swe.pdf" },
+  { label: "Resume",     href: "/Angel_Resume_swe.pdf", external: true },
   { label: "Fun Stuff",  href: "/#fun-stuff"  },
   { label: "Contact",    href: "/#contact"    },
 ];
+
+// One component for both kinds of destination so the link markup below stays
+// identical whichever it is.
+function NavLink({ item, ...props }) {
+  if (item.external) {
+    return <a href={item.href} target="_blank" rel="noopener noreferrer" {...props} />;
+  }
+  // `scroll={false}` on hash links: Next's built-in hash handling is an instant
+  // scrollIntoView, which lands on the section before Lenis can ease anything —
+  // the jump you'd otherwise see. Lenis does the moving instead (Layout.js).
+  return <Link href={item.href} scroll={!item.href.includes("#")} {...props} />;
+}
 
 const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
 const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
@@ -261,8 +275,8 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <nav className="hidden md:flex items-center" aria-label="Primary navigation">
-            {navItems.map(({ label, href }, i) => (
-              <span key={label} className="flex items-center">
+            {navItems.map((item, i) => (
+              <span key={item.label} className="flex items-center">
                 {i > 0 && (
                   <span
                     className="mx-3 select-none"
@@ -272,13 +286,13 @@ export default function Navbar() {
                     /
                   </span>
                 )}
-                <Link
-                  href={href}
+                <NavLink
+                  item={item}
                   className="press vibrant relative group transition-colors duration-200 hover:text-[var(--green-deep)]"
                   style={{ fontFamily: "var(--font-sans)", fontSize: "0.95rem" }}
                   onMouseEnter={() => wiggleLink(wigglePaths.current[i])}
                 >
-                  {label}
+                  {item.label}
                   <svg
                     className="absolute -bottom-[3px] left-0 w-0 h-[6px] overflow-visible transition-[width] duration-300 ease-[var(--spring)] group-hover:w-full"
                     viewBox="0 0 60 6"
@@ -294,7 +308,7 @@ export default function Navbar() {
                       strokeLinecap="round"
                     />
                   </svg>
-                </Link>
+                </NavLink>
               </span>
             ))}
           </nav>
@@ -336,7 +350,7 @@ export default function Navbar() {
             <div
               style={{
                 width: "80%",
-                height: 2,
+                height: 1,
                 borderRadius: 999,
                 background:
                   "linear-gradient(90deg, transparent, var(--green-deep) 12%, var(--green-deep) 88%, transparent)",
@@ -346,17 +360,17 @@ export default function Navbar() {
           </div>
 
           <nav className="flex-1 flex flex-col gap-6 pl-6 pr-4 sm:pl-7 sm:pr-5" aria-label="Mobile navigation">
-            {navItems.map(({ label, href }, i) => (
-              <Link
-                key={label}
-                href={href}
+            {navItems.map((item, i) => (
+              <NavLink
+                key={item.label}
+                item={item}
                 onClick={() => setOpen(false)}
                 onMouseEnter={() => wiggleLink(mobilePaths.current[i])}
                 className="press relative group inline-block w-fit hover:text-[var(--green-deep)] transition-colors duration-200"
                 style={{ fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: "1.5rem", letterSpacing: "-0.012em", color: "var(--text-secondary)" }}
               >
                 <span style={{ color: "var(--green-deep)", opacity: 0.45, marginRight: "0.6rem", fontSize: "1.1rem" }}>/</span>
-                {label}
+                {item.label}
                 <svg
                   className="absolute -bottom-[3px] left-0 w-0 h-[7px] overflow-visible transition-[width] duration-300 ease-[var(--spring)] group-hover:w-full"
                   viewBox="0 0 60 6"
@@ -372,7 +386,7 @@ export default function Navbar() {
                     strokeLinecap="round"
                   />
                 </svg>
-              </Link>
+              </NavLink>
             ))}
           </nav>
 

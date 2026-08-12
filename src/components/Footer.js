@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
     return (
         <footer className="section-dark border-t border-[rgba(255,255,255,0.08)]">
@@ -10,9 +12,12 @@ export default function Footer() {
                         </h3>
                         <p className="font-body type-small text-[rgba(236,236,236,0.65)] mt-3 max-w-[36ch] mx-auto lg:mx-0">
                             Peek at the{" "}
-                            <a href="#fun-stuff" className="text-[var(--green-muted)] underline decoration-[var(--green-deep)] underline-offset-4 hover:decoration-[var(--green-vivid)] transition-colors">
+                            {/* Root-relative: the footer renders on /projects
+                                and /blog too, where a bare "#fun-stuff" points
+                                at a section that isn't on the page. */}
+                            <Link href="/#fun-stuff" scroll={false} className="text-[var(--green-muted)] underline decoration-[var(--green-deep)] underline-offset-4 hover:decoration-[var(--green-vivid)] transition-colors">
                                 Fun stuff
-                            </a>{" "}
+                            </Link>{" "}
                             to see me being whimsical.
                         </p>
                     </div>

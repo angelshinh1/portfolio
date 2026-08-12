@@ -110,11 +110,6 @@ function Block({ block, project }) {
                   sizes={wide ? "(max-width: 760px) 100vw, 760px" : "(max-width: 640px) 100vw, 50vw"}
                 />
               </div>
-              {img.caption && (
-                <figcaption className="font-mono text-[0.72rem] text-[var(--text-muted)] mt-2.5 leading-snug">
-                  {img.caption}
-                </figcaption>
-              )}
             </figure>
           ))}
         </div>
