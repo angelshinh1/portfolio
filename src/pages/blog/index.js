@@ -24,11 +24,10 @@ export default function Blog({ allPostsData }) {
       <div className="pt-24 md:pt-28 pb-20 min-h-screen">
         <main className="max-w-[680px] mx-auto px-6">
           <header className="mb-12">
-            <span className="eyebrow text-[var(--ink-3)]">Digital garden</span>
-            <h1 className="font-heading text-5xl lg:text-6xl mt-4 text-[var(--ink)]">Blog</h1>
-            <p className="font-sans text-[var(--ink-2)] text-lg mt-4 leading-relaxed">A digital garden of notes, essays, and learnings. They&apos;re currently on the way - stay tuned!</p>
+            <h1 className="type-title mt-4 text-[var(--ink)]">Blog</h1>
+            <p className="font-sans type-lead text-[var(--ink-2)] mt-5">A digital garden of notes, essays, and learnings. They&apos;re currently on the way - stay tuned!</p>
           </header>
-          <Link href="/" className="font-mono text-sm text-[var(--ink)] underline underline-offset-4 decoration-[var(--line-strong)] hover:text-[var(--accent)] hover:decoration-[var(--accent)] transition-colors">
+          <Link href="/" className="press font-mono text-sm text-[var(--ink)] underline underline-offset-4 decoration-[var(--line-strong)] hover:text-[var(--accent)] hover:decoration-[var(--accent)] transition-colors">
             ← Return home
           </Link>
         </main>

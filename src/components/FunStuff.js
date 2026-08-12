@@ -101,8 +101,8 @@ export default function FunStuff() {
             <Reveal className="mb-20 lg:mb-24">
                 <div className="grid grid-cols-1 lg:grid-cols-[0.7fr_1fr] gap-10 lg:gap-14 items-center">
                     <div className="relative w-full max-w-[300px] mx-auto lg:mx-0">
-                        <div className="absolute -inset-3 rounded-3xl bg-[var(--bg-grain)]" aria-hidden="true" />
-                        <div className="relative rounded-2xl overflow-hidden border border-[var(--line)] shadow-[0_4px_6px_rgba(0,0,0,0.04),0_20px_40px_rgba(0,0,0,0.08)]">
+                        <div className="absolute -inset-3 rounded-[1.75rem] bg-[var(--bg-grain)]" aria-hidden="true" />
+                        <div className="relative rounded-2xl overflow-hidden border border-[var(--mat-edge)] shadow-[var(--lift-3)]">
                             <video
                                 src="/guitar-video.mp4"
                                 controls
@@ -118,7 +118,7 @@ export default function FunStuff() {
                     </div>
 
                     <div>
-                        <h3 className="font-heading text-3xl lg:text-4xl text-[var(--text-primary)] leading-tight">
+                        <h3 className="type-heading text-[var(--text-primary)]">
                             Two years, one <span style={{ fontStyle: "italic" }}>stress reliever</span>.
                         </h3>
 
@@ -135,7 +135,7 @@ export default function FunStuff() {
                             />
                         </div>
 
-                        <p className="font-body text-base lg:text-lg leading-relaxed text-[var(--text-secondary)] max-w-[46ch]">
+                        <p className="font-body type-lead text-[var(--text-secondary)] max-w-[46ch]">
                             Been playing guitar for 2 years and it&apos;s my{" "}
                             <mark>go-to way to unwind</mark>. The song in this video is{" "}
                             <StringLink
@@ -159,8 +159,8 @@ export default function FunStuff() {
                             {["Classic", "Jazz", "Spanish"].map((g) => (
                                 <span
                                     key={g}
-                                    className="font-mono text-[0.7rem] px-2.5 py-1 bg-[var(--green-soft)] text-[var(--green-deep)] tracking-tight"
-                                    style={{ borderRadius: '2px' }}
+                                    className="font-mono text-[0.7rem] px-3 py-1 bg-[var(--green-soft)] text-[var(--green-deep)]"
+                                    style={{ borderRadius: '999px', letterSpacing: '0.015em' }}
                                 >
                                     {g}
                                 </span>
@@ -175,7 +175,7 @@ export default function FunStuff() {
                 {/* Hobbies */}
                 <div>
                     <Reveal>
-                        <h3 className="font-heading text-2xl lg:text-3xl text-[var(--text-primary)] mb-8">
+                        <h3 className="type-heading text-[var(--text-primary)] mb-8">
                             Hobbies &amp; interests
                         </h3>
                     </Reveal>
@@ -184,11 +184,19 @@ export default function FunStuff() {
                             <Reveal
                                 key={index}
                                 delay={Math.min(index * 0.04, 0.2)}
-                                className="group flex flex-col items-center text-center gap-2.5 border border-[var(--line)] bg-[var(--bg-surface)] px-4 py-5 transition-[box-shadow] duration-300 hover:shadow-[0_6px_20px_rgba(0,0,0,0.09)]"
-                                style={{ borderRadius: '4px' }}
+                                className="group material press flex flex-col items-center text-center gap-2.5 px-4 py-5 cursor-default hover:shadow-[var(--lift-2)]"
+                                style={{
+                                    borderRadius: '14px',
+                                    // Static tilt — pinned to a corkboard, straightens on hover
+                                    rotate: `${HOBBY_TILTS[index % HOBBY_TILTS.length]}deg`,
+                                    transition: 'rotate var(--t-base) var(--spring), transform var(--t-press) var(--spring), box-shadow var(--t-base) var(--spring)',
+                                }}
+                                onMouseEnter={(e) => { e.currentTarget.style.rotate = '0deg'; }}
+                                onMouseLeave={(e) => { e.currentTarget.style.rotate = `${HOBBY_TILTS[index % HOBBY_TILTS.length]}deg`; }}
                             >
                                 <i
-                                    className={`ti ${hobby.icon} text-[1.75rem] text-[var(--green-deep)]`}
+                                    className={`ti ${hobby.icon} text-[1.75rem]`}
+                                    style={{ color: HOBBY_ACCENTS[index % HOBBY_ACCENTS.length] }}
                                     aria-hidden="true"
                                 />
                                 <div>
@@ -210,23 +218,39 @@ export default function FunStuff() {
                 {/* Random facts */}
                 <div>
                     <Reveal>
-                        <h3 className="font-heading text-2xl lg:text-3xl text-[var(--text-primary)] mb-8">
+                        <h3 className="type-heading text-[var(--text-primary)] mb-8">
                             Random facts you didn&apos;t ask for
                         </h3>
                     </Reveal>
                     <ul className="space-y-0">
-                        {randomFacts.map((fact, index) => (
-                            <Reveal
-                                key={index}
-                                delay={Math.min(index * 0.04, 0.2)}
-                                as="li"
-                                className="py-3.5 border-t border-[var(--line)]"
-                            >
-                                <p className="font-body text-sm lg:text-[0.95rem] leading-relaxed text-[var(--text-secondary)]">
-                                    {fact}
-                                </p>
-                            </Reveal>
-                        ))}
+                        {randomFacts.map((fact, index) => {
+                            const meta = FACT_META[index] ?? {};
+                            return (
+                                <Reveal
+                                    key={index}
+                                    delay={Math.min(index * 0.04, 0.2)}
+                                    as="li"
+                                    className="py-3.5 border-t border-[var(--line)]"
+                                >
+                                    <p
+                                        className="font-body type-small text-[var(--text-secondary)] flex gap-2.5"
+                                        style={meta.callout ? {
+                                            background: 'var(--accent-mark)',
+                                            borderRadius: '8px',
+                                            padding: '0.55rem 0.75rem',
+                                            margin: '-0.2rem -0.75rem',
+                                        } : undefined}
+                                    >
+                                        {meta.prefix && (
+                                            <span aria-hidden style={{ color: 'var(--green-deep)', opacity: 0.7 }}>
+                                                {meta.prefix}
+                                            </span>
+                                        )}
+                                        <span>{fact}</span>
+                                    </p>
+                                </Reveal>
+                            );
+                        })}
                     </ul>
                 </div>
             </div>

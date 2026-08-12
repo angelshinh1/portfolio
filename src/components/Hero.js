@@ -11,6 +11,8 @@ gsap.registerPlugin(useGSAP);
 
 export default function Hero() {
     const [showTooltip, setShowTooltip] = useState(false);
+    const [hovered, setHovered] = useState(false);
+    const tipVisible = showTooltip || hovered;
     const introRef = useRef(null);
     const avatarRef = useRef(null);
     const headingRef = useRef(null);
@@ -65,12 +67,20 @@ export default function Hero() {
             {/* Identity row — avatar (left) + name & subtitle (right) */}
             <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6 lg:gap-8 items-center">
                 <Reveal className="flex-shrink-0">
-                    <div className="relative group w-fit mx-auto lg:mx-0">
-                        <div
+                    <div
+                        className="relative group w-fit mx-auto lg:mx-0"
+                        onMouseEnter={() => setHovered(true)}
+                        onMouseLeave={() => setHovered(false)}
+                    >
+                        <button
                             ref={avatarRef}
-                            className="relative w-36 h-36 md:w-44 md:h-44 cursor-pointer overflow-hidden rounded-full transition-transform duration-500 ease-[var(--ease-out)] group-hover:-translate-y-1"
-                            style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.20)" }}
+                            className="press-strong relative block w-36 h-36 md:w-44 md:h-44 cursor-pointer overflow-hidden rounded-full transition-[translate] duration-500 ease-[var(--spring)] lg:group-hover:-translate-y-1"
+                            style={{
+                                boxShadow: "var(--lift-3), 0 0 0 1px var(--mat-edge) inset",
+                                transition: "transform var(--t-press) var(--spring), box-shadow var(--t-base) var(--spring)",
+                            }}
                             onClick={handleImageClick}
+                            aria-label="Angel Shinh — say hi"
                         >
                             <Image
                                 src="/profile.jpg"
@@ -79,31 +89,39 @@ export default function Hero() {
                                 priority
                                 className="object-cover"
                             />
-                        </div>
+                        </button>
 
+                        {/* Tooltip grows out of the avatar it belongs to, and
+                            materializes (blur + scale) rather than plainly fading. */}
                         <div
-                            className={`font-mono absolute left-1/2 -translate-x-1/2 top-full mt-6 px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--line)] text-[var(--text-primary)] text-xs transition-all duration-300 ease-[var(--ease-out)] whitespace-nowrap shadow-xl z-40 ${
-                                showTooltip
-                                    ? "opacity-100 translate-y-0"
-                                    : "opacity-0 translate-y-1 lg:group-hover:opacity-100 lg:group-hover:translate-y-0"
-                            }`}
+                            className="font-mono material absolute left-1/2 top-full mt-5 px-4 py-2.5 rounded-2xl text-[var(--text-primary)] text-xs whitespace-nowrap z-40 pointer-events-none"
+                            style={{
+                                transformOrigin: "top center",
+                                transform: `translateX(-50%) scale(${tipVisible ? 1 : 0.94})`,
+                                opacity: tipVisible ? 1 : 0,
+                                filter: tipVisible ? "blur(0)" : "blur(4px)",
+                                transition: "opacity var(--t-base) var(--spring), transform var(--t-base) var(--spring-soft), filter var(--t-base) var(--spring)",
+                            }}
                         >
                             Ts guy got W rizz. Should ask him out{" "}
                             <span className="inline-block">✌️🥀</span>
-                            <div className="absolute left-1/2 -translate-x-1/2 -top-[7px] w-3 h-3 rotate-45 bg-[var(--bg-surface)] border-l border-t border-[var(--line)]"></div>
+                            <div className="absolute left-1/2 -translate-x-1/2 -top-[6px] w-3 h-3 rotate-45 bg-[var(--mat-regular)] border-l border-t border-[var(--mat-edge)]"></div>
                         </div>
                     </div>
                 </Reveal>
 
                 <Reveal delay={0.05} className="flex-1 text-center lg:text-left">
-                    <h1 ref={headingRef} className="font-heading text-[clamp(2.75rem,8vw,5rem)] leading-[1.3] text-[var(--text-primary)]">
+                    <h1 ref={headingRef} className="type-display text-[var(--text-primary)]">
                         Hi, I&apos;m{" "}
                         <em style={{ color: "var(--green-deep)", fontStyle: "normal" }}>Angel</em>.
                     </h1>
-                    <p className="font-mono mt-4 text-xs md:text-sm text-[var(--text-muted)] tracking-widest uppercase">
+                    <p
+                        className="font-body mt-3 text-[var(--green-deep)]"
+                        style={{ fontWeight: 500, fontSize: "1.05rem", letterSpacing: "0.002em" }}
+                    >
                         Software Developer
                     </p>
-                    <p className="font-body mt-3 text-lg md:text-xl leading-relaxed text-[var(--text-secondary)] max-w-[44ch] mx-auto lg:mx-0">
+                    <p className="font-body type-lead mt-4 text-[var(--text-secondary)] max-w-[44ch] mx-auto lg:mx-0">
                         Passionate about building innovative solutions &amp; blending
                         tech with art.
                     </p>
@@ -112,10 +130,11 @@ export default function Hero() {
 
             {/* About */}
             <Reveal delay={0.1} className="mt-16 lg:mt-20">
-                <h2 className="font-heading text-3xl lg:text-4xl text-[var(--text-primary)]">
+                <h2 className="type-heading text-[var(--text-primary)]">
                     About
                 </h2>
-                <div className="font-body mt-5 text-base lg:text-lg text-[var(--text-secondary)] leading-[1.7] space-y-5 max-w-[62ch]">
+                <div className="mb-6 mt-4 h-px w-10" style={{ background: "var(--green-vivid)" }} aria-hidden />
+                <div className="font-body type-body text-base lg:text-lg text-[var(--text-secondary)] space-y-5 max-w-[62ch]">
                     <p>
                         I&apos;m really into exploring new technologies and staying
                         up-to-date with the latest trends in software development.
@@ -133,9 +152,12 @@ export default function Hero() {
                     </p>
 
                     {/* CTAs */}
-                    <div className="flex flex-wrap gap-3 pt-3">
+                    <div className="flex flex-wrap gap-3 pt-4">
                         <a href="#contact" className="btn btn-solid">
                             Get in touch
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
                         </a>
                         <a
                             href="./Angel_Resume_swe.pdf"

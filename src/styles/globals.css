@@ -1,8 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* ── Playfair Display (expressive display serif, headings only) + Manrope (sans, everything else) ── */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+/* ── Playfair Display (expressive display serif, headings only) + Satoshi (sans, everything else) ── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,800&display=swap');
 
 :root {
   /* ── Green-tinted paper foundations ── */
@@ -46,8 +47,42 @@
   --accent-soft: #C8E4B0;
   --highlight:   rgba(162, 230, 102, 0.40);
 
-  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  /* ══ MOTION ══════════════════════════════════════════════════════════
+     Curves that approximate springs. --spring is critically damped
+     (damping 1.0) — the house default, no overshoot. --spring-soft carries
+     a little overshoot and is reserved for motion a gesture set going.
+     Durations map to Apple's "response": 0.3–0.4s for UI, faster for press. */
+  --spring:      cubic-bezier(0.32, 0.72, 0, 1);
+  --spring-soft: cubic-bezier(0.34, 1.28, 0.64, 1);
+  --ease-out:    cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --t-press: 110ms;  /* press feedback — must feel instant */
+  --t-fast:  200ms;
+  --t-base:  340ms;  /* response 0.34 */
+  --t-slow:  480ms;
+
+  /* ══ MATERIALS ═══════════════════════════════════════════════════════
+     Translucent layers that float over content. Heavier material separates
+     structure (nav, sheets); lighter material lifts interactive things.
+     Never stack a light material on another light one. */
+  --mat-thick:    rgba(232, 238, 226, 0.72);
+  --mat-regular:  rgba(244, 248, 241, 0.66);
+  --mat-thin:     rgba(244, 248, 241, 0.44);
+  --mat-dark:     rgba(26, 26, 24, 0.62);
+  --mat-blur-lg:  saturate(180%) blur(24px);
+  --mat-blur-md:  saturate(170%) blur(14px);
+  --mat-blur-sm:  saturate(150%) blur(8px);
+  --mat-edge:     rgba(255, 255, 255, 0.55);   /* light catching the top edge */
+
+  /* Elevation — bigger surfaces read thicker, so they cast further */
+  --lift-1: 0 1px 2px rgba(26, 26, 24, 0.05), 0 2px 8px rgba(26, 26, 24, 0.05);
+  --lift-2: 0 2px 4px rgba(26, 26, 24, 0.05), 0 10px 26px rgba(26, 26, 24, 0.09);
+  --lift-3: 0 4px 8px rgba(26, 26, 24, 0.06), 0 24px 56px rgba(26, 26, 24, 0.15);
+
+  /* ── Families ── */
+  --font-sans:  'Satoshi', -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
 
   --background: var(--bg-base);
   --foreground: var(--text-primary);
@@ -60,44 +95,108 @@ html {
   scroll-padding-top: 80px;
 }
 
-
 body {
   background: var(--bg-base);
   color: var(--text-primary);
-  font-family: 'Manrope', -apple-system, 'Segoe UI', sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.0625rem;
   font-weight: 400;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  font-optical-sizing: auto;
+}
+
+/* ── Paper grain ──────────────────────────────────────────────────────
+   A still, tiling noise field over the whole page — generated rather than
+   downloaded, so it costs nothing and stays crisp at any zoom. Never
+   animated: a moving full-viewport texture is exactly the kind of thing
+   reduced-motion exists to prevent. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
 /* ── Type families ── */
 /* Two fonts, one job each: Playfair Display (expressive display serif)
-   carries headings and the ornate initial-cap gesture; Manrope (sans, kept
-   light) carries everything else — body copy, nav, labels, subtitles. */
+   carries headings and the ornate initial-cap gesture; Satoshi (a tight,
+   low-contrast neo-grotesque) carries everything else — body copy, nav,
+   labels, subtitles. */
 .font-display {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-style: italic;
 }
 
 .font-heading {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-weight: 600;
 }
 
 .font-body,
 .font-sans {
-  font-family: 'Manrope', -apple-system, 'Segoe UI', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
 }
 
 .font-mono,
 .vt323-regular {
-  font-family: 'Manrope', -apple-system, 'Segoe UI', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 500;
   letter-spacing: 0.02em;
 }
+
+/* ══ TYPE SCALE ════════════════════════════════════════════════════════
+   Tracking is size-specific, never one value for all sizes: display text
+   tightens as it grows, body sits near 0, small caps-y labels open up.
+   Leading moves inversely to size. Sizes are in rem so a larger user text
+   setting scales the layout with the text. */
+.type-display {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  line-height: 1.06;
+  letter-spacing: -0.028em;
+}
+
+.type-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.022em;
+}
+
+.type-heading {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+}
+
+.type-row {   /* accordion row titles — dense, still a heading */
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  line-height: 1.25;
+  letter-spacing: -0.011em;
+}
+
+.type-lead {
+  font-size: clamp(1.0625rem, 1.5vw, 1.2rem);
+  line-height: 1.62;
+  letter-spacing: -0.003em;
+}
+
+.type-body  { line-height: 1.7; letter-spacing: 0; }
+.type-small { font-size: 0.875rem; line-height: 1.55; letter-spacing: 0.004em; }
 
 /* ── Section backgrounds ── */
 .section-base  { background: var(--bg-base); }
@@ -105,13 +204,36 @@ body {
 .section-green { background: var(--bg-green); }
 .section-dark  { background: var(--bg-dark); color: #ECECEC; }
 
-/* ── Eyebrow label ── */
-.eyebrow {
-  font-family: 'Manrope', sans-serif;
-  font-size: 0.72rem;
+/* ══ MATERIALS ═════════════════════════════════════════════════════════ */
+.material {
+  background: var(--mat-regular);
+  backdrop-filter: var(--mat-blur-md);
+  -webkit-backdrop-filter: var(--mat-blur-md);
+  border: 1px solid var(--mat-edge);
+  box-shadow: var(--lift-2);
+}
+
+.material-chrome {  /* structural: nav bars — heavier, blurs more */
+  background: var(--mat-thick);
+  backdrop-filter: var(--mat-blur-lg);
+  -webkit-backdrop-filter: var(--mat-blur-lg);
+}
+
+/* A sheet that takes over the screen is a blocking layer, so it reads as a
+   near-solid surface — translucent enough to stay connected to the page,
+   never so thin that the content behind it competes with the nav. */
+.material-sheet {
+  background: rgba(232, 238, 226, 0.95);
+  backdrop-filter: saturate(180%) blur(32px);
+  -webkit-backdrop-filter: saturate(180%) blur(32px);
+}
+
+/* Vibrancy: text over a translucent surface needs weight + a tracking bump,
+   not flat gray, or it dissolves into whatever scrolls underneath. */
+.vibrant {
+  color: var(--text-secondary);
   font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 
 /* ── Green highlight mark ── */
@@ -125,7 +247,7 @@ mark, .mark {
 /* ── Ornament divider ── */
 .ornament-divider {
   text-align: center;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-serif);
   font-style: italic;
   font-size: 2.25rem;
   color: var(--green-deep);
@@ -136,54 +258,77 @@ mark, .mark {
   background: var(--bg-base);
 }
 
-/* ── Scroll reveal ── */
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 500ms cubic-bezier(0.23, 1, 0.32, 1),
-              transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+/* ══ RESPONSE ══════════════════════════════════════════════════════════
+   Feedback lives on the press, not the release, and it is instant. */
+.press {
+  transition: transform var(--t-press) var(--spring), opacity var(--t-press) linear;
+  touch-action: manipulation;   /* no 300ms tap delay */
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+.press:active { transform: scale(0.985); }
+
+.press-strong:active { transform: scale(0.955); }
+
+/* Lift on hover, settle on press — the surface follows the pointer's intent */
+.lift {
+  transition: transform var(--t-base) var(--spring), box-shadow var(--t-base) var(--spring);
+}
+
+.lift:hover  { transform: translateY(-2px); box-shadow: var(--lift-2); }
+.lift:active { transform: translateY(0)    scale(0.99); }
+
+/* Focus that matches the material system rather than the UA default */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--green-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 /* ── CTA button ── */
 .btn {
-  display: inline-block;
-  font-family: 'Manrope', sans-serif;
-  font-weight: 500;
-  font-size: 0.72rem;
-  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.045em;
   color: var(--text-primary);
-  background: transparent;
+  background: var(--mat-thin);
+  backdrop-filter: var(--mat-blur-sm);
+  -webkit-backdrop-filter: var(--mat-blur-sm);
   border: 1.5px solid var(--text-primary);
-  padding: 0.6rem 1.35rem;
-  border-radius: 3px;
+  padding: 0.72rem 1.5rem;
+  border-radius: 999px;
   cursor: pointer;
-  transition: background 160ms ease-out, transform 120ms ease-out;
   text-decoration: none;
+  touch-action: manipulation;
+  transition: background var(--t-fast) var(--spring),
+              transform var(--t-press) var(--spring),
+              box-shadow var(--t-base) var(--spring);
 }
 
 .btn:hover {
-  background: rgba(162, 230, 102, 0.22);
+  background: rgba(162, 230, 102, 0.28);
+  box-shadow: var(--lift-1);
   text-decoration: none;
   color: var(--text-primary);
 }
 
 .btn:active {
-  transform: scale(0.97);
+  transform: scale(0.965);
+  box-shadow: none;
 }
 
 .btn-solid {
   background: var(--text-primary);
   color: var(--bg-base);
+  backdrop-filter: none;
 }
 
 .btn-solid:hover {
   background: var(--text-primary);
-  opacity: 0.85;
+  opacity: 0.88;
   color: var(--bg-base);
 }
 
@@ -192,37 +337,70 @@ mark, .mark {
   body { font-size: 1.0625rem; }
 }
 
+/* ══ ACCESSIBILITY ═════════════════════════════════════════════════════
+   Reduced motion keeps the feedback but drops the travel: cross-fades in
+   place of slides, no overshoot, no parallax. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
+
+  .press:active, .press-strong:active, .btn:active { transform: none; }
+  .lift:hover { transform: none; }
+}
+
+/* Frostier, not see-through, when transparency is turned down */
+@media (prefers-reduced-transparency: reduce) {
+  .material, .material-chrome, .material-sheet, .btn {
+    background: var(--bg-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  body::after { opacity: 0.06; }
+}
+
+/* Near-solid surfaces with a defined border at high contrast */
+@media (prefers-contrast: more) {
+  :root {
+    --line: rgba(26, 26, 24, 0.34);
+    --text-secondary: #16160F;
+    --text-muted: #3A3A34;
+  }
+  .material, .material-chrome, .material-sheet {
+    background: var(--bg-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: var(--line-strong);
+  }
+  body::after { opacity: 0; }
 }
 
 /* ── Case-study entrance animation (pure CSS, runs at mount) ── */
 @keyframes case-fade-in {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 .case-reveal {
-  animation: case-fade-in 650ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation: case-fade-in var(--t-slow) var(--spring) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .case-reveal { animation: none; }
 }
 
-/* ── Preview fade — crossfade when the /projects hover preview swaps ── */
-@keyframes preview-fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+/* ── Preview swap — the surface materializes rather than plainly fading ── */
+@keyframes preview-materialize {
+  from { opacity: 0; transform: scale(0.985); filter: blur(6px); }
+  to   { opacity: 1; transform: scale(1);     filter: blur(0); }
 }
 
 .preview-fade {
-  animation: preview-fade-in 420ms ease-out both;
+  animation: preview-materialize var(--t-base) var(--spring) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -239,12 +417,12 @@ mark, .mark {
   border-radius: 6px;
   border: 1.5px solid transparent;
   pointer-events: none;
-  transition: border-color 300ms ease-out;
+  transition: border-color var(--t-base) var(--spring);
 }
 
 .string-border:hover::after {
   border-color: var(--green-muted);
-  animation: string-ripple-border 600ms ease-out forwards;
+  animation: string-ripple-border 600ms var(--spring) forwards;
 }
 
 @keyframes string-ripple-border {

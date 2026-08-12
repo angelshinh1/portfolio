@@ -20,6 +20,28 @@ const IconArrow = (props) => (
   </svg>
 );
 
+// The open/close affordance: a plus that turns into a close mark. Rotation is
+// spring-eased so it settles rather than stopping dead, and it fills in on open
+// so the row's state is readable at a glance.
+function ToggleGlyph({ isExpanded }) {
+  return (
+    <span
+      className="flex flex-shrink-0 items-center justify-center w-7 h-7 rounded-full border border-[var(--line)] select-none"
+      style={{
+        color: "var(--green-deep)",
+        background: isExpanded ? "var(--green-soft)" : "transparent",
+        transform: isExpanded ? "rotate(45deg)" : "rotate(0deg)",
+        transition: "transform var(--t-base) var(--spring), background var(--t-fast) var(--spring)",
+      }}
+      aria-hidden
+    >
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+        <path d="M6 1v10M1 6h10" />
+      </svg>
+    </span>
+  );
+}
+
 function ExpandedDetails({ project, chipBg }) {
   return (
     <>
@@ -33,8 +55,8 @@ function ExpandedDetails({ project, chipBg }) {
         {project.technologies.map((tech) => (
           <span
             key={tech}
-            className="font-mono text-[0.63rem] px-2.5 py-[0.3rem] text-[var(--text-secondary)] tracking-tight"
-            style={{ background: chipBg, borderRadius: "3px" }}
+            className="font-mono text-[0.66rem] px-2.5 py-[0.32rem] text-[var(--text-secondary)] border border-[var(--line)]"
+            style={{ background: chipBg, borderRadius: "999px", letterSpacing: "0.015em" }}
           >
             {tech}
           </span>
@@ -47,7 +69,7 @@ function ExpandedDetails({ project, chipBg }) {
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-mono text-[0.7rem] tracking-tight text-[var(--green-deep)] transition-colors duration-200 hover:text-[var(--text-primary)]"
+            className="press inline-flex items-center gap-1.5 font-mono text-[0.72rem] text-[var(--green-deep)] transition-colors duration-200 hover:text-[var(--text-primary)]"
           >
             <IconGithub /> Code
           </a>
@@ -57,16 +79,17 @@ function ExpandedDetails({ project, chipBg }) {
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-mono text-[0.7rem] tracking-tight text-[var(--green-deep)] transition-colors duration-200 hover:text-[var(--text-primary)]"
+            className="press inline-flex items-center gap-1.5 font-mono text-[0.72rem] text-[var(--green-deep)] transition-colors duration-200 hover:text-[var(--text-primary)]"
           >
             <IconLive /> Live demo
           </a>
         )}
         <Link
           href={`/projects/${project.slug}`}
-          className="inline-flex items-center gap-1.5 font-mono text-[0.7rem] tracking-tight text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--green-deep)]"
+          className="press group/cs inline-flex items-center gap-1.5 font-mono text-[0.72rem] text-[var(--text-primary)] transition-colors duration-200 hover:text-[var(--green-deep)]"
         >
-          Read case study <IconArrow />
+          Read case study
+          <IconArrow className="transition-transform duration-300 ease-[var(--spring)] group-hover/cs:translate-x-1" />
         </Link>
       </div>
     </>
@@ -79,23 +102,23 @@ export default function ProjectRow({ project, isExpanded, onToggle, onHoverStart
   if (variant === "card") {
     return (
       <div
-        className="group/row rounded-lg border border-[var(--line)] bg-[var(--bg-surface)] h-full flex flex-col transition-shadow duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]"
+        className="group/row lift material rounded-2xl h-full flex flex-col"
         onMouseEnter={onHoverStart}
       >
         <button
           onClick={onToggle}
-          className="w-full text-left cursor-pointer flex-1 flex flex-col p-6"
+          className="press w-full text-left cursor-pointer flex-1 flex flex-col p-6 rounded-2xl"
           aria-expanded={isExpanded}
         >
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <h3 className="font-heading text-xl md:text-2xl leading-snug text-[var(--text-primary)] transition-colors duration-200 group-hover/row:text-[var(--green-deep)]">
+              <h3 className="type-row text-[var(--text-primary)] transition-colors duration-200 group-hover/row:text-[var(--green-deep)]">
                 {project.title}
               </h3>
               <p
                 className="mt-1"
                 style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: "var(--font-sans)",
                   fontWeight: 400,
                   fontSize: "1.15rem",
                   color: "var(--text-secondary)",
@@ -104,17 +127,7 @@ export default function ProjectRow({ project, isExpanded, onToggle, onHoverStart
                 {project.subtitle}
               </p>
             </div>
-            <span
-              className="font-heading text-2xl leading-none select-none transition-all duration-300 flex-shrink-0"
-              style={{
-                color: "var(--green-deep)",
-                opacity: isExpanded ? 1 : 0.45,
-                transform: isExpanded ? "rotate(45deg)" : "rotate(0deg)",
-                display: "inline-block",
-              }}
-            >
-              +
-            </span>
+            <ToggleGlyph isExpanded={isExpanded} />
           </div>
 
           <p className="font-mono text-[0.68rem] text-[var(--text-secondary)] mt-3 tracking-tight opacity-70">
@@ -127,7 +140,7 @@ export default function ProjectRow({ project, isExpanded, onToggle, onHoverStart
           style={{
             gridTemplateRows: isExpanded ? "1fr" : "0fr",
             opacity: isExpanded ? 1 : 0,
-            transition: "grid-template-rows 350ms cubic-bezier(0.23,1,0.32,1), opacity 300ms ease",
+            transition: "grid-template-rows var(--t-base) var(--spring), opacity var(--t-fast) linear",
           }}
         >
           <div className="overflow-hidden">
@@ -148,18 +161,18 @@ export default function ProjectRow({ project, isExpanded, onToggle, onHoverStart
       <button
         onClick={onToggle}
         onFocus={onHoverStart}
-        className="w-full text-left cursor-pointer group/row py-6 md:py-7 px-1 md:px-2"
+        className="press w-full text-left cursor-pointer group/row py-6 md:py-7 px-2 md:px-3 rounded-lg hover:bg-[rgba(200,228,176,0.14)] active:bg-[rgba(200,228,176,0.3)]"
         aria-expanded={isExpanded}
       >
         <div className="flex items-start justify-between gap-4 md:gap-8">
           <div className="min-w-0">
-            <h3 className="font-heading text-xl md:text-2xl leading-snug text-[var(--text-primary)] transition-colors duration-200 group-hover/row:text-[var(--green-deep)]">
+            <h3 className="type-row text-[var(--text-primary)] transition-colors duration-200 group-hover/row:text-[var(--green-deep)]">
               {project.title}
             </h3>
             <p
               className="mt-1"
               style={{
-                fontFamily: "'Manrope', sans-serif",
+                fontFamily: "var(--font-sans)",
                 fontWeight: 400,
                 fontSize: "1.15rem",
                 color: "var(--text-secondary)",
@@ -173,17 +186,7 @@ export default function ProjectRow({ project, isExpanded, onToggle, onHoverStart
             <span className="font-mono text-[0.72rem] text-[var(--text-secondary)] whitespace-nowrap tracking-tight hidden sm:block opacity-80">
               {project.category}
             </span>
-            <span
-              className="font-heading text-2xl leading-none select-none transition-all duration-300"
-              style={{
-                color: "var(--green-deep)",
-                opacity: isExpanded ? 1 : 0.45,
-                transform: isExpanded ? "rotate(45deg)" : "rotate(0deg)",
-                display: "inline-block",
-              }}
-            >
-              +
-            </span>
+            <ToggleGlyph isExpanded={isExpanded} />
           </div>
         </div>
 

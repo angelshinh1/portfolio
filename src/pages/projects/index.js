@@ -28,14 +28,14 @@ export default function ProjectsIndex() {
         <div className="max-w-[88vw] lg:max-w-[64rem] mx-auto px-1">
           <Reveal>
             <Breadcrumbs
-              items={[{ label: "Home", href: "/" }, { label: "Projects" }]}
+              items={[{ label: "Angel", href: "/" }, { label: "Projects" }]}
               className="mb-8"
             />
 
-            <h1 className="font-heading text-[clamp(2.5rem,6vw,3.75rem)] leading-[1.05] text-[var(--text-primary)]">
+            <h1 className="type-title text-[var(--text-primary)]">
               All projects
             </h1>
-            <p className="font-body text-base lg:text-lg text-[var(--text-secondary)] mt-4 max-w-[52ch] leading-relaxed">
+            <p className="font-body type-lead text-[var(--text-secondary)] mt-5 max-w-[52ch]">
               Hover a project to preview it, click to read more, or open the full case study.
             </p>
           </Reveal>

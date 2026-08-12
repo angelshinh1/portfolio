@@ -35,7 +35,7 @@ export default function ProjectCaseStudy({ project }) {
           <CaseReveal>
             <Breadcrumbs
               items={[
-                { label: "Home", href: "/" },
+                { label: "Angel", href: "/" },
                 { label: "Projects", href: "/projects" },
                 { label: project.title },
               ]}
@@ -44,14 +44,14 @@ export default function ProjectCaseStudy({ project }) {
           </CaseReveal>
 
           <CaseReveal delay={40}>
-            <h1 className="font-heading text-[clamp(2.5rem,7vw,4rem)] leading-[1.02] text-[var(--text-primary)]">
+            <h1 className="type-display text-[var(--text-primary)]">
               {project.title}
             </h1>
 
             <p
               className="mt-3"
               style={{
-                fontFamily: "'Manrope', sans-serif",
+                fontFamily: "var(--font-sans)",
                 fontWeight: 400,
                 fontSize: "1.4rem",
                 color: "var(--text-secondary)",
@@ -70,8 +70,8 @@ export default function ProjectCaseStudy({ project }) {
               {project.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="font-mono text-[0.68rem] px-2.5 py-[0.3rem] text-[var(--text-secondary)] tracking-tight"
-                  style={{ background: "rgba(255,255,255,0.55)", borderRadius: "3px" }}
+                  className="font-mono text-[0.68rem] px-2.5 py-[0.32rem] text-[var(--text-secondary)] border border-[var(--line)]"
+                  style={{ background: "rgba(255,255,255,0.55)", borderRadius: "999px", letterSpacing: "0.015em" }}
                 >
                   {tech}
                 </span>
@@ -116,15 +116,15 @@ export default function ProjectCaseStudy({ project }) {
           <CaseReveal delay={120}>
             <div className="max-w-[900px] mx-auto px-6 mt-14">
               <div
-                className="relative w-full aspect-[16/10] sm:aspect-[16/9] overflow-hidden rounded-xl group"
-                style={{ boxShadow: "0 12px 40px rgba(0,0,0,0.16)" }}
+                className="relative w-full aspect-[16/10] sm:aspect-[16/9] overflow-hidden rounded-2xl group border border-[var(--mat-edge)]"
+                style={{ boxShadow: "var(--lift-3)" }}
               >
                 <Image
                   src={project.coverImage}
                   alt={project.title}
                   fill
                   priority
-                  className="object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.03]"
+                  className="object-cover transition-transform duration-700 ease-[var(--spring)] group-hover:scale-[1.03]"
                   sizes="(max-width: 900px) 100vw, 900px"
                 />
               </div>

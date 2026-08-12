@@ -212,13 +212,13 @@ export default function Experience() {
                             delay={Math.min(index * 0.04, 0.2)}
                         >
                             <div
-                                className="border-t border-[var(--line)] transition-colors duration-300"
-                                style={{ background: isExpanded ? "rgba(200, 228, 176, 0.18)" : "transparent" }}
+                                className="border-t border-[var(--line)] transition-colors duration-200"
+                                style={{ background: isExpanded ? "rgba(200, 228, 176, 0.22)" : "transparent" }}
                             >
-                                {/* Clickable row */}
+                                {/* Clickable row — highlights on press, not on release */}
                                 <button
                                     onClick={() => toggleExpand(index)}
-                                    className="w-full text-left cursor-pointer group/row py-7 md:py-9 px-2 md:px-4"
+                                    className="press w-full text-left cursor-pointer group/row py-7 md:py-9 px-2 md:px-4 rounded-lg hover:bg-[rgba(200,228,176,0.14)] active:bg-[rgba(200,228,176,0.3)]"
                                     aria-expanded={isExpanded}
                                 >
                                     <div className="flex items-start justify-between gap-4 md:gap-8">
@@ -227,7 +227,9 @@ export default function Experience() {
                                         <div className="flex items-start gap-4 md:gap-5 min-w-0">
                                             {/* Company logo */}
                                             <div className="flex-shrink-0 mt-0.5">
-                                                <div className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[var(--bg-surface)] flex items-center justify-center overflow-hidden border border-[var(--line)] font-mono text-[9px] text-[var(--text-muted)] relative">
+                                                <div
+                                                    className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[var(--bg-surface)] flex items-center justify-center overflow-hidden border border-[var(--line)] font-mono text-[9px] text-[var(--text-muted)] relative transition-shadow duration-300 ease-[var(--spring)] group-hover/row:shadow-[var(--lift-1)]"
+                                                >
                                                     <span className="absolute z-0">{exp.fallback}</span>
                                                     <img
                                                         src={exp.logo}
@@ -239,13 +241,13 @@ export default function Experience() {
                                             </div>
 
                                             <div className="min-w-0">
-                                                <h3 className="font-heading text-xl md:text-2xl leading-snug text-[var(--text-primary)] transition-colors duration-200 group-hover/row:text-[var(--green-deep)]">
+                                                <h3 className="type-row text-[var(--text-primary)] transition-colors duration-200 group-hover/row:text-[var(--green-deep)]">
                                                     {exp.title}
                                                 </h3>
                                                 <p
                                                     className="mt-1"
                                                     style={{
-                                                        fontFamily: "'Manrope', sans-serif",
+                                                        fontFamily: "var(--font-sans)",
                                                         fontWeight: 400,
                                                         fontSize: "1rem",
                                                         color: "var(--green-deep)",
@@ -262,15 +264,18 @@ export default function Experience() {
                                                 {exp.period}
                                             </span>
                                             <span
-                                                className="font-heading text-2xl leading-none select-none transition-all duration-300"
+                                                className="flex items-center justify-center w-7 h-7 rounded-full border border-[var(--line)] select-none"
                                                 style={{
                                                     color: "var(--green-deep)",
-                                                    opacity: isExpanded ? 1 : 0.45,
+                                                    background: isExpanded ? "var(--green-soft)" : "transparent",
                                                     transform: isExpanded ? "rotate(45deg)" : "rotate(0deg)",
-                                                    display: "inline-block",
+                                                    transition: "transform var(--t-base) var(--spring), background var(--t-fast) var(--spring)",
                                                 }}
+                                                aria-hidden
                                             >
-                                                +
+                                                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                                                    <path d="M6 1v10M1 6h10" />
+                                                </svg>
                                             </span>
                                         </div>
                                     </div>
@@ -283,11 +288,11 @@ export default function Experience() {
 
                                 {/* Expandable details */}
                                 <div
-                                    className="grid transition-all duration-400 ease-[var(--ease-out)]"
+                                    className="grid"
                                     style={{
                                         gridTemplateRows: isExpanded ? "1fr" : "0fr",
                                         opacity: isExpanded ? 1 : 0,
-                                        transition: "grid-template-rows 350ms cubic-bezier(0.23,1,0.32,1), opacity 300ms ease",
+                                        transition: "grid-template-rows var(--t-base) var(--spring), opacity var(--t-fast) linear",
                                     }}
                                 >
                                     <div className="overflow-hidden">

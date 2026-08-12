@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ArchitectureDiagram from "./ArchitectureDiagram";
 
 export default function CaseStudyContent({ project }) {
   return (
@@ -14,14 +15,17 @@ function Block({ block, project }) {
   switch (block.type) {
     case "lead":
       return (
-        <p className="font-body text-xl lg:text-[1.45rem] leading-[1.55] text-[var(--text-primary)] max-w-[62ch]">
+        <p
+          className="font-body text-xl lg:text-[1.45rem] text-[var(--text-primary)] max-w-[62ch]"
+          style={{ lineHeight: 1.55, letterSpacing: "-0.008em" }}
+        >
           {block.text}
         </p>
       );
 
     case "heading":
       return (
-        <h2 className="font-heading text-[1.85rem] lg:text-[2.25rem] leading-[1.15] text-[var(--text-primary)] pt-2">
+        <h2 className="type-heading text-[var(--text-primary)] pt-2">
           {block.text}
         </h2>
       );
@@ -66,7 +70,12 @@ function Block({ block, project }) {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-6 py-7 border-y border-[var(--line)]">
           {block.items.map((s, i) => (
             <div key={i}>
-              <div className="font-heading text-3xl lg:text-4xl text-[var(--green-deep)]">{s.value}</div>
+              <div
+                className="font-heading text-3xl lg:text-4xl text-[var(--green-deep)]"
+                style={{ letterSpacing: "-0.02em", lineHeight: 1.1 }}
+              >
+                {s.value}
+              </div>
               <div className="font-mono text-[0.68rem] text-[var(--text-muted)] mt-1.5 leading-snug tracking-tight">
                 {s.label}
               </div>
@@ -75,24 +84,37 @@ function Block({ block, project }) {
         </div>
       );
 
+    case "diagram":
+      return <ArchitectureDiagram id={block.id} caption={block.caption} />;
+
     case "gallery": {
       if (!project.images?.length) return null;
+      // Screenshots are wide and meant to be read; photos crop happily into a
+      // portrait tile. The project declares which kind of images it has.
+      const wide = project.galleryAspect === "wide";
       return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5 py-2">
+        <div className={`grid grid-cols-1 gap-4 lg:gap-6 py-2 ${wide ? "" : "sm:grid-cols-2"}`}>
           {project.images.map((img, i) => (
             <figure key={i} className="group">
               <div
-                className="relative w-full aspect-[4/5] overflow-hidden rounded-lg"
-                style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.10)" }}
+                className={`relative w-full overflow-hidden rounded-xl border border-[var(--mat-edge)] ${
+                  wide ? "aspect-[16/10]" : "aspect-[4/5]"
+                }`}
+                style={{ boxShadow: "var(--lift-2)" }}
               >
                 <Image
                   src={img.src}
                   alt={img.alt}
                   fill
-                  className="object-cover transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-[1.04]"
-                  sizes="(max-width: 640px) 100vw, 50vw"
+                  className={`object-cover transition-transform duration-500 ease-[var(--spring)] group-hover:scale-[1.04] ${wide ? "object-top" : ""}`}
+                  sizes={wide ? "(max-width: 760px) 100vw, 760px" : "(max-width: 640px) 100vw, 50vw"}
                 />
               </div>
+              {img.caption && (
+                <figcaption className="font-mono text-[0.72rem] text-[var(--text-muted)] mt-2.5 leading-snug">
+                  {img.caption}
+                </figcaption>
+              )}
             </figure>
           ))}
         </div>

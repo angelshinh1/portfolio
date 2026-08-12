@@ -115,6 +115,213 @@ const projects = [
     ],
   },
   {
+    slug: "devflow",
+    title: "DevFlow",
+    subtitle: "AI code review for GitHub pull requests",
+    category: "Full-Stack · AI",
+    year: "2026",
+    role: "Solo Developer",
+    team: "Personal project",
+    description:
+      "Connect a GitHub account, open a pull request, and get back a structured review — a plain-language summary, a ranked list of likely bugs with file locations and severity, and non-blocking suggestions — in a panel beside the diff.",
+    technologies: [
+      "Next.js 16",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+      "Gemini",
+      "Octokit",
+      "Tailwind CSS",
+      "Framer Motion",
+    ],
+    githubUrl: "https://github.com/angelshinh1/DevFlow",
+    liveUrl: null,
+    coverImage: "/projects/devflow/review-light.webp",
+    galleryAspect: "wide",
+    images: [
+      {
+        src: "/projects/devflow/dashboard-light.webp",
+        alt: "DevFlow dashboard listing repositories and recent activity",
+        caption: "The dashboard — your repositories, sorted by recent activity.",
+      },
+      {
+        src: "/projects/devflow/review-dark.webp",
+        alt: "A pull request diff beside the AI review panel, in dark mode",
+        caption: "The review panel sits beside the diff, so findings stay next to the code they describe.",
+      },
+      {
+        src: "/projects/devflow/login-page-dark.webp",
+        alt: "DevFlow sign-in screen with GitHub OAuth, in dark mode",
+        caption: "One-click GitHub OAuth — the only credential the app ever asks for.",
+      },
+    ],
+    content: [
+      {
+        type: "lead",
+        text: "DevFlow reads a pull request diff and hands back something you can act on: a summary of what the PR does, a ranked list of likely bugs with severity and file locations, and separate non-blocking suggestions. Reviews are saved per user, so you can reopen a PR and see what the model said last time.",
+      },
+      {
+        type: "heading",
+        text: "Why bother",
+      },
+      {
+        type: "paragraph",
+        text: "Asking a chat window to \"review this PR\" gives you prose — confident, unstructured, and impossible to triage. I wanted the opposite: output with a fixed shape, so a review can be sorted, ranked, stored, and compared against the next one. That constraint drove almost every decision in the project.",
+      },
+      {
+        type: "heading",
+        text: "Making the model return data, not paragraphs",
+      },
+      {
+        type: "paragraph",
+        text: "Gemini is called with a JSON response schema, so the shape of a review is enforced by the model rather than hoped for. What comes back is then parsed and validated against a Zod schema before it is trusted — if the model returns malformed JSON or drifts from the contract, the request fails loudly with a clean error state instead of writing junk to the database.",
+      },
+      {
+        type: "paragraph",
+        text: "The overall severity of a review isn't taken from the model's own summary judgment. It's derived: the worst individual bug wins, falling back to the model's call only when there are no bugs at all. Small thing, but it means the badge on a review can never disagree with the findings underneath it.",
+      },
+      {
+        type: "paragraph",
+        text: "The system prompt spends most of its length discouraging invention — an honest empty review beats a padded one, and the model is told so explicitly. It's also told it can only see the diff, not the surrounding codebase, which noticeably cuts down on confident speculation about code that isn't there.",
+      },
+      {
+        type: "heading",
+        text: "Working within GitHub's limits",
+      },
+      {
+        type: "list",
+        items: [
+          "Diffs are fetched through Octokit in GitHub's raw diff format, then capped at 60k characters with an explicit truncation marker — big enough for real PRs, bounded enough to keep prompts and payloads predictable.",
+          "Supabase only exposes the GitHub provider token right after sign-in, and drops it when its own access token later refreshes. DevFlow copies that token into its own httpOnly cookie at the OAuth callback and reads from there first, so GitHub access survives a refresh.",
+          "Every review is written with the user's id attached and read back through Postgres Row Level Security — each policy compares auth.uid(), so a user can only ever touch their own rows, enforced by the database rather than by application code.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "The app itself",
+      },
+      {
+        type: "paragraph",
+        text: "It's Next.js 16 on the App Router with React Server Components, typed end-to-end in TypeScript strict mode. Review generation runs as a server action so the API keys never reach the browser, and the result comes back serializable to update the panel in place. Every async route has a loading skeleton and an error boundary — the difference between a demo and something you'd actually leave open in a tab.",
+      },
+      {
+        type: "gallery",
+      },
+    ],
+  },
+  {
+    slug: "fragments",
+    title: "Fragments",
+    subtitle: "A cloud microservice on AWS",
+    category: "Cloud · Backend",
+    year: "2026",
+    role: "Solo Developer",
+    team: "Seneca Polytechnic · CCP555",
+    description:
+      "A containerized Node microservice for storing and converting small pieces of text, JSON, and images — deployed to ECS Fargate behind a load balancer, with metadata in DynamoDB, blobs in S3, Cognito for auth, and a tagged release pipeline that ships it.",
+    technologies: [
+      "Node.js",
+      "Express 5",
+      "Docker",
+      "AWS ECS Fargate",
+      "Amazon ECR",
+      "DynamoDB",
+      "Amazon S3",
+      "Amazon Cognito",
+      "GitHub Actions",
+      "Jest",
+      "Hurl",
+      "sharp",
+    ],
+    githubUrl: null,
+    liveUrl: null,
+    privateNote: "Coursework project — the repository is private and the AWS resources have been torn down.",
+    coverImage: null,
+    content: [
+      {
+        type: "lead",
+        text: "Fragments is a cloud microservice built over a semester for a fictional manufacturing company: IoT devices, mobile apps, and assembly-line cameras all need to store small pieces of text and images, in a dozen formats, and read them back in whichever format the consumer happens to want.",
+      },
+      {
+        type: "heading",
+        text: "The problem it solves",
+      },
+      {
+        type: "paragraph",
+        text: "A fragment is smaller than a document — a sensor reading in CSV, a status update in Markdown, a photo of a damaged part. The requirement that shaped the whole design was conversion: a Markdown fragment has to be retrievable as HTML, a JPEG as a PNG, a CSV as JSON — without storing a second copy. Conversion therefore happens on read, from the single stored original, and costs nothing in storage.",
+      },
+      {
+        type: "stats",
+        items: [
+          { value: "11", label: "Supported fragment types" },
+          { value: "2", label: "Auth strategies, one codebase" },
+          { value: "80%+", label: "Unit test coverage" },
+          { value: "14", label: "Hurl integration suites" },
+        ],
+      },
+      {
+        type: "heading",
+        text: "How it runs on AWS",
+      },
+      {
+        type: "paragraph",
+        text: "The service runs as a Fargate task behind an Application Load Balancer. Requests carry a Cognito identity token that the server verifies itself with aws-jwt-verify, so there's no session state to keep anywhere. Storage is deliberately split: fragment metadata — id, owner, type, size, timestamps — goes to DynamoDB keyed by owner and id, while the actual bytes go to S3 under an owner-scoped key. Metadata queries stay fast and cheap, and the blobs live somewhere built to hold them.",
+      },
+      {
+        type: "diagram",
+        id: "fragments-aws",
+        caption:
+          "The request path. Sign-in happens against Cognito before the API is touched; the container verifies the token itself rather than delegating to the load balancer.",
+      },
+      {
+        type: "heading",
+        text: "One codebase, two backends",
+      },
+      {
+        type: "paragraph",
+        text: "The data layer sits behind six functions — read and write for metadata, read and write for data, list, and delete. One implementation talks to DynamoDB and S3; another keeps everything in memory. Which one loads is decided by environment variables at startup, so the same server runs locally with no AWS account at all, and the model code above it never knows the difference.",
+      },
+      {
+        type: "paragraph",
+        text: "That indirection is what makes the tests honest. Integration tests run the real container against DynamoDB Local and a MiniStack S3 stand-in via Docker Compose, exercising the actual AWS code paths — the SDK calls, the key layout, the error handling — without a single real AWS resource or a cent of spend.",
+      },
+      {
+        type: "heading",
+        text: "Shipping it",
+      },
+      {
+        type: "list",
+        items: [
+          "Every push to main runs ESLint, hadolint against the Dockerfile, Jest and Supertest unit tests above 80% coverage, and the full Hurl integration suite against the composed stack.",
+          "The image is a multi-stage build on node:24-alpine — production dependencies installed in a throwaway stage, only the resulting node_modules and source copied into the final layer, with a HEALTHCHECK hitting the service's own health route.",
+          "Deployment is gated on intent, not on merging: only pushing a v* git tag triggers CD, which builds the image, pushes it to ECR under both the version tag and latest, renders the ECS task definition with secrets injected from GitHub, and rolls the service — waiting for stability before it reports success.",
+        ],
+      },
+      {
+        type: "diagram",
+        id: "fragments-pipeline",
+        caption:
+          "CI on every push, CD only on a version tag. Tagging an already-tested commit is what makes a deploy a decision rather than an accident.",
+      },
+      {
+        type: "heading",
+        text: "Conversion",
+      },
+      {
+        type: "paragraph",
+        text: "Every supported type declares which extensions it can be read as, in one table. A request for a fragment with an extension looks up that table, and either runs the conversion — markdown-it for Markdown to HTML, js-yaml for JSON to YAML, csv-parse for CSV to JSON, sharp for anything image to anything image — or returns a 415 explaining that the conversion isn't possible. Adding a format later means adding a row, not rewriting the route.",
+      },
+      {
+        type: "heading",
+        text: "What I took from it",
+      },
+      {
+        type: "paragraph",
+        text: "The interesting part of this project was never the API surface — CRUD over text is not hard. It was everything around it: making a service that behaves identically on a laptop and on Fargate, proving it with tests that don't need the cloud to run, and building a pipeline where the risky step is the one you have to opt into. Those constraints are what the AWS parts were really teaching.",
+      },
+    ],
+  },
+  {
     slug: "somnio",
     title: "Somnio",
     subtitle: "Dream Journal & Network Platform",

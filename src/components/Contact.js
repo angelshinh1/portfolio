@@ -20,13 +20,16 @@ export default function Contact() {
       >♩</span>
 
       <Reveal delay={0.05}>
-        <h2 className="font-heading text-[clamp(2.75rem,9vw,6rem)] leading-[0.98] text-[var(--text-primary)]">
+        <h2
+          className="font-heading text-[clamp(2.75rem,9vw,6rem)] text-[var(--text-primary)]"
+          style={{ lineHeight: 0.98, letterSpacing: "-0.032em" }}
+        >
           Get <em>in touch</em>.
         </h2>
       </Reveal>
 
       <Reveal delay={0.1}>
-        <p className="font-body text-lg lg:text-xl text-[var(--text-secondary)] max-w-[46ch] mx-auto leading-relaxed mt-8">
+        <p className="font-body type-lead text-[var(--text-secondary)] max-w-[46ch] mx-auto mt-8">
           Wanna chat? Shoot me a DM on{" "}
           <StringLink
             href="https://www.linkedin.com/in/angelshinh/"
