@@ -120,10 +120,10 @@ export default function Hero() {
                         className="font-body mt-3 text-[var(--green-deep)]"
                         style={{ fontWeight: 500, fontSize: "1.05rem", letterSpacing: "0.002em" }}
                     >
-                        Software Developer
+                        Software Engineer
                     </p>
                     <p className="font-body type-lead mt-4 text-[var(--text-secondary)] max-w-[44ch] mx-auto lg:mx-0">
-                        Software engineer based in Toronto, with a year of
+                        Software engineer based in Toronto, with more than a year of
                         hands-on experience building real-world software.
                         Outside of code, usually behind a{" "}
                         <mark>camera or a guitar</mark>.

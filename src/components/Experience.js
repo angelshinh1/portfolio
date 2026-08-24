@@ -19,7 +19,6 @@ const experiencesData = {
                 period: "Jan – Apr 2026",
                 year: "2026",
                 summary: "real-time scavenger hunt platform, next.js + mongodb, 30+ players live",
-                href: "/projects/ddp-hunt",
             },
             {
                 title: "Technical Systems Analyst",
@@ -58,8 +57,6 @@ const experiencesData = {
                 period: "May 2025 – Jan 2026",
                 year: "2025",
                 summary: "designed cusec 2026 end to end",
-                href: "https://2026.cusec.net",
-                external: true,
             },
         ],
     },
@@ -176,21 +173,6 @@ function RoleRow({ exp }) {
         "group/row relative flex items-start gap-4 md:gap-5 rounded-xl px-3 md:px-4 py-3.5 md:py-4 " +
         "transition-colors duration-300 ease-[var(--spring)] hover:bg-[rgba(200,228,176,0.28)]";
 
-    if (exp.href) {
-        return (
-            <li>
-                <a
-                    href={exp.href}
-                    target={exp.external ? "_blank" : undefined}
-                    rel={exp.external ? "noopener noreferrer" : undefined}
-                    className={`press ${rowClass} cursor-pointer active:bg-[rgba(200,228,176,0.4)]`}
-                >
-                    {inner}
-                </a>
-            </li>
-        );
-    }
-
     return (
         <li className={rowClass}>
             {inner}
@@ -214,7 +196,7 @@ export default function Experience() {
     return (
         <section
             id="experience"
-            className="relative max-w-[88vw] lg:max-w-[52rem] mx-auto px-1 py-24 lg:py-28"
+            className="relative max-w-[88vw] lg:max-w-[64rem] mx-auto px-1 py-24 lg:py-28"
         >
             <SectionHeader title="Experience" className="mb-8 lg:mb-10" />
 
