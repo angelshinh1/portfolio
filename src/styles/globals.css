@@ -385,6 +385,45 @@ mark, .mark {
   body::after { opacity: 0; }
 }
 
+/* ══ SCROLLBARS ═════════════════════════════════════════════════════════
+   Thin, overlay-style, theme-tinted — replaces the stock OS scrollbar
+   (wide and grey by default) with a floating green pill, so it reads as
+   part of the paper system instead of sitting on top of it. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--green-muted) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--green-muted);
+  border-radius: 999px;
+  border: 2.5px solid transparent;
+  background-clip: padding-box;
+  transition: background-color var(--t-fast) var(--spring);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--green-deep);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+@media (prefers-contrast: more) {
+  ::-webkit-scrollbar-thumb { background-color: var(--green-deep); }
+  * { scrollbar-color: var(--green-deep) transparent; }
+}
+
 /* ── Case-study entrance animation (pure CSS, runs at mount) ── */
 @keyframes case-fade-in {
   from { opacity: 0; transform: translate3d(0, 12px, 0); }

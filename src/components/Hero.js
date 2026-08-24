@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Reveal from "./Reveal";
 import GuitarIllustration from "./GuitarIllustration";
+import GithubContributions from "./GithubContributions";
 
 gsap.registerPlugin(useGSAP);
 
@@ -122,36 +123,14 @@ export default function Hero() {
                         Software Developer
                     </p>
                     <p className="font-body type-lead mt-4 text-[var(--text-secondary)] max-w-[44ch] mx-auto lg:mx-0">
-                        Passionate about building innovative solutions &amp; blending
-                        tech with art.
-                    </p>
-                </Reveal>
-            </div>
-
-            {/* About */}
-            <Reveal delay={0.1} className="mt-16 lg:mt-20">
-                <h2 className="type-heading text-[var(--text-primary)]">
-                    About
-                </h2>
-                <div className="font-body type-body mt-5 text-base lg:text-lg text-[var(--text-secondary)] space-y-5 max-w-[62ch]">
-                    <p>
-                        I&apos;m really into exploring new technologies and staying
-                        up-to-date with the latest trends in software development.
-                        When I&apos;m not coding, I absolutely love{" "}
-                        <mark>photography and playing guitar</mark>.
-                    </p>
-                    <p>
-                        Currently I&apos;m exploring new opportunities in software
-                        engineering, having previously worked at{" "}
-                        <span className="text-[var(--text-primary)] font-semibold">RBC</span> as a
-                        SWE Intern where I dove deep into{" "}
-                        <mark>secure data exchange and backend systems</mark>. Feel free
-                        to reach out - I&apos;m always down to make new friends and
-                        collaborate on cool projects.
+                        Software engineer based in Toronto, with a year of
+                        hands-on experience building real-world software.
+                        Outside of code, usually behind a{" "}
+                        <mark>camera or a guitar</mark>.
                     </p>
 
                     {/* CTAs */}
-                    <div className="flex flex-wrap gap-3 pt-4">
+                    <div className="flex flex-wrap justify-center lg:justify-start gap-3 pt-6">
                         <a href="#contact" className="btn btn-solid">
                             Get in touch
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -167,7 +146,14 @@ export default function Hero() {
                             View resume
                         </a>
                     </div>
-                </div>
+                </Reveal>
+            </div>
+
+            {/* Contribution activity — the one stat worth leading with.
+                Capped width on desktop so it sits beside the guitar
+                illustration rather than running underneath it. */}
+            <Reveal delay={0.1} className="mt-14 lg:mt-16 lg:max-w-[42rem]">
+                <GithubContributions />
             </Reveal>
         </header>
     );
