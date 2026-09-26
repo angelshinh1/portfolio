@@ -174,20 +174,7 @@ export default function Hero() {
                     <div ref={watermarkRef} className="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none">
                         <GuitarIllustration style={{ width: 150, height: 260, transform: "rotate(-24deg)" }} />
                     </div>
-                    <p
-                        className="font-hand absolute right-2 top-0 text-[1.5rem] leading-tight text-[var(--ink-brown)] max-w-[8.5rem] text-right"
-                        style={{ rotate: "-4deg" }}
-                    >
-                        proof I actually ship code
-                    </p>
                 </div>
-                <p
-                    className="font-hand lg:hidden -mb-2 ml-3 text-[1.5rem] leading-tight text-[var(--ink-brown)]"
-                    style={{ rotate: "-3deg" }}
-                    aria-hidden
-                >
-                    proof I actually ship code
-                </p>
                 <GithubContributions
                     frame={Paper}
                     frameProps={{
