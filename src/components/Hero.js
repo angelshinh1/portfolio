@@ -51,13 +51,13 @@ export default function Hero() {
         <header
             id="about"
             ref={introRef}
-            className="relative max-w-[88vw] lg:max-w-[70rem] mx-auto px-1 pt-32 pb-20 lg:pt-40 lg:pb-24"
+            className="relative max-w-[88vw] lg:max-w-[70rem] mx-auto px-1 pt-40 pb-20 lg:pt-40 lg:pb-24"
         >
-            {/* Identity collage — photo sticker (left) + torn note (right) */}
+            {/* Desktop: stamp beside the card. Below lg: stamp pinned to the card's top-right corner */}
             <div className="relative grid grid-cols-1 lg:grid-cols-[0.85fr_1.6fr] gap-16 lg:gap-6 items-center">
-                <Reveal className="flex-shrink-0">
+                <Reveal className="absolute -top-[4.5rem] right-1 sm:right-4 z-10 lg:static lg:z-auto flex-shrink-0">
                     <div
-                        className="relative group w-fit mx-auto lg:mx-0 lg:ml-4"
+                        className="relative group w-fit lg:ml-4"
                         onMouseEnter={() => setHovered(true)}
                         onMouseLeave={() => setHovered(false)}
                     >
@@ -69,7 +69,7 @@ export default function Hero() {
                             onClick={handleImageClick}
                             aria-label="Angel Shinh — say hi"
                         >
-                            <span className="block w-[186px] h-[226px] md:w-[226px] md:h-[276px] p-2.5 bg-[#FDFBF4] border border-[rgba(62,44,30,0.14)]">
+                            <span className="block w-[88px] h-[108px] sm:w-[116px] sm:h-[140px] lg:w-[226px] lg:h-[276px] p-1.5 lg:p-2.5 bg-[#FDFBF4] border border-[rgba(62,44,30,0.14)]">
                                 <span className="relative block w-full h-full overflow-hidden">
                                     <Image
                                         src="/profile.jpg"
@@ -82,11 +82,11 @@ export default function Hero() {
                                 </span>
                             </span>
                         </button>
-                        <Postmark className="absolute -top-8 -right-24 md:-right-28 w-36 md:w-40 hidden sm:block" rotate={-8} />
+                        <Postmark className="absolute -top-8 -right-28 w-40 hidden lg:block" rotate={-8} />
 
                         {/* Margin note pointing back at the photo */}
                         <div
-                            className="absolute -bottom-14 -right-24 md:-right-28 hidden sm:flex items-center gap-1 text-[var(--ink-brown)] pointer-events-none"
+                            className="absolute -bottom-14 -right-28 hidden lg:flex items-center gap-1 text-[var(--ink-brown)] pointer-events-none"
                             style={{ opacity: tipVisible ? 0 : 1, transition: "opacity var(--t-base) var(--spring)" }}
                             aria-hidden
                         >
@@ -98,9 +98,8 @@ export default function Hero() {
 
                         {/* Taped note that fades in under the stamp */}
                         <div
-                            className="absolute left-1/2 top-full mt-5 z-40 pointer-events-none"
+                            className="absolute right-0 lg:right-auto lg:left-1/2 lg:-translate-x-1/2 top-full mt-5 z-40 pointer-events-none"
                             style={{
-                                transform: "translateX(-50%)",
                                 opacity: tipVisible ? 1 : 0,
                                 transition: "opacity var(--t-base) var(--spring)",
                             }}
@@ -130,12 +129,11 @@ export default function Hero() {
                     depth={6}
                     rotate={1.2}
                     className="text-center lg:text-left"
-                    innerClassName="px-6 py-10 sm:px-10 md:px-14 md:py-14"
+                    innerClassName="px-6 pt-14 pb-10 sm:px-10 sm:pt-16 md:px-14 md:pb-14 lg:py-14"
                     decor={<Tape rotate={-7} className="-top-3 left-8 md:left-14" />}
                 >
                     <h1 className="type-display text-[var(--text-primary)]">
-                        Hi, I&apos;m{" "}
-                        <em style={{ color: "var(--green-deep)", fontStyle: "normal" }}>Angel</em>.
+                        Hi, I&apos;m Angel.
                     </h1>
                     <p className="mt-5">
                         <span className="label-dymo" style={{ rotate: "-1.5deg" }}>Software Engineer</span>
