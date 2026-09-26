@@ -1,12 +1,10 @@
-import dynamic from "next/dynamic";
 import Contact from "@/components/Contact";
 import Experience from "@/components/Experience";
 import FunStuff from "@/components/FunStuff";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import Seo from "@/components/Seo";
-
-const GuitarDivider = dynamic(() => import("@/components/GuitarDivider"), { ssr: false });
+import { CutLine } from "@/components/scrapbook";
 
 export default function Home() {
   return (
@@ -22,15 +20,17 @@ export default function Home() {
         <Hero />
       </div>
 
-      {/* Guitar string divider */}
-      <GuitarDivider />
+      {/* "Cut here" divider */}
+      <div className="section-base">
+        <CutLine className="max-w-[88vw] lg:max-w-[70rem] mx-auto pb-10" />
+      </div>
 
       {/* Experience — subtle grain */}
       <div className="section-grain">
         <Experience />
       </div>
 
-      {/* Projects — mint-tinted green section */}
+      {/* Projects — warm oat section */}
       <div className="section-green">
         <Projects />
       </div>

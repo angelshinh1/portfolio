@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useRef, useEffect, useCallback } from "react";
 import GuitarIllustration from "./GuitarIllustration";
+import { Tape, tornClip } from "./scrapbook";
 import { createSpring, project, rubberband, createVelocityTracker } from "@/lib/spring";
 
 // `external` items are real files in /public, not routes — next/link would try
@@ -26,6 +27,10 @@ function NavLink({ item, ...props }) {
   // the jump you'd otherwise see. Lenis does the moving instead (Layout.js).
   return <Link href={item.href} scroll={!item.href.includes("#")} {...props} />;
 }
+
+// The bar is a strip of paper with a torn bottom edge. Fixed seed, so server
+// and client tear it identically.
+const NAV_CLIP = tornClip(5, ["bottom"], 4, 90);
 
 const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
 const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
@@ -113,16 +118,7 @@ export default function Navbar() {
       if (!isMobile()) return;   // desktop height is the browser's business
 
       el.style.height = `${h}px`;
-
-      // The pill has to stop being a pill almost immediately, or a tall box with
-      // a 999px radius reads as a giant lozenge on the way open.
       const progress = clamp((h - collapsed) / (expanded - collapsed), 0, 1);
-      el.style.borderRadius = `${999 - 971 * Math.min(1, progress * 6)}px`;
-
-      // A thin strip of chrome can be translucent; a surface that covers the
-      // screen is a blocking layer and has to read as near-solid, or the page
-      // behind it competes with the menu.
-      el.style.background = `rgba(232, 238, 226, ${(0.72 + 0.25 * progress).toFixed(3)})`;
 
       // Menu content arrives once there's actually room for it
       if (menuRef.current) {
@@ -153,7 +149,6 @@ export default function Navbar() {
       if (!isMobile()) {
         // Desktop lays out naturally — hand height back to the browser.
         el.style.height = "";
-        el.style.borderRadius = "999px";
         return;
       }
       spring.setCurrent(open ? e : c);
@@ -181,7 +176,6 @@ export default function Navbar() {
 
     if (reducedRef.current) {
       el.style.height = isMobile() ? `${open ? expanded : collapsed}px` : "";
-      el.style.borderRadius = open ? "28px" : "999px";
       if (menuRef.current) menuRef.current.style.opacity = open ? "1" : "0";
       return;
     }
@@ -241,20 +235,24 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-30 px-3 sm:px-5 pt-3 sm:pt-4">
-      {/* One floating surface. On mobile it grows from a pill into the whole
-          menu; on desktop it stays a bar and never changes height. */}
+      {/* A strip of paper taped across the top of the page. On mobile it grows
+          into the whole menu; on desktop it stays a bar and never changes
+          height. The wrapper carries the hide-on-scroll move and the shadow
+          (a drop-shadow, since the torn clip-path would cut off a box-shadow). */}
+      <div
+        className="relative mx-auto max-w-[92vw] lg:max-w-[76rem]"
+        style={{
+          transform: hidden && !open ? "translate3d(0, -140%, 0)" : "translate3d(0, 0, 0)",
+          filter: scrolled || open ? "var(--scrap-shadow-up)" : "var(--scrap-shadow)",
+          transition: "transform var(--t-base) var(--spring), filter var(--t-base) var(--spring)",
+        }}
+      >
+      <Tape variant="washi" rotate={-5} width={70} className="-top-2 -left-3 z-10" />
       <div
         ref={navRef}
-        className="material-chrome relative mx-auto max-w-[92vw] lg:max-w-[76rem] flex flex-col overflow-hidden rounded-full md:h-auto"
+        className="paper paper-cream relative flex flex-col overflow-hidden rounded-[2px] md:h-auto"
         style={{
-          // The hide-on-scroll transform lives on this element, not on a
-          // parent: a transformed *ancestor* creates a new backdrop root and
-          // silently kills the backdrop blur on everything inside it.
-          transform: hidden && !open ? "translate3d(0, -130%, 0)" : "translate3d(0, 0, 0)",
-          border: `1px solid ${scrolled || open ? "var(--mat-edge)" : "transparent"}`,
-          boxShadow: scrolled || open ? "var(--lift-2)" : "var(--lift-1)",
-          transition:
-            "transform var(--t-base) var(--spring), border-color var(--t-base) var(--spring), box-shadow var(--t-base) var(--spring)",
+          clipPath: NAV_CLIP,
           touchAction: open ? "none" : "auto",
         }}
         onPointerDown={onPointerDown}
@@ -267,29 +265,20 @@ export default function Navbar() {
           {/* Wordmark — Playfair Display (the one serif touch outside headings, as a logotype) */}
           <Link
             href="/"
-            className="press text-[var(--text-primary)] hover:text-[var(--green-deep)] transition-colors duration-200"
+            className="press text-[var(--ink-brown)] hover:text-[var(--green-deep)] transition-colors duration-200"
             style={{ fontFamily: "var(--font-serif)", fontWeight: 600, fontSize: "1.25rem", letterSpacing: "-0.015em" }}
           >
             Angel Shinh
           </Link>
 
           {/* Desktop links */}
-          <nav className="hidden md:flex items-center" aria-label="Primary navigation">
+          <nav className="hidden md:flex items-center gap-7" aria-label="Primary navigation">
             {navItems.map((item, i) => (
               <span key={item.label} className="flex items-center">
-                {i > 0 && (
-                  <span
-                    className="mx-3 select-none"
-                    style={{ fontFamily: "var(--font-sans)", fontWeight: 500, color: "var(--green-deep)", opacity: 0.5, fontSize: "0.9rem" }}
-                    aria-hidden="true"
-                  >
-                    /
-                  </span>
-                )}
                 <NavLink
                   item={item}
-                  className="press vibrant relative group transition-colors duration-200 hover:text-[var(--green-deep)]"
-                  style={{ fontFamily: "var(--font-sans)", fontSize: "0.95rem" }}
+                  className="press font-type relative group uppercase text-[var(--ink-brown)] transition-colors duration-200 hover:text-[var(--green-deep)]"
+                  style={{ fontSize: "0.8rem", letterSpacing: "0.12em" }}
                   onMouseEnter={() => wiggleLink(wigglePaths.current[i])}
                 >
                   {item.label}
@@ -313,7 +302,7 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Mobile toggle — guitar string icon */}
+          {/* Mobile toggle */}
           <button
             className="press-strong md:hidden p-1 relative z-10"
             onClick={() => setOpen(!open)}
@@ -321,17 +310,17 @@ export default function Navbar() {
             aria-label="Toggle navigation"
           >
             {open ? (
-              /* Close: two strings crossing as X */
+              /* Close */
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-                <line x1="2" y1="2" x2="18" y2="18" stroke="var(--string-E)" strokeWidth="2.2" strokeLinecap="round" />
-                <line x1="18" y1="2" x2="2" y2="18" stroke="var(--string-D)" strokeWidth="1.4" strokeLinecap="round" />
+                <line x1="2" y1="2" x2="18" y2="18" stroke="var(--ink-brown)" strokeWidth="2" strokeLinecap="round" />
+                <line x1="18" y1="2" x2="2" y2="18" stroke="var(--ink-brown)" strokeWidth="2" strokeLinecap="round" />
               </svg>
             ) : (
-              /* Hamburger: 3 guitar strings of different thicknesses */
+              /* Hamburger */
               <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden>
-                <line x1="0" y1="2" x2="22" y2="2" stroke="var(--string-E)" strokeWidth="2.5" strokeLinecap="round" />
-                <line x1="0" y1="8" x2="22" y2="8" stroke="var(--string-G)" strokeWidth="1.5" strokeLinecap="round" />
-                <line x1="0" y1="14" x2="22" y2="14" stroke="var(--string-e)" strokeWidth="0.75" strokeLinecap="round" />
+                <line x1="0" y1="2" x2="22" y2="2" stroke="var(--ink-brown)" strokeWidth="2" strokeLinecap="round" />
+                <line x1="0" y1="8" x2="22" y2="8" stroke="var(--ink-brown)" strokeWidth="2" strokeLinecap="round" />
+                <line x1="0" y1="14" x2="22" y2="14" stroke="var(--ink-brown)" strokeWidth="2" strokeLinecap="round" />
               </svg>
             )}
           </button>
@@ -345,18 +334,9 @@ export default function Navbar() {
           style={{ opacity: 0, transition: "opacity var(--t-fast) linear" }}
           inert={!open ? true : undefined}
         >
-          {/* Separator — a plucked string across the bar, deliberately visible */}
+          {/* Separator — a dashed cut line across the page */}
           <div className="flex justify-center pb-6" aria-hidden>
-            <div
-              style={{
-                width: "80%",
-                height: 1,
-                borderRadius: 999,
-                background:
-                  "linear-gradient(90deg, transparent, var(--green-deep) 12%, var(--green-deep) 88%, transparent)",
-                opacity: 0.8,
-              }}
-            />
+            <div className="cut-line w-[86%]" />
           </div>
 
           <nav className="flex-1 flex flex-col gap-6 pl-6 pr-4 sm:pl-7 sm:pr-5" aria-label="Mobile navigation">
@@ -366,10 +346,9 @@ export default function Navbar() {
                 item={item}
                 onClick={() => setOpen(false)}
                 onMouseEnter={() => wiggleLink(mobilePaths.current[i])}
-                className="press relative group inline-block w-fit hover:text-[var(--green-deep)] transition-colors duration-200"
-                style={{ fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: "1.5rem", letterSpacing: "-0.012em", color: "var(--text-secondary)" }}
+                className="press font-hand relative group inline-block w-fit text-[var(--ink-brown)] hover:text-[var(--green-deep)] transition-colors duration-200"
+                style={{ fontSize: "2.1rem", lineHeight: 1.1 }}
               >
-                <span style={{ color: "var(--green-deep)", opacity: 0.45, marginRight: "0.6rem", fontSize: "1.1rem" }}>/</span>
                 {item.label}
                 <svg
                   className="absolute -bottom-[3px] left-0 w-0 h-[7px] overflow-visible transition-[width] duration-300 ease-[var(--spring)] group-hover:w-full"
@@ -395,6 +374,7 @@ export default function Navbar() {
             <GuitarIllustration style={{ width: 124, height: 260 }} />
           </div>
         </div>
+      </div>
       </div>
     </header>
   );

@@ -4,6 +4,7 @@ import CaseStudyContent from "@/components/case-study/CaseStudyContent";
 import CaseReveal from "@/components/case-study/CaseReveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Seo, { SITE_URL } from "@/components/Seo";
+import { Paper, Tape } from "@/components/scrapbook";
 
 export async function getStaticPaths() {
   return {
@@ -30,7 +31,7 @@ export default function ProjectCaseStudy({ project }) {
       />
 
       {/* Hero */}
-      <header className="section-base pt-28 pb-16 lg:pt-32 lg:pb-20">
+      <header className="section-green pt-28 pb-16 lg:pt-32 lg:pb-20">
         <div className="max-w-[760px] mx-auto px-6">
           <CaseReveal>
             <Breadcrumbs
@@ -70,8 +71,7 @@ export default function ProjectCaseStudy({ project }) {
               {project.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="font-mono text-[0.68rem] px-2.5 py-[0.32rem] text-[var(--text-secondary)] border border-[var(--line)]"
-                  style={{ background: "rgba(255,255,255,0.55)", borderRadius: "999px", letterSpacing: "0.015em" }}
+                  className="font-type text-[0.66rem] px-2 py-1 text-[var(--ink-brown)] border border-dashed border-[rgba(62,44,30,0.28)] bg-[rgba(255,255,255,0.55)]"
                 >
                   {tech}
                 </span>
@@ -100,7 +100,7 @@ export default function ProjectCaseStudy({ project }) {
                 </a>
               )}
               {project.privateNote && (
-                <span className="inline-flex items-center gap-1.5 font-mono text-xs text-[var(--text-muted)]">
+                <span className="inline-flex items-center gap-1.5 font-hand text-[1.3rem] leading-none text-[var(--ink-sepia)]">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="11" width="18" height="11" rx="2" />
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
@@ -114,29 +114,38 @@ export default function ProjectCaseStudy({ project }) {
 
         {project.coverImage && (
           <CaseReveal delay={120}>
-            <div className="max-w-[900px] mx-auto px-6 mt-14">
-              <div
-                className="relative w-full aspect-[16/10] sm:aspect-[16/9] overflow-hidden rounded-2xl group border border-[var(--mat-edge)]"
-                style={{ boxShadow: "var(--lift-3)" }}
-              >
+            <div className="max-w-[900px] mx-auto px-6 mt-16">
+              {/* The cover is a print taped into the book */}
+              <div className="scrap bg-white p-2 sm:p-3" style={{ "--r": "-0.8deg" }}>
+                <Tape variant="kraft" rotate={-4} width={110} className="-top-3 left-1/2 -translate-x-1/2" />
+                <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] overflow-hidden">
                 <Image
                   src={project.coverImage}
                   alt={project.title}
                   fill
                   priority
-                  className="object-cover transition-transform duration-700 ease-[var(--spring)] group-hover:scale-[1.03]"
+                  className="object-cover"
                   sizes="(max-width: 900px) 100vw, 900px"
                 />
+                </div>
               </div>
             </div>
           </CaseReveal>
         )}
       </header>
 
-      {/* Article body */}
-      <article className="section-grain pt-16 pb-20 lg:pt-20 lg:pb-28">
-        <div className="max-w-[760px] mx-auto px-6">
-          <CaseStudyContent project={project} />
+      {/* Article body — written up on a journal page */}
+      <article className="section-green pt-16 pb-24 lg:pt-20 lg:pb-32">
+        <div className="max-w-[860px] mx-auto px-3 sm:px-6">
+          <Paper
+            variant="cream"
+            tear={["top", "bottom"]}
+            seed={71}
+            depth={7}
+            innerClassName="px-5 py-12 sm:px-10 md:px-14 md:py-16"
+          >
+            <CaseStudyContent project={project} />
+          </Paper>
         </div>
       </article>
     </>

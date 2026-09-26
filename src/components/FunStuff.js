@@ -1,8 +1,8 @@
-import Image from "next/image";
 import dynamic from "next/dynamic";
-import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
 import StringLink from "./StringLink";
+import PhotoBoard from "./PhotoBoard";
+import { Paper, Tape, Polaroid, DoodleArrow } from "./scrapbook";
 
 const GuitarStrings = dynamic(() => import("./GuitarStrings"), { ssr: false });
 
@@ -24,26 +24,7 @@ const randomFacts = [
     "Oh, did I mentioned I'm 6' 2\" 👀",
 ];
 
-const snapshots = [
-    { n: 1, r: -6, y: 10 },
-    { n: 2, r: 4, y: -8 },
-    { n: 3, r: -3, y: 16 },
-    { n: 4, r: 7, y: -2 },
-    { n: 5, r: -5, y: 8 },
-    { n: 6, r: 3, y: -12 },
-    { n: 7, r: -7, y: 12 },
-    { n: 8, r: 5, y: -4 },
-];
-
-// Decorative note positions scattered in the section
-const AMBIENT_NOTES = [
-    { symbol: '♪', right: '2%',  top: '6%',  size: '1.4rem', opacity: 0.14 },
-    { symbol: '♫', left:  '1%',  top: '28%', size: '1.1rem', opacity: 0.12 },
-    { symbol: '♩', right: '3%',  top: '52%', size: '1rem',   opacity: 0.13 },
-    { symbol: '♬', left:  '2%',  top: '74%', size: '1.2rem', opacity: 0.11 },
-];
-
-// One guitar-string color per hobby card (low E → high e)
+// One guitar-string color per hobby icon (low E → high e)
 const HOBBY_ACCENTS = [
     'var(--string-E)',
     'var(--string-D)',
@@ -53,267 +34,195 @@ const HOBBY_ACCENTS = [
     'var(--string-e)',
 ];
 
-// Subtle static tilts — "pinned to a corkboard" feel
-const HOBBY_TILTS = [-1.8, 1.2, -0.7, 1.6, -1.3, 0.9];
-
-// Per-fact decoration: optional prefix glyph + callout treatment
-const FACT_META = [
-    { prefix: null, callout: false },
-    { prefix: '♩',  callout: true  },  // guitar commits
-    { prefix: null, callout: false },
-    { prefix: null, callout: false },
-    { prefix: null, callout: false },
-    { prefix: '↑',  callout: false },  // 6' 2"
+// Paper tags cut from the same stock, set down at slightly different angles
+const TAGS = [
+    { r: -2,   seed: 41 },
+    { r: 1.5,  seed: 42 },
+    { r: -1,   seed: 43 },
+    { r: 2,    seed: 44 },
+    { r: -1.5, seed: 45 },
+    { r: 1,    seed: 46 },
 ];
+
+// The fact that gets a highlighter pass
+const CALLOUT_FACT = 1;
 
 export default function FunStuff() {
     return (
         <section
             id="fun-stuff"
-            className="relative max-w-[88vw] lg:max-w-[72rem] mx-auto px-1 pt-24 pb-12 lg:pt-28 lg:pb-14"
+            className="relative max-w-[88vw] lg:max-w-[72rem] mx-auto px-1 pt-24 pb-24 lg:pt-28 lg:pb-28"
         >
-            {/* Ambient musical notes — desktop only */}
-            {AMBIENT_NOTES.map((n, i) => (
-                <span
-                    key={i}
-                    className="absolute pointer-events-none select-none font-body hidden lg:block"
-                    style={{
-                        left: n.left,
-                        right: n.right,
-                        top: n.top,
-                        fontSize: n.size,
-                        opacity: n.opacity,
-                        color: 'var(--green-deep)',
-                    }}
-                    aria-hidden
-                >
-                    {n.symbol}
-                </span>
-            ))}
-
             <SectionHeader
                 title="Fun stuff"
                 intro={<>The whimsical side — <mark>guitars, gaming, matcha</mark>, and a few facts nobody asked for.</>}
-                className="mb-14 lg:mb-16"
+                className="mb-16 lg:mb-20"
             />
 
-            {/* Guitar feature */}
-            <Reveal className="mb-20 lg:mb-24">
-                <div className="grid grid-cols-1 lg:grid-cols-[0.7fr_1fr] gap-10 lg:gap-14 items-center">
-                    <div className="relative w-full max-w-[300px] mx-auto lg:mx-0">
-                        <div className="absolute -inset-3 rounded-[1.75rem] bg-[var(--bg-grain)]" aria-hidden="true" />
-                        <div className="relative rounded-2xl overflow-hidden border border-[var(--mat-edge)] shadow-[var(--lift-3)]">
-                            <video
-                                src="/guitar-video.mp4"
-                                controls
-                                loop
-                                playsInline
-                                preload="metadata"
-                                className="object-cover w-full aspect-square block"
-                                poster="/poster.jpg"
-                            >
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 className="type-heading text-[var(--text-primary)]">
-                            Two years, one <span style={{ fontStyle: "italic" }}>stress reliever</span>.
-                        </h3>
-
-                        {/* Decorative mini string strip under heading */}
-                        <div className="mt-3 mb-5 w-40 overflow-hidden" style={{ height: 16 }}>
-                            <GuitarStrings
-                                width={160}
-                                height={16}
-                                count={3}
-                                opacity={0.4}
-                                interactive={false}
-                                droneOnMount
-                                droneAmplitude={4}
-                            />
-                        </div>
-
-                        <p className="font-body type-lead text-[var(--text-secondary)] max-w-[46ch]">
-                            Been playing guitar for 2 years and it&apos;s my{" "}
-                            <mark>go-to way to unwind</mark>. The song in this video is{" "}
-                            <StringLink
-                                href="https://www.youtube.com/watch?v=Hth8kTDTh3g"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Gratitude by Amin Toofani
-                            </StringLink>
-                            . Currently learning{" "}
-                            <StringLink
-                                href="https://www.youtube.com/watch?v=7gphiFVVtUI"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                The Song of the Golden Dragon
-                            </StringLink>
-                            .
-                        </p>
-                        <div className="flex flex-wrap gap-2 pt-6">
-                            {["Classic", "Jazz", "Spanish"].map((g) => (
-                                <span
-                                    key={g}
-                                    className="font-mono text-[0.7rem] px-3 py-1 bg-[var(--green-soft)] text-[var(--green-deep)]"
-                                    style={{ borderRadius: '999px', letterSpacing: '0.015em' }}
-                                >
-                                    {g}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
+            {/* Guitar feature — the video is a snapshot taped into the book */}
+            <div className="mb-28 lg:mb-32 grid grid-cols-1 lg:grid-cols-[0.75fr_1fr] gap-14 lg:gap-16 items-center">
+                <div className="relative w-full max-w-[320px] mx-auto lg:mx-0">
+                    <Polaroid
+                        rotate={-3}
+                        tape="kraft"
+                        tapeRotate={4}
+                        caption="Gratitude — Amin Toofani ♪"
+                        hover={false}
+                    >
+                        <video
+                            src="/guitar-video.mp4"
+                            controls
+                            loop
+                            playsInline
+                            preload="metadata"
+                            className="absolute inset-0 object-cover w-full h-full block"
+                            poster="/poster.jpg"
+                        >
+                            Your browser does not support the video tag.
+                        </video>
+                    </Polaroid>
                 </div>
-            </Reveal>
 
-            {/* Hobbies + Facts */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20">
-                {/* Hobbies */}
                 <div>
-                    <Reveal>
-                        <h3 className="type-heading text-[var(--text-primary)] mb-8">
-                            Hobbies &amp; interests
-                        </h3>
-                    </Reveal>
-                    <div className="grid grid-cols-2 gap-4">
-                        {hobbies.map((hobby, index) => (
-                            <Reveal
-                                key={index}
-                                delay={Math.min(index * 0.04, 0.2)}
-                                className="group material press flex flex-col items-center text-center gap-2.5 px-4 py-5 cursor-default hover:shadow-[var(--lift-2)]"
-                                style={{
-                                    borderRadius: '14px',
-                                    // Static tilt — pinned to a corkboard, straightens on hover
-                                    rotate: `${HOBBY_TILTS[index % HOBBY_TILTS.length]}deg`,
-                                    transition: 'rotate var(--t-base) var(--spring), transform var(--t-press) var(--spring), box-shadow var(--t-base) var(--spring)',
-                                }}
-                                onMouseEnter={(e) => { e.currentTarget.style.rotate = '0deg'; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.rotate = `${HOBBY_TILTS[index % HOBBY_TILTS.length]}deg`; }}
+                    <h3 className="type-heading text-[var(--text-primary)]">
+                        Two years, one <span style={{ fontStyle: "italic" }}>stress reliever</span>.
+                    </h3>
+
+                    {/* Decorative mini string strip under heading */}
+                    <div className="mt-3 mb-5 w-40 overflow-hidden" style={{ height: 16 }}>
+                        <GuitarStrings
+                            width={160}
+                            height={16}
+                            count={3}
+                            opacity={0.4}
+                            interactive={false}
+                            droneOnMount
+                            droneAmplitude={4}
+                        />
+                    </div>
+
+                    <p className="font-body type-lead text-[var(--text-secondary)] max-w-[46ch]">
+                        Been playing guitar for 2 years and it&apos;s my{" "}
+                        <mark>go-to way to unwind</mark>. The song in this video is{" "}
+                        <StringLink
+                            href="https://www.youtube.com/watch?v=Hth8kTDTh3g"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Gratitude by Amin Toofani
+                        </StringLink>
+                        . Currently learning{" "}
+                        <StringLink
+                            href="https://www.youtube.com/watch?v=7gphiFVVtUI"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            The Song of the Golden Dragon
+                        </StringLink>
+                        .
+                    </p>
+                    <div className="flex flex-wrap gap-3 pt-7">
+                        {["Classic", "Jazz", "Spanish"].map((g, i) => (
+                            <span
+                                key={g}
+                                className="label-dymo"
+                                style={{ rotate: `${[-2, 1.5, -1][i]}deg` }}
                             >
-                                <i
-                                    className={`ti ${hobby.icon} text-[1.75rem]`}
-                                    style={{ color: HOBBY_ACCENTS[index % HOBBY_ACCENTS.length] }}
-                                    aria-hidden="true"
-                                />
-                                <div>
-                                    <h4 className="font-body font-semibold text-sm text-[var(--text-primary)] leading-tight">
-                                        {hobby.title}
-                                        {hobby.highlight && (
-                                            <span className="ml-1 font-body font-normal text-[var(--green-deep)] text-xs" aria-hidden> ♪</span>
-                                        )}
-                                    </h4>
-                                    <p className="font-mono text-[0.62rem] text-[var(--text-muted)] mt-1 leading-tight">
-                                        {hobby.desc}
-                                    </p>
-                                </div>
-                            </Reveal>
+                                {g}
+                            </span>
                         ))}
                     </div>
                 </div>
+            </div>
 
-                {/* Random facts */}
+            {/* Hobbies + Facts */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-16 items-start">
+                {/* Hobbies — small paper tags */}
                 <div>
-                    <Reveal>
-                        <h3 className="type-heading text-[var(--text-primary)] mb-8">
-                            Random facts you didn&apos;t ask for
-                        </h3>
-                    </Reveal>
-                    <ul className="space-y-0">
-                        {randomFacts.map((fact, index) => {
-                            const meta = FACT_META[index] ?? {};
+                    <h3 className="type-heading text-[var(--text-primary)] mb-10">
+                        Hobbies &amp; interests
+                    </h3>
+                    <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-8 pt-2">
+                        {hobbies.map((hobby, index) => {
+                            const t = TAGS[index % TAGS.length];
                             return (
-                                <Reveal
-                                    key={index}
-                                    delay={Math.min(index * 0.04, 0.2)}
+                                <Paper
+                                    key={hobby.title}
                                     as="li"
-                                    className="py-3.5 border-t border-[var(--line)]"
+                                    variant="cream"
+                                    seed={t.seed}
+                                    depth={4}
+                                    rotate={t.r}
+                                    innerClassName="flex flex-col items-center text-center gap-2 px-3 py-5"
                                 >
-                                    <p
-                                        className="font-body type-small text-[var(--text-secondary)] flex gap-2.5"
-                                        style={meta.callout ? {
-                                            background: 'var(--accent-mark)',
-                                            borderRadius: '8px',
-                                            padding: '0.55rem 0.75rem',
-                                            margin: '-0.2rem -0.75rem',
-                                        } : undefined}
-                                    >
-                                        {meta.prefix && (
-                                            <span aria-hidden style={{ color: 'var(--green-deep)', opacity: 0.7 }}>
-                                                {meta.prefix}
-                                            </span>
-                                        )}
-                                        <span>{fact}</span>
-                                    </p>
-                                </Reveal>
+                                    <i
+                                        className={`ti ${hobby.icon} text-[1.8rem]`}
+                                        style={{ color: HOBBY_ACCENTS[index % HOBBY_ACCENTS.length] }}
+                                        aria-hidden="true"
+                                    />
+                                    <div>
+                                        <h4 className="font-type text-[0.78rem] uppercase tracking-[0.14em] text-[var(--ink-brown)] leading-tight">
+                                            {hobby.title}
+                                            {hobby.highlight && (
+                                                <span className="ml-1 text-[var(--green-deep)]" aria-hidden>♪</span>
+                                            )}
+                                        </h4>
+                                        <p className="font-hand text-[1.15rem] text-[var(--ink-sepia)] mt-1.5 leading-none">
+                                            {hobby.desc}
+                                        </p>
+                                    </div>
+                                </Paper>
                             );
                         })}
                     </ul>
                 </div>
+
+                {/* Random facts — jotted on a torn notebook page */}
+                <div>
+                    <h3 className="type-heading text-[var(--text-primary)] mb-10">
+                        Random facts you didn&apos;t ask for
+                    </h3>
+                    <Paper
+                        variant="lined"
+                        tear={["top", "bottom"]}
+                        seed={31}
+                        depth={6}
+                        rotate={1.2}
+                        innerClassName="pl-[4.25rem] md:pl-[5.5rem] pr-5 md:pr-8 pt-8 pb-10"
+                        decor={<Tape variant="washi" rotate={-4} className="-top-2 left-1/2 -translate-x-1/2" />}
+                    >
+                        <ol className="flex flex-col">
+                            {randomFacts.map((fact, index) => (
+                                <li key={index} className="relative py-2.5">
+                                    <span
+                                        className="font-hand absolute -left-10 md:-left-12 top-1.5 text-[1.5rem] leading-none text-[var(--ink-sepia)]"
+                                        aria-hidden
+                                    >
+                                        {index + 1}.
+                                    </span>
+                                    <p className="font-body type-small text-[var(--text-secondary)]">
+                                        {index === CALLOUT_FACT ? <mark>{fact}</mark> : fact}
+                                    </p>
+                                </li>
+                            ))}
+                        </ol>
+                    </Paper>
+                </div>
             </div>
 
-            {/* Gallery — photos hanging from guitar strings */}
-            {/* <div>
-                <Reveal>
-                    <h3 className="font-heading text-2xl lg:text-3xl text-[var(--text-primary)] mb-10">
-                        Hanging on the strings{" "}
-                        <span style={{ color: "var(--green-deep)", opacity: 0.55 }} aria-hidden>♪</span>
+            {/* Photo board */}
+            <div className="mt-28 lg:mt-32">
+                <div className="flex flex-wrap items-end gap-x-6 gap-y-2 mb-12">
+                    <h3 className="type-heading text-[var(--text-primary)]">
+                        Around Toronto
                     </h3>
-                </Reveal>
-
-                {[snapshots.slice(0, 4), snapshots.slice(4)].map((row, rowIdx) => (
-                    <div key={rowIdx} className={rowIdx > 0 ? "mt-16" : ""}>
-                        <svg
-                            width="100%"
-                            height="8"
-                            viewBox="0 0 1000 8"
-                            preserveAspectRatio="none"
-                            aria-hidden
-                            className="block"
-                        >
-                            <line
-                                x1="0" y1="4" x2="1000" y2="4"
-                                stroke={rowIdx === 0 ? "var(--string-A)" : "var(--string-D)"}
-                                strokeWidth={rowIdx === 0 ? 2.5 : 1.5}
-                                strokeLinecap="round"
-                                opacity={0.6}
-                            />
-                        </svg>
-
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-8 justify-items-center px-2 pt-2">
-                            {row.map((s) => (
-                                <Reveal key={s.n} delay={s.n * 0.03} className="relative w-full max-w-[170px]">
-                                    <div
-                                        className="absolute left-1/2 -translate-x-1/2 -top-[14px]"
-                                        aria-hidden
-                                        style={{ width: 1.5, height: 14, background: "var(--green-deep)", opacity: 0.3 }}
-                                    />
-                                    <div
-                                        style={{ "--r": `${s.r}deg`, "--ty": `${Math.round(s.y * 0.5)}px` }}
-                                        className="group/photo cursor-pointer [transform:rotate(var(--r))_translateY(var(--ty))] transition-transform duration-300 ease-[var(--ease-out)] hover:z-20 hover:[transform:rotate(0deg)_translateY(-6px)_scale(1.04)]"
-                                    >
-                                        <div className="rounded-[3px] bg-white p-2.5 pb-5 shadow-[0_2px_4px_rgba(0,0,0,0.06),0_12px_28px_rgba(0,0,0,0.14)] transition-shadow duration-300 ease-[var(--ease-out)] group-hover/photo:shadow-[0_4px_8px_rgba(0,0,0,0.08),0_26px_52px_rgba(0,0,0,0.22)]">
-                                            <div className="relative aspect-square overflow-hidden rounded-[2px] bg-[var(--bg-grain)]">
-                                                <Image
-                                                    src={`/gallery-${s.n}.jpg`}
-                                                    alt={`Snapshot ${s.n}`}
-                                                    fill
-                                                    loading="eager"
-                                                    className="object-cover"
-                                                    sizes="(max-width: 768px) 45vw, 170px"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Reveal>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div> */}
+                    <p className="font-hand hidden lg:flex items-center gap-2 text-[1.5rem] leading-none text-[var(--ink-brown)] pb-1" style={{ rotate: "-2deg" }}>
+                        go ahead, move them around
+                        <DoodleArrow className="w-12 rotate-[35deg] translate-y-3" />
+                    </p>
+                </div>
+                <PhotoBoard />
+            </div>
         </section>
     );
 }

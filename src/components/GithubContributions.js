@@ -44,7 +44,9 @@ function monthLabelsFor(weeks) {
     return labels;
 }
 
-export default function GithubContributions() {
+// `frame` wraps the calendar (e.g. a paper scrap) and disappears with it if
+// the fetch fails, so the page never shows an empty frame.
+export default function GithubContributions({ frame: Frame = "div", frameProps }) {
     const [data, setData] = useState(null);
     const [failed, setFailed] = useState(false);
 
@@ -73,7 +75,7 @@ export default function GithubContributions() {
     const total = data?.total?.lastYear;
 
     return (
-        <div>
+        <Frame {...frameProps}>
             <div className="flex items-baseline justify-between gap-4 mb-4">
                 <p className="font-mono text-xs text-[var(--text-muted)] uppercase tracking-[0.15em]">
                     Contributions
@@ -105,7 +107,7 @@ export default function GithubContributions() {
                                         key={di}
                                         className={
                                             day
-                                                ? "w-[10px] h-[10px] rounded-[2px] transition-transform duration-150 ease-[var(--spring)] hover:scale-125 hover:shadow-[var(--lift-1)]"
+                                                ? "w-[10px] h-[10px] rounded-[2px]"
                                                 : "w-[10px] h-[10px] rounded-[2px]"
                                         }
                                         style={{
@@ -120,6 +122,6 @@ export default function GithubContributions() {
                     </div>
                 </div>
             </div>
-        </div>
+        </Frame>
     );
 }

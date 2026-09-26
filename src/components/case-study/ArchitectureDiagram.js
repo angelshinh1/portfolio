@@ -1,3 +1,5 @@
+import { Tape } from "../scrapbook";
+
 // Hand-drawn architecture diagrams for case studies that have no screenshots.
 // Plain inline SVG — no library, no network — coloured from the site's own
 // tokens so a diagram reads as part of the page rather than a pasted image.
@@ -175,14 +177,16 @@ export default function ArchitectureDiagram({ id, caption }) {
   if (!Diagram) return null;
 
   return (
-    // Diagrams break out past the reading column once there's room for them —
-    // a wide figure squeezed into a 65-character measure is unreadable.
-    <figure className="my-2 lg:-mx-20">
-      <div className="material rounded-2xl p-5 sm:p-6">
+    // Stays inside the journal page: the page's torn clip-path would cut off
+    // anything that breaks out past it. Wide diagrams scroll sideways instead.
+    <figure className="my-6">
+      {/* Pasted in on a scrap of graph paper */}
+      <div className="scrap paper paper-grid p-5 sm:p-6" style={{ "--r": "0.4deg" }}>
+        <Tape variant="clear" rotate={-3} width={96} className="-top-3 left-1/2 -translate-x-1/2" />
         <Diagram />
       </div>
       {caption && (
-        <figcaption className="font-mono text-[0.72rem] text-[var(--text-muted)] mt-3 leading-snug">
+        <figcaption className="font-hand text-[1.3rem] text-[var(--ink-sepia)] mt-4 leading-snug">
           {caption}
         </figcaption>
       )}

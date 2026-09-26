@@ -17,6 +17,11 @@ export default function Document() {
           href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,800&display=swap"
           rel="stylesheet"
         />
+        {/* Scrapbook accents only: Caveat (handwriting) + Special Elite (typewriter) */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Special+Elite&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <body className="font-body antialiased">
         <Main />

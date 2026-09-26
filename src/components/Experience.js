@@ -1,4 +1,5 @@
 import SectionHeader from "./SectionHeader";
+import { Paper } from "./scrapbook";
 
 // One line per role. The long-form detail lives in the resume and the case
 // studies — this section is a glance, not a document.
@@ -15,16 +16,23 @@ const experiencesData = {
                 summary: "open banking apis — jose cryptography, spring boot on openshift",
             },
             {
-                title: "Lead Developer (Volunteer) - DDP Hunt",
-                period: "Jan – Apr 2026",
-                year: "2026",
-                summary: "real-time scavenger hunt platform, next.js + mongodb, 30+ players live",
-            },
-            {
                 title: "Technical Systems Analyst",
                 period: "Sep – Dec 2025",
                 year: "2025",
                 summary: "iam automation + dashboards for global cyber security",
+            },
+        ],
+    },
+    "META TRADING CLUB": {
+        company: "Meta Trading Club",
+        logo: "/metatrading-logo.png",
+        fallback: "MTC",
+        roles: [
+            {
+                title: "ML Engineer & Data Science Intern",
+                period: "Jan – Apr 2025",
+                year: "2025",
+                summary: "predictive models + python pipelines, +10% simulated returns",
             },
         ],
     },
@@ -99,27 +107,17 @@ const experiencesData = {
             },
         ],
     },
-    "META TRADING CLUB": {
-        company: "Meta Trading Club",
-        logo: "/metatrading-logo.png",
-        fallback: "MTC",
-        roles: [
-            {
-                title: "ML Engineer & Data Science Intern",
-                period: "Jan – Apr 2025",
-                year: "2025",
-                summary: "predictive models + python pipelines, +10% simulated returns",
-            },
-        ],
-    },
 };
 
 function RoleRow({ exp }) {
-    const inner = (
-        <>
-            {/* Company mark */}
-            <span className="flex-shrink-0 mt-[0.15rem]">
-                <span className="relative flex w-9 h-9 md:w-10 md:h-10 items-center justify-center overflow-hidden rounded-full border border-[var(--line)] bg-[var(--bg-surface)] font-mono text-[8px] text-[var(--text-muted)] transition-[transform,box-shadow] duration-300 ease-[var(--spring)] group-hover/row:scale-105 group-hover/row:shadow-[var(--lift-1)]">
+    return (
+        <li className="group/row relative flex items-start gap-4 md:gap-5 py-4 md:py-[1.1rem]">
+            {/* Company mark — a little round sticker */}
+            <span className="flex-shrink-0 mt-[0.1rem]">
+                <span
+                    className="relative flex w-10 h-10 md:w-11 md:h-11 items-center justify-center overflow-hidden rounded-full bg-[var(--bg-surface)] font-mono text-[8px] text-[var(--text-muted)]"
+                    style={{ border: "3px solid #fff", boxShadow: "0 1px 2px rgba(62,44,30,0.16), 0 3px 8px rgba(62,44,30,0.12)" }}
+                >
                     <span className="absolute z-0">{exp.fallback}</span>
                     <img
                         src={exp.logo}
@@ -134,7 +132,7 @@ function RoleRow({ exp }) {
             <span className="min-w-0 flex-1">
                 <span className="block">
                     <span
-                        className="text-[var(--text-primary)] transition-colors duration-200 group-hover/row:text-[var(--green-deep)]"
+                        className="highlight-swipe text-[var(--text-primary)]"
                         style={{
                             fontFamily: "var(--font-serif)",
                             fontWeight: 600,
@@ -159,23 +157,13 @@ function RoleRow({ exp }) {
                 </span>
             </span>
 
-            {/* Year — the full period is there for anyone who hovers it */}
+            {/* Year, jotted in the margin — the full period is there for anyone who hovers it */}
             <span
-                className="flex-shrink-0 self-start mt-[0.35rem] font-mono text-[0.7rem] tracking-tight text-[var(--text-muted)] whitespace-nowrap opacity-70 transition-opacity duration-200 group-hover/row:opacity-100"
+                className="font-hand flex-shrink-0 self-start mt-[0.05rem] text-[1.35rem] leading-none text-[var(--ink-sepia)] whitespace-nowrap transition-colors duration-200 group-hover/row:text-[var(--green-deep)]"
                 title={exp.period}
             >
                 {exp.year}
             </span>
-        </>
-    );
-
-    const rowClass =
-        "group/row relative flex items-start gap-4 md:gap-5 rounded-xl px-3 md:px-4 py-3.5 md:py-4 " +
-        "transition-colors duration-300 ease-[var(--spring)] hover:bg-[rgba(200,228,176,0.28)]";
-
-    return (
-        <li className={rowClass}>
-            {inner}
         </li>
     );
 }
@@ -198,13 +186,40 @@ export default function Experience() {
             id="experience"
             className="relative max-w-[88vw] lg:max-w-[64rem] mx-auto px-1 py-24 lg:py-28"
         >
-            <SectionHeader title="Experience" className="mb-8 lg:mb-10" />
+            <SectionHeader title="Experience" className="mb-12 lg:mb-14" />
 
-            <ul className="flex flex-col -mx-3 md:-mx-4">
-                {flatExperiences.map((exp) => (
-                    <RoleRow key={`${exp.company}-${exp.title}`} exp={exp} />
-                ))}
-            </ul>
+            {/* A page torn out of a notebook, clipped to the board */}
+            <Paper
+                variant="lined"
+                tear={["bottom"]}
+                seed={11}
+                depth={7}
+                rotate={-0.5}
+                innerClassName="paper-holes pl-[4.25rem] md:pl-[6rem] pr-4 md:pr-10 pt-10 pb-12 md:pt-12 md:pb-14"
+                style={{ "--hole": "var(--bg-grain)" }}
+                decor={
+                    <>
+                        {/* Sticky note stuck to the page's corner — desktop only */}
+                        <a
+                            href="/Angel_Resume_swe.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="scrap scrap-hover sticky-note absolute -top-16 -right-14 w-40 p-4 pt-5 hidden xl:block"
+                            style={{ "--r": "5deg" }}
+                        >
+                            <span className="font-hand block text-[1.4rem] leading-[1.05] text-[var(--ink-brown)]">
+                                the long description lives in my resume &rarr;
+                            </span>
+                        </a>
+                    </>
+                }
+            >
+                <ul className="flex flex-col">
+                    {flatExperiences.map((exp) => (
+                        <RoleRow key={`${exp.company}-${exp.title}`} exp={exp} />
+                    ))}
+                </ul>
+            </Paper>
         </section>
     );
 }

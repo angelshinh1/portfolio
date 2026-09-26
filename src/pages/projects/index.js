@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ProjectRow from "@/components/ProjectRow";
 import ProjectPreview from "@/components/ProjectPreview";
 import Seo from "@/components/Seo";
+import { Paper } from "@/components/scrapbook";
 import projects from "@/data/projects";
 
 export default function ProjectsIndex() {
@@ -24,7 +25,7 @@ export default function ProjectsIndex() {
         path="/projects"
       />
 
-      <header className="section-base pt-32 pb-14 lg:pt-36 lg:pb-16">
+      <header className="section-green pt-32 pb-14 lg:pt-36 lg:pb-16">
         <div className="max-w-[88vw] lg:max-w-[64rem] mx-auto px-1">
           <Reveal>
             <Breadcrumbs
@@ -38,14 +39,24 @@ export default function ProjectsIndex() {
             <p className="font-body type-lead text-[var(--text-secondary)] mt-5 max-w-[52ch]">
               Hover a project to preview it, click to read more, or open the full case study.
             </p>
+            <p className="font-hand text-[1.5rem] leading-tight text-[var(--ink-brown)] mt-4" style={{ rotate: "-2deg" }} aria-hidden>
+              everything I&apos;ve built, in one place
+            </p>
           </Reveal>
         </div>
       </header>
 
-      <section className="section-grain">
+      <section className="section-green">
         <div className="max-w-[88vw] lg:max-w-[72rem] mx-auto px-1 py-16 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 lg:gap-14 items-start">
-            <div className="flex flex-col">
+            <Paper
+              variant="cream"
+              tear={["top", "bottom"]}
+              seed={51}
+              depth={6}
+              rotate={-0.3}
+              innerClassName="px-4 md:px-8 py-6 md:py-8"
+            >
               {projects.map((project, index) => (
                 <Reveal key={project.slug} delay={Math.min(index * 0.03, 0.18)}>
                   <ProjectRow
@@ -53,15 +64,14 @@ export default function ProjectsIndex() {
                     isExpanded={expandedIndex === index}
                     onToggle={() => toggleExpand(index)}
                     onHoverStart={() => setHoveredIndex(index)}
-                    chipBg="var(--bg-base)"
+                    chipBg="rgba(255,255,255,0.55)"
                     topBorder={index !== 0}
                   />
                 </Reveal>
               ))}
-              <div className="border-t border-[var(--line)]" />
-            </div>
+            </Paper>
 
-            <div className="hidden lg:block lg:sticky lg:top-28 lg:border-l lg:border-[var(--line)] lg:pl-10">
+            <div className="hidden lg:block lg:sticky lg:top-32">
               <ProjectPreview project={previewProject} />
             </div>
           </div>

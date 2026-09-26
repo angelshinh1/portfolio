@@ -1,5 +1,9 @@
 import Image from "next/image";
 import ArchitectureDiagram from "./ArchitectureDiagram";
+import { CutLine } from "../scrapbook";
+
+// Prints alternate their tilt so a gallery reads as photos stuck down by hand
+const PRINT_TILT = [-1.2, 1, 0.8, -1];
 
 export default function CaseStudyContent({ project }) {
   return (
@@ -46,8 +50,7 @@ function Block({ block, project }) {
               className="font-body text-[1.05rem] lg:text-[1.1rem] leading-[1.65] text-[var(--text-secondary)] pl-6 relative"
             >
               <span
-                className="absolute left-0 top-[0.6em] w-[7px] h-[7px] rounded-full"
-                style={{ background: "var(--green-vivid)" }}
+                className="absolute left-0 top-[0.55em] w-[8px] h-[8px] rounded-full border-[1.5px] border-[var(--ink-sepia)]"
                 aria-hidden="true"
               />
               {item}
@@ -58,8 +61,8 @@ function Block({ block, project }) {
 
     case "quote":
       return (
-        <blockquote className="border-l-2 pl-6 py-1 my-2 max-w-[56ch]" style={{ borderColor: "var(--green-muted)" }}>
-          <p className="font-body italic text-xl lg:text-2xl leading-[1.5] text-[var(--text-primary)]">
+        <blockquote className="border-l-2 border-dashed pl-6 py-1 my-2 max-w-[56ch]" style={{ borderColor: "var(--ink-sepia)" }}>
+          <p className="font-hand text-[1.7rem] lg:text-[2rem] leading-[1.3] text-[var(--ink-brown)]">
             {block.text}
           </p>
         </blockquote>
@@ -67,7 +70,7 @@ function Block({ block, project }) {
 
     case "stats":
       return (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-6 py-7 border-y border-[var(--line)]">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-6 py-7 border-y-2 border-dashed border-[rgba(62,44,30,0.22)]">
           {block.items.map((s, i) => (
             <div key={i}>
               <div
@@ -76,7 +79,7 @@ function Block({ block, project }) {
               >
                 {s.value}
               </div>
-              <div className="font-mono text-[0.68rem] text-[var(--text-muted)] mt-1.5 leading-snug tracking-tight">
+              <div className="font-type text-[0.64rem] uppercase tracking-[0.1em] text-[var(--ink-sepia)] mt-2 leading-snug">
                 {s.label}
               </div>
             </div>
@@ -93,20 +96,23 @@ function Block({ block, project }) {
       // portrait tile. The project declares which kind of images it has.
       const wide = project.galleryAspect === "wide";
       return (
-        <div className={`grid grid-cols-1 gap-4 lg:gap-6 py-2 ${wide ? "" : "sm:grid-cols-2"}`}>
+        <div className={`grid grid-cols-1 gap-8 lg:gap-10 py-4 ${wide ? "" : "sm:grid-cols-2"}`}>
           {project.images.map((img, i) => (
-            <figure key={i} className="group">
+            <figure
+              key={i}
+              className="scrap bg-white p-2 sm:p-2.5"
+              style={{ "--r": `${PRINT_TILT[i % PRINT_TILT.length] * (wide ? 0.5 : 1)}deg` }}
+            >
               <div
-                className={`relative w-full overflow-hidden rounded-xl border border-[var(--mat-edge)] ${
+                className={`relative w-full overflow-hidden ${
                   wide ? "aspect-[16/10]" : "aspect-[4/5]"
                 }`}
-                style={{ boxShadow: "var(--lift-2)" }}
               >
                 <Image
                   src={img.src}
                   alt={img.alt}
                   fill
-                  className={`object-cover transition-transform duration-500 ease-[var(--spring)] group-hover:scale-[1.04] ${wide ? "object-top" : ""}`}
+                  className={`object-cover ${wide ? "object-top" : ""}`}
                   sizes={wide ? "(max-width: 760px) 100vw, 760px" : "(max-width: 640px) 100vw, 50vw"}
                 />
               </div>
@@ -117,7 +123,7 @@ function Block({ block, project }) {
     }
 
     case "divider":
-      return <div className="ornament-divider">✦ ❧ ✦</div>;
+      return <CutLine className="py-4" />;
 
     default:
       return null;

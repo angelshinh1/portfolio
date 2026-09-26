@@ -1,18 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Paper, Tape } from "./scrapbook";
 
 // Preview shown beside the /projects accordion — swaps content on hover
-// (and on keyboard focus, via the same handler in ProjectRow). Plain
-// typographic content, no card framing — the column divider does the work
-// of separating it from the list. Projects with a real cover photo show it;
-// everything else gets built straight from the project's own data.
+// (and on keyboard focus, via the same handler in ProjectRow). It's a scrap
+// of paper taped beside the list. Projects with a real cover photo show it,
+// white-bordered like a print; everything else is built from the project's
+// own data.
 export default function ProjectPreview({ project }) {
   if (!project) return null;
 
   return (
+    <Paper
+      variant="cream"
+      seed={61}
+      rotate={1}
+      innerClassName="p-6"
+      decor={<Tape variant="kraft" rotate={-3} className="-top-3 left-1/2 -translate-x-1/2" />}
+    >
     <div key={project.slug} className="preview-fade">
       {project.coverImage && (
-        <div className="relative w-full aspect-[4/3] overflow-hidden rounded-xl mb-5 border border-[var(--mat-edge)] shadow-[var(--lift-2)]">
+        <div className="relative w-full aspect-[4/3] overflow-hidden mb-5 border-[6px] border-white shadow-[0_1px_3px_rgba(62,44,30,0.18)]">
           <Image
             src={project.coverImage}
             alt={project.title}
@@ -23,7 +31,7 @@ export default function ProjectPreview({ project }) {
         </div>
       )}
 
-      <p className="font-mono text-xs text-[var(--text-muted)] uppercase tracking-[0.15em]">
+      <p className="font-type text-[0.66rem] text-[var(--ink-sepia)] uppercase tracking-[0.14em]">
         {project.category}
       </p>
 
@@ -32,12 +40,12 @@ export default function ProjectPreview({ project }) {
       </h3>
       <p
         className="mt-2"
-        style={{ fontFamily: "var(--font-sans)", fontWeight: 400, fontSize: "1.3rem", color: "var(--text-secondary)" }}
+        style={{ fontFamily: "var(--font-sans)", fontWeight: 400, fontSize: "1.1rem", color: "var(--text-secondary)" }}
       >
         {project.subtitle}
       </p>
 
-      <p className="font-body text-[1.05rem] leading-relaxed text-[var(--text-secondary)] mt-5">
+      <p className="font-body type-small text-[var(--text-muted)] mt-4">
         {project.description}
       </p>
 
@@ -45,8 +53,7 @@ export default function ProjectPreview({ project }) {
         {project.technologies.slice(0, 5).map((tech) => (
           <span
             key={tech}
-            className="font-mono text-[0.68rem] px-2.5 py-1 text-[var(--text-secondary)] border border-[var(--line)]"
-            style={{ background: "var(--bg-surface)", borderRadius: "999px", letterSpacing: "0.015em" }}
+            className="font-type text-[0.64rem] px-2 py-1 text-[var(--ink-brown)] border border-dashed border-[rgba(62,44,30,0.28)] bg-[rgba(255,255,255,0.55)]"
           >
             {tech}
           </span>
@@ -55,13 +62,11 @@ export default function ProjectPreview({ project }) {
 
       <Link
         href={`/projects/${project.slug}`}
-        className="press group/cs mt-6 inline-flex items-center gap-1.5 font-mono text-sm text-[var(--green-deep)] transition-colors duration-200 hover:text-[var(--text-primary)]"
+        className="press mt-6 inline-block font-hand text-[1.45rem] leading-none text-[var(--green-deep)] transition-colors duration-200 hover:text-[var(--ink-brown)]"
       >
-        Read the case study
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 ease-[var(--spring)] group-hover/cs:translate-x-1">
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
+        read the story &rarr;
       </Link>
     </div>
+    </Paper>
   );
 }

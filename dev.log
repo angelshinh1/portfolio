@@ -1,0 +1,13 @@
+   ▲ Next.js 15.5.18
+   - Local:        http://localhost:3100
+   - Network:      http://192.168.5.20:3100
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1546ms
+ ○ Compiling /projects ...
+ ✓ Compiled /projects in 1202ms (521 modules)
+ GET /projects 200 in 3508ms
+ ✓ Compiled / in 448ms (554 modules)
+ GET / 200 in 2811ms
+[?25h

@@ -4,26 +4,27 @@
 /* ── Playfair Display (expressive display serif, headings only) + Satoshi (sans, everything else) ── */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600;1,700&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Special+Elite&display=swap');
 
 :root {
   /* ── Green-tinted paper foundations ── */
-  --bg-base:        #E8EEE2;   /* sage-green paper */
-  --bg-grain:       #DFE8D8;   /* slightly deeper sage */
-  --bg-green:       #e3f0cb;   /* light sage-lime section — calmer & more legible than the old vivid tone */
-  --bg-surface:     #F4F8F1;   /* near-white with green breath */
+  --bg-base:        #E1E6DB;   /* sage-grey cardstock */
+  --bg-grain:       #D9DFD2;   /* slightly deeper sage */
+  --bg-green:       #E6E2D5;   /* warm oat — the one section that steps away from green */
+  --bg-surface:     #F5F6F0;   /* near-white with a green breath */
   --bg-dark:        #1A1A18;
 
   --text-primary:   #0F0F0D;
   --text-secondary: #252520;
   --text-muted:     #5A5A54;
 
-  --green-vivid:    #A2E666;
-  --green-soft:     #C8E4B0;
-  --green-deep:     #5C8A2A;
-  --green-muted:    #BDD99A;
+  --green-vivid:    #A3BE85;
+  --green-soft:     #CFDCC0;
+  --green-deep:     #56733A;
+  --green-muted:    #B9C9A4;
 
-  --accent-link:    #5C8A2A;
-  --accent-mark:    rgba(162, 230, 102, 0.40);
+  --accent-link:    #56733A;
+  --accent-mark:    rgba(236, 204, 116, 0.45);   /* warm highlighter */
 
   /* ── Guitar string colors (bass → treble, dark → light green) ── */
   --string-E:       #4A6B20;
@@ -34,18 +35,18 @@
   --string-e:       #BDD99A;
 
   /* ── Legacy aliases so existing var() references keep working ── */
-  --bg:          #E8EEE2;
-  --bg-2:        #DFE8D8;
-  --surface:     #F4F8F1;
+  --bg:          #E1E6DB;
+  --bg-2:        #D9DFD2;
+  --surface:     #F5F6F0;
   --ink:         #0F0F0D;
   --ink-2:       #252520;
   --ink-3:       #5A5A54;
   --line:        rgba(26, 26, 24, 0.10);
   --line-strong: rgba(26, 26, 24, 0.20);
-  --accent:      #5C8A2A;
-  --accent-2:    #A2E666;
-  --accent-soft: #C8E4B0;
-  --highlight:   rgba(162, 230, 102, 0.40);
+  --accent:      #56733A;
+  --accent-2:    #A3BE85;
+  --accent-soft: #CFDCC0;
+  --highlight:   rgba(236, 204, 116, 0.45);
 
   /* ══ MOTION ══════════════════════════════════════════════════════════
      Curves that approximate springs. --spring is critically damped
@@ -66,9 +67,9 @@
      Translucent layers that float over content. Heavier material separates
      structure (nav, sheets); lighter material lifts interactive things.
      Never stack a light material on another light one. */
-  --mat-thick:    rgba(232, 238, 226, 0.72);
-  --mat-regular:  rgba(244, 248, 241, 0.66);
-  --mat-thin:     rgba(244, 248, 241, 0.44);
+  --mat-thick:    rgba(225, 230, 219, 0.72);
+  --mat-regular:  rgba(245, 246, 240, 0.66);
+  --mat-thin:     rgba(245, 246, 240, 0.44);
   --mat-dark:     rgba(26, 26, 24, 0.62);
   --mat-edge:     rgba(255, 255, 255, 0.55);   /* light catching the top edge */
 
@@ -287,8 +288,8 @@ mark, .mark {
   transition: transform var(--t-base) var(--spring), box-shadow var(--t-base) var(--spring);
 }
 
-.lift:hover  { transform: translateY(-2px); box-shadow: var(--lift-2); }
-.lift:active { transform: translateY(0)    scale(0.99); }
+.lift:hover  { box-shadow: var(--lift-2); }
+.lift:active { transform: scale(0.99); }
 
 /* Focus that matches the material system rather than the UA default */
 :where(a, button, [tabindex]):focus-visible {
@@ -320,7 +321,7 @@ mark, .mark {
 }
 
 .btn:hover {
-  background: rgba(162, 230, 102, 0.28);
+  background: rgba(236, 204, 116, 0.3);
   box-shadow: var(--lift-1);
   text-decoration: none;
   color: var(--text-primary);
@@ -360,7 +361,6 @@ mark, .mark {
   }
 
   .press:active, .press-strong:active, .btn:active { transform: none; }
-  .lift:hover { transform: none; }
 }
 
 /* Frostier, not see-through, when transparency is turned down */
@@ -471,7 +471,268 @@ mark, .mark {
 }
 
 @keyframes string-ripple-border {
-  0%   { box-shadow: 0 0 0 0 rgba(162, 230, 102, 0); }
-  40%  { box-shadow: 0 0 0 5px rgba(162, 230, 102, 0.18); }
-  100% { box-shadow: 0 0 0 0 rgba(162, 230, 102, 0); }
+  0%   { box-shadow: 0 0 0 0 rgba(163, 190, 133, 0); }
+  40%  { box-shadow: 0 0 0 5px rgba(163, 190, 133, 0.22); }
+  100% { box-shadow: 0 0 0 0 rgba(163, 190, 133, 0); }
+}
+
+/* ══ SCRAPBOOK ═════════════════════════════════════════════════════════
+   Paper, tape, stamps and ink for the collage layout. Components live in
+   src/components/scrapbook. Scraps sit on the sage page like cut paper on
+   cardstock: cream and aged stock for contrast, green washi to tie them
+   back to the palette, brown ink for anything "handwritten". */
+:root {
+  --paper-cream: #FBF7EC;
+  --paper-aged:  #F1E6CC;
+  --paper-kraft: #CDAE80;
+  --ink-brown:   #3E2C1E;
+  --ink-sepia:   #7A5A3A;
+  --margin-red:  rgba(196, 84, 68, 0.42);
+  --rule-blue:   rgba(84, 120, 170, 0.2);
+
+  --font-hand: 'Caveat', 'Segoe Print', cursive;
+  --font-type: 'Special Elite', 'Courier New', monospace;
+
+  --scrap-shadow: drop-shadow(0 1px 1px rgba(62, 44, 30, 0.16)) drop-shadow(0 8px 12px rgba(62, 44, 30, 0.12));
+  --scrap-shadow-up: drop-shadow(0 2px 2px rgba(62, 44, 30, 0.14)) drop-shadow(0 18px 22px rgba(62, 44, 30, 0.16));
+}
+
+/* Component layer, so Tailwind utilities (hidden, absolute, ...) on these elements still win. */
+@layer components {
+.font-hand {
+  font-family: var(--font-hand);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.font-type {
+  font-family: var(--font-type);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+/* ── Scrap: any piece stuck to the page ── */
+.scrap {
+  position: relative;
+  rotate: var(--r, 0deg);
+  filter: var(--scrap-shadow);
+  transition: rotate var(--t-slow) var(--spring),
+              translate var(--t-slow) var(--spring),
+              filter var(--t-base) var(--spring);
+}
+
+/* Hover deepens the shadow only — scraps never move under the pointer */
+@media (hover: hover) {
+  .scrap-hover:hover { filter: var(--scrap-shadow-up); }
+}
+
+.paper { position: relative; }
+
+.paper-cream {
+  background: radial-gradient(120% 95% at 50% 40%, #FDFAF2 45%, #F2E9D3 100%);
+}
+
+.paper-aged {
+  background: radial-gradient(115% 95% at 50% 45%, #F7EFDA 30%, #EADBB7 78%, #D8BF8F 100%);
+}
+
+.paper-newsprint {
+  background: radial-gradient(120% 100% at 50% 40%, #F0EDE3 50%, #E1DCCB 100%);
+}
+
+.paper-kraft {
+  background: radial-gradient(120% 100% at 40% 30%, #D8BC91 20%, #C4A273 100%);
+}
+
+.paper-sage {
+  background: radial-gradient(120% 100% at 50% 40%, #EEF5E4 40%, #D6E6C4 100%);
+}
+
+.paper-grid {
+  background-color: #FBFCF6;
+  background-image:
+    linear-gradient(rgba(86, 115, 58, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(86, 115, 58, 0.12) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* Notebook page: blue rules, red margin */
+.paper-lined {
+  --margin: 3.4rem;
+  --rule: 2rem;
+  background-color: #FCFBF4;
+  background-image:
+    linear-gradient(90deg,
+      transparent calc(var(--margin) - 1px),
+      var(--margin-red) calc(var(--margin) - 1px),
+      var(--margin-red) calc(var(--margin) + 1px),
+      transparent calc(var(--margin) + 1px)),
+    repeating-linear-gradient(transparent 0 calc(var(--rule) - 1px), var(--rule-blue) calc(var(--rule) - 1px) var(--rule));
+  background-position: 0 0, 0 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .paper-lined { --margin: 4.75rem; }
+}
+
+/* Punched holes down the left edge — they show whatever is behind the page */
+.paper-holes::before {
+  content: '';
+  position: absolute;
+  left: 0.85rem;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  background: radial-gradient(circle at 8px 22px, var(--hole, var(--bg-grain)) 6.5px, rgba(62, 44, 30, 0.18) 7px, transparent 7.8px) 0 0 / 16px 46px repeat-y;
+}
+
+/* ── Tape ── */
+.tape {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  height: 26px;
+  pointer-events: none;
+  clip-path: polygon(0 0, 100% 0, 97% 18%, 100% 36%, 97% 54%, 100% 72%, 97% 88%, 100% 100%, 0 100%, 3% 84%, 0 66%, 3% 50%, 0 32%, 3% 16%);
+}
+
+.tape-washi {
+  background: repeating-linear-gradient(-45deg,
+    rgba(170, 194, 142, 0.62) 0 7px,
+    rgba(226, 234, 212, 0.62) 7px 14px);
+}
+
+.tape-kraft {
+  background: linear-gradient(rgba(222, 200, 152, 0.86), rgba(208, 184, 134, 0.86));
+}
+
+.tape-clear {
+  background: linear-gradient(rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.38));
+}
+
+.tape-dots {
+  background:
+    radial-gradient(circle, rgba(122, 90, 58, 0.4) 2px, transparent 2.6px) 0 0 / 10px 10px,
+    rgba(246, 238, 218, 0.86);
+}
+
+.tape-sepia {
+  background: repeating-linear-gradient(90deg,
+    rgba(122, 90, 58, 0.5) 0 2px,
+    rgba(214, 190, 150, 0.7) 2px 9px);
+}
+
+/* ── Polaroid ── */
+.polaroid {
+  background: #FDFCF8;
+  padding: 10px 10px 0;
+}
+
+/* ── Die-cut sticker: thick white border, sits proud of the page ── */
+.sticker-cut {
+  border: 5px solid #FFFFFF;
+  box-shadow: 0 1px 2px rgba(62, 44, 30, 0.14), 0 6px 14px rgba(62, 44, 30, 0.16);
+}
+
+/* ── Paper label ── */
+.label-dymo {
+  display: inline-block;
+  background: linear-gradient(#F4EAD2, #EADDBE);
+  color: var(--ink-brown);
+  font-family: var(--font-type);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.74rem;
+  line-height: 1;
+  padding: 0.5rem 0.85rem 0.45rem;
+  border: 1px solid rgba(122, 90, 58, 0.2);
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(62, 44, 30, 0.12);
+}
+
+/* ── Postage stamp: perforations are a tiled hole pattern the inner face covers ── */
+.stamp {
+  display: inline-block;
+  padding: 7px;
+  background: radial-gradient(circle at center, transparent 3.3px, #FDFBF4 3.8px) -5px -5px / 10px 10px;
+  filter: drop-shadow(0 2px 3px rgba(62, 44, 30, 0.2));
+}
+
+.stamp-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #E3E9DA;
+  border: 1px solid rgba(86, 115, 58, 0.35);
+  color: var(--green-deep);
+}
+
+.postmark {
+  color: rgba(62, 44, 30, 0.55);
+  pointer-events: none;
+}
+
+/* ── Ticket stub: notched sides + a perforated tear line ── */
+.ticket {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  background: var(--paper-aged);
+  color: var(--ink-brown);
+  -webkit-mask:
+    radial-gradient(circle 9px at 0 50%, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle 9px at 100% 50%, #0000 98%, #000) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle 9px at 0 50%, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle 9px at 100% 50%, #0000 98%, #000) right / 51% 100% no-repeat;
+}
+
+.ticket-stub {
+  border-left: 2px dashed rgba(62, 44, 30, 0.3);
+}
+
+/* ── "Cut here" divider between sections ── */
+.cut-line {
+  height: 0;
+  border-top: 2px dashed rgba(62, 44, 30, 0.28);
+}
+
+/* ── Sticky note ── */
+.sticky-note {
+  background: linear-gradient(170deg, #F7EDC8 0%, #EFE0AE 100%);
+}
+
+/* ── Highlighter swipe that draws in under text on hover ── */
+.highlight-swipe {
+  background: linear-gradient(100deg, transparent 0.25em, var(--accent-mark) 0.35em, var(--accent-mark) calc(100% - 0.3em), transparent 100%) no-repeat 0 88% / 0% 52%;
+  transition: background-size var(--t-slow) var(--spring);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.group:hover .highlight-swipe,
+.group\/row:hover .highlight-swipe,
+.group:focus-visible .highlight-swipe {
+  background-size: 100% 52%;
+}
+
+/* ── Draggable photos on the Fun Stuff board ── */
+.drag-photo {
+  touch-action: auto;
+}
+
+@media (min-width: 1024px) and (hover: hover) {
+  .drag-photo { cursor: grab; }
+  .drag-photo.is-dragging {
+    cursor: grabbing;
+    filter: var(--scrap-shadow-up);
+    transition: rotate var(--t-fast) var(--spring), filter var(--t-fast) var(--spring);
+  }
+}
+
+@media (prefers-contrast: more) {
+  .paper-lined { --rule-blue: rgba(84, 120, 170, 0.4); }
+  .tape { opacity: 0.6; }
+}
 }
