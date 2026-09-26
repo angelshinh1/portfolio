@@ -1,8 +1,6 @@
 import { Tape } from "../scrapbook";
 
-// Hand-drawn architecture diagrams for case studies that have no screenshots.
-// Plain inline SVG — no library, no network — coloured from the site's own
-// tokens so a diagram reads as part of the page rather than a pasted image.
+// Hand-drawn SVG architecture diagrams, colored from site tokens
 
 const INK = "var(--text-primary)";
 const MUTED = "var(--text-muted)";
@@ -73,8 +71,7 @@ function Arrow({ from, to, label, dashed = false, labelDy = -7 }) {
 }
 
 function Frame({ viewBox, minWidth, children }) {
-  // Diagrams keep their proportions and scroll sideways on narrow screens
-  // rather than shrinking their labels into illegibility.
+  // Scroll sideways on narrow screens rather than shrinking labels
   return (
     <div className="w-full overflow-x-auto">
       <svg
@@ -177,8 +174,7 @@ export default function ArchitectureDiagram({ id, caption }) {
   if (!Diagram) return null;
 
   return (
-    // Stays inside the journal page: the page's torn clip-path would cut off
-    // anything that breaks out past it. Wide diagrams scroll sideways instead.
+    // Stays inside the journal page; its torn clip-path would cut anything wider
     <figure className="my-6">
       {/* Pasted in on a scrap of graph paper */}
       <div className="scrap paper paper-grid p-5 sm:p-6" style={{ "--r": "0.4deg" }}>

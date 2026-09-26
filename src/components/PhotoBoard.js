@@ -3,11 +3,10 @@
 import { useRef } from "react";
 import { Polaroid } from "./scrapbook";
 
-// Snapshots scattered on the board. x/y are the desktop resting spots (% of the
-// board); on smaller screens the board collapses to a plain grid.
+// x/y are desktop resting spots (% of board); smaller screens use a grid
 const PHOTOS = [
-    { n: 1, caption: "rainy downtown",    x: 1,  y: 6,  r: -5, tape: "kraft" },
-    { n: 2, caption: "blue-sky day",      x: 19, y: 30, r: 3 },
+    { n: 1, caption: "rainy downtown",    x: 1,  y: 6,  r: 4, tape: "kraft" },
+    { n: 2, caption: "blue-sky day",      x: 19, y: 30, r: -3 },
     { n: 3, caption: "looking up",        x: 36, y: 2,  r: -2 },
     { n: 4, caption: "streetcar spotting", x: 54, y: 26, r: 4, tape: "clear" },
     { n: 5, caption: "that sunset",       x: 72, y: 4,  r: -3 },
@@ -18,8 +17,7 @@ const PHOTOS = [
 
 const DESKTOP = "(min-width: 1024px) and (hover: hover)";
 
-// Photos can be picked up and moved with a mouse on desktop. Touch is left
-// alone so swiping over the grid still scrolls the page.
+// Mouse-draggable on desktop; touch is left alone so the page still scrolls
 export default function PhotoBoard() {
     const boardRef = useRef(null);
     const topZ = useRef(10);

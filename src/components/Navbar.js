@@ -6,8 +6,7 @@ import GuitarIllustration from "./GuitarIllustration";
 import { Tape, tornClip } from "./scrapbook";
 import { createSpring, project, rubberband, createVelocityTracker } from "@/lib/spring";
 
-// `external` items are real files in /public, not routes — next/link would try
-// to client-side route to them and land on a 404, so they get a plain anchor.
+// `external` items are files in /public, so they get a plain anchor
 const navItems = [
   { label: "Experience", href: "/#experience" },
   { label: "Projects",   href: "/projects"    },
@@ -16,20 +15,16 @@ const navItems = [
   { label: "Contact",    href: "/#contact"    },
 ];
 
-// One component for both kinds of destination so the link markup below stays
-// identical whichever it is.
+// Same markup for routes and files
 function NavLink({ item, ...props }) {
   if (item.external) {
     return <a href={item.href} target="_blank" rel="noopener noreferrer" {...props} />;
   }
-  // `scroll={false}` on hash links: Next's built-in hash handling is an instant
-  // scrollIntoView, which lands on the section before Lenis can ease anything —
-  // the jump you'd otherwise see. Lenis does the moving instead (Layout.js).
+  // scroll={false} on hash links so Lenis eases the jump instead of Next snapping
   return <Link href={item.href} scroll={!item.href.includes("#")} {...props} />;
 }
 
-// The bar is a strip of paper with a torn bottom edge. Fixed seed, so server
-// and client tear it identically.
+// Torn bottom edge; fixed seed so server and client match
 const NAV_CLIP = tornClip(5, ["bottom"], 4, 90);
 
 const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
@@ -67,9 +62,7 @@ export default function Navbar() {
     });
   }
 
-  // The bar grows an edge once there is content behind it, and gets out of the
-  // way when you scroll down — reading direction wins the screen; the moment you
-  // scroll back up you're looking for navigation, so it returns.
+  // Hide on scroll down, return on scroll up
   useEffect(() => {
     let lastY = window.scrollY;
 
@@ -77,8 +70,7 @@ export default function Navbar() {
       const y = window.scrollY;
       setScrolled(y > 8);
 
-      // A small threshold so a jittery trackpad or a rubber-band bounce at the
-      // top doesn't flap the bar in and out.
+      // Threshold so trackpad jitter doesn't flap the bar
       if (Math.abs(y - lastY) > 6) {
         setHidden(y > lastY && y > 120);
         lastY = y;
@@ -90,11 +82,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // ── The menu is the bar ────────────────────────────────────────────────────
-  // One surface, one spring, one dimension: the nav's own height. Opening grows
-  // the bar into a full menu; closing shrinks it back. Because a spring owns the
-  // value for the surface's whole life, an open can be caught halfway and pushed
-  // back closed without a jump.
+  // Mobile: the bar grows into the menu — one spring drives its height
   useEffect(() => {
     const el = navRef.current;
     const row = rowRef.current;
@@ -160,7 +148,7 @@ export default function Navbar() {
       window.removeEventListener("resize", onResize);
       spring.stop();
     };
-    // `open` is read inside onResize only to re-settle after a viewport change
+    // `open` is only read in onResize to re-settle
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -182,12 +170,9 @@ export default function Navbar() {
     springRef.current?.set(open ? expanded : collapsed);
   }, [open]);
 
-  // ── Push the menu back up into the bar ─────────────────────────────────────
-  // Dragging upward shrinks the surface 1:1 with the finger; past fully open it
-  // resists instead of stopping dead; the release is thrown, not snapped.
+  // Drag the open menu up to close it: 1:1, rubber-banded, thrown on release
   const onPointerDown = useCallback((e) => {
-    // Only an open menu can be dragged, and never by pressing something that
-    // already does its own job (the toggle button, a link).
+    // Only an open menu drags, and never from a link or button
     if (reducedRef.current || !isMobile() || !openRef.current) return;
     if (e.target.closest("a, button")) return;
     const drag = dragRef.current;
@@ -220,8 +205,7 @@ export default function Navbar() {
     const { collapsed, expanded } = sizeRef.current;
     const velocity = tracker.current.velocity();   // px/s, downward positive
 
-    // A decisive flick commits in the direction it was thrown; only an
-    // ambiguous, slow release asks where the surface would have come to rest.
+    // A flick commits in its direction; a slow release settles where it would land
     const FLICK = 450;
     const stayOpen = velocity < -FLICK
       ? false
@@ -235,10 +219,7 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-30 px-3 sm:px-5 pt-3 sm:pt-4">
-      {/* A strip of paper taped across the top of the page. On mobile it grows
-          into the whole menu; on desktop it stays a bar and never changes
-          height. The wrapper carries the hide-on-scroll move and the shadow
-          (a drop-shadow, since the torn clip-path would cut off a box-shadow). */}
+      {/* Wrapper carries the hide transform and the drop-shadow (clip-path would cut a box-shadow) */}
       <div
         className="relative mx-auto max-w-[92vw] lg:max-w-[76rem]"
         style={{
@@ -277,8 +258,8 @@ export default function Navbar() {
               <span key={item.label} className="flex items-center">
                 <NavLink
                   item={item}
-                  className="press font-type relative group uppercase text-[var(--ink-brown)] transition-colors duration-200 hover:text-[var(--green-deep)]"
-                  style={{ fontSize: "0.8rem", letterSpacing: "0.12em" }}
+                  className="press font-type relative group text-[var(--ink-brown)] transition-colors duration-200 hover:text-[var(--green-deep)]"
+                  style={{ fontSize: "0.9rem", letterSpacing: "0.02em" }}
                   onMouseEnter={() => wiggleLink(wigglePaths.current[i])}
                 >
                   {item.label}
@@ -326,8 +307,7 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Menu body — part of the bar, not a panel under it. Revealed as the
-            surface grows, so there is never a second layer to notice. */}
+        {/* Menu body, revealed as the bar grows */}
         <div
           ref={menuRef}
           className="md:hidden flex flex-col flex-1 min-h-0"

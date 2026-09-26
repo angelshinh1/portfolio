@@ -1,13 +1,4 @@
-// A tiny interruptible spring, driven off the shared rAF ticker.
-//
-// The point of a spring here (over a CSS transition) is that it can be grabbed
-// mid-flight: `set` re-targets from wherever the value currently *is*, carrying
-// the current velocity through, so a reversal never hits a brick wall.
-//
-// Parameters follow Apple's designer-facing pair rather than mass/stiffness:
-//   damping  1.0 = critically damped (no overshoot) — the default
-//            ~0.8 = a little bounce, only for momentum-driven motion
-//   response = seconds to reach the target (not a fixed duration)
+// Interruptible spring on the shared ticker; damping 1 = no overshoot, response = seconds
 import ticker from "./ticker";
 
 export function createSpring({ from = 0, damping = 1, response = 0.35, onChange } = {}) {
@@ -52,8 +43,7 @@ export function createSpring({ from = 0, damping = 1, response = 0.35, onChange 
   }
 
   return {
-    // Re-target. Velocity is preserved (or handed off from a gesture release),
-    // so an interrupted animation continues from its live on-screen value.
+    // Re-target from the current value, keeping velocity
     set(next, initialVelocity) {
       target = next;
       if (initialVelocity !== undefined) velocity = initialVelocity;
@@ -71,8 +61,7 @@ export function createSpring({ from = 0, damping = 1, response = 0.35, onChange 
   };
 }
 
-// Where a flick would come to rest, using Apple's exponential-decay projection
-// (the same maths as scroll deceleration) — not the textbook v²/2a.
+// Where a flick comes to rest (exponential-decay projection)
 export function project(velocity, decelerationRate = 0.998) {
   return (velocity / 1000) * decelerationRate / (1 - decelerationRate);
 }

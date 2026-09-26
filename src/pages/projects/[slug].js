@@ -116,7 +116,7 @@ export default function ProjectCaseStudy({ project }) {
           <CaseReveal delay={120}>
             <div className="max-w-[900px] mx-auto px-6 mt-16">
               {/* The cover is a print taped into the book */}
-              <div className="scrap bg-white p-2 sm:p-3" style={{ "--r": "-0.8deg" }}>
+              <div className="scrap bg-white p-2 sm:p-3" style={{ "--r": "0.8deg" }}>
                 <Tape variant="kraft" rotate={-4} width={110} className="-top-3 left-1/2 -translate-x-1/2" />
                 <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] overflow-hidden">
                 <Image

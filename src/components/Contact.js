@@ -18,7 +18,7 @@ export default function Contact() {
       <Paper
         variant="aged"
         tear={false}
-        rotate={-1}
+        rotate={0.8}
         className="mt-16 lg:mt-20 max-w-[48rem] mx-auto"
         innerClassName="rounded-[3px] p-6 sm:p-8 md:p-12"
         decor={

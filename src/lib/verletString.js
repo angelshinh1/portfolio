@@ -1,10 +1,4 @@
-// Point-mass / Verlet string simulation. Framework-agnostic — no DOM, no React.
-// Drive `.step()` from the shared gsap.ticker (see lib/ticker.js). Consumed by
-// components/GuitarStringsPhysics.js, which samples `.points` into an SVG path.
-//
-// Coordinate model: points run along a local x axis from 0..length (string
-// rest line). `y` is perpendicular displacement from rest — renderers map
-// that onto real SVG x/y depending on orientation.
+// Point-mass / Verlet string simulation
 
 export class VerletString {
   constructor({ length, segments = 14, damping = 0.985, stiffness = 0.15, relaxIterations = 3 }) {
@@ -28,9 +22,7 @@ export class VerletString {
     });
   }
 
-  // amplitude: signed displacement to add at atRatio (0 = start, 1 = end) along the string.
-  // velocity: optional, how hard to pluck (e.g. from cursor speed) — scales a nearby spread
-  // so the pluck looks like a real disturbance instead of a single-point spike.
+  // amplitude: signed displacement at atRatio (0 = start, 1 = end)
   pluck(amplitude, atRatio = 0.5, spread = 2) {
     const center = Math.round(atRatio * (this.segments - 1));
     for (let offset = -spread; offset <= spread; offset++) {
@@ -66,12 +58,7 @@ export class VerletString {
     }
   }
 
-  // Samples the current points into a smooth cubic-bezier SVG path (Catmull-Rom
-  // -> Bezier conversion), mapped into real SVG space: `position` is the string's
-  // rest-line coordinate (the y in DESIGN.md's horizontal format, x in vertical),
-  // and `vertical` picks which axis the displacement perturbs — matching
-  // GuitarStrings.js's `M 0,{y} C ...` (horizontal) / `M {x},0 C ...` (vertical)
-  // path structure so this drops into the same rendering path.
+  // Samples the points into a smooth SVG path matching GuitarStrings.js
   toPath({ position = 0, vertical = false } = {}) {
     const pts = this.points;
     const n = pts.length;

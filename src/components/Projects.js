@@ -8,10 +8,10 @@ const TEASER_COUNT = 4;
 
 // Each clipping is cut from different stock and stuck down a little crooked.
 const CLIPPINGS = [
-  { variant: "cream", rotate: -1.2, seed: 21, tape: "kraft", tapeRotate: -4 },
-  { variant: "aged",  rotate: 1.0,  seed: 22, tape: "clear", tapeRotate: 3 },
-  { variant: "aged",  rotate: 0.8,  seed: 23, tape: "clear", tapeRotate: -2 },
-  { variant: "cream", rotate: -1.0, seed: 24, tape: "kraft", tapeRotate: 4 },
+  { variant: "cream", rotate: 1.2,  seed: 21, tape: "kraft", tapeRotate: -4 },
+  { variant: "aged",  rotate: -1.0, seed: 22, tape: "clear", tapeRotate: 3 },
+  { variant: "aged",  rotate: -0.8, seed: 23, tape: "clear", tapeRotate: -2 },
+  { variant: "cream", rotate: 1.0,  seed: 24, tape: "kraft", tapeRotate: 4 },
 ];
 
 const IconGithub = (props) => (

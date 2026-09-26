@@ -48,11 +48,7 @@
   --accent-soft: #CFDCC0;
   --highlight:   rgba(236, 204, 116, 0.45);
 
-  /* ══ MOTION ══════════════════════════════════════════════════════════
-     Curves that approximate springs. --spring is critically damped
-     (damping 1.0) — the house default, no overshoot. --spring-soft carries
-     a little overshoot and is reserved for motion a gesture set going.
-     Durations map to Apple's "response": 0.3–0.4s for UI, faster for press. */
+  /* Motion: spring-like curves; --spring is the default, --spring-soft only for momentum */
   --spring:      cubic-bezier(0.32, 0.72, 0, 1);
   --spring-soft: cubic-bezier(0.34, 1.28, 0.64, 1);
   --ease-out:    cubic-bezier(0.32, 0.72, 0, 1);
@@ -63,10 +59,7 @@
   --t-base:  340ms;  /* response 0.34 */
   --t-slow:  480ms;
 
-  /* ══ MATERIALS ═══════════════════════════════════════════════════════
-     Translucent layers that float over content. Heavier material separates
-     structure (nav, sheets); lighter material lifts interactive things.
-     Never stack a light material on another light one. */
+  /* Materials: translucent layers over content */
   --mat-thick:    rgba(225, 230, 219, 0.72);
   --mat-regular:  rgba(245, 246, 240, 0.66);
   --mat-thin:     rgba(245, 246, 240, 0.44);
@@ -87,8 +80,7 @@
 }
 
 html {
-  /* Lenis owns smooth-scroll easing now (see Layout.js); native smooth-scroll
-     would double-ease against it and cause jank. */
+  /* Lenis owns smooth scrolling; native smooth-scroll would double-ease */
   scroll-behavior: auto;
   scroll-padding-top: 80px;
 }
@@ -105,11 +97,7 @@ body {
   font-optical-sizing: auto;
 }
 
-/* ── Paper grain ──────────────────────────────────────────────────────
-   A still, tiling noise field over the whole page — generated rather than
-   downloaded, so it costs nothing and stays crisp at any zoom. Never
-   animated: a moving full-viewport texture is exactly the kind of thing
-   reduced-motion exists to prevent. */
+/* Paper grain: still, tiling SVG noise over the whole page */
 body::after {
   content: '';
   position: fixed;
@@ -123,10 +111,7 @@ body::after {
 }
 
 /* ── Type families ── */
-/* Two fonts, one job each: Playfair Display (expressive display serif)
-   carries headings and the ornate initial-cap gesture; Satoshi (a tight,
-   low-contrast neo-grotesque) carries everything else — body copy, nav,
-   labels, subtitles. */
+/* Playfair Display for headings, Satoshi for everything else */
 .font-display {
   font-family: var(--font-serif);
   font-style: italic;
@@ -150,11 +135,7 @@ body::after {
   letter-spacing: 0.02em;
 }
 
-/* ══ TYPE SCALE ════════════════════════════════════════════════════════
-   Tracking is size-specific, never one value for all sizes: display text
-   tightens as it grows, body sits near 0, small caps-y labels open up.
-   Leading moves inversely to size. Sizes are in rem so a larger user text
-   setting scales the layout with the text. */
+/* Type scale: tracking tightens as size grows */
 .type-display {
   font-family: var(--font-serif);
   font-weight: 600;
@@ -213,11 +194,7 @@ body::after {
   background: var(--mat-thick);
 }
 
-/* The blur lives behind an @supports guard on purpose. The production CSS
-   minifier resolves the build's browser targets and silently DELETES bare
-   backdrop-filter declarations for them — the property survives in dev and
-   vanishes in the built stylesheet. Inside @supports the condition is a
-   runtime question, so the declarations are left alone. */
+/* Keep inside @supports — the production minifier deletes bare backdrop-filter */
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .material {
     -webkit-backdrop-filter: saturate(170%) blur(14px);
@@ -242,8 +219,7 @@ body::after {
   }
 }
 
-/* Vibrancy: text over a translucent surface needs weight + a tracking bump,
-   not flat gray, or it dissolves into whatever scrolls underneath. */
+/* Text over translucent surfaces needs extra weight and tracking */
 .vibrant {
   color: var(--text-secondary);
   font-weight: 500;
@@ -272,8 +248,7 @@ mark, .mark {
   background: var(--bg-base);
 }
 
-/* ══ RESPONSE ══════════════════════════════════════════════════════════
-   Feedback lives on the press, not the release, and it is instant. */
+/* Press feedback: instant, on pointer-down */
 .press {
   transition: transform var(--t-press) var(--spring), opacity var(--t-press) linear;
   touch-action: manipulation;   /* no 300ms tap delay */
@@ -348,9 +323,7 @@ mark, .mark {
   body { font-size: 1.0625rem; }
 }
 
-/* ══ ACCESSIBILITY ═════════════════════════════════════════════════════
-   Reduced motion keeps the feedback but drops the travel: cross-fades in
-   place of slides, no overshoot, no parallax. */
+/* Reduced motion keeps feedback, drops travel */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 
@@ -385,10 +358,7 @@ mark, .mark {
   body::after { opacity: 0; }
 }
 
-/* ══ SCROLLBARS ═════════════════════════════════════════════════════════
-   Thin, overlay-style, theme-tinted — replaces the stock OS scrollbar
-   (wide and grey by default) with a floating green pill, so it reads as
-   part of the paper system instead of sitting on top of it. */
+/* Thin, theme-tinted scrollbars */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--green-muted) transparent;
@@ -476,11 +446,7 @@ mark, .mark {
   100% { box-shadow: 0 0 0 0 rgba(163, 190, 133, 0); }
 }
 
-/* ══ SCRAPBOOK ═════════════════════════════════════════════════════════
-   Paper, tape, stamps and ink for the collage layout. Components live in
-   src/components/scrapbook. Scraps sit on the sage page like cut paper on
-   cardstock: cream and aged stock for contrast, green washi to tie them
-   back to the palette, brown ink for anything "handwritten". */
+/* Scrapbook: paper, tape, stamps and ink; components in src/components/scrapbook */
 :root {
   --paper-cream: #FBF7EC;
   --paper-aged:  #F1E6CC;
@@ -575,7 +541,11 @@ mark, .mark {
   .paper-lined { --margin: 4.75rem; }
 }
 
-/* Punched holes down the left edge — they show whatever is behind the page */
+/* Punched holes showing the page behind; tablet and up */
+@media (max-width: 767px) {
+  .paper-holes::before { display: none; }
+}
+
 .paper-holes::before {
   content: '';
   position: absolute;

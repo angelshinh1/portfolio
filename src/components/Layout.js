@@ -28,8 +28,7 @@ export default function Layout(props) {
         }
         ticker.add(onTick);
 
-        // Keeps future ScrollTrigger-driven work (Phase 2) in sync with Lenis's
-        // virtual scroll position instead of the native scroll event.
+        // Keep ScrollTrigger in sync with Lenis's virtual scroll
         lenis.on("scroll", ScrollTrigger.update);
 
         return () => {
@@ -39,17 +38,13 @@ export default function Layout(props) {
         };
     }, []);
 
-    // ── Hash navigation ───────────────────────────────────────────────────────
-    // Registered unconditionally (unlike Lenis above): with reduced motion the
-    // helper falls back to an instant jump, but the links still have to work.
+    // Hash navigation — registered even with reduced motion, which jumps instantly
     useEffect(() => {
         if (typeof window === "undefined") return;
 
-        // Same-page jumps: Next won't re-render for these, so handle the click
-        // ourselves and keep the URL in step by hand.
+        // Same-page jumps: Next won't re-render, so handle the click and URL ourselves
         function onDocumentClick(event) {
-            // No `defaultPrevented` guard: next/link has already cancelled the
-            // event by the time this fires, which is exactly the case we want.
+            // No defaultPrevented guard: next/link has already cancelled the event
             if (event.button !== 0) return;
             if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
@@ -62,26 +57,19 @@ export default function Layout(props) {
 
             event.preventDefault();
 
-            // Deferred so next/link's own router.push lands first: if it
-            // already wrote the hash, pushing again would cost the user a
-            // second press of the back button. Plain <a href="#..."> anchors
-            // (the Hero CTA) have nothing else updating the URL, so they fall
-            // through to this.
+            // Deferred so next/link's push lands first and we don't add a second history entry
             setTimeout(() => {
                 if (window.location.hash !== url.hash) {
                     window.history.pushState(null, "", url.hash);
                 }
             }, 0);
 
-            // Deferred, not immediate: a mobile-menu link is still holding the
-            // scroll lock at click time and releases it a frame later.
+            // Deferred: a mobile-menu link still holds the scroll lock for a frame
             scrollToHashWhenReady(url.hash);
         }
         document.addEventListener("click", onDocumentClick);
 
-        // Cross-page jumps (/projects → /#experience). Next lands on the new
-        // page and scrolls to the top; the section may not even be mounted yet,
-        // so the helper waits for it.
+        // Cross-page jumps (/projects → /#experience): wait for the section to mount
         function onRouteDone(dest) {
             const hash = new URL(dest, window.location.origin).hash;
             if (hash) scrollToHashWhenReady(hash);
@@ -96,14 +84,12 @@ export default function Layout(props) {
         };
     }, [router]);
 
-    // Cold load on a deep link (someone opens /#contact directly). The loading
-    // overlay owns the scroll until it's finished, so wait for its signal.
+    // Cold load on a deep link: wait for the loading screen to finish
     useEffect(() => {
         const hash = window.location.hash;
         if (!hash) return;
 
-        // Immediate here, unlike the click paths: someone opening /#contact
-        // directly wants to be there, not to watch the whole page scroll past.
+        // Jump instantly on a deep link rather than scrolling past the whole page
         if (window.__appReady) {
             scrollToHashWhenReady(hash, { immediate: true });
             return;

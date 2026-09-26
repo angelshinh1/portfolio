@@ -4,10 +4,7 @@ import { useEffect, useRef } from 'react';
 import ticker from '@/lib/ticker';
 import { VerletString } from '@/lib/verletString';
 
-// Verlet-physics drop-in replacement for GuitarStrings.js — same props, same
-// SVG path structure (M ... C ...), same pluck/drone/onReady API — but the
-// path is sampled from a real point-mass simulation each tick instead of a
-// fixed 5-coefficient keyframe curve. See ANIMATION_PLAN.md concept #1.
+// Verlet-physics drop-in for GuitarStrings.js — same props and path shape
 
 const ALL_STRINGS = [
   { thickness: 3,    color: 'var(--string-E)' },

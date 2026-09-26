@@ -36,12 +36,12 @@ const HOBBY_ACCENTS = [
 
 // Paper tags cut from the same stock, set down at slightly different angles
 const TAGS = [
-    { r: -2,   seed: 41 },
-    { r: 1.5,  seed: 42 },
-    { r: -1,   seed: 43 },
-    { r: 2,    seed: 44 },
-    { r: -1.5, seed: 45 },
-    { r: 1,    seed: 46 },
+    { r: 2,    seed: 41 },
+    { r: -1.5, seed: 42 },
+    { r: 1,    seed: 43 },
+    { r: -2,   seed: 44 },
+    { r: 1.5,  seed: 45 },
+    { r: -1,   seed: 46 },
 ];
 
 // The fact that gets a highlighter pass
@@ -63,7 +63,7 @@ export default function FunStuff() {
             <div className="mb-28 lg:mb-32 grid grid-cols-1 lg:grid-cols-[0.75fr_1fr] gap-14 lg:gap-16 items-center">
                 <div className="relative w-full max-w-[320px] mx-auto lg:mx-0">
                     <Polaroid
-                        rotate={-3}
+                        rotate={2.5}
                         tape="kraft"
                         tapeRotate={4}
                         caption="Gratitude — Amin Toofani ♪"
@@ -187,7 +187,7 @@ export default function FunStuff() {
                         tear={["top", "bottom"]}
                         seed={31}
                         depth={6}
-                        rotate={1.2}
+                        rotate={-1.2}
                         innerClassName="pl-[4.25rem] md:pl-[5.5rem] pr-5 md:pr-8 pt-8 pb-10"
                         decor={<Tape variant="washi" rotate={-4} className="-top-2 left-1/2 -translate-x-1/2" />}
                     >

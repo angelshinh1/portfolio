@@ -4,9 +4,7 @@ import { Paper, Postmark } from "./scrapbook";
 const socialClass =
     "press-strong sticker-cut flex items-center justify-center w-12 h-12 rounded-full bg-[var(--paper-cream)] text-[var(--ink-brown)] transition-colors duration-200 hover:text-[var(--green-deep)]";
 
-// The last page of the book: a torn strip of kraft paper across the bottom.
-// It overlaps the section above by the depth of its tear, so the notches show
-// that section's color instead of a seam.
+// Torn kraft strip; overlaps the section above so the tear shows its color
 export default function Footer() {
     return (
         <Paper
@@ -35,9 +33,7 @@ export default function Footer() {
                         </h3>
                         <p className="font-hand text-[1.5rem] leading-snug text-[var(--ink-brown)] mt-2 max-w-[40ch] mx-auto lg:mx-0">
                             Peek at the{" "}
-                            {/* Root-relative: the footer renders on /projects
-                                and /blog too, where a bare "#fun-stuff" points
-                                at a section that isn't on the page. */}
+                            {/* Root-relative so it works from /projects and /blog too */}
                             <Link
                                 href="/#fun-stuff"
                                 scroll={false}

@@ -14,9 +14,7 @@ const IconLive = (props) => (
   </svg>
 );
 
-// The open/close affordance: a plus that turns into a close mark. Rotation is
-// spring-eased so it settles rather than stopping dead, and it fills in on open
-// so the row's state is readable at a glance.
+// Plus that rotates into a close mark
 function ToggleGlyph({ isExpanded }) {
   return (
     <span
@@ -87,8 +85,7 @@ function ExpandedDetails({ project, chipBg }) {
   );
 }
 
-// Shared accordion unit for a project — used on the homepage teaser grid
-// (variant="card") and the full /projects listing (variant="list").
+// Accordion row — homepage card variant and /projects list variant
 export default function ProjectRow({ project, isExpanded, onToggle, onHoverStart, chipBg = "var(--bg-surface)", variant = "list", topBorder = true }) {
   if (variant === "card") {
     return (

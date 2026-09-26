@@ -1,8 +1,4 @@
-// Central project data — used by the Projects grid (src/components/Projects.js)
-// and by the case-study detail pages (src/pages/projects/[slug].js).
-//
-// `content` is an array of blocks rendered by src/components/case-study/CaseStudyContent.js.
-// Supported block types: lead, heading, paragraph, list, quote, stats, diagram, gallery, divider.
+// Project data for the Projects section and case-study pages
 
 const projects = [
   {

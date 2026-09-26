@@ -1,9 +1,4 @@
-// Scrapbook primitives — torn paper, tape, photos, stamps, doodles.
-//
-// Everything is drawn in CSS/SVG (no texture downloads). Torn edges are a
-// clip-path polygon generated from a seed, so the same scrap tears the same
-// way on the server and the client and hydration stays clean. Styles for the
-// classes used here live in the SCRAPBOOK block of globals.css.
+// Scrapbook primitives; styles in the SCRAPBOOK block of globals.css
 
 import { useMemo } from "react";
 import Image from "next/image";
@@ -20,8 +15,7 @@ function mulberry32(seed) {
     };
 }
 
-// Tear depth is in px, not %, so a wide scrap and a narrow one look equally
-// ragged. `edges` is "all" or a list of "top" | "right" | "bottom" | "left".
+// Tear depth in px so every scrap looks equally ragged
 export function tornClip(seed = 1, edges = "all", depth = 5, teeth = 44) {
     const r = mulberry32(seed);
     const on = (e) => edges === "all" || edges.includes(e);
@@ -43,10 +37,7 @@ export function tornClip(seed = 1, edges = "all", depth = 5, teeth = 44) {
     return `polygon(${pts.join(",")})`;
 }
 
-// A scrap of paper. The outer element carries rotation + shadow (a drop-shadow
-// filter, because box-shadow would be clipped away with the torn edge); the
-// inner element is the paper itself. `decor` renders outside the clip, which
-// is where tape, clips and stamps belong.
+// Outer carries tilt + drop-shadow, inner is the clipped paper, `decor` sits outside the clip
 export function Paper({
     as: Tag = "div",
     variant = "cream",
@@ -80,8 +71,7 @@ export function Paper({
     );
 }
 
-// A strip of tape. Position it with classes on `className`; rotation is the
-// separate `rotate` property so it composes with Tailwind's translate utilities.
+// Rotation uses the `rotate` property so it composes with Tailwind translates
 export function Tape({ variant = "washi", rotate = -4, width = 96, className = "", style }) {
     return (
         <span

@@ -92,8 +92,7 @@ function Block({ block, project }) {
 
     case "gallery": {
       if (!project.images?.length) return null;
-      // Screenshots are wide and meant to be read; photos crop happily into a
-      // portrait tile. The project declares which kind of images it has.
+      // Wide screenshots stay wide; photos crop to portrait
       const wide = project.galleryAspect === "wide";
       return (
         <div className={`grid grid-cols-1 gap-8 lg:gap-10 py-4 ${wide ? "" : "sm:grid-cols-2"}`}>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
-// Live GitHub contribution calendar for the past year. Fetched client-side
-// on every visit — no scrape baked into the build, no fixture data.
+// Live GitHub contribution calendar for the past year
 const USERNAME = "angelshinh1";
 const API_URL = `https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`;
 
@@ -16,8 +15,7 @@ const LEVEL_COLOR = [
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const SKELETON_WEEKS = 53;
 
-// Groups the flat, date-ascending contribution list into Sunday-start weeks,
-// padding the front so the first real day lands on its correct weekday.
+// Groups days into Sunday-start weeks, padding the first week
 function buildWeeks(contributions) {
     if (!contributions?.length) return [];
     const lead = new Date(`${contributions[0].date}T00:00:00`).getDay();
@@ -44,8 +42,7 @@ function monthLabelsFor(weeks) {
     return labels;
 }
 
-// `frame` wraps the calendar (e.g. a paper scrap) and disappears with it if
-// the fetch fails, so the page never shows an empty frame.
+// `frame` wraps the calendar and disappears with it if the fetch fails
 export default function GithubContributions({ frame: Frame = "div", frameProps }) {
     const [data, setData] = useState(null);
     const [failed, setFailed] = useState(false);

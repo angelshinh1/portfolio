@@ -2,11 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Paper, Tape } from "./scrapbook";
 
-// Preview shown beside the /projects accordion — swaps content on hover
-// (and on keyboard focus, via the same handler in ProjectRow). It's a scrap
-// of paper taped beside the list. Projects with a real cover photo show it,
-// white-bordered like a print; everything else is built from the project's
-// own data.
+// Preview beside the /projects list, swapped on hover or focus
 export default function ProjectPreview({ project }) {
   if (!project) return null;
 
@@ -14,7 +10,7 @@ export default function ProjectPreview({ project }) {
     <Paper
       variant="cream"
       seed={61}
-      rotate={1}
+      rotate={-1}
       innerClassName="p-6"
       decor={<Tape variant="kraft" rotate={-3} className="-top-3 left-1/2 -translate-x-1/2" />}
     >

@@ -20,10 +20,7 @@ export default function Hero() {
     const headingRef = useRef(null);
     const watermarkRef = useRef(null);
 
-    // Intro — photo sticker scales in, the note drops onto the page, the
-    // guitar by the commit graph fades up last. Animates whole elements only (no text splitting), so
-    // nothing reflows when it finishes. Waits for the loading-screen curtain
-    // to lift so it isn't burned through underneath.
+    // Intro: stamp scales in, note drops in, guitar fades up; waits for the loading screen
     useGSAP(() => {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -64,27 +61,33 @@ export default function Hero() {
                         onMouseEnter={() => setHovered(true)}
                         onMouseLeave={() => setHovered(false)}
                     >
+                        {/* The photo as a postage stamp, cancelled with a Toronto postmark */}
                         <button
                             ref={avatarRef}
-                            className="press-strong sticker-cut relative block w-44 h-44 md:w-56 md:h-56 cursor-pointer overflow-hidden rounded-full"
-                            style={{ rotate: "-3deg" }}
+                            className="press-strong stamp relative block cursor-pointer"
+                            style={{ rotate: "-4deg" }}
                             onClick={handleImageClick}
                             aria-label="Angel Shinh — say hi"
                         >
-                            <Image
-                                src="/profile.jpg"
-                                alt="Angel Shinh"
-                                fill
-                                priority
-                                sizes="224px"
-                                className="object-cover"
-                            />
+                            <span className="block w-[186px] h-[226px] md:w-[226px] md:h-[276px] p-2.5 bg-[#FDFBF4] border border-[rgba(62,44,30,0.14)]">
+                                <span className="relative block w-full h-full overflow-hidden">
+                                    <Image
+                                        src="/profile.jpg"
+                                        alt="Angel Shinh"
+                                        fill
+                                        priority
+                                        sizes="226px"
+                                        className="object-cover object-[50%_40%]"
+                                    />
+                                </span>
+                            </span>
                         </button>
-                        <Tape variant="kraft" rotate={-38} width={92} className="top-2 -right-7" />
+                        <Postmark className="absolute -top-8 -right-24 md:-right-28 w-36 md:w-40 hidden sm:block" rotate={-8} />
 
                         {/* Margin note pointing back at the photo */}
                         <div
                             className="absolute -bottom-14 -right-24 md:-right-28 hidden sm:flex items-center gap-1 text-[var(--ink-brown)] pointer-events-none"
+                            style={{ opacity: tipVisible ? 0 : 1, transition: "opacity var(--t-base) var(--spring)" }}
                             aria-hidden
                         >
                             <DoodleArrow className="w-12 rotate-[200deg] -translate-y-3" />
@@ -93,21 +96,29 @@ export default function Hero() {
                             </span>
                         </div>
 
-                        {/* Tooltip grows out of the avatar it belongs to, and
-                            materializes (blur + scale) rather than plainly fading. */}
+                        {/* Taped note that fades in under the stamp */}
                         <div
-                            className="font-mono material absolute left-1/2 top-full mt-5 px-4 py-2.5 rounded-2xl text-[var(--text-primary)] text-xs whitespace-nowrap z-40 pointer-events-none"
+                            className="absolute left-1/2 top-full mt-5 z-40 pointer-events-none"
                             style={{
-                                transformOrigin: "top center",
-                                transform: `translateX(-50%) scale(${tipVisible ? 1 : 0.94})`,
+                                transform: "translateX(-50%)",
                                 opacity: tipVisible ? 1 : 0,
-                                filter: tipVisible ? "blur(0)" : "blur(4px)",
-                                transition: "opacity var(--t-base) var(--spring), transform var(--t-base) var(--spring-soft), filter var(--t-base) var(--spring)",
+                                transition: "opacity var(--t-base) var(--spring)",
                             }}
+                            aria-hidden={!tipVisible}
                         >
-                            Ts guy got W rizz. Should ask him out{" "}
-                            <span className="inline-block">✌️🥀</span>
-                            <div className="absolute left-1/2 -translate-x-1/2 -top-[6px] w-3 h-3 rotate-45 bg-[var(--mat-regular)] border-l border-t border-[var(--mat-edge)]"></div>
+                            <Paper
+                                variant="cream"
+                                seed={88}
+                                depth={3}
+                                rotate={2}
+                                innerClassName="px-4 pt-3.5 pb-2.5"
+                                decor={<Tape variant="clear" rotate={-4} width={46} className="-top-2 left-1/2 -translate-x-1/2" />}
+                            >
+                                <p className="font-hand w-[10rem] text-center text-[1.1rem] leading-tight text-[var(--ink-brown)]">
+                                    Ts guy got W rizz. Should ask him out{" "}
+                                    <span className="inline-block">✌️🥀</span>
+                                </p>
+                            </Paper>
                         </div>
                     </div>
                 </Reveal>
@@ -117,15 +128,10 @@ export default function Hero() {
                     variant="cream"
                     seed={3}
                     depth={6}
-                    rotate={-1.2}
+                    rotate={1.2}
                     className="text-center lg:text-left"
                     innerClassName="px-6 py-10 sm:px-10 md:px-14 md:py-14"
-                    decor={
-                        <>
-                            <Tape rotate={-7} className="-top-3 left-8 md:left-14" />
-                            <Postmark className="absolute -top-12 -right-4 md:-right-10 w-36 md:w-44 hidden sm:block" />
-                        </>
-                    }
+                    decor={<Tape rotate={-7} className="-top-3 left-8 md:left-14" />}
                 >
                     <h1 className="type-display text-[var(--text-primary)]">
                         Hi, I&apos;m{" "}
@@ -164,9 +170,7 @@ export default function Hero() {
                 </Paper>
             </div>
 
-            {/* Contribution activity on graph paper, with the guitar lying
-                beside it on desktop. Capped width so the calendar fits without
-                scrolling. */}
+            {/* Commit graph on graph paper, guitar beside it on desktop */}
             <div className="relative mt-28 lg:mt-24 grid grid-cols-1 lg:grid-cols-[1fr_47rem] items-center gap-6">
                 <div className="relative hidden lg:block h-full min-h-[16rem]" aria-hidden>
                     <div ref={watermarkRef} className="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -192,7 +196,7 @@ export default function Hero() {
                         variant: "grid",
                         tear: ["bottom"],
                         seed: 9,
-                        rotate: 0.6,
+                        rotate: -0.6,
                         innerClassName: "p-5 md:p-7",
                         decor: (
                             <Tape variant="clear" rotate={-3} width={90} className="-top-3 left-1/2 -translate-x-1/2" />

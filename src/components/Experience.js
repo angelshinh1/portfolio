@@ -1,8 +1,7 @@
 import SectionHeader from "./SectionHeader";
 import { Paper } from "./scrapbook";
 
-// One line per role. The long-form detail lives in the resume and the case
-// studies — this section is a glance, not a document.
+// One line per role — the detail lives in the resume and case studies
 const experiencesData = {
     RBC: {
         company: "RBC",
@@ -194,8 +193,9 @@ export default function Experience() {
                 tear={["bottom"]}
                 seed={11}
                 depth={7}
-                rotate={-0.5}
-                innerClassName="paper-holes pl-[4.25rem] md:pl-[6rem] pr-4 md:pr-10 pt-10 pb-12 md:pt-12 md:pb-14"
+                rotate={0.6}
+                className="max-md:![rotate:0deg] max-md:![filter:none]"
+                innerClassName="paper-holes max-md:!bg-transparent max-md:!bg-none max-md:![clip-path:none] md:pl-[6rem] md:pr-10 md:pt-12 md:pb-14"
                 style={{ "--hole": "var(--bg-grain)" }}
                 decor={
                     <>

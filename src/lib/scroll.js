@@ -1,9 +1,4 @@
-// Hash navigation has to go through Lenis, because Lenis owns the scroll
-// position: a native jump (Next's own hash handling, scrollIntoView, setting
-// window.scrollY) leaves Lenis's internal target where it was, and the next
-// frame it animates the page straight back. So every in-page jump — same page,
-// after a route change, or on a cold load with a hash in the URL — is funneled
-// through here.
+// Hash navigation goes through Lenis — native jumps get animated straight back
 
 let lenis = null;
 
@@ -11,13 +6,10 @@ export function setLenis(instance) {
   lenis = instance;
 }
 
-// How far above the target to land, so the floating navbar doesn't sit on top
-// of the section heading. Matches `scroll-padding-top` in globals.css.
+// Land below the floating navbar
 const NAV_OFFSET = 80;
 
-// The scroll is pointless — and on mobile, silently swallowed — while something
-// is holding the page still: the loading overlay and the open mobile menu both
-// pin `body { overflow: hidden }`.
+// Wait while the loading overlay or mobile menu has the page locked
 function scrollLocked() {
   return document.body.style.overflow === "hidden";
 }
@@ -31,14 +23,8 @@ function findTarget(hash) {
   }
 }
 
-/**
- * Scroll to `hash` right now. Returns false if it couldn't (target missing or
- * scrolling is locked), so callers can retry.
- */
-// A single click can reach us twice — once from the document click handler,
-// once from the router event it triggers. Firing scrollTo again mid-flight
-// restarts the easing from the current position, which reads as a stutter, so
-// an identical request arriving right behind another is dropped.
+/* Scroll to `hash` now */
+// A click can arrive twice (click handler + router event); ignore the repeat
 let lastRequest = { hash: null, at: 0 };
 
 export function scrollToHash(hash, { immediate = false } = {}) {
@@ -61,12 +47,7 @@ export function scrollToHash(hash, { immediate = false } = {}) {
   return true;
 }
 
-/**
- * Same, but waits for the target to actually be there and for the page to be
- * unlocked. Needed because a cross-page hash link lands before the destination
- * has mounted, and a mobile menu link fires before the menu has released the
- * scroll lock. Gives up after ~2s rather than looping forever.
- */
+/* Scroll to `hash` once the target exists and the page is unlocked */
 export function scrollToHashWhenReady(hash, opts) {
   if (typeof window === "undefined" || !hash || hash === "#") return;
 

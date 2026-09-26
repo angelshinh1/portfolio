@@ -54,7 +54,7 @@ export default function ProjectsIndex() {
               tear={["top", "bottom"]}
               seed={51}
               depth={6}
-              rotate={-0.3}
+              rotate={0.4}
               innerClassName="px-4 md:px-8 py-6 md:py-8"
             >
               {projects.map((project, index) => (
