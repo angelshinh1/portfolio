@@ -4,6 +4,10 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        {/* The design is light-only: opt out of browser auto-dark and dark-mode extensions */}
+        <meta name="color-scheme" content="only light" />
+        <meta name="supported-color-schemes" content="light" />
+        <meta name="darkreader-lock" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

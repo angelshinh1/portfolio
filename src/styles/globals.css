@@ -7,6 +7,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Special+Elite&display=swap');
 
 :root {
+  /* Light-only: stops auto-dark (Chrome, Samsung Internet) from recolouring the page */
+  color-scheme: only light;
   /* ── Green-tinted paper foundations ── */
   --bg-base:        #E1E6DB;   /* sage-grey cardstock */
   --bg-grain:       #D9DFD2;   /* slightly deeper sage */
