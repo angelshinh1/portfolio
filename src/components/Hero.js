@@ -5,22 +5,25 @@ import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Reveal from "./Reveal";
-import GuitarIllustration from "./GuitarIllustration";
+import Camera from "./Camera";
 import GithubContributions from "./GithubContributions";
 import { Paper, Tape, Postmark, DoodleArrow } from "./scrapbook";
 
 gsap.registerPlugin(useGSAP);
 
+const PRINTS = [1, 5, 3, 7, 2, 8, 4, 6].map((n) => `/gallery-${n}.jpg`);
+
 export default function Hero() {
     const [showTooltip, setShowTooltip] = useState(false);
     const [hovered, setHovered] = useState(false);
+    const [shots, setShots] = useState(0);
     const tipVisible = showTooltip || hovered;
     const introRef = useRef(null);
     const avatarRef = useRef(null);
     const headingRef = useRef(null);
     const watermarkRef = useRef(null);
 
-    // Intro: stamp scales in, note drops in, guitar fades up; waits for the loading screen
+    // Intro: stamp scales in, note drops in, camera fades up; waits for the loading screen
     useGSAP(() => {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -168,11 +171,29 @@ export default function Hero() {
                 </Paper>
             </div>
 
-            {/* Commit graph on graph paper, guitar beside it on desktop */}
+            {/* Commit graph on graph paper; camera beside it on desktop, below it on mobile */}
             <div className="relative mt-28 lg:mt-24 grid grid-cols-1 lg:grid-cols-[1fr_47rem] items-center gap-6">
-                <div className="relative hidden lg:block h-full min-h-[16rem]" aria-hidden>
-                    <div ref={watermarkRef} className="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none">
-                        <GuitarIllustration style={{ width: 150, height: 260, transform: "rotate(-24deg)" }} />
+                <div className="relative flex justify-center lg:justify-start items-center h-full lg:min-h-[16rem] order-2 lg:order-1 mt-10 lg:mt-0 pb-20 lg:pb-0">
+                    <div ref={watermarkRef} className="relative">
+                        <Camera
+                            interactive
+                            prints={PRINTS}
+                            onShot={setShots}
+                            className="w-[180px] lg:w-[220px]"
+                            style={{ rotate: "-7deg" }}
+                            sizes="(max-width: 1024px) 180px, 220px"
+                        />
+                        {/* Handwritten nudge; turns into a roll counter once you start shooting */}
+                        <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 lg:left-24 lg:translate-x-0 flex items-start gap-1 text-[var(--ink-brown)] pointer-events-none" aria-live="polite">
+                            <DoodleArrow className="w-12 rotate-[200deg] -translate-y-2" />
+                            <span className="font-hand text-[1.45rem] leading-tight whitespace-nowrap pt-3" style={{ rotate: "-4deg" }}>
+                                {shots === 0
+                                    ? "psst, click me! I take photos"
+                                    : shots < PRINTS.length
+                                        ? `shot ${shots} of ${PRINTS.length}, another?`
+                                        : "that's the whole roll \u2726"}
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <GithubContributions
@@ -181,6 +202,7 @@ export default function Hero() {
                         variant: "grid",
                         tear: ["bottom"],
                         seed: 9,
+                        className: "order-1 lg:order-2",
                         rotate: -0.6,
                         innerClassName: "p-5 md:p-7",
                         decor: (

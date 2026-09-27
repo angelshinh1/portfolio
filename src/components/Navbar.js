@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useRef, useEffect, useCallback } from "react";
-import GuitarIllustration from "./GuitarIllustration";
+import Camera from "./Camera";
 import { Tape, tornClip } from "./scrapbook";
 import { createSpring, project, rubberband, createVelocityTracker } from "@/lib/spring";
 
@@ -349,9 +349,9 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Guitar illustration — centered at bottom */}
-          <div className="flex justify-center pb-7 pointer-events-none" aria-hidden style={{ opacity: 0.37 }}>
-            <GuitarIllustration style={{ width: 124, height: 260 }} />
+          {/* Camera sticker at the bottom of the menu */}
+          <div className="flex justify-center pb-10 pointer-events-none">
+            <Camera live={false} className="w-[150px]" style={{ rotate: "-6deg" }} sizes="150px" />
           </div>
         </div>
       </div>

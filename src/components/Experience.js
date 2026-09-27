@@ -194,8 +194,8 @@ export default function Experience() {
                 seed={11}
                 depth={7}
                 rotate={0.6}
-                className="max-md:![rotate:0deg] max-md:![filter:none]"
-                innerClassName="paper-holes max-md:!bg-transparent max-md:!bg-none max-md:![clip-path:none] md:pl-[6rem] md:pr-10 md:pt-12 md:pb-14"
+                className="max-md:![rotate:0deg]"
+                innerClassName="paper-holes px-5 pt-8 pb-10 md:pl-[6rem] md:pr-10 md:pt-12 md:pb-14"
                 style={{ "--hole": "var(--bg-grain)" }}
                 decor={
                     <>

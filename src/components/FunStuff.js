@@ -1,7 +1,10 @@
 import dynamic from "next/dynamic";
+import { useState } from "react";
 import SectionHeader from "./SectionHeader";
 import StringLink from "./StringLink";
 import PhotoBoard from "./PhotoBoard";
+import Guitar from "./Guitar";
+import Camera from "./Camera";
 import { Paper, Tape, Polaroid, DoodleArrow } from "./scrapbook";
 
 const GuitarStrings = dynamic(() => import("./GuitarStrings"), { ssr: false });
@@ -48,6 +51,8 @@ const TAGS = [
 const CALLOUT_FACT = 1;
 
 export default function FunStuff() {
+    const [playing, setPlaying] = useState(false);
+
     return (
         <section
             id="fun-stuff"
@@ -61,7 +66,7 @@ export default function FunStuff() {
 
             {/* Guitar feature — the video is a snapshot taped into the book */}
             <div className="mb-28 lg:mb-32 grid grid-cols-1 lg:grid-cols-[0.75fr_1fr] gap-14 lg:gap-16 items-center">
-                <div className="relative w-full max-w-[320px] mx-auto lg:mx-0">
+                <div className="relative w-full max-w-[320px] mx-auto lg:mx-0 mb-16 sm:mb-10 lg:mb-0">
                     <Polaroid
                         rotate={2.5}
                         tape="kraft"
@@ -77,10 +82,20 @@ export default function FunStuff() {
                             preload="metadata"
                             className="absolute inset-0 object-cover w-full h-full block"
                             poster="/poster.jpg"
+                            onPlay={() => setPlaying(true)}
+                            onPause={() => setPlaying(false)}
+                            onEnded={() => setPlaying(false)}
                         >
                             Your browser does not support the video tag.
                         </video>
                     </Polaroid>
+
+                    {/* Guitar leaning on the snapshot — strum it, or play the video and it plays along */}
+                    <Guitar
+                        playing={playing}
+                        className="absolute z-10 -right-3 sm:-right-12 lg:-right-24 -bottom-24 sm:-bottom-20 lg:-bottom-14 w-[80px] sm:w-[100px] lg:w-[124px]"
+                        style={{ rotate: "14deg" }}
+                    />
                 </div>
 
                 <div>
@@ -213,9 +228,12 @@ export default function FunStuff() {
             {/* Photo board */}
             <div className="mt-28 lg:mt-32">
                 <div className="flex flex-wrap items-end gap-x-6 gap-y-2 mb-12">
-                    <h3 className="type-heading text-[var(--text-primary)]">
-                        Around Toronto
-                    </h3>
+                    <div className="flex items-center gap-5">
+                        <h3 className="type-heading text-[var(--text-primary)]">
+                            Around Toronto
+                        </h3>
+                        <Camera interactive className="w-[76px] translate-y-1" style={{ rotate: "8deg" }} sizes="80px" />
+                    </div>
                     <p className="font-hand hidden lg:flex items-center gap-2 text-[1.5rem] leading-none text-[var(--ink-brown)] pb-1" style={{ rotate: "-2deg" }}>
                         go ahead, move them around
                         <DoodleArrow className="w-12 rotate-[35deg] translate-y-3" />

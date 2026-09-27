@@ -544,6 +544,7 @@ mark, .mark {
 /* Punched holes showing the page behind; tablet and up */
 @media (max-width: 767px) {
   .paper-holes::before { display: none; }
+  .paper-holes.paper-lined { --margin: -10px; }
 }
 
 .paper-holes::before {
