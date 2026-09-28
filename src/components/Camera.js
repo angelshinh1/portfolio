@@ -220,8 +220,9 @@ export default function Camera({ className = "", style, live = true, interactive
             {
                 id: n,
                 src: prints[n % prints.length],
-                x: side * (40 + Math.random() * 50),
-                y: -150 - Math.random() * 40,
+                ...(window.matchMedia("(max-width: 1023px)").matches
+                    ? { x: side * (rootRef.current.offsetWidth * 0.5 + 30 + Math.random() * 12), y: -40 - Math.random() * 25 }
+                    : { x: side * (40 + Math.random() * 50), y: -150 - Math.random() * 40 }),
                 r: side * (6 + Math.random() * 10),
             },
         ]);

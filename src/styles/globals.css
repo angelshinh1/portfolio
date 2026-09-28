@@ -99,6 +99,9 @@ body {
   font-optical-sizing: auto;
 }
 
+/* No grey tap-highlight boxes over torn/rotated shapes on mobile */
+html { -webkit-tap-highlight-color: transparent; }
+
 /* Paper grain: still, tiling SVG noise over the whole page */
 body::after {
   content: '';
@@ -108,6 +111,7 @@ body::after {
   pointer-events: none;
   mix-blend-mode: multiply;
   opacity: 0.16;
+  transform: translateZ(0);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
 }
@@ -256,17 +260,22 @@ mark, .mark {
   touch-action: manipulation;   /* no 300ms tap delay */
 }
 
-.press:active { transform: scale(0.985); }
-
-.press-strong:active { transform: scale(0.955); }
+/* Mouse only: on touch, :active fires while scrolling and makes things pulse */
+@media (hover: hover) and (pointer: fine) {
+  .press:active { transform: scale(0.985); }
+  .press-strong:active { transform: scale(0.955); }
+  .lift:hover  { box-shadow: var(--lift-2); }
+  .lift:active { transform: scale(0.99); }
+  .btn:active { transform: scale(0.965); box-shadow: none; }
+  .btn:hover { background: rgba(236, 204, 116, 0.3); box-shadow: var(--lift-1); }
+  .btn-solid:hover { background: var(--text-primary); opacity: 0.88; }
+}
 
 /* Lift on hover, settle on press — the surface follows the pointer's intent */
 .lift {
   transition: transform var(--t-base) var(--spring), box-shadow var(--t-base) var(--spring);
 }
 
-.lift:hover  { box-shadow: var(--lift-2); }
-.lift:active { transform: scale(0.99); }
 
 /* Focus that matches the material system rather than the UA default */
 :where(a, button, [tabindex]):focus-visible {
@@ -297,28 +306,12 @@ mark, .mark {
               box-shadow var(--t-base) var(--spring);
 }
 
-.btn:hover {
-  background: rgba(236, 204, 116, 0.3);
-  box-shadow: var(--lift-1);
-  text-decoration: none;
-  color: var(--text-primary);
-}
-
-.btn:active {
-  transform: scale(0.965);
-  box-shadow: none;
-}
 
 .btn-solid {
   background: var(--text-primary);
   color: var(--bg-base);
 }
 
-.btn-solid:hover {
-  background: var(--text-primary);
-  opacity: 0.88;
-  color: var(--bg-base);
-}
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
@@ -437,10 +430,10 @@ mark, .mark {
   transition: border-color var(--t-base) var(--spring);
 }
 
-.string-border:hover::after {
+@media (hover: hover) { .string-border:hover::after {
   border-color: var(--green-muted);
   animation: string-ripple-border 600ms var(--spring) forwards;
-}
+} }
 
 @keyframes string-ripple-border {
   0%   { box-shadow: 0 0 0 0 rgba(163, 190, 133, 0); }
@@ -684,10 +677,11 @@ mark, .mark {
   box-decoration-break: clone;
 }
 
-.group:hover .highlight-swipe,
-.group\/row:hover .highlight-swipe,
-.group:focus-visible .highlight-swipe {
-  background-size: 100% 52%;
+.group:focus-visible .highlight-swipe { background-size: 100% 52%; }
+
+@media (hover: hover) {
+  .group:hover .highlight-swipe,
+  .group\/row:hover .highlight-swipe { background-size: 100% 52%; }
 }
 
 /* ── Draggable photos on the Fun Stuff board ── */

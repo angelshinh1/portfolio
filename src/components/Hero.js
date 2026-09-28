@@ -61,8 +61,8 @@ export default function Hero() {
                 <Reveal className="absolute -top-[4.5rem] right-1 sm:right-4 z-10 lg:static lg:z-auto flex-shrink-0">
                     <div
                         className="relative group w-fit lg:ml-4"
-                        onMouseEnter={() => setHovered(true)}
-                        onMouseLeave={() => setHovered(false)}
+                        onPointerEnter={(e) => { if (e.pointerType === "mouse") setHovered(true); }}
+                        onPointerLeave={(e) => { if (e.pointerType === "mouse") setHovered(false); }}
                     >
                         {/* The photo as a postage stamp, cancelled with a Toronto postmark */}
                         <button
