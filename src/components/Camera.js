@@ -337,18 +337,21 @@ export default function Camera({ className = "", style, live = true, interactive
                     draggable={false}
                     className="block w-full h-auto select-none drop-shadow-[0_8px_12px_rgba(62,44,30,0.18)]"
                 />
-                <Image
-                    ref={crankRef}
-                    src="/camera/crank.webp"
-                    alt=""
-                    width={1120}
-                    height={1020}
-                    sizes={sizes}
-                    priority={priority}
-                    draggable={false}
-                    className="absolute inset-0 w-full h-auto select-none pointer-events-none"
-                    style={{ transformOrigin: "85.04% 48.28%" }}
-                />
+                {/* Clipped to the camera: the full-canvas crank image swings its corners far out as it turns */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <Image
+                        ref={crankRef}
+                        src="/camera/crank.webp"
+                        alt=""
+                        width={1120}
+                        height={1020}
+                        sizes={sizes}
+                        priority={priority}
+                        draggable={false}
+                        className="absolute inset-0 w-full h-auto select-none"
+                        style={{ transformOrigin: "85.04% 48.28%" }}
+                    />
+                </div>
                 <svg viewBox="-24 -24 448 408" className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden>
                     <g ref={sheenRef} style={{ transformBox: "view-box", transformOrigin: `${CX}px ${CY}px` }}>
                         <circle

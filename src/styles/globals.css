@@ -87,6 +87,9 @@ html {
   scroll-padding-top: 80px;
 }
 
+/* Nothing decorative may widen the page; on phones that makes the browser zoom out */
+html, body { overflow-x: clip; }
+
 body {
   background: var(--bg-base);
   color: var(--text-primary);
