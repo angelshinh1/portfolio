@@ -54,7 +54,7 @@ function Clipping({ project, look, offset }) {
         </div>
       )}
 
-      <p className="font-type text-[0.68rem] uppercase tracking-[0.16em] text-[var(--ink-sepia)]">
+      <p className="font-type text-[0.76rem] tracking-[0.03em] text-[var(--ink-sepia)]">
         {project.category}
       </p>
 

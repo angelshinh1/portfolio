@@ -27,7 +27,7 @@ export default function ProjectPreview({ project }) {
         </div>
       )}
 
-      <p className="font-type text-[0.66rem] text-[var(--ink-sepia)] uppercase tracking-[0.14em]">
+      <p className="font-type text-[0.74rem] text-[var(--ink-sepia)] tracking-[0.03em]">
         {project.category}
       </p>
 

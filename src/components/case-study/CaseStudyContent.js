@@ -79,7 +79,7 @@ function Block({ block, project }) {
               >
                 {s.value}
               </div>
-              <div className="font-type text-[0.64rem] uppercase tracking-[0.1em] text-[var(--ink-sepia)] mt-2 leading-snug">
+              <div className="font-type text-[0.72rem] tracking-[0.02em] text-[var(--ink-sepia)] mt-2 leading-snug">
                 {s.label}
               </div>
             </div>

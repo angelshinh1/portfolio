@@ -74,7 +74,7 @@ export default function GithubContributions({ frame: Frame = "div", frameProps }
     return (
         <Frame {...frameProps}>
             <div className="flex items-baseline justify-between gap-4 mb-4">
-                <p className="font-mono text-xs text-[var(--text-muted)] uppercase tracking-[0.15em]">
+                <p className="font-mono text-[0.8rem] text-[var(--text-muted)] tracking-[0.02em]">
                     Contributions
                 </p>
                 <p className="font-mono text-[0.7rem] text-[var(--text-muted)] tracking-tight min-h-[1em]">

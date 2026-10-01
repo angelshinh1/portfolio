@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Paper, Postmark } from "./scrapbook";
 
 const socialClass =
-    "press label-dymo normal-case tracking-[0.03em] text-[0.85rem] inline-flex items-center gap-2 transition-colors duration-200 hover:text-[var(--green-deep)]";
+    "press label-dymo inline-flex items-center gap-2 transition-colors duration-200 hover:text-[var(--green-deep)]";
 
 // Torn kraft strip; overlaps the section above so the tear shows its color
 export default function Footer() {

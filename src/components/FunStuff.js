@@ -5,17 +5,18 @@ import StringLink from "./StringLink";
 import PhotoBoard from "./PhotoBoard";
 import Guitar from "./Guitar";
 import Camera from "./Camera";
+import Matcha from "./Matcha";
 import { Paper, Tape, Polaroid, DoodleArrow } from "./scrapbook";
 
 const GuitarStrings = dynamic(() => import("./GuitarStrings"), { ssr: false });
 
 const hobbies = [
-    { icon: "ti-guitar-pick", title: "Guitar", desc: "Jamming since forever", highlight: true },
-    { icon: "ti-device-gamepad-2", title: "Gaming", desc: "Just finished RDR2" },
-    { icon: "ti-pizza", title: "Pizza", desc: "Fuel for coding" },
-    { icon: "ti-bulb", title: "Learning", desc: "Always curious" },
-    { icon: "ti-camera", title: "Photography", desc: "Capturing moments" },
-    { icon: "ti-music", title: "Music", desc: "All genres welcome" },
+    { icon: "ti-guitar-pick", title: "Guitar" },
+    { icon: "ti-camera", title: "Photography" },
+    { icon: "ti-device-gamepad-2", title: "Gaming" },
+    { icon: "ti-music", title: "Music" },
+    { icon: "ti-pizza", title: "Pizza" },
+    { icon: "ti-bulb", title: "Learning" },
 ];
 
 const randomFacts = [
@@ -25,26 +26,6 @@ const randomFacts = [
     "I can solve a Rubik's cube",
     "I lowkey get confused at some math problems which my high-school self would've solved in seconds",
     "Oh, did I mentioned I'm 6' 2\" 👀",
-];
-
-// One guitar-string color per hobby icon (low E → high e)
-const HOBBY_ACCENTS = [
-    'var(--string-E)',
-    'var(--string-D)',
-    'var(--string-B)',
-    'var(--string-G)',
-    'var(--string-A)',
-    'var(--string-e)',
-];
-
-// Paper tags cut from the same stock, set down at slightly different angles
-const TAGS = [
-    { r: 2,    seed: 41 },
-    { r: -1.5, seed: 42 },
-    { r: 1,    seed: 43 },
-    { r: -2,   seed: 44 },
-    { r: 1.5,  seed: 45 },
-    { r: -1,   seed: 46 },
 ];
 
 // The fact that gets a highlighter pass
@@ -152,44 +133,35 @@ export default function FunStuff() {
 
             {/* Hobbies + Facts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-16 items-start">
-                {/* Hobbies — small paper tags */}
+                {/* Hobbies: a row of paper labels, then the matcha bowl */}
                 <div>
-                    <h3 className="type-heading text-[var(--text-primary)] mb-10">
+                    <h3 className="type-heading text-[var(--text-primary)] mb-8">
                         Hobbies &amp; interests
                     </h3>
-                    <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-8 pt-2">
-                        {hobbies.map((hobby, index) => {
-                            const t = TAGS[index % TAGS.length];
-                            return (
-                                <Paper
-                                    key={hobby.title}
-                                    as="li"
-                                    variant="cream"
-                                    seed={t.seed}
-                                    depth={4}
-                                    rotate={t.r}
-                                    innerClassName="flex flex-col items-center text-center gap-2 px-3 py-5"
-                                >
-                                    <i
-                                        className={`ti ${hobby.icon} text-[1.8rem]`}
-                                        style={{ color: HOBBY_ACCENTS[index % HOBBY_ACCENTS.length] }}
-                                        aria-hidden="true"
-                                    />
-                                    <div>
-                                        <h4 className="font-type text-[0.78rem] uppercase tracking-[0.14em] text-[var(--ink-brown)] leading-tight">
-                                            {hobby.title}
-                                            {hobby.highlight && (
-                                                <span className="ml-1 text-[var(--green-deep)]" aria-hidden>♪</span>
-                                            )}
-                                        </h4>
-                                        <p className="font-hand text-[1.15rem] text-[var(--ink-sepia)] mt-1.5 leading-none">
-                                            {hobby.desc}
-                                        </p>
-                                    </div>
-                                </Paper>
-                            );
-                        })}
+                    <ul className="flex flex-wrap gap-3">
+                        {hobbies.map((hobby, i) => (
+                            <li
+                                key={hobby.title}
+                                className="label-dymo inline-flex items-center gap-2"
+                                style={{ rotate: `${[-2, 1.5, -1, 2, -1.5, 1][i]}deg` }}
+                            >
+                                <i className={`ti ${hobby.icon} text-[1rem]`} aria-hidden="true" />
+                                {hobby.title}
+                            </li>
+                        ))}
                     </ul>
+
+                    <div className="relative mt-14 w-[250px] sm:w-[290px] mx-auto lg:mx-0 lg:ml-8">
+                        <Matcha style={{ rotate: "-3deg" }} />
+                        <p
+                            className="font-hand absolute -right-6 sm:-right-28 -bottom-8 sm:bottom-6 flex items-center gap-1 text-[1.35rem] leading-none text-[var(--ink-brown)] pointer-events-none"
+                            style={{ rotate: "-5deg" }}
+                            aria-hidden
+                        >
+                            <DoodleArrow className="w-10 -scale-x-100 rotate-[20deg]" />
+                            click to whisk
+                        </p>
+                    </div>
                 </div>
 
                 {/* Random facts — jotted on a torn notebook page */}
@@ -222,6 +194,7 @@ export default function FunStuff() {
                             ))}
                         </ol>
                     </Paper>
+
                 </div>
             </div>
 

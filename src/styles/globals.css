@@ -609,9 +609,8 @@ mark, .mark {
   background: linear-gradient(#F4EAD2, #EADDBE);
   color: var(--ink-brown);
   font-family: var(--font-type);
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  font-size: 0.82rem;
   line-height: 1;
   padding: 0.5rem 0.85rem 0.45rem;
   border: 1px solid rgba(122, 90, 58, 0.2);

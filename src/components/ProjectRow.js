@@ -171,14 +171,14 @@ export default function ProjectRow({ project, isExpanded, onToggle, onHoverStart
           </div>
 
           <div className="flex-shrink-0 flex items-center gap-3 md:gap-4 mt-0.5">
-            <span className="font-type text-[0.66rem] uppercase tracking-[0.12em] text-[var(--ink-sepia)] whitespace-nowrap hidden sm:block">
+            <span className="font-type text-[0.74rem] tracking-[0.03em] text-[var(--ink-sepia)] whitespace-nowrap hidden sm:block">
               {project.category}
             </span>
             <ToggleGlyph isExpanded={isExpanded} />
           </div>
         </div>
 
-        <p className="sm:hidden font-type text-[0.64rem] uppercase tracking-[0.12em] text-[var(--ink-sepia)] mt-1.5">
+        <p className="sm:hidden font-type text-[0.72rem] tracking-[0.03em] text-[var(--ink-sepia)] mt-1.5">
           {project.category}
         </p>
       </button>

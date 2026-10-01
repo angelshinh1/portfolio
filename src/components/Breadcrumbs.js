@@ -3,7 +3,7 @@ import Link from "next/link";
 // items: [{ label, href? }] — the last item should omit href (current page).
 export default function Breadcrumbs({ items, className = "" }) {
   return (
-    <nav aria-label="Breadcrumb" className={`flex items-center flex-wrap gap-2 font-type text-[0.7rem] uppercase tracking-[0.14em] ${className}`}>
+    <nav aria-label="Breadcrumb" className={`flex items-center flex-wrap gap-2 font-type text-[0.78rem] tracking-[0.03em] ${className}`}>
       {items.map((item, i) => (
         <span key={i} className="flex items-center gap-2">
           {i > 0 && (
