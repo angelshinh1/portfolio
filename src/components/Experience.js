@@ -201,7 +201,7 @@ export default function Experience() {
                     <>
                         {/* Sticky note stuck to the page's corner — desktop only */}
                         <a
-                            href="/Angel_Resume_swe.pdf"
+                            href="/Angel_Shinh_Resume.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="scrap scrap-hover sticky-note absolute -top-16 -right-14 w-40 p-4 pt-5 hidden xl:block"

@@ -10,7 +10,7 @@ import { createSpring, project, rubberband, createVelocityTracker } from "@/lib/
 const navItems = [
   { label: "Experience", href: "/#experience" },
   { label: "Projects",   href: "/projects"    },
-  { label: "Resume",     href: "/Angel_Resume_swe.pdf", external: true },
+  { label: "Resume",     href: "/Angel_Shinh_Resume.pdf", external: true },
   { label: "Fun Stuff",  href: "/#fun-stuff"  },
   { label: "Contact",    href: "/#contact"    },
 ];
