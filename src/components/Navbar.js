@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useState, useRef, useEffect, useCallback } from "react";
 import Camera from "./Camera";
 import { Tape, tornClip } from "./scrapbook";
+import { RESUME_URL } from "@/lib/resume";
 import { createSpring, project, rubberband, createVelocityTracker } from "@/lib/spring";
 
 // `external` items are files in /public, so they get a plain anchor
 const navItems = [
   { label: "Experience", href: "/#experience" },
   { label: "Projects",   href: "/projects"    },
-  { label: "Resume",     href: "/Angel_Shinh_Resume.pdf", external: true },
+  { label: "Resume",     href: RESUME_URL, external: true },
   { label: "Fun Stuff",  href: "/#fun-stuff"  },
   { label: "Contact",    href: "/#contact"    },
 ];

@@ -8,6 +8,7 @@ import Reveal from "./Reveal";
 import Camera from "./Camera";
 import GithubContributions from "./GithubContributions";
 import { Paper, Tape, Postmark, DoodleArrow } from "./scrapbook";
+import { RESUME_URL } from "@/lib/resume";
 
 gsap.registerPlugin(useGSAP);
 
@@ -157,7 +158,7 @@ export default function Hero() {
                             </svg>
                         </a>
                         <a
-                            href="/Angel_Shinh_Resume.pdf"
+                            href={RESUME_URL}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="press ticket group/ticket"

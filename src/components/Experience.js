@@ -1,5 +1,6 @@
 import SectionHeader from "./SectionHeader";
 import { Paper } from "./scrapbook";
+import { RESUME_URL } from "@/lib/resume";
 
 // One line per role — the detail lives in the resume and case studies
 const experiencesData = {
@@ -201,7 +202,7 @@ export default function Experience() {
                     <>
                         {/* Sticky note stuck to the page's corner — desktop only */}
                         <a
-                            href="/Angel_Shinh_Resume.pdf"
+                            href={RESUME_URL}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="scrap scrap-hover sticky-note absolute -top-16 -right-14 w-40 p-4 pt-5 hidden xl:block"

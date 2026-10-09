@@ -7,6 +7,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import ResumeViewer from "./ResumeViewer";
 import ticker from "@/lib/ticker";
 import { setLenis, scrollToHashWhenReady } from "@/lib/scroll";
 
@@ -104,6 +105,7 @@ export default function Layout(props) {
             <Navbar />
             <main>{props.children}</main>
             <Footer />
+            <ResumeViewer />
         </>
     );
 }

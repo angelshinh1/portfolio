@@ -58,3 +58,7 @@ export function scrollToHashWhenReady(hash, opts) {
   };
   requestAnimationFrame(tick);
 }
+
+export function getLenis() {
+  return lenis;
+}

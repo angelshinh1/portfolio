@@ -705,3 +705,139 @@ mark, .mark {
   .tape { opacity: 0.6; }
 }
 }
+
+/* ── Resume viewer: the PDF drawn onto a cream sheet over the page ── */
+@layer components {
+.resume-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(196, 204, 186, 0.9);
+  opacity: 0;
+  transition: opacity var(--t-fast) linear;
+}
+.resume-viewer[data-shown] { opacity: 1; }
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .resume-viewer {
+    background: rgba(196, 204, 186, 0.78);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+}
+
+.resume-scroll {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.resume-stage {
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 5.5rem 1rem 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: content-box;
+}
+@media (min-width: 640px) { .resume-stage { padding: 6rem 3rem 5rem; } }
+
+/* Lands like a sheet set down on the desk, then sits dead straight so the text stays crisp */
+.resume-sheet {
+  flex-shrink: 0;
+  filter: var(--scrap-shadow-up);
+  translate: 0 36px;
+  rotate: -2.5deg;
+  opacity: 0;
+  transition: translate var(--t-slow) var(--spring-soft),
+              rotate var(--t-slow) var(--spring-soft),
+              opacity var(--t-fast) linear;
+}
+.resume-viewer[data-shown] .resume-sheet { translate: 0 0; rotate: 0deg; opacity: 1; }
+.resume-viewer:not([data-shown]) .resume-sheet { transition-duration: var(--t-fast); }
+
+/* White page multiplies away, leaving ink on cream */
+.resume-ink { mix-blend-mode: multiply; }
+
+.resume-sheet .textLayer {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  line-height: 1;
+  text-align: initial;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  forced-color-adjust: none;
+  transform-origin: 0 0;
+  --min-font-size: 1;
+  --text-scale-factor: calc(var(--total-scale-factor) * var(--min-font-size));
+  --min-font-size-inv: calc(1 / var(--min-font-size));
+}
+.resume-sheet .textLayer :is(span, br) {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+  user-select: text;
+}
+.resume-sheet .textLayer > :not(.markedContent),
+.resume-sheet .textLayer .markedContent span:not(.markedContent) {
+  --font-height: 0;
+  --scale-x: 1;
+  --rotate: 0deg;
+  font-size: calc(var(--text-scale-factor) * var(--font-height));
+  transform: rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv));
+}
+.resume-sheet .textLayer .markedContent { display: contents; }
+.resume-sheet .textLayer ::selection { background: var(--accent-mark); color: transparent; }
+.resume-sheet .textLayer .endOfContent { display: block; position: absolute; inset: 100% 0 0; user-select: none; }
+
+/* Links in the PDF get the highlighter on hover */
+.resume-link {
+  position: absolute;
+  z-index: 2;
+  border-radius: 2px;
+  transition: background-color var(--t-fast) var(--spring);
+}
+.resume-link:hover, .resume-link:focus-visible { background: var(--accent-mark); }
+
+.resume-bar {
+  position: fixed;
+  top: 0.9rem;
+  left: 50%;
+  translate: -50% -140%;
+  z-index: 1;
+  transition: translate var(--t-base) var(--spring);
+}
+.resume-viewer[data-shown] .resume-bar { translate: -50% 0; }
+
+.resume-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: color var(--t-fast) var(--spring), background-color var(--t-fast) var(--spring);
+}
+.resume-btn span { font-size: 0.85rem; }
+.resume-btn:disabled { opacity: 0.35; }
+@media (hover: hover) {
+  .resume-btn:not(:disabled):hover { color: var(--green-deep); background: rgba(62, 44, 30, 0.06); }
+}
+@media (hover: hover) and (pointer: fine) {
+  .resume-btn:not(:disabled):active { transform: scale(0.94); }
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resume-viewer, .resume-sheet, .resume-bar { transition: none; }
+  .resume-sheet { translate: 0 0; rotate: 0deg; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .resume-viewer { background: #C4CCBA; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
