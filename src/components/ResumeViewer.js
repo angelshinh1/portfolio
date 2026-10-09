@@ -142,7 +142,7 @@ export default function ResumeViewer() {
 
     const width = Math.round(fit * ZOOMS[zoom]);
 
-    // Redraw ink and text at the new size; CSS stretches the old canvas meanwhile
+    // Redraw on resize and on every reopen, since each open mounts a fresh canvas
     useEffect(() => {
         if (!data || !canvasRef.current || !textRef.current) return;
         let task = null;
@@ -175,7 +175,7 @@ export default function ResumeViewer() {
             task?.cancel();
             textLayer?.cancel();
         };
-    }, [data, width]);
+    }, [data, width, open]);
 
     if (!open) return null;
 
