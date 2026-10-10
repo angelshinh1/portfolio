@@ -1,6 +1,7 @@
 'use client';
 
 import { forwardRef, useEffect, useRef, useImperativeHandle } from 'react';
+import { playWhileVisible } from '@/lib/visibility';
 
 const ALL_STRINGS = [
   { thickness: 3,    color: 'var(--string-E)' },
@@ -57,6 +58,7 @@ const GuitarStrings = forwardRef(function GuitarStrings(props, ref) {
 
   const pathRefs = useRef([]);
   const cooldowns = useRef([]);
+  const svgRef = useRef(null);
 
   function doPluck(pathEl, stringPos, amplitude) {
     if (!pathEl) return;
@@ -112,6 +114,7 @@ const GuitarStrings = forwardRef(function GuitarStrings(props, ref) {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (!droneOnMount) return;
 
+    const gate = playWhileVisible(svgRef.current);
     import('animejs').then(({ animate }) => {
       pathRefs.current.forEach((pathEl, i) => {
         if (!pathEl) return;
@@ -122,7 +125,7 @@ const GuitarStrings = forwardRef(function GuitarStrings(props, ref) {
         const period = 2400 - i * 150;
         // Stagger start so strings ripple one after another
         const delay  = i * 260;
-        animate(pathEl, {
+        gate.add(animate(pathEl, {
           d: [
             { to: pluckedPath(p, stringLen, +A, isVertical), duration: period * 0.25 },
             { to: pluckedPath(p, stringLen, -A, isVertical), duration: period * 0.5  },
@@ -131,11 +134,12 @@ const GuitarStrings = forwardRef(function GuitarStrings(props, ref) {
           loop: true,
           delay,
           ease: 'inOutSine',
-        });
+        }));
       });
     });
 
     return () => {
+      gate.stop();
       import('animejs').then(({ utils }) => {
         pathRefs.current.forEach(el => el && utils.remove(el));
       });
@@ -149,6 +153,7 @@ const GuitarStrings = forwardRef(function GuitarStrings(props, ref) {
 
   return (
     <svg
+      ref={svgRef}
       viewBox={`0 0 ${width} ${height}`}
       style={{ opacity, display: 'block', overflow: 'visible' }}
       {...svgProps}

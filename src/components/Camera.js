@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useId, useImperativeHandle, useRef, useState } from "react";
+import { playWhileVisible } from "@/lib/visibility";
 
 // Artwork canvas is viewBox -24 -24 448 408; every layer in public/camera shares it
 const CX = 200;
@@ -249,15 +250,17 @@ export default function Camera({ className = "", style, live = true, interactive
         if (!live || reduced()) return;
         const io = new IntersectionObserver(([e]) => { visibleRef.current = e.isIntersecting; });
         io.observe(rootRef.current);
+        const gate = playWhileVisible(rootRef.current);
         let sheen;
         loadAnime().then(({ animate }) => {
             if (!sheenRef.current) return;
             sheen = animate(sheenRef.current, { rotate: 360, duration: 7000, ease: "linear", loop: true });
+            gate.add(sheen);
         });
         const timer = setInterval(() => {
             if (visibleRef.current && !document.hidden && !busyRef.current) wind();
         }, 5200);
-        return () => { io.disconnect(); clearInterval(timer); sheen?.revert(); };
+        return () => { io.disconnect(); gate.stop(); clearInterval(timer); sheen?.revert(); };
         // wind only touches refs, so it never goes stale
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [live]);
@@ -268,6 +271,7 @@ export default function Camera({ className = "", style, live = true, interactive
         let cancelled = false;
         const running = [];
         let blink;
+        const gate = playWhileVisible(rootRef.current);
 
         loadAnime().then(({ animate, stagger }) => {
             if (cancelled) return;
@@ -302,11 +306,13 @@ export default function Camera({ className = "", style, live = true, interactive
                 }),
             );
 
-            blink = setInterval(shutter, 9000);
+            gate.add(...running);
+            blink = setInterval(() => { if (visibleRef.current && !document.hidden) shutter(); }, 9000);
         });
 
         return () => {
             cancelled = true;
+            gate.stop();
             clearInterval(blink);
             running.forEach((a) => a.revert());
         };

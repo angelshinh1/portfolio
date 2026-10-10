@@ -15,10 +15,7 @@ gsap.registerPlugin(useGSAP);
 const PRINTS = [1, 5, 3, 7, 2, 8, 4, 6].map((n) => `/gallery-${n}.jpg`);
 
 export default function Hero() {
-    const [showTooltip, setShowTooltip] = useState(false);
-    const [hovered, setHovered] = useState(false);
     const [shots, setShots] = useState(0);
-    const tipVisible = showTooltip || hovered;
     const introRef = useRef(null);
     const avatarRef = useRef(null);
     const headingRef = useRef(null);
@@ -44,13 +41,6 @@ export default function Hero() {
         return () => window.removeEventListener("app:ready", play);
     }, { scope: introRef });
 
-    const handleImageClick = () => {
-        setShowTooltip(!showTooltip);
-        if (!showTooltip) {
-            setTimeout(() => setShowTooltip(false), 3000);
-        }
-    };
-
     return (
         <header
             id="about"
@@ -60,18 +50,12 @@ export default function Hero() {
             {/* Desktop: stamp beside the card. Below lg: stamp pinned to the card's top-right corner */}
             <div className="relative grid grid-cols-1 lg:grid-cols-[0.85fr_1.6fr] gap-16 lg:gap-6 items-center">
                 <Reveal className="absolute -top-[4.5rem] right-1 sm:right-4 z-10 lg:static lg:z-auto flex-shrink-0">
-                    <div
-                        className="relative group w-fit lg:ml-4"
-                        onPointerEnter={(e) => { if (e.pointerType === "mouse") setHovered(true); }}
-                        onPointerLeave={(e) => { if (e.pointerType === "mouse") setHovered(false); }}
-                    >
+                    <div className="relative w-fit lg:ml-4">
                         {/* The photo as a postage stamp, cancelled with a Toronto postmark */}
-                        <button
+                        <div
                             ref={avatarRef}
-                            className="press-strong stamp relative block cursor-pointer"
+                            className="stamp relative block"
                             style={{ rotate: "-4deg" }}
-                            onClick={handleImageClick}
-                            aria-label="Angel Shinh — say hi"
                         >
                             <span className="block w-[88px] h-[108px] sm:w-[116px] sm:h-[140px] lg:w-[226px] lg:h-[276px] p-1.5 lg:p-2.5 bg-[#FDFBF4] border border-[rgba(62,44,30,0.14)]">
                                 <span className="relative block w-full h-full overflow-hidden">
@@ -85,43 +69,18 @@ export default function Hero() {
                                     />
                                 </span>
                             </span>
-                        </button>
+                        </div>
                         <Postmark className="absolute -top-8 -right-28 w-40 hidden lg:block" rotate={-8} />
 
                         {/* Margin note pointing back at the photo */}
                         <div
                             className="absolute -bottom-14 -right-28 hidden lg:flex items-center gap-1 text-[var(--ink-brown)] pointer-events-none"
-                            style={{ opacity: tipVisible ? 0 : 1, transition: "opacity var(--t-base) var(--spring)" }}
                             aria-hidden
                         >
                             <DoodleArrow className="w-12 rotate-[200deg] -translate-y-3" />
                             <span className="font-hand text-[1.6rem] leading-none whitespace-nowrap" style={{ rotate: "-6deg" }}>
                                 that&apos;s me!
                             </span>
-                        </div>
-
-                        {/* Taped note that fades in under the stamp */}
-                        <div
-                            className="absolute right-0 lg:right-auto lg:left-1/2 lg:-translate-x-1/2 top-full mt-5 z-40 pointer-events-none"
-                            style={{
-                                opacity: tipVisible ? 1 : 0,
-                                transition: "opacity var(--t-base) var(--spring)",
-                            }}
-                            aria-hidden={!tipVisible}
-                        >
-                            <Paper
-                                variant="cream"
-                                seed={88}
-                                depth={3}
-                                rotate={2}
-                                innerClassName="px-4 pt-3.5 pb-2.5"
-                                decor={<Tape variant="clear" rotate={-4} width={46} className="-top-2 left-1/2 -translate-x-1/2" />}
-                            >
-                                <p className="font-hand w-[10rem] text-center text-[1.1rem] leading-tight text-[var(--ink-brown)]">
-                                    Ts guy got W rizz. Should ask him out{" "}
-                                    <span className="inline-block">✌️🥀</span>
-                                </p>
-                            </Paper>
                         </div>
                     </div>
                 </Reveal>

@@ -82,7 +82,7 @@
 }
 
 html {
-  /* Lenis owns smooth scrolling; native smooth-scroll would double-ease */
+  /* Hash jumps are smooth-scrolled in JS (lib/scroll.js), so CSS stays instant */
   scroll-behavior: auto;
   scroll-padding-top: 80px;
 }
@@ -105,17 +105,15 @@ body {
 /* No grey tap-highlight boxes over torn/rotated shapes on mobile */
 html { -webkit-tap-highlight-color: transparent; }
 
-/* Paper grain: still, tiling SVG noise over the whole page */
+/* Paper grain: dark specks with alpha baked in, matching the old 16% multiply without a per-frame blend */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   z-index: 9998;
   pointer-events: none;
-  mix-blend-mode: multiply;
-  opacity: 0.16;
   transform: translateZ(0);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -0.03 0 0 0.05 0.01'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
 }
 
@@ -339,7 +337,7 @@ mark, .mark {
   .material, .material-chrome, .btn {
     background: var(--bg-surface);
   }
-  body::after { opacity: 0.06; }
+  body::after { opacity: 0.375; }
 }
 
 /* Near-solid surfaces with a defined border at high contrast */
@@ -457,8 +455,9 @@ mark, .mark {
   --font-hand: 'Caveat', 'Segoe Print', cursive;
   --font-type: 'Special Elite', 'Courier New', monospace;
 
-  --scrap-shadow: drop-shadow(0 1px 1px rgba(62, 44, 30, 0.16)) drop-shadow(0 8px 12px rgba(62, 44, 30, 0.12));
-  --scrap-shadow-up: drop-shadow(0 2px 2px rgba(62, 44, 30, 0.14)) drop-shadow(0 18px 22px rgba(62, 44, 30, 0.16));
+  /* One drop-shadow each: a second pass doubled the raster cost of every scrap while scrolling */
+  --scrap-shadow: drop-shadow(0 4px 6px rgba(62, 44, 30, 0.2));
+  --scrap-shadow-up: drop-shadow(0 12px 16px rgba(62, 44, 30, 0.2));
 }
 
 /* Component layer, so Tailwind utilities (hidden, absolute, ...) on these elements still win. */

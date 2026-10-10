@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useId, useRef } from "react";
+import { playWhileVisible } from "@/lib/visibility";
 
 // Artwork canvas is viewBox -24 -24 408 348 (public/matcha); bowl opening centred at (180, 142)
 const CX = 180;
@@ -69,6 +70,7 @@ export default function Matcha({ className = "", style, sizes = "260px" }) {
         if (reduced()) return;
         let cancelled = false;
         const loops = [];
+        const gate = playWhileVisible(rootRef.current);
         loadAnime().then(({ animate, stagger }) => {
             if (cancelled || !steamRef.current) return;
             const c = current.current;
@@ -95,8 +97,9 @@ export default function Matcha({ className = "", style, sizes = "260px" }) {
                 ease: "inOutSine",
                 loop: true,
             }));
+            gate.add(...loops);
         });
-        return () => { cancelled = true; loops.forEach((a) => a.revert()); cancelAnimationFrame(frame.current); };
+        return () => { cancelled = true; gate.stop(); loops.forEach((a) => a.revert()); cancelAnimationFrame(frame.current); };
         // render/schedule only touch refs, so they never go stale
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

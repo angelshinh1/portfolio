@@ -1,10 +1,4 @@
-// Hash navigation goes through Lenis — native jumps get animated straight back
-
-let lenis = null;
-
-export function setLenis(instance) {
-  lenis = instance;
-}
+// Hash navigation: native smooth scroll, offset below the navbar
 
 // Land below the floating navbar
 const NAV_OFFSET = 80;
@@ -37,13 +31,10 @@ export function scrollToHash(hash, { immediate = false } = {}) {
   if (lastRequest.hash === hash && now - lastRequest.at < 200) return true;
   lastRequest = { hash, at: now };
 
-  if (lenis) {
-    lenis.scrollTo(target, { offset: -NAV_OFFSET, immediate });
-  } else {
-    // Reduced motion, or Lenis not running — plain jump.
-    const top = target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
-    window.scrollTo({ top, behavior: "auto" });
-  }
+  // Reduced motion and deep links jump instead of gliding
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const top = target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+  window.scrollTo({ top, behavior: immediate || reduced ? "auto" : "smooth" });
   return true;
 }
 
@@ -57,8 +48,4 @@ export function scrollToHashWhenReady(hash, opts) {
     if (frames++ < 120) requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
-}
-
-export function getLenis() {
-  return lenis;
 }

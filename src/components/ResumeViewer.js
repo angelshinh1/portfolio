@@ -1,9 +1,8 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Tape, tornClip } from "./scrapbook";
+import { tornClip } from "./scrapbook";
 import { RESUME_URL, RESUME_FILENAME } from "@/lib/resume";
-import { getLenis } from "@/lib/scroll";
 
 // Zoom is a multiple of the fit-to-screen width
 const ZOOMS = [1, 1.25, 1.5, 2, 2.5];
@@ -115,7 +114,6 @@ export default function ResumeViewer() {
         const html = document.documentElement;
         const prev = html.style.overflow;
         html.style.overflow = "hidden";
-        getLenis()?.stop();
         closeRef.current?.focus({ preventScroll: true });
 
         const onKey = (e) => {
@@ -127,7 +125,6 @@ export default function ResumeViewer() {
         return () => {
             window.removeEventListener("keydown", onKey);
             html.style.overflow = prev;
-            getLenis()?.start();
         };
     }, [open, close]);
 
@@ -192,7 +189,6 @@ export default function ResumeViewer() {
         >
             <div
                 className="resume-scroll"
-                data-lenis-prevent
                 onClick={(e) => { if (e.target === e.currentTarget || e.target.dataset.backdrop != null) close(); }}
             >
                 <div data-backdrop className="resume-stage" style={{ width: Math.max(width, fit) }}>
@@ -219,7 +215,6 @@ export default function ResumeViewer() {
                                 </p>
                             )}
                         </div>
-                        <Tape variant="washi" rotate={-3} width={110} className="-top-3 left-1/2 -translate-x-1/2" />
                     </div>
                 </div>
             </div>

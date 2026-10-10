@@ -2,42 +2,13 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import Lenis from "lenis";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import gsap from "gsap";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import ResumeViewer from "./ResumeViewer";
-import ticker from "@/lib/ticker";
-import { setLenis, scrollToHashWhenReady } from "@/lib/scroll";
-
-gsap.registerPlugin(ScrollTrigger);
+import { scrollToHashWhenReady } from "@/lib/scroll";
 
 export default function Layout(props) {
     const router = useRouter();
-
-    // ── Smooth scrolling ──────────────────────────────────────────────────────
-    useEffect(() => {
-        if (typeof window === "undefined") return;
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-        const lenis = new Lenis({ autoRaf: false });
-        setLenis(lenis);
-
-        function onTick() {
-            lenis.raf(performance.now());
-        }
-        ticker.add(onTick);
-
-        // Keep ScrollTrigger in sync with Lenis's virtual scroll
-        lenis.on("scroll", ScrollTrigger.update);
-
-        return () => {
-            ticker.remove(onTick);
-            lenis.destroy();
-            setLenis(null);
-        };
-    }, []);
 
     // Hash navigation — registered even with reduced motion, which jumps instantly
     useEffect(() => {

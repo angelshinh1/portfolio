@@ -21,7 +21,7 @@ function NavLink({ item, ...props }) {
   if (item.external) {
     return <a href={item.href} target="_blank" rel="noopener noreferrer" {...props} />;
   }
-  // scroll={false} on hash links so Lenis eases the jump instead of Next snapping
+  // scroll={false} on hash links so Layout's handler smooth-scrolls instead of Next snapping
   return <Link href={item.href} scroll={!item.href.includes("#")} {...props} />;
 }
 

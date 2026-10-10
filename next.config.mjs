@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   devIndicators: false,
-  transpilePackages: ['animejs', 'lenis'],
+  transpilePackages: ['animejs'],
   // pdf.js worker ships as a static file; the resume viewer only needs its URL
   webpack(config) {
     config.module.rules.push({
