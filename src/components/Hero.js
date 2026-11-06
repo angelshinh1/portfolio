@@ -7,12 +7,24 @@ import { useGSAP } from "@gsap/react";
 import Reveal from "./Reveal";
 import Camera from "./Camera";
 import GithubContributions from "./GithubContributions";
-import { Paper, Tape, Postmark, DoodleArrow } from "./scrapbook";
+import { Paper, Tape, DoodleArrow } from "./scrapbook";
 import { RESUME_URL } from "@/lib/resume";
 
 gsap.registerPlugin(useGSAP);
 
 const PRINTS = [1, 5, 3, 7, 2, 8, 4, 6].map((n) => `/gallery-${n}.jpg`);
+
+// Circle with a stamp's notches bitten out of its edge, in a 100×100 viewBox
+const PERFORATED_CIRCLE = (() => {
+    const notches = 64, R = 49.5, r = 1.4, half = Math.asin(r / R);
+    const at = (a) => `${(50 + R * Math.cos(a)).toFixed(2)} ${(50 + R * Math.sin(a)).toFixed(2)}`;
+    const angle = (i) => (i / notches) * 2 * Math.PI;
+    let d = `M${at(angle(0) - half)}`;
+    for (let i = 0; i < notches; i++) {
+        d += `A${r} ${r} 0 0 0 ${at(angle(i) + half)}A${R} ${R} 0 0 1 ${at(angle(i + 1) - half)}`;
+    }
+    return `${d}Z`;
+})();
 
 export default function Hero() {
     const [shots, setShots] = useState(0);
@@ -21,7 +33,7 @@ export default function Hero() {
     const headingRef = useRef(null);
     const watermarkRef = useRef(null);
 
-    // Intro: stamp scales in, note drops in, camera fades up; waits for the loading screen
+    // Intro: photo scales in, note drops in, camera fades up; waits for the loading screen
     useGSAP(() => {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -47,34 +59,31 @@ export default function Hero() {
             ref={introRef}
             className="relative max-w-[88vw] lg:max-w-[70rem] mx-auto px-1 pt-40 pb-20 lg:pt-40 lg:pb-24"
         >
-            {/* Desktop: stamp beside the card. Below lg: stamp pinned to the card's top-right corner */}
+            {/* Desktop: photo beside the card. Below lg: photo pinned to the card's top-right corner */}
             <div className="relative grid grid-cols-1 lg:grid-cols-[0.85fr_1.6fr] gap-16 lg:gap-6 items-center">
-                <Reveal className="absolute -top-[4.5rem] right-1 sm:right-4 z-10 lg:static lg:z-auto flex-shrink-0">
-                    <div className="relative w-fit lg:ml-4">
-                        {/* The photo as a postage stamp, cancelled with a Toronto postmark */}
-                        <div
-                            ref={avatarRef}
-                            className="stamp relative block"
-                            style={{ rotate: "-4deg" }}
-                        >
-                            <span className="block w-[88px] h-[108px] sm:w-[116px] sm:h-[140px] lg:w-[226px] lg:h-[276px] p-1.5 lg:p-2.5 bg-[#FDFBF4] border border-[rgba(62,44,30,0.14)]">
-                                <span className="relative block w-full h-full overflow-hidden">
-                                    <Image
-                                        src="/profile.jpg"
-                                        alt="Angel Shinh"
-                                        fill
-                                        priority
-                                        sizes="226px"
-                                        className="object-cover object-[50%_40%]"
-                                    />
-                                </span>
+                <Reveal className="absolute -top-[4.5rem] sm:-top-[5rem] right-1 sm:right-4 z-10 lg:static lg:z-auto flex-shrink-0">
+                    <div className="relative w-fit">
+                        {/* Photo in a round frame with stamp perforations */}
+                        <div ref={avatarRef} className="scrap w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] lg:w-[280px] lg:h-[280px] xl:w-[300px] xl:h-[300px]">
+                            <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full" aria-hidden>
+                                <path d={PERFORATED_CIRCLE} fill="#FDFBF4" />
+                            </svg>
+                            <span className="absolute inset-[9px] lg:inset-5 rounded-full overflow-hidden border border-[rgba(62,44,30,0.35)]">
+                                {/* Slight crop: keeps the raised finger outside the circle */}
+                                <Image
+                                    src="/profile.jpg"
+                                    alt="Angel Shinh"
+                                    fill
+                                    priority
+                                    sizes="(min-width: 1280px) 300px, (min-width: 1024px) 280px, 140px"
+                                    className="object-cover scale-[1.08] origin-[19%_0%]"
+                                />
                             </span>
                         </div>
-                        <Postmark className="absolute -top-8 -right-28 w-40 hidden lg:block" rotate={-8} />
 
                         {/* Margin note pointing back at the photo */}
                         <div
-                            className="absolute -bottom-14 -right-28 hidden lg:flex items-center gap-1 text-[var(--ink-brown)] pointer-events-none"
+                            className="absolute -bottom-12 -right-4 hidden lg:flex items-center gap-1 text-[var(--ink-brown)] pointer-events-none"
                             aria-hidden
                         >
                             <DoodleArrow className="w-12 rotate-[200deg] -translate-y-3" />
