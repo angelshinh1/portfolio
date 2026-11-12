@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Paper, Tape } from "./scrapbook";
+import { Paper, Sticker, Tape } from "./scrapbook";
 
 // Preview beside the /projects list, swapped on hover or focus
 export default function ProjectPreview({ project }) {
@@ -12,7 +12,12 @@ export default function ProjectPreview({ project }) {
       seed={61}
       rotate={-1}
       innerClassName="p-6"
-      decor={<Tape variant="kraft" rotate={-3} className="-top-3 left-1/2 -translate-x-1/2" />}
+      decor={
+        <>
+          <Tape variant="kraft" rotate={-3} className="-top-3 left-1/2 -translate-x-1/2" />
+          <Sticker key={project.slug} src={project.icon} size={88} rotate={8} className="preview-fade absolute -top-9 -right-6 z-10" />
+        </>
+      }
     >
     <div key={project.slug} className="preview-fade">
       {project.coverImage && (

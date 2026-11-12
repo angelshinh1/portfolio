@@ -4,7 +4,7 @@ import CaseStudyContent from "@/components/case-study/CaseStudyContent";
 import CaseReveal from "@/components/case-study/CaseReveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Seo, { SITE_URL } from "@/components/Seo";
-import { Paper, Tape } from "@/components/scrapbook";
+import { Paper, Sticker, Tape } from "@/components/scrapbook";
 
 export async function getStaticPaths() {
   return {
@@ -45,9 +45,12 @@ export default function ProjectCaseStudy({ project }) {
           </CaseReveal>
 
           <CaseReveal delay={40}>
-            <h1 className="type-display text-[var(--text-primary)]">
-              {project.title}
-            </h1>
+            <div className="flex items-start justify-between gap-4">
+              <h1 className="type-display text-[var(--text-primary)] min-w-0">
+                {project.title}
+              </h1>
+              <Sticker src={project.icon} size={120} rotate={7} className="shrink-0 -mt-4 max-sm:!w-20" />
+            </div>
 
             <p
               className="mt-3"

@@ -411,7 +411,7 @@ mark, .mark {
 }
 
 .preview-fade {
-  animation: preview-materialize var(--t-base) var(--spring) both;
+  animation: preview-materialize var(--t-base) var(--spring) backwards; /* no fill after: a held blur(0)/scale(1) keeps text rasterised */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -487,6 +487,15 @@ mark, .mark {
 /* Hover deepens the shadow only — scraps never move under the pointer */
 @media (hover: hover) {
   .scrap-hover:hover { filter: var(--scrap-shadow-up); }
+}
+
+/* Paper scraps cast their shadow from a backing layer (see Paper) to keep text crisp */
+.scrap-paper,
+.scrap-paper.scrap-hover:hover { filter: none; }
+.scrap-backing { position: absolute; inset: 0; filter: var(--scrap-shadow); transition: filter var(--t-base) var(--spring); }
+.scrap-backing > .paper { height: 100%; }
+@media (hover: hover) {
+  .scrap-hover:hover > .scrap-backing { filter: var(--scrap-shadow-up); }
 }
 
 .paper { position: relative; }

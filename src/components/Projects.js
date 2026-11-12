@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeader from "./SectionHeader";
-import { Paper, Tape } from "./scrapbook";
+import { Paper, Sticker, Tape } from "./scrapbook";
 import projects from "@/data/projects";
 
 const TEASER_COUNT = 4;
@@ -40,7 +40,12 @@ function Clipping({ project, look, offset }) {
       hover
       className={`group ${offset ? "md:mt-14" : ""}`}
       innerClassName="p-6 md:p-8 h-full"
-      decor={<Tape variant={look.tape} rotate={look.tapeRotate} className="-top-3 left-1/2 -translate-x-1/2" />}
+      decor={
+        <>
+          <Tape variant={look.tape} rotate={look.tapeRotate} className="-top-3 left-1/2 -translate-x-1/2" />
+          <Sticker src={project.icon} size={92} rotate={look.tapeRotate * 2} className="absolute -top-9 -right-5 z-10" />
+        </>
+      }
     >
       {project.coverImage && (
         <div className="relative aspect-[16/9] mb-6 overflow-hidden bg-[var(--bg-grain)] border-[6px] border-white shadow-[0_1px_3px_rgba(62,44,30,0.18)]" style={{ rotate: "0.8deg" }}>

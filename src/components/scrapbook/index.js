@@ -59,15 +59,34 @@ export function Paper({
     return (
         <Tag
             ref={ref}
-            className={`scrap ${hover ? "scrap-hover" : ""} ${className}`}
+            className={`scrap scrap-paper ${hover ? "scrap-hover" : ""} ${className}`}
             style={{ "--r": `${rotate}deg`, ...style }}
             {...rest}
         >
+            {/* Shadow lives on a backing copy so the filter never rasterises the rotated text */}
+            <div className="scrap-backing" aria-hidden><div className={`paper paper-${variant}`} style={{ clipPath }} /></div>
             <div className={`paper paper-${variant} ${innerClassName}`} style={{ clipPath }}>
                 {children}
             </div>
             {decor}
         </Tag>
+    );
+}
+
+// Die-cut project sticker (public/projects/icons), decorative only
+export function Sticker({ src, size = 96, rotate = 6, className = "" }) {
+    if (!src) return null;
+    return (
+        <Image
+            src={src}
+            alt=""
+            aria-hidden
+            width={size * 2}
+            height={size * 2}
+            unoptimized
+            className={`pointer-events-none select-none h-auto ${className}`}
+            style={{ width: size, rotate: `${rotate}deg`, filter: "drop-shadow(0 1px 1px rgba(62,44,30,0.16)) drop-shadow(0 4px 8px rgba(62,44,30,0.12))" }}
+        />
     );
 }
 

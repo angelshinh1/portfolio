@@ -3,6 +3,7 @@
 const projects = [
   {
     slug: "ddp-hunt",
+    icon: "/projects/icons/ddp-hunt.webp",
     title: "DDP Hunt",
     subtitle: "A scavenger hunt for RBC's Digital Developer Practice event",
     category: "Full-Stack, Event Platform",
@@ -112,6 +113,7 @@ const projects = [
   },
   {
     slug: "devflow",
+    icon: "/projects/icons/devflow.webp",
     title: "DevFlow",
     subtitle: "AI code review for GitHub pull requests",
     category: "Full-Stack, AI",
@@ -207,6 +209,7 @@ const projects = [
   },
   {
     slug: "fragments",
+    icon: "/projects/icons/fragments.webp",
     title: "Fragments",
     subtitle: "A cloud microservice on AWS",
     category: "Cloud, Backend",
@@ -319,6 +322,7 @@ const projects = [
   },
   {
     slug: "somnio",
+    icon: "/projects/icons/somnio.webp",
     title: "Somnio",
     subtitle: "Dream Journal & Network Platform",
     category: "Full-Stack, Graph Database",
@@ -380,7 +384,293 @@ const projects = [
     ],
   },
   {
+    slug: "ask-node",
+    icon: "/projects/icons/ask-node.webp",
+    title: "ask-node",
+    subtitle: "A RAG assistant grounded in the Node.js docs",
+    category: "AI, Retrieval",
+    year: "2026",
+    role: "Solo Developer",
+    team: "Seneca Polytechnic · AIP444",
+    description:
+      "A command-line assistant that answers Node.js questions from the official API docs instead of from memory — structure-aware chunking, a Chroma vector store, retrieve-then-rerank, and answers that cite the file they came from.",
+    technologies: [
+      "Python",
+      "ChromaDB",
+      "OpenRouter",
+      "text-embedding-3-small",
+      "Cohere Rerank",
+      "Gemini Flash Lite",
+      "OpenAI SDK",
+    ],
+    githubUrl: null,
+    liveUrl: null,
+    privateNote: "Coursework project — the code lives in a private course repo.",
+    coverImage: null,
+    content: [
+      {
+        type: "lead",
+        text: "ask-node is a small CLI that knows the current Node.js API better than the model behind it does. Ask it how to read a file as a stream, and it pulls the relevant sections of the official docs, hands only those to an LLM, and answers with the source file cited — or says it doesn't know.",
+      },
+      {
+        type: "heading",
+        text: "Why not just ask the model",
+      },
+      {
+        type: "paragraph",
+        text: "LLMs have a knowledge cutoff, and API details are exactly the kind of thing they get confidently wrong: a renamed option, a method that moved modules, a flag that was experimental two versions ago. Retrieval Augmented Generation flips the job around — the model stops being the source of truth and becomes a reader of documents you hand it. Getting the right documents into that hand is the whole problem.",
+      },
+      {
+        type: "heading",
+        text: "First, search that understands meaning",
+      },
+      {
+        type: "paragraph",
+        text: "The groundwork was a semantic product search over the DummyJSON catalog. Each product is serialized into one labeled line — title, category, description, tags, brand — and the whole catalog is embedded in a single batched API call, then saved to disk so searching never re-embeds it. A query is embedded the same way and scored against every product with a dot product.",
+      },
+      {
+        type: "paragraph",
+        text: "The useful lesson was the threshold. Running a query that should match (\"nice smelling scent\") beside one that shouldn't (\"a textbook on quantum physics\") showed a clear gap between real and accidental matches, and that gap set a 0.2 minimum score. Below it, the search admits it has nothing like that in stock instead of recommending a perfume to someone looking for physics.",
+      },
+      {
+        type: "heading",
+        text: "Chunking that respects the docs",
+      },
+      {
+        type: "paragraph",
+        text: "Splitting documentation every N characters cuts methods in half and separates examples from the text that explains them. The chunker splits on Markdown headings instead and keeps a stack of the headings above each section, so every chunk carries a breadcrumb like fs > Promises API > filehandle.read() — prepended to the text before it's embedded, so a short section about an option still knows which method it belongs to.",
+      },
+      {
+        type: "list",
+        items: [
+          "Headings inside fenced code blocks are ignored, so a # comment in a shell example never starts a new chunk.",
+          "HTML comments, which the Node docs use for version metadata, are stripped before chunking.",
+          "Sections under 50 characters are dropped — a heading with nothing under it is noise in a vector store.",
+          "Each chunk keeps its source file and breadcrumb as metadata, which is what makes citations possible later.",
+        ],
+      },
+      {
+        type: "stats",
+        items: [
+          { value: "70", label: "Node.js API docs indexed" },
+          { value: "5,411", label: "chunks in the vector store" },
+          { value: "25 → 5", label: "retrieved, then reranked" },
+          { value: "0.2", label: "similarity floor for a real match" },
+        ],
+      },
+      {
+        type: "heading",
+        text: "Retrieve wide, rerank narrow",
+      },
+      {
+        type: "paragraph",
+        text: "Chroma stores the chunks with cosine distance and pulls the 25 nearest to a question. Embedding similarity is fast but blunt, so those 25 go through a Cohere reranker, which reads the question and each chunk together and scores how well one actually answers the other. Only the top 5 reach the model. It's the same retrieve-then-rerank pattern as the product search — cheap recall first, expensive precision second.",
+      },
+      {
+        type: "heading",
+        text: "Answering, with receipts",
+      },
+      {
+        type: "paragraph",
+        text: "The five chunks are wrapped in tagged blocks carrying their source file and breadcrumb, and the system prompt sets three rules: answer only from that context, say \"I don't have enough information\" when the context doesn't cover it, and cite the file. The sources and their rerank scores go to stderr and the answer to stdout, so the tool pipes cleanly into anything else while you can still see what it read.",
+      },
+      {
+        type: "heading",
+        text: "What I took from it",
+      },
+      {
+        type: "paragraph",
+        text: "Most of the quality in a RAG system is decided before the model is ever called. The breadcrumbs, the threshold, the rerank step — none of them are clever on their own, but each one removes a way for the wrong text to end up in the prompt. The generation step is the easy part once retrieval is honest.",
+      },
+    ],
+  },
+  {
+    slug: "review-board",
+    icon: "/projects/icons/review-board.webp",
+    title: "Review Board",
+    subtitle: "A multi-agent AI code review CLI",
+    category: "AI, Developer Tools",
+    year: "2026",
+    role: "Solo Developer",
+    team: "Seneca Polytechnic · AIP444",
+    description:
+      "Run it on your staged changes and two specialist AI reviewers — a security auditor and a maintainability critic — work in parallel with tools to read and search the codebase, before a third lead-dev model checks their findings and writes one HTML report.",
+    technologies: [
+      "Python",
+      "OpenAI SDK",
+      "OpenRouter",
+      "Pydantic",
+      "asyncio",
+      "ripgrep",
+      "DeepSeek",
+    ],
+    githubUrl: null,
+    liveUrl: null,
+    privateNote: "Coursework project — the code lives in a private course repo.",
+    coverImage: null,
+    content: [
+      {
+        type: "lead",
+        text: "Review Board is a review command for your terminal. Point it at your staged git changes or a single file, and three models do what a small review team would: two specialists dig in from different angles, and a lead developer reconciles what they found into a report you can actually read.",
+      },
+      {
+        type: "heading",
+        text: "Two biases are better than one",
+      },
+      {
+        type: "paragraph",
+        text: "A single \"review this\" prompt tries to care about everything and ends up shallow on all of it. So the work is split between two reviewers with deliberately narrow personalities. The Security Auditor is paranoid by design — injection, hardcoded secrets, disabled certificate checks, missing auth — and runs at a low temperature. The Maintainability Critic looks at naming, duplication and structure, with a little more room to roam. Both run at the same time with asyncio, so the second opinion costs no extra wait.",
+      },
+      {
+        type: "heading",
+        text: "Findings as data",
+      },
+      {
+        type: "paragraph",
+        text: "Each reviewer has to return structured output validated against a Pydantic schema: a list of findings, each with a file path, a line number, a severity of info, warn or critical, a category, and a plain explanation with a fix. An empty list is an allowed answer and the prompts say so outright — inventing problems to look useful is the failure mode that makes AI review noisy.",
+      },
+      {
+        type: "heading",
+        text: "Reviewers that can look around",
+      },
+      {
+        type: "paragraph",
+        text: "A diff only shows what changed, not the function it calls or the config it reads. Both reviewers get two tools — read_file and ripgrep — and loop until they're ready to answer, capped at eight rounds so a confused model can't run up a bill. The lead dev gets read_file too, so it can check a finding against the real code before putting it in the report.",
+      },
+      {
+        type: "list",
+        items: [
+          "read_file only resolves paths inside the project root. The code being reviewed is untrusted input, and a comment telling the model to read ~/.ssh is a real prompt-injection attempt, not a hypothetical.",
+          "Tool output is capped — 300 lines per read, 60 matches per search — so one broad pattern can't flood the context window.",
+          "Every request retries with exponential backoff, and every response's cost is added up and printed at the end.",
+          "--debug streams every tool call, result and raw finding to stderr, keeping stdout clean for the final summary.",
+        ],
+      },
+      {
+        type: "stats",
+        items: [
+          { value: "3", label: "models, two running in parallel" },
+          { value: "2", label: "tools to read and search the repo" },
+          { value: "8", label: "max tool rounds per reviewer" },
+          { value: "1", label: "self-contained HTML report" },
+        ],
+      },
+      {
+        type: "heading",
+        text: "Choosing models on value",
+      },
+      {
+        type: "paragraph",
+        text: "The reviewers do the heavy reading, so they run on a fast, cheap model; the lead dev does less reading and more judgment, so it gets the stronger one. Every call's token cost is tracked, so the trade-off shows up as a number at the end of each run rather than on a bill at the end of the month — the goal was the cheapest setup whose report I'd still trust.",
+      },
+      {
+        type: "heading",
+        text: "What I took from it",
+      },
+      {
+        type: "paragraph",
+        text: "Treating every model as an untrusted component made the tool better. Its output is validated, its tools are fenced in, its loops are bounded and its cost is metered. The prompts matter, but those boundaries are what made it something I'd run on my own code.",
+      },
+    ],
+  },
+  {
+    slug: "blue-green-azure",
+    icon: "/projects/icons/blue-green-azure.webp",
+    title: "Blue/Green on Azure",
+    subtitle: "Zero-downtime releases on Azure Container Apps",
+    category: "Cloud, DevOps",
+    year: "2026",
+    role: "Cloud / DevOps Engineer",
+    team: "Seneca Polytechnic · PRO690",
+    description:
+      "Two microservices on Azure Container Apps, released with blue/green and canary traffic splitting — first by hand with the Azure CLI, then as an Azure Pipeline on a self-hosted agent that builds, validates, deploys at 0% traffic, tests the new revision and only then promotes it.",
+    technologies: [
+      "Azure Container Apps",
+      "Azure Container Registry",
+      "Azure Pipelines",
+      "Azure Repos",
+      "Docker",
+      "Azure CLI",
+      "Bash",
+      "Ubuntu VM",
+    ],
+    githubUrl: null,
+    liveUrl: null,
+    privateNote: "Coursework project — the Azure resources have been torn down.",
+    coverImage: null,
+    content: [
+      {
+        type: "lead",
+        text: "This started as a question every team shipping software has to answer: how do you put a new version in front of users without a window where things are broken? Over an assignment and a midterm, I answered it twice on Azure Container Apps — once by hand, and once as a pipeline that does it without me.",
+      },
+      {
+        type: "heading",
+        text: "Two services, one private registry",
+      },
+      {
+        type: "paragraph",
+        text: "The first step was a small microservice pair: an album API and a web front end that calls it. Both images are built into a private Azure Container Registry and deployed as Container Apps in one environment. The front end never hardcodes where the API lives — the API's address is read at deploy time and passed in as an environment variable, so either side can be redeployed without rebuilding the other.",
+      },
+      {
+        type: "heading",
+        text: "Blue/green and canary, by hand",
+      },
+      {
+        type: "paragraph",
+        text: "With the API in multiple-revision mode, a new version runs beside the old one instead of replacing it. Labels make the two addressable: blue is what users get, green is the new revision, reachable through its own label URL for testing while it carries 0% of real traffic. Switching is one traffic command, and so is rolling back — the old revision never went anywhere.",
+      },
+      {
+        type: "paragraph",
+        text: "Canary is the gentler version of the same idea: instead of flipping 100% at once, a small share of traffic goes to the new revision first and grows as it proves itself. Doing both by hand with the Azure CLI made the trade-off concrete — blue/green gives an instant, clean cutover; canary limits how many people a bad release can reach.",
+      },
+      {
+        type: "heading",
+        text: "Then, making it a pipeline",
+      },
+      {
+        type: "paragraph",
+        text: "The midterm turned that runbook into an Azure Pipeline. It runs on a self-hosted agent — an Ubuntu VM I provisioned and registered into its own agent pool — against a repo in Azure Repos where main is protected and every pull request has to pass a build before it can merge.",
+      },
+      {
+        type: "list",
+        items: [
+          "Build — the image is built on every run and tagged with both the build ID and the commit SHA, but only pushed to the registry when the run isn't a pull request.",
+          "Validate — confirms that exact tag exists in the registry, that the app is in multiple-revision mode, and runs the image on the agent itself and calls /albums as a smoke test.",
+          "Deploy — gated behind a production environment approval. It finds which label holds 100% of traffic, deploys the new revision under the other label, and leaves production traffic untouched.",
+          "Validation gate — calls the new revision on its own URL with retries, failing fast on a 4xx. If it fails, the pipeline stops and prints the traffic table to prove production was never touched.",
+          "Promote — switches 100% of traffic to the validated label, checks the production URL, and switches straight back on its own if that check fails.",
+        ],
+      },
+      {
+        type: "stats",
+        items: [
+          { value: "5", label: "stages from commit to live" },
+          { value: "0%", label: "traffic on a new revision until it passes" },
+          { value: "1", label: "manual approval before production" },
+          { value: "1 click", label: "rollback, verified before switching" },
+        ],
+      },
+      {
+        type: "heading",
+        text: "Designing for the bad day",
+      },
+      {
+        type: "paragraph",
+        text: "Two run-time parameters exist purely to prove the failure paths work. One simulates a bad release by pointing the validation gate at a route the app doesn't serve, so you can watch promotion get skipped while production keeps serving the old version. The other runs only a rollback stage, which checks that the previous revision still responds before sending any users back to it — rolling back onto something broken is just a second outage.",
+      },
+      {
+        type: "heading",
+        text: "What I took from it",
+      },
+      {
+        type: "paragraph",
+        text: "The deploy itself is the least interesting stage. What makes a release safe is everything around it: a revision that exists before anyone uses it, a test that runs against the real thing, and a way back that's been exercised rather than assumed. Doing it by hand first is what made each pipeline stage obvious when it came time to automate.",
+      },
+    ],
+  },
+  {
     slug: "face-expression-recognizer",
+    icon: "/projects/icons/face-expression-recognizer.webp",
     title: "Face Expression Recognizer",
     subtitle: "Real-time Emotion Detection",
     category: "Machine Learning, Computer Vision",
@@ -436,6 +726,7 @@ const projects = [
   },
   {
     slug: "diabetes-prediction",
+    icon: "/projects/icons/diabetes-prediction.webp",
     title: "Diabetes Prediction",
     subtitle: "Clinical ML Classifier",
     category: "Machine Learning",
@@ -489,6 +780,7 @@ const projects = [
   },
   {
     slug: "movie-recommender",
+    icon: "/projects/icons/movie-recommender.webp",
     title: "Movie Recommender",
     subtitle: "Hybrid Filtering Engine",
     category: "Machine Learning, Data Science",
@@ -535,6 +827,7 @@ const projects = [
   },
   {
     slug: "ray-tracer",
+    icon: "/projects/icons/ray-tracer.webp",
     title: "Ray Tracer",
     subtitle: "From-Scratch Rendering Engine",
     category: "Computer Graphics, Systems",
