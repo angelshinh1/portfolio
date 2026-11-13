@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useRef, useEffect, useCallback } from "react";
 import Camera from "./Camera";
-import { Tape, tornClip } from "./scrapbook";
+import { tornClip } from "./scrapbook";
 import { RESUME_URL } from "@/lib/resume";
 import { createSpring, project, rubberband, createVelocityTracker } from "@/lib/spring";
 
@@ -26,7 +26,7 @@ function NavLink({ item, ...props }) {
 }
 
 // Torn bottom edge; fixed seed so server and client match
-const NAV_CLIP = tornClip(5, ["bottom"], 4, 90);
+const NAV_CLIP = tornClip(5, ["bottom"], 2.5, 70);
 
 const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
 const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
@@ -222,14 +222,13 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-30 px-3 sm:px-5 pt-3 sm:pt-4">
       {/* Wrapper carries the hide transform and the drop-shadow (clip-path would cut a box-shadow) */}
       <div
-        className="relative mx-auto max-w-[92vw] lg:max-w-[76rem]"
+        className="relative mx-auto max-w-[calc(88vw-0.5rem)] lg:max-w-[59.5rem]"
         style={{
           transform: hidden && !open ? "translate3d(0, -140%, 0)" : "translate3d(0, 0, 0)",
-          filter: scrolled || open ? "var(--scrap-shadow-up)" : "var(--scrap-shadow)",
+          filter: scrolled || open ? "var(--scrap-shadow)" : "drop-shadow(0 2px 3px rgba(62, 44, 30, 0.12))",
           transition: "transform var(--t-base) var(--spring), filter var(--t-base) var(--spring)",
         }}
       >
-      <Tape variant="washi" rotate={-5} width={70} className="-top-2 -left-3 z-10" />
       <div
         ref={navRef}
         className="paper paper-cream relative flex flex-col overflow-hidden rounded-[2px] md:h-auto"
@@ -242,25 +241,25 @@ export default function Navbar() {
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
       >
-        <div ref={rowRef} className="flex-shrink-0 flex items-center justify-between pl-6 pr-4 sm:pl-7 sm:pr-5 py-3 md:py-3.5">
+        <div ref={rowRef} className="flex-shrink-0 flex items-center justify-between pl-5 pr-4 sm:pl-6 sm:pr-5 py-2.5 md:py-2.5">
 
           {/* Wordmark, Playfair Display (the one serif touch outside headings, as a logotype) */}
           <Link
             href="/"
             className="press text-[var(--ink-brown)] hover:text-[var(--green-deep)] transition-colors duration-200"
-            style={{ fontFamily: "var(--font-serif)", fontWeight: 600, fontSize: "1.25rem", letterSpacing: "-0.015em" }}
+            style={{ fontFamily: "var(--font-serif)", fontWeight: 600, fontSize: "1.12rem", letterSpacing: "-0.015em" }}
           >
             Angel Shinh
           </Link>
 
           {/* Desktop links */}
-          <nav className="hidden md:flex items-center gap-7" aria-label="Primary navigation">
+          <nav className="hidden md:flex items-center gap-6" aria-label="Primary navigation">
             {navItems.map((item, i) => (
               <span key={item.label} className="flex items-center">
                 <NavLink
                   item={item}
-                  className="press font-type relative group text-[var(--ink-brown)] transition-colors duration-200 hover:text-[var(--green-deep)]"
-                  style={{ fontSize: "0.9rem", letterSpacing: "0.02em" }}
+                  className="press font-body font-medium relative group text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--green-deep)]"
+                  style={{ fontSize: "0.86rem" }}
                   onMouseEnter={() => wiggleLink(wigglePaths.current[i])}
                 >
                   {item.label}

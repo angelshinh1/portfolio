@@ -78,8 +78,6 @@ export default function ProjectCaseStudy({ project }) {
               <dl className="font-body text-[0.92rem]">
                 {[
                   ["Year", project.year],
-                  ["Role", project.role],
-                  ["Team", project.team],
                   ["Category", project.category],
                 ].filter(([, v]) => v).map(([label, value]) => (
                   <div key={label} className="py-3 border-t border-[rgba(62,44,30,0.14)]">

@@ -175,7 +175,7 @@ const projects = [
       },
       {
         type: "paragraph",
-        text: "This was my half of the project: everything between a person clicking approve and Google Calendar actually changing. It had to survive the boring failures as well as the malicious ones: a closed laptop, a crashed worker, a retry that would double-book a meeting.",
+        text: "Everything between a person clicking approve and Google Calendar actually changing has to survive the boring failures as well as the malicious ones: a closed laptop, a crashed worker, a retry that would double-book a meeting.",
       },
       {
         type: "diagram",
@@ -227,19 +227,15 @@ const projects = [
       },
       {
         type: "heading",
-        text: "What I built, and what Dave built",
+        text: "Running on Antigravity",
       },
       {
         type: "paragraph",
-        text: "Dave Ta built the governance core: the policy gate as an ADK plugin, the precedent store, the content armor and the first version of the ledger. I built the Antigravity integration, then the approved execution pipeline on top of the gate: Google OAuth and cloud bootstrap, the approval UI, the workflow records, the mandatory reviewer, the local outbox, the Cloud Run worker and reconciler, the Terraform and Firestore rules, and the tests that hold it together.",
+        text: "The agent runs locally through Google's Antigravity SDK, which drives a compiled binary shipped inside its own wheel, so discovery has to answer three questions: is the package installed, does the runtime exist, and are there credentials. The vendor docs were wrong or silent on three details that changed the design, so the integration is built against the installed source instead.",
       },
       {
         type: "paragraph",
-        text: "The Antigravity piece taught me to read source over docs. Its SDK drives a compiled binary shipped inside its own wheel, so discovery has to answer three questions: is the package installed, does the runtime exist, and are there credentials. The vendor docs were wrong or silent on three details that changed the design, so I built against the installed source instead.",
-      },
-      {
-        type: "paragraph",
-        text: "We built it in under a week for Devpost's All Things Agentic hackathon in August 2026, on top of Google's Agent Development Kit.",
+        text: "Built with [Dave Ta](https://www.linkedin.com/in/tan-dat-ta/) in under a week for Devpost's All Things Agentic hackathon in August 2026, on top of Google's Agent Development Kit.",
       },
     ],
   },

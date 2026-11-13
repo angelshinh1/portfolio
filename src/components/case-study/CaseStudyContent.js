@@ -5,6 +5,18 @@ import { CutLine } from "../scrapbook";
 // Prints alternate their tilt so a gallery reads as photos stuck down by hand
 const PRINT_TILT = [-1.2, 1, 0.8, -1];
 
+// Turns [label](url) inside paragraph text into a link
+function withLinks(text) {
+  return text.split(/(\[[^\]]+\]\([^)]+\))/).map((part, i) => {
+    const m = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    return m ? (
+      <a key={i} href={m[2]} target="_blank" rel="noopener noreferrer" className="text-[var(--text-primary)] underline decoration-[var(--green-deep)] underline-offset-[3px] transition-colors duration-200 hover:text-[var(--green-deep)]">
+        {m[1]}
+      </a>
+    ) : part;
+  });
+}
+
 export default function CaseStudyContent({ project }) {
   return (
     <div className="space-y-6 lg:space-y-7">
@@ -37,7 +49,7 @@ function Block({ block, project }) {
     case "paragraph":
       return (
         <p className="font-body text-[0.98rem] lg:text-[1.03rem] leading-[1.72] text-[var(--text-secondary)] max-w-[64ch]">
-          {block.text}
+          {withLinks(block.text)}
         </p>
       );
 
