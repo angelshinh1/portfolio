@@ -49,7 +49,7 @@ export function createSpring({ from = 0, damping = 1, response = 0.35, onChange 
       if (initialVelocity !== undefined) velocity = initialVelocity;
       if (value !== target || velocity !== 0) start();
     },
-    // Jump the value without animating — used while a finger is tracking 1:1.
+    // Jump the value without animating, used while a finger is tracking 1:1.
     setCurrent(next) {
       stop();
       value = target = next;

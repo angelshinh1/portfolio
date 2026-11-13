@@ -21,7 +21,7 @@ export default function ProjectsIndex() {
     <>
       <Seo
         title="Projects | Angel Shinh"
-        description="Everything I've built — from an event scavenger hunt to a from-scratch ray tracer."
+        description="Everything I've built, from an event scavenger hunt to a from-scratch ray tracer."
         path="/projects"
       />
 

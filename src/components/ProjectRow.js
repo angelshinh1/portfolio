@@ -85,7 +85,7 @@ function ExpandedDetails({ project, chipBg }) {
   );
 }
 
-// Accordion row — homepage card variant and /projects list variant
+// Accordion row, homepage card variant and /projects list variant
 export default function ProjectRow({ project, isExpanded, onToggle, onHoverStart, chipBg = "var(--bg-surface)", variant = "list", topBorder = true }) {
   if (variant === "card") {
     return (

@@ -45,7 +45,7 @@ export default function Footer() {
                         </p>
                     </div>
 
-                    {/* Socials — paper labels, like the one under the hero heading */}
+                    {/* Socials, paper labels, like the one under the hero heading */}
                     <div className="flex gap-4 justify-center lg:mr-44">
                         <a
                             href="https://github.com/angelshinh1"

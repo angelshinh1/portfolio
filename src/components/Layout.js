@@ -10,7 +10,7 @@ import { scrollToHashWhenReady } from "@/lib/scroll";
 export default function Layout(props) {
     const router = useRouter();
 
-    // Hash navigation — registered even with reduced motion, which jumps instantly
+    // Hash navigation, registered even with reduced motion, which jumps instantly
     useEffect(() => {
         if (typeof window === "undefined") return;
 

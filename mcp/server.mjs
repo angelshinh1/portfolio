@@ -23,7 +23,7 @@ const PROFILE = {
   location: "Toronto, Canada",
   intro:
     "Software engineer based in Toronto, with more than a year of hands-on experience building real-world software. Outside of code, usually behind a camera or a guitar.",
-  education: "Seneca Polytechnic — Computer Programming & Analysis",
+  education: "Seneca Polytechnic: Computer Programming & Analysis",
   links: {
     website: SITE,
     github: "https://github.com/angelshinh1",
@@ -37,12 +37,12 @@ const text = (s) => ({ content: [{ type: "text", text: s }] });
 
 function experienceMarkdown() {
   return Object.values(experiencesData)
-    .flatMap((c) => c.roles.map((r) => `- **${r.title}**, ${c.company} (${r.period}) — ${r.summary}`))
+    .flatMap((c) => c.roles.map((r) => `- **${r.title}**, ${c.company} (${r.period}): ${r.summary}`))
     .join("\n");
 }
 
 function projectSummary(p) {
-  return `- **${p.title}** (\`${p.slug}\`, ${p.year}) — ${p.subtitle}. ${p.category}. Stack: ${p.technologies.join(", ")}.`;
+  return `- **${p.title}** (\`${p.slug}\`, ${p.year}): ${p.subtitle}. ${p.category}. Stack: ${p.technologies.join(", ")}.`;
 }
 
 function blockMarkdown(b) {
@@ -67,7 +67,7 @@ function blockMarkdown(b) {
 
 function projectMarkdown(p) {
   const meta = [
-    `# ${p.title} — ${p.subtitle}`,
+    `# ${p.title}: ${p.subtitle}`,
     `Year: ${p.year} · Role: ${p.role} · Team: ${p.team} · Category: ${p.category}`,
     `Stack: ${p.technologies.join(", ")}`,
     `Case study: ${SITE}/projects/${p.slug}`,
@@ -106,7 +106,7 @@ server.registerTool(
   async () =>
     text(
       [
-        `# ${PROFILE.name} — ${PROFILE.headline}`,
+        `# ${PROFILE.name}: ${PROFILE.headline}`,
         `${PROFILE.location} · ${PROFILE.education}`,
         PROFILE.intro,
         "## Links",
@@ -167,7 +167,7 @@ server.registerTool(
   "list_posts",
   { title: "List blog posts", description: "Published blog posts with slug, date and description." },
   async () =>
-    text(getSortedPostsData().map((p) => `- **${p.title}** (\`${p.slug}\`, ${p.date}) — ${p.description}`).join("\n"))
+    text(getSortedPostsData().map((p) => `- **${p.title}** (\`${p.slug}\`, ${p.date}): ${p.description}`).join("\n"))
 );
 
 server.registerTool(

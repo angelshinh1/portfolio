@@ -15,7 +15,7 @@ export default function Home() {
         path="/"
       />
 
-      {/* Hero — warm paper background */}
+      {/* Hero, warm paper background */}
       <div className="section-base">
         <Hero />
       </div>
@@ -25,22 +25,22 @@ export default function Home() {
         <CutLine className="max-w-[88vw] lg:max-w-[70rem] mx-auto pb-10" />
       </div>
 
-      {/* Experience — subtle grain */}
+      {/* Experience, subtle grain */}
       <div className="section-grain">
         <Experience />
       </div>
 
-      {/* Projects — warm oat section */}
+      {/* Projects, warm oat section */}
       <div className="section-green">
         <Projects />
       </div>
 
-      {/* Fun Stuff — back to warm base */}
+      {/* Fun Stuff, back to warm base */}
       <div className="section-base">
         <FunStuff />
       </div>
 
-      {/* Contact — grain section */}
+      {/* Contact, grain section */}
       <div className="section-grain">
         <Contact />
       </div>

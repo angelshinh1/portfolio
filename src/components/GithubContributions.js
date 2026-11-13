@@ -5,11 +5,11 @@ const USERNAME = "angelshinh1";
 const API_URL = `https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`;
 
 const LEVEL_COLOR = [
-    "var(--bg-surface)",  // 0 — no activity
+    "var(--bg-surface)",  // 0, no activity
     "var(--green-soft)",
     "var(--green-muted)",
     "var(--green-vivid)",
-    "var(--green-deep)",  // 4 — heaviest day
+    "var(--green-deep)",  // 4, heaviest day
 ];
 
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

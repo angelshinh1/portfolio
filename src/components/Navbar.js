@@ -38,7 +38,7 @@ export default function Navbar() {
   const wigglePaths = useRef([]);
   const mobilePaths = useRef([]);
 
-  const navRef = useRef(null);    // the whole floating surface — this is what grows
+  const navRef = useRef(null);    // the whole floating surface, this is what grows
   const rowRef = useRef(null);    // the bar row: wordmark + links + toggle
   const menuRef = useRef(null);   // everything revealed below the separator
   const springRef = useRef(null);
@@ -83,7 +83,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Mobile: the bar grows into the menu — one spring drives its height
+  // Mobile: the bar grows into the menu, one spring drives its height
   useEffect(() => {
     const el = navRef.current;
     const row = rowRef.current;
@@ -136,7 +136,7 @@ export default function Navbar() {
     const onResize = () => {
       const { collapsed: c, expanded: e } = measure();
       if (!isMobile()) {
-        // Desktop lays out naturally — hand height back to the browser.
+        // Desktop lays out naturally, hand height back to the browser.
         el.style.height = "";
         return;
       }
@@ -192,7 +192,7 @@ export default function Navbar() {
     tracker.current.add(e.clientY);
 
     const { collapsed, expanded } = sizeRef.current;
-    // Finger up shortens the surface, finger down grows it — 1:1 either way
+    // Finger up shortens the surface, finger down grows it, 1:1 either way
     let h = drag.startH + (e.clientY - drag.grabY);
     if (h > expanded) h = expanded + rubberband(h - expanded, expanded);
     springRef.current?.setCurrent(Math.max(collapsed, h));
@@ -244,7 +244,7 @@ export default function Navbar() {
       >
         <div ref={rowRef} className="flex-shrink-0 flex items-center justify-between pl-6 pr-4 sm:pl-7 sm:pr-5 py-3 md:py-3.5">
 
-          {/* Wordmark — Playfair Display (the one serif touch outside headings, as a logotype) */}
+          {/* Wordmark, Playfair Display (the one serif touch outside headings, as a logotype) */}
           <Link
             href="/"
             className="press text-[var(--ink-brown)] hover:text-[var(--green-deep)] transition-colors duration-200"
@@ -315,7 +315,7 @@ export default function Navbar() {
           style={{ opacity: 0, transition: "opacity var(--t-fast) linear" }}
           inert={!open ? true : undefined}
         >
-          {/* Separator — a dashed cut line across the page */}
+          {/* Separator, a dashed cut line across the page */}
           <div className="flex justify-center pb-6" aria-hidden>
             <div className="cut-line w-[86%]" />
           </div>

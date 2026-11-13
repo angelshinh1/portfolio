@@ -12,7 +12,7 @@
   /* ── Green-tinted paper foundations ── */
   --bg-base:        #E1E6DB;   /* sage-grey cardstock */
   --bg-grain:       #D9DFD2;   /* slightly deeper sage */
-  --bg-green:       #E6E2D5;   /* warm oat — the one section that steps away from green */
+  --bg-green:       #E6E2D5;   /* warm oat, the one section that steps away from green */
   --bg-surface:     #F5F6F0;   /* near-white with a green breath */
   --bg-dark:        #1A1A18;
 
@@ -56,7 +56,7 @@
   --ease-out:    cubic-bezier(0.32, 0.72, 0, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
-  --t-press: 110ms;  /* press feedback — must feel instant */
+  --t-press: 110ms;  /* press feedback, must feel instant */
   --t-fast:  200ms;
   --t-base:  340ms;  /* response 0.34 */
   --t-slow:  480ms;
@@ -68,7 +68,7 @@
   --mat-dark:     rgba(26, 26, 24, 0.62);
   --mat-edge:     rgba(255, 255, 255, 0.55);   /* light catching the top edge */
 
-  /* Elevation — bigger surfaces read thicker, so they cast further */
+  /* Elevation, bigger surfaces read thicker, so they cast further */
   --lift-1: 0 1px 2px rgba(26, 26, 24, 0.05), 0 2px 8px rgba(26, 26, 24, 0.05);
   --lift-2: 0 2px 4px rgba(26, 26, 24, 0.05), 0 10px 26px rgba(26, 26, 24, 0.09);
   --lift-3: 0 4px 8px rgba(26, 26, 24, 0.06), 0 24px 56px rgba(26, 26, 24, 0.15);
@@ -167,7 +167,7 @@ body::after {
   letter-spacing: -0.015em;
 }
 
-.type-row {   /* accordion row titles — dense, still a heading */
+.type-row {   /* accordion row titles, dense, still a heading */
   font-family: var(--font-serif);
   font-weight: 600;
   font-size: clamp(1.25rem, 2vw, 1.55rem);
@@ -197,11 +197,11 @@ body::after {
   box-shadow: var(--lift-2);
 }
 
-.material-chrome {  /* structural: nav bars — heavier, blurs more */
+.material-chrome {  /* structural: nav bars, heavier, blurs more */
   background: var(--mat-thick);
 }
 
-/* Keep inside @supports — the production minifier deletes bare backdrop-filter */
+/* Keep inside @supports, the production minifier deletes bare backdrop-filter */
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .material {
     -webkit-backdrop-filter: saturate(170%) blur(14px);
@@ -272,7 +272,7 @@ mark, .mark {
   .btn-solid:hover { background: var(--text-primary); opacity: 0.88; }
 }
 
-/* Lift on hover, settle on press — the surface follows the pointer's intent */
+/* Lift on hover, settle on press, the surface follows the pointer's intent */
 .lift {
   transition: transform var(--t-base) var(--spring), box-shadow var(--t-base) var(--spring);
 }
@@ -404,7 +404,7 @@ mark, .mark {
   .case-reveal { animation: none; }
 }
 
-/* ── Preview swap — the surface materializes rather than plainly fading ── */
+/* ── Preview swap, the surface materializes rather than plainly fading ── */
 @keyframes preview-materialize {
   from { opacity: 0; transform: scale(0.985); filter: blur(6px); }
   to   { opacity: 1; transform: scale(1);     filter: blur(0); }
@@ -484,7 +484,7 @@ mark, .mark {
               filter var(--t-base) var(--spring);
 }
 
-/* Hover deepens the shadow only — scraps never move under the pointer */
+/* Hover deepens the shadow only, scraps never move under the pointer */
 @media (hover: hover) {
   .scrap-hover:hover { filter: var(--scrap-shadow-up); }
 }

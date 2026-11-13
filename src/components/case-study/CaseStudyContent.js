@@ -7,7 +7,7 @@ const PRINT_TILT = [-1.2, 1, 0.8, -1];
 
 export default function CaseStudyContent({ project }) {
   return (
-    <div className="space-y-7 lg:space-y-8">
+    <div className="space-y-6 lg:space-y-7">
       {project.content.map((block, i) => (
         <Block key={i} block={block} project={project} />
       ))}
@@ -20,8 +20,8 @@ function Block({ block, project }) {
     case "lead":
       return (
         <p
-          className="font-body text-xl lg:text-[1.45rem] text-[var(--text-primary)] max-w-[62ch]"
-          style={{ lineHeight: 1.55, letterSpacing: "-0.008em" }}
+          className="font-body text-[1.15rem] lg:text-[1.28rem] text-[var(--text-primary)] max-w-[60ch]"
+          style={{ lineHeight: 1.6, letterSpacing: "-0.006em" }}
         >
           {block.text}
         </p>
@@ -29,28 +29,28 @@ function Block({ block, project }) {
 
     case "heading":
       return (
-        <h2 className="type-heading text-[var(--text-primary)] pt-2">
+        <h2 className="type-heading text-[var(--text-primary)] pt-3" style={{ fontSize: "clamp(1.35rem, 2vw, 1.6rem)" }}>
           {block.text}
         </h2>
       );
 
     case "paragraph":
       return (
-        <p className="font-body text-[1.05rem] lg:text-[1.15rem] leading-[1.75] text-[var(--text-secondary)] max-w-[68ch]">
+        <p className="font-body text-[0.98rem] lg:text-[1.03rem] leading-[1.72] text-[var(--text-secondary)] max-w-[64ch]">
           {block.text}
         </p>
       );
 
     case "list":
       return (
-        <ul className="space-y-3 max-w-[68ch]">
+        <ul className="space-y-2.5 max-w-[64ch]">
           {block.items.map((item, i) => (
             <li
               key={i}
-              className="font-body text-[1.05rem] lg:text-[1.1rem] leading-[1.65] text-[var(--text-secondary)] pl-6 relative"
+              className="font-body text-[0.98rem] lg:text-[1.03rem] leading-[1.68] text-[var(--text-secondary)] pl-6 relative"
             >
               <span
-                className="absolute left-0 top-[0.55em] w-[8px] h-[8px] rounded-full border-[1.5px] border-[var(--ink-sepia)]"
+                className="absolute left-0 top-[0.6em] w-[7px] h-[7px] rounded-full border-[1.5px] border-[var(--ink-sepia)]"
                 aria-hidden="true"
               />
               {item}
@@ -74,7 +74,7 @@ function Block({ block, project }) {
           {block.items.map((s, i) => (
             <div key={i}>
               <div
-                className="font-heading text-3xl lg:text-4xl text-[var(--green-deep)]"
+                className="font-heading text-[1.75rem] lg:text-[2rem] text-[var(--green-deep)]"
                 style={{ letterSpacing: "-0.02em", lineHeight: 1.1 }}
               >
                 {s.value}
@@ -106,6 +106,7 @@ function Block({ block, project }) {
                 className={`relative w-full overflow-hidden ${
                   wide ? "aspect-[16/10]" : "aspect-[4/5]"
                 }`}
+                style={project.galleryRatio ? { aspectRatio: project.galleryRatio } : undefined}
               >
                 <Image
                   src={img.src}

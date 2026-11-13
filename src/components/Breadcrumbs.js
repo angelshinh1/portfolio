@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-// items: [{ label, href? }] — the last item should omit href (current page).
+// items: [{ label, href? }], the last item should omit href (current page).
 export default function Breadcrumbs({ items, className = "" }) {
   return (
     <nav aria-label="Breadcrumb" className={`flex items-center flex-wrap gap-2 font-type text-[0.78rem] tracking-[0.03em] ${className}`}>

@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import ticker from '@/lib/ticker';
 import { VerletString } from '@/lib/verletString';
 
-// Verlet-physics drop-in for GuitarStrings.js — same props and path shape
+// Verlet-physics drop-in for GuitarStrings.js, same props and path shape
 
 const ALL_STRINGS = [
   { thickness: 3,    color: 'var(--string-E)' },
@@ -106,7 +106,7 @@ export default function GuitarStringsPhysics(props) {
     onStringPluck?.(i);
   }
 
-  // onReady callback — reliable alternative to forwardRef when loaded via dynamic().
+  // onReady callback, reliable alternative to forwardRef when loaded via dynamic().
   useEffect(() => {
     onReady?.({
       pluckString(index, amplitude = 14) {

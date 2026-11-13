@@ -64,7 +64,7 @@ function Clipping({ project, look, offset }) {
       </p>
 
       <h3 className="type-row mt-2 text-[var(--text-primary)]">
-        {/* Stretched link — the whole clipping opens the case study */}
+        {/* Stretched link, the whole clipping opens the case study */}
         <Link href={caseHref} className="highlight-swipe after:absolute after:inset-0 after:content-['']">
           {project.title}
         </Link>

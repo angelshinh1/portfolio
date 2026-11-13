@@ -99,7 +99,7 @@ const GuitarStrings = forwardRef(function GuitarStrings(props, ref) {
     },
   }));
 
-  // onReady callback — reliable alternative to forwardRef when used via dynamic()
+  // onReady callback, reliable alternative to forwardRef when used via dynamic()
   useEffect(() => {
     onReady?.({
       pluckString(index, amplitude = 14) {

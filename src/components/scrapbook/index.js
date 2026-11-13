@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import Image from "next/image";
 
-// Small deterministic PRNG — a seed always yields the same tear.
+// Small deterministic PRNG, a seed always yields the same tear.
 function mulberry32(seed) {
     let a = seed >>> 0;
     return () => {
@@ -198,7 +198,7 @@ export function DoodleArrow({ className = "", style }) {
     );
 }
 
-// A dashed "cut here" line with scissors partway along — the section divider.
+// A dashed "cut here" line with scissors partway along, the section divider.
 export function CutLine({ className = "" }) {
     return (
         <div aria-hidden className={`relative flex items-center ${className}`}>
@@ -229,7 +229,7 @@ export function PaperClip({ className = "", style }) {
     );
 }
 
-// A pressed sprig — the dried-flower gesture, drawn in ink.
+// A pressed sprig, the dried-flower gesture, drawn in ink.
 export function Sprig({ className = "", style }) {
     return (
         <svg aria-hidden viewBox="0 0 80 160" fill="none" className={className} style={style}>

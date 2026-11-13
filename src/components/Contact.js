@@ -14,7 +14,7 @@ export default function Contact() {
         Get <em>in touch</em>.
       </h2>
 
-      {/* A postcard — the message, centered, stamped in the corner */}
+      {/* A postcard, the message, centered, stamped in the corner */}
       <Paper
         variant="aged"
         tear={false}
@@ -69,7 +69,7 @@ export default function Contact() {
             .
           </p>
           <p className="font-hand text-[1.6rem] text-[var(--ink-brown)] mt-6" style={{ rotate: "-3deg" }}>
-            — Angel
+            ~ Angel
           </p>
         </div>
       </Paper>

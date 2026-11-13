@@ -41,18 +41,18 @@ export default function FunStuff() {
         >
             <SectionHeader
                 title="Fun stuff"
-                intro={<>The whimsical side — <mark>guitars, gaming, matcha</mark>, and a few facts nobody asked for.</>}
+                intro={<>The whimsical side, <mark>guitars, gaming, matcha</mark>, and a few facts nobody asked for.</>}
                 className="mb-16 lg:mb-20"
             />
 
-            {/* Guitar feature — the video is a snapshot taped into the book */}
+            {/* Guitar feature, the video is a snapshot taped into the book */}
             <div className="mb-28 lg:mb-32 grid grid-cols-1 lg:grid-cols-[0.75fr_1fr] gap-14 lg:gap-16 items-center">
                 <div className="relative w-full max-w-[320px] mx-auto lg:mx-0 mb-16 sm:mb-10 lg:mb-0">
                     <Polaroid
                         rotate={2.5}
                         tape="kraft"
                         tapeRotate={4}
-                        caption="Gratitude — Amin Toofani ♪"
+                        caption="Gratitude, Amin Toofani ♪"
                         hover={false}
                     >
                         <video
@@ -71,7 +71,7 @@ export default function FunStuff() {
                         </video>
                     </Polaroid>
 
-                    {/* Guitar leaning on the snapshot — strum it, or play the video and it plays along */}
+                    {/* Guitar leaning on the snapshot, strum it, or play the video and it plays along */}
                     <Guitar
                         playing={playing}
                         className="absolute z-10 -right-3 sm:-right-12 lg:-right-24 -bottom-24 sm:-bottom-20 lg:-bottom-14 w-[80px] sm:w-[100px] lg:w-[124px]"
@@ -164,7 +164,7 @@ export default function FunStuff() {
                     </div>
                 </div>
 
-                {/* Random facts — jotted on a torn notebook page */}
+                {/* Random facts, jotted on a torn notebook page */}
                 <div>
                     <h3 className="type-heading text-[var(--text-primary)] mb-10">
                         Random facts you didn&apos;t ask for
