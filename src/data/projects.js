@@ -656,6 +656,121 @@ const projects = [
     ],
   },
   {
+    slug: "sonatelle",
+    icon: "/projects/icons/sonatelle.webp",
+    title: "Sonatelle",
+    subtitle: "A self-hosted notes app that can't lose a note",
+    category: "Full-Stack, Self-Hosted",
+    year: "2026",
+    role: "Solo Developer",
+    team: "Personal project",
+    description:
+      "My own notes app, running on my own machine. Nested projects, history and full-text search on top; underneath, a cache that can't go stale, four independent backup layers, offline editing, and an MCP server so AI agents can read and write my notes.",
+    technologies: ["TypeScript", "React", "Node.js", "Hono", "SQLite", "Redis", "MCP", "Docker", "Tailscale"],
+    githubUrl: "https://github.com/angelshinh1/sonatelle",
+    liveUrl: null,
+    coverImage: "/projects/covers/sonatelle.webp",
+    content: [
+      {
+        type: "lead",
+        text: "Sonatelle is a quiet notes app: projects inside projects, stars, a guitar pick for the important ones, and every note kept in history. It's built to run on a machine at home and reach my phone and laptop privately. The interesting part is underneath, because I wanted three things a hosted app wouldn't give me: my notes on my own machine, readable by Claude, and impossible to lose.",
+      },
+      {
+        type: "heading",
+        text: "How it fits together",
+      },
+      {
+        type: "diagram",
+        id: "sonatelle-arch",
+        caption: "Reads try the fastest copy first. Every write lands with its event in one transaction, and that event is what tells everyone else.",
+      },
+      {
+        type: "heading",
+        text: "A cache that can't go stale",
+      },
+      {
+        type: "paragraph",
+        text: "Reads go memory first, then Redis, then the SQLite primary, then a replica. The usual cache problem is invalidation: forget to clear a key and someone sees an old note. Here nothing is ever invalidated. Every cache key carries the change number of what it holds, like note:abc:s1042, so a write simply makes readers ask for a new key. Old entries just age out.",
+      },
+      {
+        type: "list",
+        items: [
+          "If Redis is slow or down, a circuit breaker skips it for a while and reads go straight to SQLite. The app gets slower, never broken.",
+          "When many requests miss the same key at once, they share a single load instead of all hitting the database.",
+          "Search runs on the server with SQLite's full-text index, so it stays fast as the library grows.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "One write, everyone told",
+      },
+      {
+        type: "paragraph",
+        text: "Every change is written in the same SQLite transaction as an event row, the outbox pattern. Once it commits, that event reaches any open browser over Server-Sent Events, nudges the replica and the git mirror, and lands on a Redis Stream. If Redis is away, events wait in the outbox and go out later, so nothing is half-announced.",
+      },
+      {
+        type: "paragraph",
+        text: "I left Kafka out on purpose. A broker cluster for one person's notes is a JVM and a lot of moving parts for nothing Redis Streams doesn't already give: an append-only log with consumer groups. Because of the outbox, adding Kafka later would be one more sink, not a rewrite.",
+      },
+      {
+        type: "heading",
+        text: "Notes that can't get lost",
+      },
+      {
+        type: "diagram",
+        id: "sonatelle-recovery",
+        caption: "Start-up takes the first healthy copy it finds. The backups underneath don't depend on each other, so losing one leaves the rest.",
+      },
+      {
+        type: "list",
+        items: [
+          "Snapshots: a full, checked copy of the database every 30 minutes after changes, plus at start-up and shutdown. The newest 48 are kept, plus one a day for 30 days.",
+          "A Markdown mirror in git: every note as a .md file in folders matching its projects, committed a few seconds after changes and pushed to a private repo. Readable in any editor even if Sonatelle is gone.",
+          "Note history inside the app, with one-click restore, and a one-file JSON export from Settings.",
+          "If the primary database is missing or fails its integrity check, start-up rebuilds it from the replica, then the newest healthy snapshot. Anything damaged is moved aside, never deleted.",
+        ],
+      },
+      {
+        type: "stats",
+        items: [
+          { value: "14", label: "MCP tools for agents" },
+          { value: "4", label: "independent backup layers" },
+          { value: "4", label: "steps in the recovery chain" },
+          { value: "16", label: "server tests, from recovery to search" },
+        ],
+      },
+      {
+        type: "heading",
+        text: "Agents as a real user",
+      },
+      {
+        type: "paragraph",
+        text: "The server speaks MCP over Streamable HTTP, with tools to list, search, read, create, update, trash and restore notes and projects. Agents read and write Markdown and can name a project by path, like Guitar / Songs. When Claude adds to a note, it uses an append mode so it doesn't rewrite what I wrote, and the note's history is always saved before an agent edit. Their changes appear live in any open browser, so I can watch a note fill in while Claude works.",
+      },
+      {
+        type: "heading",
+        text: "Offline, and two tabs at once",
+      },
+      {
+        type: "paragraph",
+        text: "The browser keeps the library in IndexedDB and queues edits in its own outbox when the server can't be reached, then sends them when it's back. Every save carries the version it was based on. If two tabs edit the same note from the same version, the later save wins, but the one it overwrote is kept in history marked as a conflict, so nothing disappears quietly.",
+      },
+      {
+        type: "heading",
+        text: "Running it",
+      },
+      {
+        type: "list",
+        items: [
+          "Docker Compose runs Sonatelle and Redis, restarts both after a reboot, and only listens on 127.0.0.1.",
+          "Tailscale can serve it over HTTPS to just my own devices, so nothing has to be open to the internet.",
+          "An access token, rate limits on writes, request size limits and a strict, hashed Content Security Policy guard the API.",
+          "Structured logs, Prometheus metrics, a health check and a graceful shutdown that finishes its backup before exiting.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "blue-green-azure",
     icon: "/projects/icons/blue-green-azure.webp",
     title: "Blue/Green on Azure",

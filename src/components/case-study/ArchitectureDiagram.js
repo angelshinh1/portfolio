@@ -324,7 +324,59 @@ function AdkApproval() {
   );
 }
 
+function SonatelleArch() {
+  return (
+    <Frame title="Sonatelle reads and writes" h={372}>
+      <Node x={12} y={40} w={190} t="Browser" s="HTTP + live events" />
+      <Node x={12} y={156} w={190} t="Agents" s="MCP at /mcp" />
+      <Node x={250} y={95} w={170} t="Server" s="Node + Hono" />
+      <Edge d="M202 72 H226 V115 H246" accent />
+      <Edge d="M202 188 H226 V139 H246" accent />
+      <Group x={456} y={12} w={500} h={110} label="Reads, fastest first" />
+      <Node x={472} y={52} w={110} h={56} t="Memory" s="L1" />
+      <Node x={594} y={52} w={110} h={56} t="Redis" s="L2" />
+      <Node x={716} y={52} w={110} h={56} t="SQLite" s="primary" />
+      <Node x={838} y={52} w={110} h={56} t="Replica" s="fallback" />
+      <Edge d="M582 80 H590" />
+      <Edge d="M704 80 H712" />
+      <Edge d="M826 80 H834" dashed />
+      <Edge d="M420 112 H440 V80 H468" accent />
+      <Group x={456} y={150} w={500} h={212} label="Writes" dashed labelBottom />
+      <Node x={472} y={218} w={196} t="SQLite primary" s="write + event, together" />
+      <Node x={724} y={164} w={216} h={52} t="Open browsers" s="live over SSE" />
+      <Node x={724} y={224} w={216} h={52} t="Redis Stream" s="sonatelle:events" />
+      <Node x={724} y={284} w={216} h={52} t="Replica + mirror" s="copy + git commit" />
+      <Edge d="M420 142 H440 V250 H468" accent />
+      <Edge d="M668 250 H696 V190 H720" />
+      <Edge d="M668 250 H720" />
+      <Edge d="M668 250 H696 V310 H720" />
+    </Frame>
+  );
+}
+
+function SonatelleRecovery() {
+  return (
+    <Frame title="Sonatelle recovery chain and backups" h={352}>
+      <Group x={12} y={12} w={936} h={146} label="Start-up: the first healthy copy wins" />
+      <Node x={32} y={60} w={200} t="Primary" s="integrity check" />
+      <Node x={264} y={60} w={200} t="Replica" s="refreshed after writes" />
+      <Node x={496} y={60} w={200} t="Snapshot" s="newest healthy one" />
+      <Node x={728} y={60} w={200} t="New database" s="only if all else fails" />
+      <Edge d="M232 92 H260" dashed />
+      <Edge d="M464 92 H492" dashed />
+      <Edge d="M696 92 H724" dashed />
+      <Group x={12} y={186} w={936} h={146} label="Backups, each on its own" dashed />
+      <Node x={32} y={234} w={200} t="Snapshots" s="every 30 min, 48 kept" />
+      <Node x={264} y={234} w={200} t="Git mirror" s="every note as Markdown" />
+      <Node x={496} y={234} w={200} t="Note history" s="one-click restore" />
+      <Node x={728} y={234} w={200} t="Export" s="one JSON file" />
+    </Frame>
+  );
+}
+
 const DIAGRAMS = {
+  "sonatelle-arch": SonatelleArch,
+  "sonatelle-recovery": SonatelleRecovery,
   "adk-harness": AdkHarness,
   "adk-approval": AdkApproval,
   "pii-architecture": PiiArchitecture,
