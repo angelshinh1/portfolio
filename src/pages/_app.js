@@ -9,6 +9,7 @@ export default function App({ Component, pageProps }) {
 
   const handleLoadingDone = () => {
     setLoading(false);
+    try { sessionStorage.setItem("intro-seen", "1"); } catch {}
     window.__appReady = true;
     window.dispatchEvent(new Event("app:ready"));
   };

@@ -1,16 +1,13 @@
 'use client';
 
 import Image from "next/image";
-import { useState, useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import { useState } from "react";
 import Reveal from "./Reveal";
 import Camera from "./Camera";
 import GithubContributions from "./GithubContributions";
 import { Paper, Tape, DoodleArrow } from "./scrapbook";
 import { RESUME_URL } from "@/lib/resume";
 
-gsap.registerPlugin(useGSAP);
 
 const PRINTS = [1, 5, 3, 7, 2, 8, 4, 6].map((n) => `/gallery-${n}.jpg`);
 
@@ -45,35 +42,11 @@ function HeroShapes() {
 
 export default function Hero() {
     const [shots, setShots] = useState(0);
-    const introRef = useRef(null);
-    const avatarRef = useRef(null);
-    const headingRef = useRef(null);
-    const watermarkRef = useRef(null);
-
-    // Intro: photo scales in, note drops in, camera fades up; waits for the loading screen
-    useGSAP(() => {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-        const play = () => {
-            gsap.timeline({ defaults: { ease: "power3.out" } })
-                .from(avatarRef.current, { scale: 0.85, opacity: 0, duration: 0.6, ease: "power2.out" })
-                .from(headingRef.current, { y: -28, rotation: -3, opacity: 0, duration: 0.8 }, "-=0.25")
-                .from(watermarkRef.current, { opacity: 0, y: 24, duration: 0.8, ease: "power2.out" }, "-=0.4");
-        };
-
-        if (window.__appReady) {
-            play();
-        } else {
-            window.addEventListener("app:ready", play, { once: true });
-        }
-
-        return () => window.removeEventListener("app:ready", play);
-    }, { scope: introRef });
 
     return (
         <header
             id="about"
-            ref={introRef}
+           
             className="relative max-w-[88vw] lg:max-w-[70rem] mx-auto px-1 pt-40 pb-20 lg:pt-40 lg:pb-24"
         >
             {/* Photo on the left, intro on the right; stacked on small screens */}
@@ -81,7 +54,7 @@ export default function Hero() {
                 <Reveal className="flex justify-center lg:block flex-shrink-0">
                     <div className="relative w-fit">
                         {/* Photo in a round frame with stamp perforations */}
-                        <div ref={avatarRef} className="scrap w-[190px] h-[190px] sm:w-[220px] sm:h-[220px] lg:w-[280px] lg:h-[280px] xl:w-[300px] xl:h-[300px]">
+                        <div className="scrap w-[190px] h-[190px] sm:w-[220px] sm:h-[220px] lg:w-[280px] lg:h-[280px] xl:w-[300px] xl:h-[300px]">
                             <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full" aria-hidden>
                                 <path d={PERFORATED_CIRCLE} fill="#FDFBF4" />
                             </svg>
@@ -111,7 +84,7 @@ export default function Hero() {
                     </div>
                 </Reveal>
 
-                <div ref={headingRef} className="relative isolate text-center lg:text-left lg:pl-6">
+                <div className="relative isolate text-center lg:text-left lg:pl-6">
                     <HeroShapes />
                     <h1 className="type-display text-[var(--text-primary)]">
                         Hi, I&apos;m Angel.
@@ -167,7 +140,7 @@ export default function Hero() {
             {/* Commit graph on graph paper; camera beside it on desktop, below it on mobile */}
             <div className="relative mt-28 lg:mt-24 grid grid-cols-1 lg:grid-cols-[1fr_47rem] items-center gap-6">
                 <div className="relative flex justify-center lg:justify-start items-center h-full lg:min-h-[16rem] order-2 lg:order-1 mt-10 lg:mt-0 pb-20 lg:pb-0">
-                    <div ref={watermarkRef} className="relative">
+                    <div className="relative">
                         <Camera
                             interactive
                             prints={PRINTS}

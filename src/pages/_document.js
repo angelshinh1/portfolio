@@ -4,6 +4,8 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        {/* Before first paint: a reload in the same tab skips the intro instead of replaying it */}
+        <script dangerouslySetInnerHTML={{ __html: "try{if(sessionStorage.getItem('intro-seen'))document.documentElement.dataset.seen='1'}catch(e){}" }} />
         {/* The design is light-only: opt out of browser auto-dark and dark-mode extensions */}
         <meta name="color-scheme" content="only light" />
         <meta name="supported-color-schemes" content="light" />

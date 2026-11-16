@@ -14,6 +14,8 @@ export default function LoadingScreen({ onDone }) {
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Already shown this session: finish at once, the overlay was never painted
+    if (document.documentElement.dataset.seen) return onDone?.();
     const timers = [];
     const later = (fn, ms) => timers.push(setTimeout(fn, ms));
 
@@ -39,6 +41,7 @@ export default function LoadingScreen({ onDone }) {
 
   // Lock scroll while visible
   useEffect(() => {
+    if (document.documentElement.dataset.seen) return;
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = ''; };
   }, []);
@@ -47,6 +50,7 @@ export default function LoadingScreen({ onDone }) {
     <div
       ref={overlayRef}
       aria-hidden="true"
+      className="loading-screen"
       style={{
         position: 'fixed',
         inset: 0,

@@ -105,6 +105,9 @@ body {
 /* No grey tap-highlight boxes over torn/rotated shapes on mobile */
 html { -webkit-tap-highlight-color: transparent; }
 
+/* Set before paint by _document on a same-tab reload: no intro overlay */
+html[data-seen] .loading-screen { display: none !important; }
+
 /* Paper grain: dark specks with alpha baked in, matching the old 16% multiply without a per-frame blend */
 body::after {
   content: '';
